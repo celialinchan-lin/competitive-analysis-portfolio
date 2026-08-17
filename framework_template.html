@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>竞品分析情报网 · 框架模板 v1.0</title>
+<style>
+  :root{
+    --bg:#0E1418; --bg2:#161F25; --card:#1C2830; --card2:#243340;
+    --text:#E8EEF1; --muted:#9AAAB5; --line:#2E3F4A;
+    --gold:#D9A441; --gold-light:#EBC76B; --red:#C8102E; --green:#5FB87A; --blue:#5B9BD5;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{background:var(--bg);color:var(--text);font-family:"PingFang SC","Microsoft YaHei",-apple-system,sans-serif;line-height:1.7;font-size:15px;}
+  .wrap{max-width:940px;margin:0 auto;padding:40px 24px 60px;}
+  h1{font-size:30px;font-weight:800;color:var(--gold-light);margin-bottom:6px;}
+  .sub{color:var(--muted);font-size:14px;margin-bottom:24px;}
+  h2{font-size:22px;font-weight:800;color:var(--gold);margin:34px 0 10px;padding-bottom:6px;border-bottom:1px solid var(--line);}
+  h3{font-size:17px;font-weight:800;color:var(--gold-light);margin:22px 0 8px;}
+  p{margin:8px 0;}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:12px 0;}
+  .card.gold{border-left:4px solid var(--gold);}
+  .card.green{border-left:4px solid var(--green);}
+  table{width:100%;border-collapse:collapse;font-size:13px;margin:10px 0;}
+  th,td{border:1px solid var(--line);padding:9px 10px;text-align:left;vertical-align:top;}
+  th{background:var(--card2);color:var(--gold-light);font-weight:700;}
+  .tw{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+  .tw table{min-width:620px;}
+  .pill{display:inline-block;background:var(--card2);border:1px solid var(--line);border-radius:8px;padding:3px 10px;font-size:12px;margin:3px 4px 3px 0;color:var(--text);}
+  .pill.g{background:rgba(95,184,122,.15);border-color:var(--green);color:var(--green);}
+  ul,ol{margin:8px 0 8px 22px;}
+  li{margin:5px 0;}
+  .quote{border-left:3px solid var(--gold);padding:10px 16px;background:var(--card);border-radius:0 10px 10px 0;margin:12px 0;}
+  .quote .q{color:var(--gold-light);font-weight:800;}
+  .foot{text-align:center;font-size:12px;color:var(--muted);padding:24px 0 0;border-top:1px dashed var(--line);margin-top:32px;}
+  .flag{font-size:11px;padding:1px 6px;border-radius:5px;background:var(--card2);color:var(--muted);margin-left:4px;}
+  .flag.a{color:var(--green);} .flag.b{color:var(--gold-light);}
+  .newzone{border:1px dashed var(--gold);border-radius:12px;padding:14px 16px;margin:14px 0;background:rgba(217,164,65,.06);}
+  .newzone .zh{font-size:13px;color:var(--gold-light);font-weight:800;margin-bottom:6px;}
+  .scene{background:var(--card2);color:var(--gold-light);font-weight:800;padding:2px 8px;border-radius:6px;font-size:12px;}
+  @media(max-width:820px){.wrap{padding:24px 16px 40px;}h1{font-size:23px;}h2{font-size:19px;}table{font-size:12px;}.tw table{min-width:480px;}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>竞品分析情报网 · 框架模板</h1>
+  <p class="sub">v1.0 ｜ 2026-08-17 与 CC 讨论定稿 ｜ 新建 EP 的标准字段与机理映射参考 ｜ 后续新方向动态补录</p>
+
+  <h2>一、框架定稿决策</h2>
+  <div class="card gold">
+    <p><b style="color:var(--gold-light)">导航顶层大类</b>（可扩展，随产品新增）：护肤 / 彩妆 / 洗护 / 家清 / …</p>
+    <p><b style="color:var(--gold-light)">护肤细分主轴</b>：人群 × 机理 × 地域</p>
+    <p><b style="color:var(--gold-light)">彩妆细分主轴</b>：主题色彩 × 包材 × 质地 × 持妆 × 肤质 × 地域（6 维）</p>
+    <p><b style="color:var(--gold-light)">命名策略</b>：P3 坐标/场景用消费者语言（如"熬夜衰老""抗糖化"）；P4 配方用专业词+具体成分（如"抗糖化：肌肽/脱羧肌肽/革糖素"）</p>
+    <p><b style="color:var(--gold-light)">现有 EP01-09</b>：不回溯，只对新 EP 应用新框架</p>
+    <p><b style="color:var(--gold-light)">执行顺序</b>：①研究补全机理 → ②固化框架模板（本文件）→ ③按新框架建新 EP</p>
+  </div>
+
+  <h2>二、10 页字段说明（每页填什么 · 按品类换轴）</h2>
+  <p>通用 10 页骨架不变，关键页的"细分坐标/配方/卖点/对标转化"按品类换轴：</p>
+  <div class="tw"><table>
+    <tr><th style="width:12%">页</th><th style="width:40%">通用字段</th><th>护肤品类换轴</th><th>彩妆品类换轴</th></tr>
+    <tr><td><b>P1 结论</b></td><td>一句话结论 + 3个KPI卡（规模/地位/软肋）+ 来源级标注</td><td>同通用</td><td>同通用</td></tr>
+    <tr><td><b>P2 市场全景</b></td><td>赛道规模 + TOP品牌条形图 + 格局/坐标/对照三卡</td><td>按功效赛道（抗老/美白/敏感/祛痘…）</td><td>按品类赛道（唇妆/底妆/眼妆）或主题</td></tr>
+    <tr><td><b>P3 产品定位</b></td><td>定位一句话 + 坐标矩阵 + 同品牌家族/剂型矩阵</td><td><b>人群 × 机理</b>坐标（+地域适配）；消费者语言</td><td><b>主题色彩 × 包材</b>坐标（+质地/持妆/肤质/地域）；6维</td></tr>
+    <tr><td><b>P4 配方拆解</b></td><td>核心成分体系 + 机理标签 + 载体/包装形态</td><td>成分按<b>机理对应</b>（每机理→成分）；专业词</td><td>色彩配方（色号/显色/持妆）+ 包材工艺</td></tr>
+    <tr><td><b>P5 价格策略</b></td><td>价格带条形图 + 锚点卡 + 被夹击分析</td><td>同通用</td><td>同通用</td></tr>
+    <tr><td><b>P6 消费者评价</b></td><td>好评/差评词云 + KPI（好评率/复购/个案）</td><td>同通用（黑猫个案不推总体率）</td><td>同通用</td></tr>
+    <tr><td><b>P7 卖点拆解</b></td><td>×交叉拆解（轴数按实际）+ 包装/视觉轴</td><td>医研/成分 × 大单品 × 信任（按实际）</td><td>主题故事 × 包材体验 × 色彩科学</td></tr>
+    <tr><td><b>P8 痛点与机会</b></td><td>"它没做好的=你的机会"表 + 对标转化路径</td><td>换人群/换机理/换剂型/换地域</td><td>换主题/换包材/换IP/换肤质适配</td></tr>
+    <tr><td><b>P9 产品启示</b></td><td>5条可执行策略（含对标转化落地）</td><td>按机理空白切入</td><td>按主题/包材空白切入</td></tr>
+    <tr><td><b>P10 总结+来源</b></td><td>一句话总结 + 来源置信度清单（A/B/C）</td><td>同通用</td><td>同通用</td></tr>
+  </table></div>
+
+  <div class="newzone">
+    <div class="zh">▍框架增强模块（EP09 薇诺娜已试点，新 EP 沿用）</div>
+    <p>P3「剂型坐标」· P4「载体/包装形态」· P7「包装/视觉」轴 · P8/P9「对标转化路径」——四个模块用绿框标注，便于填空时识别。</p>
+  </div>
+
+  <h2>三、护肤 6 大场景机理映射表（医学依据坐实）</h2>
+  <p>每场景 = 机理条目（消费者语言）+ 专业词 + 对应成分。P3 用消费者语言列，P4 用专业词+具体成分。<span class="flag a">A·医学文献</span></p>
+  <div class="tw"><table>
+    <tr><th style="width:11%">场景</th><th style="width:20%">机理（P3消费者语言）</th><th style="width:24%">专业词（P4）</th><th>对应成分方向</th></tr>
+    <tr><td rowspan="6"><span class="scene">抗老</span></td><td>自然衰老</td><td>内源性衰老/胶原流失</td><td>视黄醇·补骨脂酚·肽类·植物雌激素</td></tr>
+    <tr><td>光老化</td><td>UV致胶原断裂/ROS/MMP-1</td><td>VC·阿魏酸·艾地苯·防晒协同</td></tr>
+    <tr><td>抗糖化</td><td>AGEs交联</td><td>肌肽·脱羧肌肽·革糖素·肌醇</td></tr>
+    <tr><td>熬夜压力衰老</td><td>皮质醇↑/氧化应激</td><td>麦角硫因·虾青素·屏障修护</td></tr>
+    <tr><td>表情纹</td><td>肌肉反复收缩</td><td>类蛇毒肽·乙酰基六肽-8</td></tr>
+    <tr><td>屏障衰退</td><td>TEWL↑/修护力降</td><td>神经酰胺·青刺果·屏障仿生</td></tr>
+
+    <tr><td rowspan="6"><span class="scene">美白</span></td><td>抑黑生成</td><td>抑制酪氨酸酶/黑色素合成</td><td>377·熊果苷·曲酸·光甘草定·传明酸</td></tr>
+    <tr><td>阻断转运</td><td>阻黑素体到角质细胞</td><td>烟酰胺</td></tr>
+    <tr><td>加速代谢</td><td>剥脱/加速角质更新</td><td>果酸·水杨酸·维A</td></tr>
+    <tr><td>抗炎美白</td><td>抑炎症介导黑色素</td><td>传明酸·甘草酸</td></tr>
+    <tr><td>抗糖去黄</td><td>抗AGEs减黄</td><td>肌肽·脱羧肌肽·革糖素</td></tr>
+    <tr><td>抗氧提亮</td><td>中和ROS</td><td>VC·阿魏酸·虾青素</td></tr>
+
+    <tr><td rowspan="5"><span class="scene">祛痘</span></td><td>激素型</td><td>雄激素↑→皮脂（姨妈痘/青春期）</td><td>锌·南瓜籽·植物雌激素（内调为主）</td></tr>
+    <tr><td>闭口粉刺</td><td>角化异常堵塞毛孔</td><td>水杨酸·果酸·维A</td></tr>
+    <tr><td>炎性脓疱</td><td>痤疮丙酸杆菌+炎症</td><td>过氧苯甲酰·壬二酸·茶树</td></tr>
+    <tr><td>油痘</td><td>皮脂过剩</td><td>烟酰胺控油·PCA锌</td></tr>
+    <tr><td>痘印</td><td>PIH色素沉着/凹陷</td><td>烟酰胺·377·维A·果酸</td></tr>
+
+    <tr><td rowspan="5"><span class="scene">修护</span></td><td>屏障脂质受损</td><td>神经酰胺流失/砖墙结构破损</td><td>神经酰胺1:1:1·胆固醇·脂肪酸·青刺果</td></tr>
+    <tr><td>微生态失衡</td><td>菌群失调（痤疮丙酸杆菌/金葡菌）</td><td>益生菌·益生元·抑有害菌</td></tr>
+    <tr><td>医美后创伤</td><td>术后屏障破坏</td><td>修护+抗炎+防晒（术前稳定2周/术后修护1月）</td></tr>
+    <tr><td>接触性炎症</td><td>过敏/刺激反应</td><td>红没药醇·马齿苋·积雪草·抗组胺</td></tr>
+    <tr><td>神经敏感</td><td>TRPV1过度激活</td><td>TRPV1拮抗剂（德之馨4-叔丁基环己烷）</td></tr>
+
+    <tr><td rowspan="5"><span class="scene">防晒</span></td><td>物理屏蔽</td><td>反射/散射UV</td><td>TiO2·ZnO（氧化锌全段290-400nm）</td></tr>
+    <tr><td>化学吸收</td><td>吸收UV转热能</td><td>阿伏苯宗·二苯酮·肉桂酸酯（UVB/UVA/宽谱）</td></tr>
+    <tr><td>生物抗氧</td><td>清除自由基/间接防晒</td><td>VC·VE·烟酰胺·SOD·辅酶Q·植物提取物</td></tr>
+    <tr><td>成膜持妆</td><td>成膜剂/防水基质</td><td>防水成膜（浸水40/80分钟维持SPF）</td></tr>
+    <tr><td>晒后修护</td><td>UV损伤修复</td><td>屏障修护+抗炎（同修护场景）</td></tr>
+
+    <tr><td rowspan="5"><span class="scene">控油</span></td><td>皮脂腺源头调控</td><td>DHT通路/5α-还原酶</td><td>维A酸·抗雄激素（螺内酯/丹参酮）·PCA锌</td></tr>
+    <tr><td>角化异常疏通</td><td>毛囊角化/角栓</td><td>水杨酸·果酸·维A（阿达帕林）</td></tr>
+    <tr><td>皮脂氧化微生态</td><td>皮脂氧化致痘</td><td>抗氧+抑菌</td></tr>
+    <tr><td>物理吸附</td><td>表面控油（不改分泌率）</td><td>高岭土·膨润土·二氧化矽</td></tr>
+    <tr><td>屏障平衡</td><td>防代偿出油</td><td>烟酰胺（控油+屏障双效，降排泄率20%）</td></tr>
+  </table></div>
+  <p style="font-size:12px;color:var(--muted);">医学关键依据：砖墙结构神经酰胺占50%、1:1:1黄金比、TEWL、TRPV1拮抗剂、UVA致MMP-1胶原断裂、皮脂腺DHT通路（5α-还原酶）、温度每升1℃皮脂+10%、烟酰胺降排泄率20%。</p>
+
+  <h2>四、彩妆 6 维细分（P3 坐标 + P4 配方）</h2>
+  <div class="tw"><table>
+    <tr><th style="width:16%">维度</th><th>内容</th></tr>
+    <tr><td><b>主题色彩</b></td><td>色系（莫兰迪/复古/裸感/东方）· 情绪季节（春夏/赛博/怀旧）</td></tr>
+    <tr><td><b>包材设计</b></td><td>罐型 · 泵头 · 限量礼盒 · IP联名 · 可替换芯</td></tr>
+    <tr><td><b>质地</b></td><td>哑光 · 滋润 · 镜面 · 雾面（不叫"质地机理"）</td></tr>
+    <tr><td><b>持妆</b></td><td>成膜 · 锁色 · 防汗 · 防脱 · 三明治定妆法（散粉-定妆喷雾-散粉）</td></tr>
+    <tr><td><b>肤质适配</b></td><td>敏感肌（矿物彩妆·纯物理防晒）· 痘肌（无油不致痘/non-comedogenic·绿遮瑕）· 成熟肌（滋润避粉堆积细纹）· 干燥肌（乳霜粉底·喷雾定妆）· 妊娠期（避维A酸/水杨酸/高浓度AHA）</td></tr>
+    <tr><td><b>地域适配</b></td><td>南方（清爽控油持妆哑光）· 北方（滋润保湿避卡粉）· 沿海（温和防晒）· 高原（强防晒+深层保湿+修护）</td></tr>
+  </table></div>
+
+  <h2>五、地域维度（护肤+彩妆共通）</h2>
+  <div class="card green">
+    <p><b>南方高温高湿</b>（华南 粤闽桂琼）：皮脂↑→控油防痘 + 清爽持妆哑光底妆；护肤清爽防闷痘</p>
+    <p><b>北方干冷</b>（华北东北）：TEWL↑→保湿屏障 + 滋润防卡粉底妆；护肤强保湿</p>
+    <p><b>沿海</b>：海风+UV→温和防晒 + 清爽；避刺激成分</p>
+    <p><b>高原强UV</b>（青藏）：强防晒 + 深层保湿 + 屏障修护</p>
+    <p><b>西南湿热少日</b>（川渝云贵）：湿热→控油防痘；美白需求相对低</p>
+    <p><b>西北干燥强UV</b>（陕甘宁新）：防晒+保湿双高</p>
+  </div>
+
+  <h2>六、新建 EP 步骤</h2>
+  <ol>
+    <li><b>选题</b>：确定品类（护肤/彩妆/洗护/家清）+ 细分坐标（护肤=人群×机理×地域；彩妆=6维）</li>
+    <li><b>研究</b>：查真实数据（年报/医学文献/电商/投诉），标 A/B/C 来源级</li>
+    <li><b>复制模板</b>：以最近一个同品类 EP 为骨架（护肤用 EP09 薇诺娜，彩妆待建首个），改品牌色变量与内容</li>
+    <li><b>填 10 页</b>：按本模板字段说明填，P3/P4/P7/P8-9 按品类换轴，4 个增强模块用绿框标注</li>
+    <li><b>接导航</b>：index.html 加 nav-brand + nav-sub（10页链接），归入对应大类/分组，dot 色用品牌色</li>
+    <li><b>推送</b>：git add/commit/push，等 Pages 重建（约2-3min）验证 200+关键内容</li>
+  </ol>
+
+  <h2>七、动态补录机制</h2>
+  <div class="newzone">
+    <div class="zh">▍后续新方向/新思路随时补录</div>
+    <p>机理体系非封闭——后续产品提到的新方向（如新功效场景、新机理通路、新地域气候、洗护/家清品类逻辑），按以下方式补录：</p>
+    <ul>
+      <li>新增机理条目 → 追加进对应场景表（第三部分）</li>
+      <li>新增功效场景（如修护之外的新场景）→ 新增场景小节</li>
+      <li>新品类（洗护/家清）→ 补该品类的细分主轴（参照护肤/彩妆思路，查医学/专业报告坐实）</li>
+      <li>版本号递增（v1.1/v1.2…），本文件底部记变更日志</li>
+    </ul>
+  </div>
+
+  <div class="foot">
+    竞品分析情报网 · 框架模板 v1.0 ｜ 2026-08-17 定稿 ｜ 数据截至 2026-08 公开资料+医学文献 ｜ 仅供产品研究使用
+  </div>
+</div>
+</body>
+</html>
