@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>竞品集结展示 EP.02｜珀莱雅红宝石精华</title>
+<style>
+  :root{
+    --red:#C8102E; --red-deep:#7A0B1E; --gold:#D4AF37; --gold-light:#EBC76B;
+    --bg:#1A0B0E; --bg2:#241014; --card:#2E1318; --card2:#3A171D;
+    --text:#F5EDE8; --muted:#B89AA0; --line:#4A222A; --good:#5FB87A; --bad:#E06B6B;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{background:var(--bg);color:var(--text);font-family:"PingFang SC","Microsoft YaHei",-apple-system,sans-serif;line-height:1.6;font-size:15px;}
+  .page{width:100%;max-width:920px;margin:0 auto;min-height:100vh;padding:54px 40px 40px;display:flex;flex-direction:column;justify-content:flex-start;border-bottom:1px solid var(--line);position:relative;}
+  .pageno{position:absolute;top:22px;right:40px;font-size:12px;color:var(--gold);letter-spacing:2px;font-weight:700;}
+  .tag{display:inline-block;background:var(--red);color:#fff;font-size:12px;padding:3px 12px;border-radius:20px;letter-spacing:1px;margin-bottom:14px;font-weight:700;}
+  h1{font-size:40px;line-height:1.25;font-weight:800;letter-spacing:1px;margin-bottom:8px;}
+  h2{font-size:26px;font-weight:800;margin-bottom:6px;color:var(--gold-light);}
+  h3{font-size:18px;font-weight:800;color:var(--text);margin:18px 0 8px;}
+  .sub{color:var(--muted);font-size:14px;margin-bottom:20px;}
+  .src{margin-top:auto;padding-top:18px;font-size:11px;color:var(--muted);border-top:1px dashed var(--line);}
+  .src b{color:var(--gold-light);}
+  .grid{display:grid;gap:14px;}
+  .g3{grid-template-columns:repeat(3,1fr);}
+  .g2{grid-template-columns:repeat(2,1fr);}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 16px;}
+  .card.red{border-left:4px solid var(--red);}
+  .card.gold{border-left:4px solid var(--gold);}
+  .kpi{font-size:34px;font-weight:800;color:var(--gold);line-height:1.1;}
+  .kpi.red{color:var(--red);}
+  .kpi small{font-size:13px;color:var(--muted);font-weight:400;}
+  .card .t{font-size:13px;color:var(--muted);margin-bottom:6px;}
+  .pill{display:inline-block;background:var(--card2);border:1px solid var(--line);border-radius:8px;padding:4px 10px;font-size:12px;margin:3px 4px 3px 0;color:var(--text);}
+  .pill.good{background:rgba(95,184,122,.15);border-color:var(--good);color:var(--good);}
+  .pill.bad{background:rgba(224,107,107,.15);border-color:var(--bad);color:var(--bad);}
+  .pill.gold{background:rgba(212,175,55,.12);border-color:var(--gold);color:var(--gold-light);}
+  .bar-row{display:flex;align-items:center;margin:7px 0;font-size:13px;}
+  .bar-name{width:108px;flex-shrink:0;color:var(--text);text-align:right;padding-right:10px;}
+  .bar-track{flex:1;background:var(--bg2);border-radius:6px;height:22px;overflow:hidden;position:relative;}
+  .bar-fill{height:100%;border-radius:6px;background:linear-gradient(90deg,var(--red-deep),var(--red));display:flex;align-items:center;justify-content:flex-end;padding-right:8px;font-size:11px;color:#fff;font-weight:700;}
+  .bar-fill.gold{background:linear-gradient(90deg,#8a6d1e,var(--gold));color:#1A0B0E;}
+  .bar-fill.dim{background:linear-gradient(90deg,#3a2228,#5a2e36);}
+  .matrix{position:relative;width:100%;height:340px;background:var(--bg2);border:1px solid var(--line);border-radius:14px;margin-top:8px;}
+  .axis-x{position:absolute;bottom:8px;width:100%;text-align:center;font-size:12px;color:var(--muted);}
+  .axis-y{position:absolute;left:8px;top:0;height:100%;writing-mode:vertical-rl;font-size:12px;color:var(--muted);}
+  .dot{position:absolute;transform:translate(-50%,-50%);padding:5px 10px;border-radius:20px;font-size:12px;font-weight:700;white-space:nowrap;}
+  .dot.me{background:var(--red);color:#fff;border:2px solid var(--gold);}
+  .dot.other{background:var(--card2);color:var(--text);border:1px solid var(--line);}
+  .cloud{display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px;padding:14px;background:var(--bg2);border-radius:14px;}
+  .cloud span{padding:3px 10px;border-radius:8px;line-height:1.5;}
+  .s1{font-size:13px;} .s2{font-size:16px;} .s3{font-size:20px;} .s4{font-size:25px;}
+  .cgood{background:rgba(95,184,122,.13);color:var(--good);}
+  .cbad{background:rgba(224,107,107,.13);color:var(--bad);}
+  .ctheme{font-size:15px;color:var(--gold-light);background:rgba(212,175,55,.1);padding:6px 14px;border-radius:10px;font-weight:700;}
+  .quote{border-left:3px solid var(--gold);padding:10px 16px;background:var(--card);border-radius:0 10px 10px 0;font-size:15px;color:var(--text);margin:10px 0;}
+  .quote .q{color:var(--gold-light);font-weight:800;}
+  table{width:100%;border-collapse:collapse;font-size:13px;margin-top:8px;}
+  th,td{border:1px solid var(--line);padding:9px 10px;text-align:left;vertical-align:top;}
+  th{background:var(--card2);color:var(--gold-light);font-weight:700;}
+  td .y{color:var(--good);} td .n{color:var(--bad);}
+  .listnum{counter-reset:l;list-style:none;}
+  .listnum li{counter-increment:l;position:relative;padding:12px 14px 12px 52px;background:var(--card);border:1px solid var(--line);border-radius:12px;margin-bottom:10px;}
+  .listnum li::before{content:counter(l);position:absolute;left:14px;top:12px;width:26px;height:26px;background:var(--red);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;}
+  .listnum li b{color:var(--gold-light);}
+  .foot{text-align:center;font-size:12px;color:var(--muted);padding:26px;}
+  .foot b{color:var(--gold-light);}
+  .flag{font-size:11px;padding:1px 6px;border-radius:5px;background:var(--card2);color:var(--muted);margin-left:4px;}
+  .flag.a{color:var(--good);} .flag.b{color:var(--gold-light);} .flag.c{color:var(--bad);}
+
+  /* ===== 移动端自适应 iOS Safari / Android Chrome ===== */
+  @media (max-width:820px){
+    .page{min-height:100dvh;padding:24px 18px 40px;}
+    .pageno{top:14px;right:16px;}
+    h1{font-size:27px;}
+    h2{font-size:21px;}
+    h3{font-size:16px;}
+    .sub{font-size:13px;margin-bottom:14px;}
+    .g3,.g2{grid-template-columns:1fr;}
+    .card{padding:15px 13px;}
+    .kpi{font-size:26px;}
+    .bar-name{width:74px;font-size:11px;padding-right:6px;}
+    .bar-track{height:20px;}
+    .bar-fill{font-size:10px;padding-right:5px;}
+    .matrix{height:300px;}
+    .dot{font-size:11px;padding:4px 8px;}
+    .cloud{padding:12px 10px;gap:5px 6px;}
+    .s1{font-size:12px;} .s2{font-size:14px;} .s3{font-size:17px;} .s4{font-size:21px;}
+    table{font-size:12px;}
+    th,td{padding:7px 8px;}
+    .quote{font-size:14px;padding:9px 13px;}
+    .listnum li{padding:11px 12px 11px 46px;}
+    .listnum li::before{left:12px;width:24px;height:24px;font-size:13px;}
+    .src{font-size:10px;}
+    .flag{font-size:10px;}
+  }
+
+
+  /* iOS/Android 横向溢出兜底：彻底消除 iframe 内横向滚动导致的布局错位 */
+  .page{overflow-x:hidden;}
+  .tw{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:10px 0;}
+  .tw table{min-width:620px;}
+
+  /* 移动端柱状图修复：品牌名独立成行避免被条形遮挡；数值标签min-width保证可读 */
+  @media (max-width:820px){
+    .bar-row,.bar{flex-direction:column;align-items:stretch;margin:11px 0;}
+    .bar-name{width:auto !important;flex-shrink:1;text-align:left !important;padding-right:0;font-size:12.5px;line-height:1.4;overflow-wrap:anywhere;word-break:break-word;}
+    .bar-track{width:100%;}
+    .bar-fill{min-width:60px;}
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ P1 结论 ============ -->
+<section class="page" id="p1">
+  <div class="pageno">01 / 10</div>
+  <span class="tag">竞品集结展示 · EP.02</span>
+  <h1>珀莱雅红宝石精华<br>国货抗老精华的"教育者"标杆</h1>
+  <p class="sub">一个靠"早C晚A品类教育 + 环肽-161自研 + 大牌平替价格"建立国货抗老心智的单品；但A醇刺激信任与红蛮腰价格下探，是它要补的课。</p>
+  <div class="quote"><span class="q">一句话结论：</span>红宝石把"抗老=早C晚A"写进消费者心智，并用<b>中国首个自主专利环肽-161</b>建立技术壁垒；但<b>双A体系的刺激风险</b>与<b>红蛮腰的99-149元价格下探</b>，正从"功效信任"和"价格带"两端挤压它。</div>
+  <div class="grid g3" style="margin-top:22px;">
+    <div class="card red">
+      <div class="kpi">239-350<small> 元</small></div>
+      <div class="t">价格锚点 · 大牌平替 <span class="flag b">B</span></div>
+      <p style="font-size:13px;color:var(--muted);margin-top:6px;">对标雅诗兰黛小棕瓶/兰蔻小黑瓶 800+，卡位中高价格带，是"贵妇平替"心智代表。</p>
+    </div>
+    <div class="card gold">
+      <div class="kpi red">7.69<small> 亿</small></div>
+      <div class="t">618淘天美妆登顶（品牌） <span class="flag b">B</span></div>
+      <p style="font-size:13px;color:var(--muted);margin-top:6px;">珀莱雅2025年618淘天成交登顶；38大促红宝石套装GMV 5000-7500万。</p>
+    </div>
+    <div class="card">
+      <div class="kpi red">0.13<small>% 双A</small></div>
+      <div class="t">核心壁垒 · 环肽-161+双A <span class="flag a">A</span></div>
+      <p style="font-size:13px;color:var(--muted);margin-top:6px;">专利 ZL202210368579.1；备案 浙G妆网备字2024004931。温和抗老宣称与真实刺激风险存落差。</p>
+    </div>
+  </div>
+  <div class="src"><b>数据来源：</b>珀莱雅官方/天猫（B级，239-350元价格带、早C晚A）｜青眼情报（B级，618淘天7.69亿登顶、38大促GMV）｜光明网/中新网（A级，环肽-161专利号、备案号）。数字均标注来源级别，置信度见第10页来源清单。</div>
+</section>
+
+<!-- ============ P2 市场全景 ============ -->
+<section class="page" id="p2">
+  <div class="pageno">02 / 10</div>
+  <span class="tag">市场全景</span>
+  <h2>淘宝/主流电商 护肤 TOP20 格局</h2>
+  <p class="sub">精华液2025零售额 993.4亿（+8.1%），占化妆品 12.1%；抗衰抗皱 1298.3亿（+26.3%）为最大细分。 <span class="flag a">A/B级</span> 条形为相对格局示意。</p>
+  <div style="background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px;">
+    <div class="bar-row"><div class="bar-name">珀莱雅</div><div class="bar-track"><div class="bar-fill gold" style="width:100%">80亿+</div></div></div>
+    <div class="bar-row"><div class="bar-name">巴黎欧莱雅</div><div class="bar-track"><div class="bar-fill gold" style="width:88%">70亿+</div></div></div>
+    <div class="bar-row"><div class="bar-name">韩束</div><div class="bar-track"><div class="bar-fill gold" style="width:86%">73.6亿</div></div></div>
+    <div class="bar-row"><div class="bar-name">兰蔻/雅诗兰黛</div><div class="bar-track"><div class="bar-fill dim" style="width:58%">40-60亿</div></div></div>
+    <div class="bar-row"><div class="bar-name">海蓝之谜/SK-II/赫莲娜/OLAY</div><div class="bar-track"><div class="bar-fill dim" style="width:55%">40-60亿</div></div></div>
+    <div class="bar-row"><div class="bar-name">修丽可</div><div class="bar-track"><div class="bar-fill dim" style="width:48%">约38亿</div></div></div>
+    <div class="bar-row"><div class="bar-name">自然堂/可复美/薇诺娜/谷雨/百雀羚</div><div class="bar-track"><div class="bar-fill dim" style="width:38%">30亿+</div></div></div>
+    <div class="bar-row"><div class="bar-name">丸美 / HBN</div><div class="bar-track"><div class="bar-fill dim" style="width:26%">20亿+</div></div></div>
+  </div>
+  <div class="grid g3" style="margin-top:18px;">
+    <div class="card"><div class="t">赛道规模</div><p>精华液 <b style="color:var(--gold-light)">993.4亿</b>（+8.1%）；抗衰抗皱 <b style="color:var(--gold-light)">1298.3亿</b>（+26.3%）增速领跑。<span class="flag a">A/B</span></p></div>
+    <div class="card"><div class="t">集中度窗口</div><p>液态精华 <b style="color:var(--gold-light)">CR3=10.57%</b>（同比-4.6%）——头部未垄断，新品牌仍有切入空间。<span class="flag b">B</span></p></div>
+    <div class="card"><div class="t">国货势力</div><p>TOP20中<b style="color:var(--gold-light)">国货占9席</b>；珀莱雅领跑，是红宝石所处的"领头羊"生态位。</p></div>
+  </div>
+  <div class="src"><b>数据来源：</b>东方财富/青眼《100个关键数据》（A级，精华液993.4亿）｜魔镜洞察白皮书（B级，抗衰1298.3亿）｜果集/美妆网（B级，液态精华CR3=10.57%）｜C2CC×用户说 TOP20（B级）。修护增速不同报告口径不一（49.5% vs 39.5%），本页未采用该值。</div>
+</section>
+
+<!-- ============ P3 产品定位 ============ -->
+<section class="page" id="p3">
+  <div class="pageno">03 / 10</div>
+  <span class="tag">产品定位</span>
+  <h2>红宝石卡在什么位置？</h2>
+  <p class="sub">"抗老界的教育者"：把"早C晚A"从概念做成品类，卡位中高价格×强功效，上打国际大牌、下防国货价格战。</p>
+  <div class="matrix">
+    <div class="axis-y">功效强度 →</div>
+    <div class="axis-x">← 价格（低）　　价格（高） →</div>
+    <div class="dot me" style="left:68%;top:28%">红宝石 239-350</div>
+    <div class="dot other" style="left:88%;top:22%">小棕瓶/小黑瓶 800+</div>
+    <div class="dot other" style="left:82%;top:38%">娇韵诗双萃</div>
+    <div class="dot other" style="left:40%;top:46%">HBN 100-200</div>
+    <div class="dot other" style="left:30%;top:58%">百雀羚超A瓶 99-149</div>
+    <div class="dot other" style="left:34%;top:40%">韩束红蛮腰 99-149</div>
+    <div class="dot other" style="left:55%;top:66%">平价A醇/连带品</div>
+  </div>
+  <div class="grid g3" style="margin-top:16px;">
+    <div class="card"><div class="t">对标国际</div><p><b style="color:var(--gold-light)">晚A</b>对标小棕瓶/小黑瓶的"抗老精华"心智，但价格仅其 1/3，主打"贵妇平替"。</p></div>
+    <div class="card"><div class="t">对标国货</div><p>相对 HBN（A醇专研）、百雀羚（植物A醇）、韩束（多肽），红宝石以<b>"早C晚A教育+环肽"</b>差异化。</p></div>
+    <div class="card"><div class="t">心智占位</div><p>"早C晚A"品类开创者——用户想到抗老早C晚A，第一反应是珀莱雅。这是最深的护城河。</p></div>
+  </div>
+  <div class="src"><b>数据来源：</b>珀莱雅官方/天猫（B级，价格带与早C晚A定位）｜青眼/魔镜竞品梳理（B级，国际/国货竞品矩阵）。矩阵坐标为基于公开价格的相对示意，非精确定位。</div>
+</section>
+
+<!-- ============ P4 配方拆解 ============ -->
+<section class="page" id="p4">
+  <div class="pageno">04 / 10</div>
+  <span class="tag">配方拆解</span>
+  <h2>环肽-161 + 双A：自研壁垒与刺激隐患并存</h2>
+  <p class="sub">红宝石3.0 = 环肽-161（自研专利环肽）+ 双A体系（A醇+HPR）+ 早C（双抗精华：VC+麦角硫因）。内源促胶原、外源抗氧，但双A的刺激是核心风险点。</p>
+  <div class="grid g2">
+    <div class="card red">
+      <div class="t">核心成分 · 环肽-161</div>
+      <p style="font-size:13px;color:var(--muted);">中国<b style="color:var(--gold-light)">首个自主专利环肽</b>，宣称促进胶原、紧致淡纹。专利号 <b>ZL202210368579.1</b>（光明网/中新网多源确认）。<span class="flag a">A级</span></p>
+      <div style="margin-top:10px;">
+        <span class="pill gold">自研专利</span><span class="pill">促胶原</span><span class="pill">紧致淡纹</span>
+      </div>
+    </div>
+    <div class="card gold">
+      <div class="t">协同体系 · 双A + 早C</div>
+      <p style="font-size:13px;color:var(--muted);">晚A：环肽-161 + 双A（A醇+HPR）总浓度 <b>0.13%</b>（产品宣称，待以备案成分表为准）；早C：双抗精华 VC+麦角硫因+虾青素。<span class="flag c">C·产品宣称</span></p>
+      <div style="margin-top:10px;">
+        <span class="pill">A醇</span><span class="pill">HPR</span><span class="pill">VC</span><span class="pill">麦角硫因</span>
+      </div>
+    </div>
+  </div>
+  <div class="quote" style="margin-top:16px;"><span class="q">技术壁垒本质：</span>不是简单堆A醇，而是<b>环肽递送 + 双A低浓度复配</b>试图兼顾"起效"与"温和"。但"温和抗老"宣称与0.13%双A的真实刺激风险之间存在<b>预期落差</b>——这是后续信任危机的根源。<span class="flag c">C·推断</span></div>
+  <div class="card" style="margin-top:14px;">
+    <div class="t">备案与合规锚点</div>
+    <p style="font-size:13px;color:var(--muted);">国产普通化妆品备案 <b>浙G妆网备字2024004931</b>（京东商品页，A级）；环肽-161专利 ZL202210368579.1（A级）。双A 0.13% 浓度以官方产品宣称为准，建议以药监局备案成分表最终核实。</p>
+  </div>
+  <div class="src"><b>数据来源：</b>光明网/中新网（A级，环肽-161专利号）｜京东商品页（A级，备案号）｜珀莱雅官方/天猫产品页（C级，双A 0.13%浓度与早C晚A体系）。"温和vs刺激落差"为基于成分与投诉数据的合理推断。</div>
+</section>
+
+<!-- ============ P5 价格策略 ============ -->
+<section class="page" id="p5">
+  <div class="pageno">05 / 10</div>
+  <span class="tag">价格策略</span>
+  <h2>锚点逻辑：用"套盒到手价"制造占便宜感</h2>
+  <p class="sub">单品 239-350元对标大牌 800+；"早C晚A"套盒在大促把到手价进一步压低，制造"贵妇平替"的占便宜感。</p>
+  <div style="background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px;">
+    <div class="bar-row"><div class="bar-name">小棕瓶/小黑瓶</div><div class="bar-track"><div class="bar-fill dim" style="width:100%">800元+</div></div></div>
+    <div class="bar-row"><div class="bar-name">红宝石单品</div><div class="bar-track"><div class="bar-fill gold" style="width:42%">239-350元</div></div></div>
+    <div class="bar-row"><div class="bar-name">HBN</div><div class="bar-track"><div class="bar-fill dim" style="width:25%">100-200元</div></div></div>
+    <div class="bar-row"><div class="bar-name">百雀羚/韩束</div><div class="bar-track"><div class="bar-fill dim" style="width:18%">99-149元</div></div></div>
+  </div>
+  <div class="grid g3" style="margin-top:18px;">
+    <div class="card"><div class="t">锚定逻辑</div><p>用 <b style="color:var(--gold-light)">800+大牌</b> 做价格锚，红宝石 239-350 显"真香"；套盒（早C晚A）进一步放大价值感。</p></div>
+    <div class="card"><div class="t">大促印证</div><p>38大促红宝石套装 <b style="color:var(--gold-light)">GMV 5000-7500万</b>；618淘天珀莱雅 <b style="color:var(--gold-light)">7.69亿</b> 登顶。<span class="flag b">B</span></p></div>
+    <div class="card"><div class="t">软肋</div><p>价格带被<b style="color:var(--bad)">红蛮腰99-149</b>下探挤压；套盒依赖大促，日常价盘易被比价。</p></div>
+  </div>
+  <div class="src"><b>数据来源：</b>珀莱雅官方/天猫（B级，239-350元单品与套盒）｜青眼情报（B级，38大促GMV、618淘天7.69亿）｜C2CC/东方财富（B级，38大促套装）。"占便宜感"逻辑为基于营销资料的推断。</div>
+</section>
+
+<!-- ============ P6 消费者评价 ============ -->
+<section class="page" id="p6">
+  <div class="pageno">06 / 10</div>
+  <span class="tag">消费者评价</span>
+  <h2>好评 / 差评词云</h2>
+  <p class="sub">好评集中于"淡纹紧致+肤感+性价比"；差评集中于"A醇刺激"——干燥、起皮、泛红，甚至过敏就医。注意：黑猫1117条为珀莱雅<b>全品牌</b>投诉，非红宝石单品。</p>
+  <div class="grid g2">
+    <div>
+      <div class="ctheme" style="margin-bottom:8px;">好评词云</div>
+      <div class="cloud">
+        <span class="cloud cgood s4">紧致淡纹</span>
+        <span class="cloud cgood s3">吸收好</span>
+        <span class="cloud cgood s3">肤感舒服</span>
+        <span class="cloud cgood s2">性价比高</span>
+        <span class="cloud cgood s2">细纹变淡</span>
+        <span class="cloud cgood s2">回购</span>
+        <span class="cloud cgood s1">早C晚A方便</span>
+      </div>
+    </div>
+    <div>
+      <div class="ctheme" style="margin-bottom:8px;color:var(--bad);background:rgba(224,107,107,.1);">差评词云</div>
+      <div class="cloud">
+        <span class="cloud cbad s4">刺激泛红</span>
+        <span class="cloud cbad s3">干燥起皮</span>
+        <span class="cloud cbad s3">过敏</span>
+        <span class="cloud cbad s2">不耐受</span>
+        <span class="cloud cbad s2">孕期不敢用</span>
+        <span class="cloud cbad s1">香味争议</span>
+      </div>
+    </div>
+  </div>
+  <div class="quote" style="margin-top:16px;"><span class="q">信任风险点：</span>黑猫投诉平台珀莱雅<b>全品牌</b>累计约 <b>1117条</b>（截至25.3.26，B级）；红宝石是其中一部分，不能简单归为"红宝石1117条"。A醇类刺激反应是美妆类普遍痛点，但红宝石"温和抗老"宣称放大了预期落差。</div>
+  <div class="src"><b>数据来源：</b>黑猫投诉315/新浪财经（B级，全品牌1117条，归属需修正）｜小红书/淘宝达人测评（C级，好评/差评体验词，单一经历不代表整体）｜今日头条自媒体（C级，8周法令纹-41.12%、复购率78.3%——非官方口径，较脆弱）。复购率/销量等微观数字建议以品牌官方披露为准。</div>
+</section>
+
+<!-- ============ P7 卖点拆解 ============ -->
+<section class="page" id="p7">
+  <div class="pageno">07 / 10</div>
+  <span class="tag">卖点拆解</span>
+  <h2>早C晚A教育 × 环肽自研 × 大牌平替</h2>
+  <p class="sub">红宝石的消费者心智三杠杆（按"×交叉拆解"格式、从真实数据提炼，非照抄示例文案）：用品类教育建立认知、用自研成分建立信任、用价格击穿决策。</p>
+  <div class="grid g3">
+    <div class="card red">
+      <div class="kpi" style="font-size:22px;color:var(--red)">早C晚A教育</div>
+      <div class="t">品类心智 · 认知锚</div>
+      <p style="font-size:13px;color:var(--muted);">把"抗老=早C晚A"从概念做成品类，用户第一联想即珀莱雅。这是<b>最深、最难抄</b>的护城河。<span class="flag b">B级·官方定位</span></p>
+    </div>
+    <div class="card gold">
+      <div class="kpi" style="font-size:22px;color:var(--gold)">环肽自研</div>
+      <div class="t">技术壁垒 · 信任锚</div>
+      <p style="font-size:13px;color:var(--muted);">环肽-161 中国首个自主专利环肽（ZL202210368579.1）+ 双A低浓度复配。用"自研科技"对抗国货"成分虚标"质疑。<span class="flag a">A级·专利</span></p>
+    </div>
+    <div class="card">
+      <div class="kpi" style="font-size:22px;color:var(--gold-light)">大牌平替</div>
+      <div class="t">价格锚 · 决策锚</div>
+      <p style="font-size:13px;color:var(--muted);">239-350对标大牌800+，套盒进一步放大价值感。"贵妇平替"= 成交临门一脚。<span class="flag b">B级·官方/天猫</span></p>
+    </div>
+  </div>
+  <div class="quote" style="margin-top:18px;"><span class="q">三轴相乘而非相加：</span>品类教育提供<b>认知入口</b>、自研成分提供<b>信任</b>、平替价格提供<b>决策理由</b>——三段漏斗让红宝石成为"想抗老就先想到它"的国民单品。其隐忧是：教育红利正被红蛮腰等以更低价格截流。<span class="flag c">C·策略推断</span></div>
+  <div class="src"><b>数据来源：</b>光明网/中新网（A级，环肽-161专利）｜珀莱雅官方/天猫（B级，早C晚A定位、239-350价格带）｜青眼/魔镜（B级，竞品矩阵）。三轴为我按"×交叉拆解"格式从真实数据提炼，非示例照搬。</div>
+</section>
+
+<!-- ============ P8 痛点与机会 ============ -->
+<section class="page" id="p8">
+  <div class="pageno">08 / 10</div>
+  <span class="tag">痛点与机会</span>
+  <h2>它没做好的 = 你的机会</h2>
+  <p class="sub">不打红宝石的"早C晚A教育"正面战场，而是打它留给你的信任、敏感肌、价格、剂型空白。六组对照：</p>
+  <div class="tw"><table>
+    <tr><th style="width:34%">红宝石的痛点 / 空白</th><th style="width:33%">背后原因（数据）</th><th style="width:33%">你的机会</th></tr>
+    <tr><td>双A刺激，敏感肌不敢用</td><td class="n">0.13%双A真实刺激风险；黑猫全品牌1117条投诉含刺激反馈</td><td class="y"><b>敏感肌抗老</b>：无A醇/植物A醇+神经酰胺，中国敏感肌人群超40%</td></tr>
+    <tr><td>价格被红蛮腰下探挤压</td><td class="n">红蛮腰99-149元卡位，套盒依赖大促</td><td class="y"><b>中端守擂+平价副线</b>：用"成分透明"守住239-350带</td></tr>
+    <tr><td>"温和"宣称与刺激落差</td><td class="n">温和抗老宣传 vs A醇类普遍刺激</td><td class="y"><b>坦诚沟通+耐受教育卡片</b>：降低预期落差与退货</td></tr>
+    <tr><td>套盒依赖大促，日常价盘易被比价</td><td class="n">大促GMV占比如高（38大促5000-7500万）</td><td class="y"><b>稳日常价盘+订阅制</b>：提升复购确定性</td></tr>
+    <tr><td>剂型传统，A醇易氧化失活</td><td class="n">敞口瓶装，用户担忧活性</td><td class="y"><b>次抛A醇精华</b>：切入+873%增长赛道，解决氧化痛点</td></tr>
+    <tr><td>临床背书分散，复购率口径脆弱</td><td class="n">8周-41.12%、复购78.3%均为C级自媒体</td><td class="y"><b>第三方人体试验+公开报告</b>：用硬证据建信任</td></tr>
+  </table></div>
+  <div class="src"><b>数据来源：</b>黑猫投诉（B级，全品牌投诉）｜青眼情报（B级，38大促GMV）｜果集/美妆网（B级，次抛+873%）｜今日头条自媒体（C级，淡纹/复购率，较脆弱）。"敏感肌超40%"为行业通用估算，非本报告实测；机会列为基于公开事实的策略推断。</div>
+</section>
+
+<!-- ============ P9 产品启示 ============ -->
+<section class="page" id="p9">
+  <div class="pageno">09 / 10</div>
+  <span class="tag">产品启示</span>
+  <h2>如果做竞品，怎么打？</h2>
+  <p class="sub">假设我方=新锐国货抗老品牌。五条可执行策略，全部避开红宝石的正面壁垒、切它的空白：</p>
+  <ol class="listnum">
+    <li><b>切"敏感肌抗老"空白：</b>无A醇/植物A醇+神经酰胺路线，正面承接红宝石流失的敏感肌用户（人群超40%，却几乎无A醇产品覆盖）。</li>
+    <li><b>成分透明+临床背书：</b>公开第三方人体试验报告，用硬证据对抗"温和vs刺激"的预期落差，建立比红宝石更可信的信任状。</li>
+    <li><b>剂型差异化——次抛A醇：</b>切入+873%增速赛道，次抛天然解决A醇氧化失活痛点，与小棕瓶/红宝石的敞口瓶装形成体验差。</li>
+    <li><b>坦诚沟通+耐受教育：</b>随附"建立耐受"说明卡片，把刺激风险前置管理，降低退货与差评，反向强化专业感。</li>
+    <li><b>稳价盘+订阅复购：</b>不卷大促套盒，用日常稳定价+订阅制锁定复购，避开红宝石"套盒依赖大促"的软肋。</li>
+  </ol>
+  <div class="quote"><span class="q">核心思路：</span>红宝石赢在"教育+自研+平替"三位一体；后来者赢在<b>补它的信任缺口与敏感肌空白</b>，而非正面拼早C晚A。</div>
+  <div class="src"><b>数据来源：</b>策略推断基于本报告第4/5/6/8页公开事实（环肽专利A级、投诉B级、次抛增速B级、敏感肌行业估算）。五条均为"我方视角"的产品建议，非珀莱雅官方信息。</div>
+</section>
+
+<!-- ============ P10 总结 ============ -->
+<section class="page" id="p10">
+  <div class="pageno">10 / 10</div>
+  <span class="tag">总结 + 来源</span>
+  <h2>一句话总结</h2>
+  <p class="sub">红宝石是"国货抗老教育者"：早C晚A心智 + 环肽-161自研 + 大牌平替价格，筑成深护城河；但A醇刺激信任危机与红蛮腰价格下探，正从两端挤压——行业切口在于"敏感肌抗老+成分透明+次抛剂型"。</p>
+  <div class="grid g2" style="margin-top:10px;">
+    <div class="card red"><div class="t">已验证事实（高置信）</div>
+      <ul style="font-size:13px;color:var(--muted);padding-left:18px;">
+        <li>环肽-161专利 ZL202210368579.1（A级）</li>
+        <li>备案 浙G妆网备字2024004931（A级）</li>
+        <li>价格 239-350元、618淘天7.69亿登顶（B级）</li>
+        <li>黑猫全品牌投诉约1117条（B级，归属非单品）</li>
+      </ul>
+    </div>
+    <div class="card gold"><div class="t">待核实 / 低置信（勿当事实）</div>
+      <ul style="font-size:13px;color:var(--muted);padding-left:18px;">
+        <li>双A 0.13% 浓度（C级产品宣称）</li>
+        <li>8周法令纹-41.12%、复购78.3%（C级自媒体）</li>
+        <li>敏感肌超40%（行业估算，非实测）</li>
+      </ul>
+    </div>
+  </div>
+  <table style="margin-top:14px;">
+    <tr><th>来源</th><th>级别</th><th>用途</th></tr>
+    <tr><td>光明网/中新网（环肽专利）、京东（备案号）</td><td>A</td><td>专利号、备案号等权威事实</td></tr>
+    <tr><td>青眼情报、魔镜洞察、果集/美妆网、C2CC×用户说、东方财富/青眼100关键数据</td><td>B</td><td>市场规模、大促GMV、TOP20、增速</td></tr>
+    <tr><td>珀莱雅官方/天猫、黑猫投诉、小红书/淘宝达人、今日头条自媒体</td><td>C</td><td>价格快照、体验词、微观数字（标注脆弱）</td></tr>
+  </table></div>
+  <div class="src"><b>完整说明：</b>本报告所有数字均标注 A/B/C 来源级别；C级为平台快照或自媒体表述，单一经历不代表整体，置信度低于A/B级，引用时请注明口径与时间。</div>
+</section>
+
+<div class="foot">竞品集结展示 · EP.02 珀莱雅红宝石精华 ｜ 数据截至 2026-08 公开资料 ｜ 仅供学习与研究，非投资/医疗建议</div>
+
+</body>
+</html>

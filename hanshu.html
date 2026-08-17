@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>竞品集结展示 EP.01｜韩束红蛮腰系列</title>
+<style>
+  :root{
+    --red:#C8102E; --red-deep:#7A0B1E; --gold:#D4AF37; --gold-light:#EBC76B;
+    --bg:#1A0B0E; --bg2:#241014; --card:#2E1318; --card2:#3A171D;
+    --text:#F5EDE8; --muted:#B89AA0; --line:#4A222A; --good:#5FB87A; --bad:#E06B6B;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{background:var(--bg);color:var(--text);font-family:"PingFang SC","Microsoft YaHei",-apple-system,sans-serif;line-height:1.6;font-size:15px;}
+  .page{width:100%;max-width:920px;margin:0 auto;min-height:100vh;padding:54px 40px 40px;display:flex;flex-direction:column;justify-content:flex-start;border-bottom:1px solid var(--line);position:relative;}
+  .pageno{position:absolute;top:22px;right:40px;font-size:12px;color:var(--gold);letter-spacing:2px;font-weight:700;}
+  .tag{display:inline-block;background:var(--red);color:#fff;font-size:12px;padding:3px 12px;border-radius:20px;letter-spacing:1px;margin-bottom:14px;font-weight:700;}
+  h1{font-size:40px;line-height:1.25;font-weight:800;letter-spacing:1px;margin-bottom:8px;}
+  h2{font-size:26px;font-weight:800;margin-bottom:6px;color:var(--gold-light);}
+  h3{font-size:18px;font-weight:800;color:var(--text);margin:18px 0 8px;}
+  .sub{color:var(--muted);font-size:14px;margin-bottom:20px;}
+  .src{margin-top:auto;padding-top:18px;font-size:11px;color:var(--muted);border-top:1px dashed var(--line);}
+  .src b{color:var(--gold-light);}
+  .grid{display:grid;gap:14px;}
+  .g3{grid-template-columns:repeat(3,1fr);}
+  .g2{grid-template-columns:repeat(2,1fr);}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 16px;}
+  .card.red{border-left:4px solid var(--red);}
+  .card.gold{border-left:4px solid var(--gold);}
+  .kpi{font-size:34px;font-weight:800;color:var(--gold);line-height:1.1;}
+  .kpi.red{color:var(--red);}
+  .kpi small{font-size:13px;color:var(--muted);font-weight:400;}
+  .card .t{font-size:13px;color:var(--muted);margin-bottom:6px;}
+  .pill{display:inline-block;background:var(--card2);border:1px solid var(--line);border-radius:8px;padding:4px 10px;font-size:12px;margin:3px 4px 3px 0;color:var(--text);}
+  .pill.good{background:rgba(95,184,122,.15);border-color:var(--good);color:var(--good);}
+  .pill.bad{background:rgba(224,107,107,.15);border-color:var(--bad);color:var(--bad);}
+  .pill.gold{background:rgba(212,175,55,.12);border-color:var(--gold);color:var(--gold-light);}
+  /* bar chart */
+  .bar-row{display:flex;align-items:center;margin:7px 0;font-size:13px;}
+  .bar-name{width:108px;flex-shrink:0;color:var(--text);text-align:right;padding-right:10px;}
+  .bar-track{flex:1;background:var(--bg2);border-radius:6px;height:22px;overflow:hidden;position:relative;}
+  .bar-fill{height:100%;border-radius:6px;background:linear-gradient(90deg,var(--red-deep),var(--red));display:flex;align-items:center;justify-content:flex-end;padding-right:8px;font-size:11px;color:#fff;font-weight:700;}
+  .bar-fill.gold{background:linear-gradient(90deg,#8a6d1e,var(--gold));color:#1A0B0E;}
+  .bar-fill.dim{background:linear-gradient(90deg,#3a2228,#5a2e36);}
+  /* position matrix */
+  .matrix{position:relative;width:100%;height:340px;background:var(--bg2);border:1px solid var(--line);border-radius:14px;margin-top:8px;}
+  .axis-x{position:absolute;bottom:8px;width:100%;text-align:center;font-size:12px;color:var(--muted);}
+  .axis-y{position:absolute;left:8px;top:0;height:100%;writing-mode:vertical-rl;font-size:12px;color:var(--muted);}
+  .dot{position:absolute;transform:translate(-50%,-50%);padding:5px 10px;border-radius:20px;font-size:12px;font-weight:700;white-space:nowrap;}
+  .dot.me{background:var(--red);color:#fff;border:2px solid var(--gold);}
+  .dot.other{background:var(--card2);color:var(--text);border:1px solid var(--line);}
+  /* cloud */
+  .cloud{display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px;padding:14px;background:var(--bg2);border-radius:14px;}
+  .cloud span{padding:3px 10px;border-radius:8px;line-height:1.5;}
+  .s1{font-size:13px;} .s2{font-size:16px;} .s3{font-size:20px;} .s4{font-size:25px;}
+  .cgood{background:rgba(95,184,122,.13);color:var(--good);}
+  .cbad{background:rgba(224,107,107,.13);color:var(--bad);}
+  .ctheme{font-size:15px;color:var(--gold-light);background:rgba(212,175,55,.1);padding:6px 14px;border-radius:10px;font-weight:700;}
+  .quote{border-left:3px solid var(--gold);padding:10px 16px;background:var(--card);border-radius:0 10px 10px 0;font-size:15px;color:var(--text);margin:10px 0;}
+  .quote .q{color:var(--gold-light);font-weight:800;}
+  table{width:100%;border-collapse:collapse;font-size:13px;margin-top:8px;}
+  th,td{border:1px solid var(--line);padding:9px 10px;text-align:left;vertical-align:top;}
+  th{background:var(--card2);color:var(--gold-light);font-weight:700;}
+  td .y{color:var(--good);} td .n{color:var(--bad);}
+  .listnum{counter-reset:l;list-style:none;}
+  .listnum li{counter-increment:l;position:relative;padding:12px 14px 12px 52px;background:var(--card);border:1px solid var(--line);border-radius:12px;margin-bottom:10px;}
+  .listnum li::before{content:counter(l);position:absolute;left:14px;top:12px;width:26px;height:26px;background:var(--red);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;}
+  .listnum li b{color:var(--gold-light);}
+  .foot{text-align:center;font-size:12px;color:var(--muted);padding:26px;}
+  .foot b{color:var(--gold-light);}
+  .flag{font-size:11px;padding:1px 6px;border-radius:5px;background:var(--card2);color:var(--muted);margin-left:4px;}
+  .flag.a{color:var(--good);} .flag.b{color:var(--gold-light);} .flag.c{color:var(--bad);}
+
+  /* ===== 移动端自适应 iOS Safari / Android Chrome ===== */
+  @media (max-width:820px){
+    .page{min-height:100dvh;padding:24px 18px 40px;}
+    .pageno{top:14px;right:16px;}
+    h1{font-size:27px;}
+    h2{font-size:21px;}
+    h3{font-size:16px;}
+    .sub{font-size:13px;margin-bottom:14px;}
+    .g3,.g2{grid-template-columns:1fr;}
+    .card{padding:15px 13px;}
+    .kpi{font-size:26px;}
+    .bar-name{width:74px;font-size:11px;padding-right:6px;}
+    .bar-track{height:20px;}
+    .bar-fill{font-size:10px;padding-right:5px;}
+    .matrix{height:300px;}
+    .dot{font-size:11px;padding:4px 8px;}
+    .cloud{padding:12px 10px;gap:5px 6px;}
+    .s1{font-size:12px;} .s2{font-size:14px;} .s3{font-size:17px;} .s4{font-size:21px;}
+    table{font-size:12px;}
+    th,td{padding:7px 8px;}
+    .quote{font-size:14px;padding:9px 13px;}
+    .listnum li{padding:11px 12px 11px 46px;}
+    .listnum li::before{left:12px;width:24px;height:24px;font-size:13px;}
+    .src{font-size:10px;}
+    .flag{font-size:10px;}
+  }
+
+
+  /* iOS/Android 横向溢出兜底：彻底消除 iframe 内横向滚动导致的布局错位 */
+  .page{overflow-x:hidden;}
+  .tw{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:10px 0;}
+  .tw table{min-width:620px;}
+
+  /* 移动端柱状图修复：品牌名独立成行避免被条形遮挡；数值标签min-width保证可读 */
+  @media (max-width:820px){
+    .bar-row,.bar{flex-direction:column;align-items:stretch;margin:11px 0;}
+    .bar-name{width:auto !important;flex-shrink:1;text-align:left !important;padding-right:0;font-size:12.5px;line-height:1.4;overflow-wrap:anywhere;word-break:break-word;}
+    .bar-track{width:100%;}
+    .bar-fill{min-width:60px;}
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ P1 ============ -->
+<section class="page" id="p1">
+  <div class="pageno">01 / 10</div>
+  <span class="tag">竞品集结展示 · EP.01</span>
+  <h1>韩束红蛮腰系列<br>国民级抗初老大单品拆解</h1>
+  <p class="sub">一个"抖音原生"品牌如何用自研成分+套盒锚点+短剧自播，一年卖出 1810 万套——以及它没补上的课，正是你的切口。</p>
+  <div class="quote"><span class="q">一句话结论：</span>红蛮腰证明了"自研成分 × 399元套盒锚点 × 抖音自播"能跑出国民大单品；但<b>研发薄弱、渠道单一、安全信任危机</b>，是它留给后来者的窗口。</div>
+  <div class="grid g3" style="margin-top:22px;">
+    <div class="card red">
+      <div class="kpi">1810<small> 万套/年</small></div>
+      <div class="t">规模 · 红蛮腰2025累计销量 <span class="flag a">A</span></div>
+      <p style="font-size:13px;color:var(--muted);margin-top:6px;">韩束品牌2025营收 73.6亿，占上美股份 80.2%，几乎以一己之力撑起集团。</p>
+    </div>
+    <div class="card gold">
+      <div class="kpi red">399<small> 元套盒</small></div>
+      <div class="t">打法 · 锚定大众200-400带 <span class="flag b">B</span></div>
+      <p style="font-size:13px;color:var(--muted);margin-top:6px;">"抗衰界拼多多"：精华+眼霜+面霜+面膜+美容仪，对标本类大牌 800+。</p>
+    </div>
+    <div class="card">
+      <div class="kpi red">2.5<small>% 研发费率</small></div>
+      <div class="t">软肋 · 营销56.9% vs 研发2.5% <span class="flag a">A</span></div>
+      <p style="font-size:13px;color:var(--muted);margin-top:6px;">抖音自播占比85%+；EGF禁用成分风波+黑猫8%回复率，信任待补。</p>
+    </div>
+  </div>
+  <div class="src"><b>数据来源：</b>上美股份2025年报（中新网/腾讯新闻，A级）｜C2CC×用户说 TOP20榜单（B级）｜黑猫投诉315红黑榜/新浪财经（B级）。所有数字均标注来源级别（A权威/B行业/C平台快照），置信度见第10页来源清单。</div>
+</section>
+
+<!-- ============ P2 ============ -->
+<section class="page" id="p2">
+  <div class="pageno">02 / 10</div>
+  <span class="tag">市场全景</span>
+  <h2>淘宝/主流电商护肤 TOP20 格局</h2>
+  <p class="sub">2025年主流电商（淘天+抖音+京东）护肤TOP20整体规模 800亿+；美妆大盘 5439亿（+8%）。<span class="flag b">B级</span> 条形长度为相对格局示意，非精确绝对值。</p>
+  <div style="background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px;">
+    <div class="bar-row"><div class="bar-name">珀莱雅</div><div class="bar-track"><div class="bar-fill gold" style="width:100%">80亿+</div></div></div>
+    <div class="bar-row"><div class="bar-name">巴黎欧莱雅</div><div class="bar-track"><div class="bar-fill gold" style="width:88%">70亿+</div></div></div>
+    <div class="bar-row"><div class="bar-name">韩束</div><div class="bar-track"><div class="bar-fill" style="width:86%">73.6亿</div></div></div>
+    <div class="bar-row"><div class="bar-name">兰蔻/雅诗兰黛</div><div class="bar-track"><div class="bar-fill dim" style="width:58%">40-60亿</div></div></div>
+    <div class="bar-row"><div class="bar-name">海蓝之谜/SK-II/赫莲娜/OLAY</div><div class="bar-track"><div class="bar-fill dim" style="width:55%">40-60亿</div></div></div>
+    <div class="bar-row"><div class="bar-name">修丽可</div><div class="bar-track"><div class="bar-fill dim" style="width:48%">约38亿</div></div></div>
+    <div class="bar-row"><div class="bar-name">自然堂/可复美/薇诺娜/谷雨/百雀羚</div><div class="bar-track"><div class="bar-fill dim" style="width:38%">30亿+</div></div></div>
+    <div class="bar-row"><div class="bar-name">丸美 / HBN</div><div class="bar-track"><div class="bar-fill dim" style="width:26%">20亿+</div></div></div>
+  </div>
+  <div class="grid g3" style="margin-top:18px;">
+    <div class="card"><div class="t">格局</div><p><b style="color:var(--gold-light)">"一超两强"</b>：珀莱雅领跑，欧莱雅+韩束紧随，均为70亿+量级。</p></div>
+    <div class="card"><div class="t">国货势力</div><p>TOP20中<b style="color:var(--gold-light)">国货占9席</b>：珀莱雅、韩束、自然堂、可复美、薇诺娜、谷雨、百雀羚、丸美、HBN。</p></div>
+    <div class="card"><div class="t">渠道错位</div><p>2025.2月抖音护肤TOP1是<b style="color:var(--red)">韩束5.62亿</b>；天猫TOP1却是欧莱雅2.52亿、珀莱雅2.11亿——<b style="color:var(--bad)">韩束强抖音、弱天猫</b>。</p></div>
+  </div>
+  <div class="src"><b>数据来源：</b>C2CC传媒×新妆《2025主流电商美妆TOP20》（用户说数据，B级）｜券商研报 天猫/抖音渠道2025年2月美容护肤TOP10（B级）。国货份额57.37%来自2025中国化妆品产业数据发布会（B级）。</div>
+</section>
+
+<!-- ============ P3 ============ -->
+<section class="page" id="p3">
+  <div class="pageno">03 / 10</div>
+  <span class="tag">产品定位</span>
+  <h2>红蛮腰卡在什么位置？</h2>
+  <p class="sub">定位一句话：<b style="color:var(--gold-light)">"抗衰界优衣库 / 抗衰界拼多多"</b>——大众初抗老、一站式套盒、全肤质可入。卡位坐标：价格200-400带 × 初抗老(25+) × 套盒覆盖全流程。</p>
+  <div class="matrix">
+    <div class="axis-y">价格带（低 → 高）</div>
+    <div class="axis-x">抗老强度（基础 → 高阶）</div>
+    <div class="dot me" style="left:30%;top:62%;">韩束红蛮腰 399套盒</div>
+    <div class="dot other" style="left:42%;top:55%;">珀莱雅红宝石 239-350</div>
+    <div class="dot other" style="left:22%;top:40%;">欧莱雅复颜 150-300</div>
+    <div class="dot other" style="left:20%;top:75%;">HBN双A醇 99-199</div>
+    <div class="dot other" style="left:78%;top:30%;">雅诗兰黛小棕瓶 800+</div>
+    <div class="dot other" style="left:70%;top:22%;">兰蔻/海蓝之谜 1000+</div>
+    <div class="dot other" style="left:55%;top:42%;">百雀羚帧颜 200-350</div>
+  </div>
+  <h3>韩束"蛮腰家族"矩阵（分肤分龄切分）</h3>
+  <div class="grid g2">
+    <div class="card"><span class="pill gold">红蛮腰</span> 初老肌 · 环六肽+冻干 · 抗氧抗糖</div>
+    <div class="card"><span class="pill gold">白蛮腰</span> 美白+抗氧双通路 · 包裹377特证</div>
+    <div class="card"><span class="pill gold">蓝蛮腰</span> 敏感肌抗老 · 红没药醇+积雪草</div>
+    <div class="card"><span class="pill gold">黑蛮腰</span> 高阶A醇+玻色因 · 顽固纹</div>
+    <div class="card"><span class="pill gold">X肽超频霜</span> 高端线 · 环六肽含量30%</div>
+    <div class="card"><span class="pill">闪充棒</span> 涂抹/喷雾形态 · 悬油科技 · 去黏腻</div>
+  </div>
+  <div class="src"><b>数据来源：</b>韩束官网/CAME 2026展商资料（A级）｜A股美容护理行业研究（B级）｜各品牌官方旗舰店价格（C级快照）。坐标为基于公开价格的示意性卡位，非精确测量。</div>
+</section>
+
+<!-- ============ P4 ============ -->
+<section class="page" id="p4">
+  <div class="pageno">04 / 10</div>
+  <span class="tag">配方拆解</span>
+  <h2>核心：全球自研「环六肽-9」</h2>
+  <p class="sub">沙利文认证"全球自研环六肽首创者"——突破多肽线性结构壁垒，作用更持久、渗透更深入。以环六肽-9为核心构建"复合肽矩阵 + 抗氧 + 抗糖"的内外源抗老体系。</p>
+  <div class="grid g2">
+    <div class="card red">
+      <div class="t">内源 · 促胶原 / 阻表情纹</div>
+      <p><span class="pill gold">环六肽-9</span> 自研核心<br><span class="pill">乙酰基六肽-8</span> 类肉毒·表情纹<br><span class="pill">棕榈酰三肽-5</span> 促胶原<br><span class="pill">棕榈酰五肽-4</span> 修护<br><span class="pill">4C肽 / 胶原肽</span> 充盈弹性</p>
+    </div>
+    <div class="card">
+      <div class="t">外源 · 抗氧 / 抗糖 / 提亮</div>
+      <p><span class="pill">VC+VE+阿魏酸</span> 抗氧铁三角<br><span class="pill">肌肽+脱羧肌肽</span> 抗糖去黄<br><span class="pill">2%烟酰胺</span> 提亮均肤<br><span class="pill">透明质酸/神经酰胺</span> 保湿屏障</p>
+    </div>
+  </div>
+  <div class="quote" style="margin-top:18px;"><span class="q">机理标签：</span>"预防+改善"双轨——外源解决氧化糖化（暗沉蜡黄），内源解决肌底老化（松弛细纹）。配方思路与珀莱雅红宝石（六胜肽+缓释A醇）、HBN（双A醇）形成国货抗老"多肽 vs A醇"两派。</div>
+  <div class="grid g3" style="margin-top:14px;">
+    <div class="card"><div class="kpi red" style="font-size:22px;">28天</div><div class="t">SGS实测淡纹 +47% <span class="flag b">B·待核方法</span></div></div>
+    <div class="card"><div class="kpi red" style="font-size:22px;">环六肽-9</div><div class="t">自研专利成分 <span class="flag a">A</span></div></div>
+    <div class="card"><div class="kpi red" style="font-size:22px;">无酒精*</div><div class="t">低刺激配方（部分资料称无香精*）<span class="flag c">C·存争议</span></div></div>
+  </div>
+  <div class="src"><b>数据来源：</b>韩束官网/CAME展商（A级，环六肽-9、沙利文认证）｜和君《价值破壁六步法》（B级，SGS淡纹47%引述，实验方法未公开待核）｜多篇成分测评（C级）。* "无酒精/无香精"说法在不同渠道不一致，部分为达人表述，需以备案成分表为准。</div>
+</section>
+
+<!-- ============ P5 ============ -->
+<section class="page" id="p5">
+  <div class="pageno">05 / 10</div>
+  <span class="tag">价格策略</span>
+  <h2>锚点逻辑：用"套盒到手价"制造占便宜感</h2>
+  <p class="sub">红蛮腰主推套盒、锚定 200-400 价格带，以"近翻倍容量赠品"拉高感知价值，质价比碾压国际品牌 400-500+ 套装。<span class="flag b">B级</span></p>
+  <div style="background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px;">
+    <div class="bar-row"><div class="bar-name">雅诗兰黛小棕瓶</div><div class="bar-track"><div class="bar-fill dim" style="width:100%">800+ 元/精华</div></div></div>
+    <div class="bar-row"><div class="bar-name">国际抗衰套盒</div><div class="bar-track"><div class="bar-fill dim" style="width:60%">400-500+ 元</div></div></div>
+    <div class="bar-row"><div class="bar-name">珀莱雅红宝石</div><div class="bar-track"><div class="bar-fill dim" style="width:42%">239-350 元</div></div></div>
+    <div class="bar-row"><div class="bar-name">韩束红蛮腰·水乳</div><div class="bar-track"><div class="bar-fill dim" style="width:28%">219 元（含赠品）</div></div></div>
+    <div class="bar-row"><div class="bar-name">韩束红蛮腰·豪华套盒</div><div class="bar-track"><div class="bar-fill" style="width:50%">399 元（精华+眼霜+面霜+面膜+美容仪）</div></div></div>
+    <div class="bar-row"><div class="bar-name">HBN双A醇</div><div class="bar-track"><div class="bar-fill dim" style="width:24%">99-199 元</div></div></div>
+  </div>
+  <div class="grid g3" style="margin-top:16px;">
+    <div class="card red"><div class="t">锚点① 399豪华套盒</div><p>精华50ml+眼霜15ml+面霜30g+面膜2片+美容仪，对标大牌单精华800+，制造"贵妇级抗衰平权"。</p></div>
+    <div class="card"><div class="t">锚点② 219基础水乳</div><p>含近翻倍容量赠品，降低尝鲜门槛，对应"抗衰界优衣库"。</p></div>
+    <div class="card"><div class="t">单品拆卖（唯品会）</div><p>柔肤乳常卖¥107.5、面霜¥67-82（618价），五件套活动价150-260元，大促再降30-50%。<span class="flag c">C</span></p></div>
+  </div>
+  <div class="src"><b>数据来源：</b>A股美容护理行业研究（B级，399/219套盒锚点）｜唯品会商品页（C级快照，单品价格随促销波动）｜韩束官方旗舰店（C级）。"占便宜感"逻辑为基于营销资料的推断。</div>
+</section>
+
+<!-- ============ P6 ============ -->
+<section class="page" id="p6">
+  <div class="pageno">06 / 10</div>
+  <span class="tag">消费者评价</span>
+  <h2>好评词云 vs 差评痛点</h2>
+  <p class="sub">好评集中于功效与体验，差评集中于安全与售后。平台好评率：唯品会柔肤乳 92%、面霜 100%；但黑猫投诉将韩束列入 2025 美妆黑榜（回复率仅 8%）。<span class="flag b">B/C</span></p>
+  <div class="grid g2">
+    <div>
+      <h3 style="color:var(--good)">✓ 好评词云</h3>
+      <div class="cloud">
+        <span class="cloud cgood s3">紧致提拉</span>
+        <span class="cloud cgood s2">淡纹</span>
+        <span class="cloud cgood s3">保湿水润</span>
+        <span class="cloud cgood s2">性价比高</span>
+        <span class="cloud cgood s4">香味好闻</span>
+        <span class="cloud cgood s2">包装高级</span>
+        <span class="cloud cgood s2">吸收快</span>
+        <span class="cloud cgood s1">温和不刺激</span>
+        <span class="cloud cgood s1">红金小蛮腰</span>
+        <span class="cloud cgood s1">学生党友好</span>
+        <span class="cloud cgood s2">熬夜急救</span>
+      </div>
+    </div>
+    <div>
+      <h3 style="color:var(--bad)">✗ 差评 / 痛点词云</h3>
+      <div class="cloud">
+        <span class="cloud cbad s3">过敏爆痘</span>
+        <span class="cloud cbad s4">虚假宣传</span>
+        <span class="cloud cbad s3">EGF禁用成分</span>
+        <span class="cloud cbad s3">售后推诿</span>
+        <span class="cloud cbad s2">机器人回复</span>
+        <span class="cloud cbad s2">不退货</span>
+        <span class="cloud cbad s2">成本26卖399</span>
+        <span class="cloud cbad s1">黏腻(面霜)</span>
+        <span class="cloud cbad s1">香精刺激</span>
+        <span class="cloud cbad s1">过度营销</span>
+      </div>
+    </div>
+  </div>
+  <div class="quote" style="margin-top:16px;"><span class="q">典型投诉（黑猫）：</span>"用红蛮腰水乳导致脸颊红、满脸爆痘，客服以超售后期为由不退，要求三甲医院鉴定自费"——央视曾点名红蛮腰"成本26元卖399元"及非法添加禁用成分EGF问题。<span class="flag b">B/C</span></div>
+  <div class="src"><b>数据来源：</b>黑猫投诉315红黑榜/新浪财经（B级，EGF事件、8%回复率）｜黑猫个案投诉页（C级，单一用户经历不代表整体）｜唯品会商品页好评率（C级快照）｜淘宝达人测评（C级，香味/体验描述）。</div>
+</section>
+
+<!-- ============ P7 ============ -->
+<section class="page" id="p7">
+  <div class="pageno">07 / 10</div>
+  <span class="tag">卖点拆解</span>
+  <h2>自研成分 × 质价比 × 嗅觉体验</h2>
+  <p class="sub">红蛮腰的消费者心智三杠杆（按"×交叉拆解"格式、从真实数据提炼，非照抄示例文案）：用科学成分建立信任、用价格击穿决策、用嗅觉制造黏性。</p>
+  <div class="grid g3">
+    <div class="card red">
+      <div class="kpi" style="font-size:24px;color:var(--red)">自研成分</div>
+      <div class="t">科学抗衰 · 信任锚</div>
+      <p style="font-size:13px;color:var(--muted);">环六肽-9 自研专利多肽 + 沙利文认证 + SGS 28天淡纹47%（方法待核）+ 分肤分龄矩阵（红/白/蓝/黑蛮腰）。用"科学抗衰"对抗国货"成分虚标"刻板印象。<span class="flag a">A级·官网/CAME</span></p>
+    </div>
+    <div class="card gold">
+      <div class="kpi" style="font-size:24px;color:var(--gold)">质价比</div>
+      <div class="t">抗衰平权 · 决策锚</div>
+      <p style="font-size:13px;color:var(--muted);">399套盒对标大牌800+；1810万套年销摊薄成本；口号"抗衰平权"精准击中"精致穷"人群爽点。"占便宜感"= 成交临门一脚。<span class="flag b">B级·券商</span></p>
+    </div>
+    <div class="card">
+      <div class="kpi" style="font-size:24px;color:var(--gold-light)">嗅觉体验</div>
+      <div class="t">香 · 复购锚</div>
+      <p style="font-size:13px;color:var(--muted);">花果清香调：水"清晨花园甜润"、洁面"雨后花园"、面霜"清新淡雅"。在慢功效品类提供即时正反馈，间接拉动复购与自发晒单。<span class="flag c">C级·达人+推断</span></p>
+    </div>
+  </div>
+  <div class="quote" style="margin-top:18px;"><span class="q">三轴相乘而非相加：</span>科学成分提供<b>信任</b>、质价比提供<b>决策理由</b>、嗅觉提供<b>复购钩子</b>——三段漏斗环环相扣，构成红蛮腰"低客单也能高复购"的增长飞轮。这也是它能用 2.5% 研发投入撬动 56.9% 营销费用、仍跑通规模的关键。<span class="flag c">C·策略推断</span></div>
+  <div class="src"><b>数据来源：</b>韩束官网/CAME（A级，环六肽-9、沙利文认证）｜券商研究（B级，399套盒锚点、研发/营销费用率）｜和君（B级，SGS淡纹47%引述，方法未公开待核）｜淘宝达人测评多篇（C级，香味/体验描述，非官方口径）。三轴为我按"×交叉拆解"格式从真实数据提炼，非示例照搬。</div>
+</section>
+
+<!-- ============ P8 ============ -->
+<section class="page" id="p8">
+  <div class="pageno">08 / 10</div>
+  <span class="tag">痛点与机会</span>
+  <h2>它没做好的 = 你的机会</h2>
+  <p class="sub">红蛮腰赢了规模，但在信任、研发、渠道、服务四个维度留了口子。每一处软肋，都是新品牌的差异化切口。</p>
+  <div class="tw"><table>
+    <tr><th style="width:30%">红蛮腰没做好的</th><th>你的机会（切口）</th></tr>
+    <tr><td><span class="n">安全信任危机</span><br>EGF禁用成分风波、过敏不退货、黑猫8%回复率</td><td><span class="y">切"敏感肌抗老"空白</span>：避开A醇/EGF雷区，神经酰胺+环肽+温和，主打"可验证安全+无忧退"</td></tr>
+    <tr><td><span class="n">研发费率仅2.5%</span><br>营销56.9%，重话术轻实证</td><td><span class="y">真科研背书</span>：第三方人体报告、成分溯源、扫码看数据，反"虚假宣传"痛点</td></tr>
+    <tr><td><span class="n">抖音依赖&gt;85%</span><br>天猫仅售30万套，线下早期</td><td><span class="y">全渠道均衡</span>：抖音做声量、天猫做搜索沉淀、线下做体验，抗单一平台风险</td></tr>
+    <tr><td><span class="n">售后体验差</span><br>机器人回复、推诿、不退货</td><td><span class="y">服务即产品</span>：真人肤质顾问、过敏无忧退、会员长期陪伴</td></tr>
+    <tr><td><span class="n">多肽路线同质化</span><br>与珀莱雅红宝石机理雷同</td><td><span class="y">差异化机理</span>：微生态/屏障/光老化新角度，不与头部拼多肽</td></tr>
+    <tr><td><span class="n">399锚点=廉价平替心智</span><br>X肽高端线未起量</td><td><span class="y">中高端价值感</span>：用成分稀缺性+体验设计建立"贵得有理"</td></tr>
+  </table></div>
+  <div class="src"><b>数据来源：</b>上美股份2025年报（A级，研发2.5%/营销56.9%/韩束占比）｜36氪/申万宏源（B级，渠道依赖、抖音801万套vs天猫30万套）｜黑猫/新浪财经（B级，EGF、售后）｜各品牌公开定位（C级）。机会点为基于公开事实的策略推断。</div>
+</section>
+
+<!-- ============ P9 ============ -->
+<section class="page" id="p9">
+  <div class="pageno">09 / 10</div>
+  <span class="tag">产品启示</span>
+  <h2>如果做竞品，怎么打？</h2>
+  <p class="sub">不打红蛮腰的"便宜"正面战场，而是打它留给你的信任、研发、服务、机理空白。五条可执行策略：</p>
+  <ol class="listnum">
+    <li><b>切"敏感肌抗老"空白赛道。</b>中国敏感肌人群超40%，但A醇/EGF类抗老几乎都不友好。用神经酰胺+环肽+舒缓体系，主打"抗老不烂脸"，直接承接红蛮腰流失的敏感肌用户。</li>
+    <li><b>把"成分透明"做成产品。</b>每支产品配第三方人体功效报告二维码，扫码看细胞级/临床数据，正面回应黑猫"虚假宣传"痛点，把信任做成壁垒。</li>
+    <li><b>全渠道而非 all in 抖音。</b>抖音做短剧声量、天猫做搜索词沉淀与复购、线下做体验店。避免"长在抖音上"的单点脆弱，参考韩束2025线下补课动作。</li>
+    <li><b>服务即产品。</b>真人肤质顾问+过敏无忧退+会员长期陪伴，直接对冲红蛮腰8%回复率的售后差评，把差评变成口碑反转点。</li>
+    <li><b>找差异化机理，别拼多肽同质化。</b>避开与红宝石/红蛮腰的"多肽内卷"，从微生态、屏障修护、光老化等角度建立专属成分故事，降低正面比价。</li>
+  </ol>
+  <div class="src"><b>说明：</b>以上为基于红蛮腰公开竞争态势的"我方（假设为新锐国货抗老品牌）"策略推断，非韩束官方信息。我方品牌定位、价格带、渠道资源需结合实际业务进一步定义。</div>
+</section>
+
+<!-- ============ P10 ============ -->
+<section class="page" id="p10">
+  <div class="pageno">10 / 10</div>
+  <span class="tag">总结 + 来源</span>
+  <h2>一句话总结</h2>
+  <div class="quote"><span class="q">红蛮腰验证了一条路径：</span>自研成分 + 套盒价格锚点 + 抖音自播，能跑出国民级抗老大单品；但它把"规模"跑通了，把"信任"和"研发"留给了后来者——新品牌的切口，就在这扇未关严的窗里。</div>
+
+  <h3 style="margin-top:18px;">数据来源与置信度清单</h3>
+  <div class="tw"><table>
+    <tr><th style="width:42%">来源</th><th style="width:12%">级别</th><th>用于本报告的结论</th></tr>
+    <tr><td>上美股份2025年报（中新网/腾讯新闻/网易）</td><td><span class="y">A</span></td><td>营收91.78亿、韩束73.6亿(占80.2%)、毛利率76.43%、研发2.5%/营销56.9%</td></tr>
+    <tr><td>韩束官网 / CAME 2026展商资料</td><td><span class="y">A</span></td><td>环六肽-9自研、沙利文认证、蛮腰家族矩阵</td></tr>
+    <tr><td>黑猫投诉315红黑榜 / 新浪财经</td><td><span class="y">A/B</span></td><td>EGF禁用成分、8%回复率、美妆黑榜</td></tr>
+    <tr><td>C2CC×新妆《2025美妆TOP20》（用户说）</td><td>B</td><td>护肤TOP20规模800亿+、国货9席、一超两强</td></tr>
+    <tr><td>券商研报（天猫/抖音渠道2025.2 TOP10）</td><td>B</td><td>抖音韩束5.62亿登顶、天猫欧莱雅/珀莱雅领先</td></tr>
+    <tr><td>A股美容护理行业研究</td><td>B</td><td>红蛮腰399/219套盒锚点、200-400价格带</td></tr>
+    <tr><td>和君《价值破壁六步法》</td><td>B</td><td>SGS 28天淡纹47%、红蛮腰1810万套(部分交叉印证)</td></tr>
+    <tr><td>36氪 / 申万宏源研报</td><td>B</td><td>渠道依赖、抖音801万vs天猫30万套、用户破1亿</td></tr>
+    <tr><td>唯品会 / 各平台商品页</td><td>C</td><td>单品价格、好评率（随促销波动的快照）</td></tr>
+    <tr><td>淘宝达人测评 / 小红书 / 黑猫个案</td><td>C</td><td>香味体验、具体差评案例（单一经历，不代表整体）</td></tr>
+  </table></div>
+  <div class="src"><b>置信度说明：</b>A=公司公告/监管/官方；B=行业机构/券商研报；C=平台快照/达人内容（波动大、存个案偏差）。标注"待核方法""存争议"处为需进一步验证的信息。本报告不构成对任何品牌的投资或购买建议。</div>
+</section>
+
+<div class="foot">竞品集结展示 EP.01 · 韩束红蛮腰系列 ｜ 数据截至 2026-08-17 公开资料整理 ｜ 内容仅供产品研究与求职作品集使用</div>
+
+</body>
+</html>

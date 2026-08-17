@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>竞品集结 · 美白赛道横向总览（国货植萃派 vs 国际成分派）</title>
+<style>
+  :root{
+    --red:#1E3A2F;          /* 深墨绿 主色（赛道总览） */
+    --red-d:#13291F;
+    --gold:#B8860B;         /* 奖牌金 高亮 */
+    --gold-light:#D4A836;
+    --bg:#F5F3EC;
+    --card:#FFFFFF;
+    --ink:#1E2A22;
+    --muted:#5C6B5F;
+    --line:#E0DBCB;
+    /* 四品牌标识色 */
+    --c-olay:#1B4F9C;   /* 国际蓝 */
+    --c-osm:#C9A24B;    /* 珍珠金 */
+    --c-guyu:#2F5D3A;   /* 草木绿 */
+    --c-sky:#2E7DA8;    /* 科学蓝 */
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:"PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--ink);line-height:1.65;-webkit-font-smoothing:antialiased}
+  .page{min-height:100vh;padding:40px;max-width:980px;margin:0 auto;position:relative}
+  .pageno{position:absolute;top:22px;right:30px;font-size:13px;color:var(--gold);font-weight:700;letter-spacing:1px}
+  h1{font-size:40px;line-height:1.2;margin-bottom:14px;color:var(--red-d)}
+  h2{font-size:26px;margin:8px 0 16px;color:var(--red);border-left:5px solid var(--gold);padding-left:12px}
+  h3{font-size:17px;margin:14px 0 8px;color:var(--red-d)}
+  .sub{font-size:14px;color:var(--muted);margin-bottom:22px}
+  .grid{display:grid;gap:16px}
+  .g3{grid-template-columns:repeat(3,1fr)}
+  .g2{grid-template-columns:repeat(2,1fr)}
+  .g4{grid-template-columns:repeat(4,1fr)}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;box-shadow:0 2px 10px rgba(30,58,47,.06)}
+  .card.red{border-top:4px solid var(--red)}
+  .card.gold{border-top:4px solid var(--gold)}
+  .kpi{font-size:30px;font-weight:800;color:var(--red);line-height:1.1}
+  .t{font-size:14px;font-weight:700;margin:6px 0 4px;color:var(--ink)}
+  .bar{display:flex;align-items:center;margin:9px 0}
+  .bar-name{width:96px;font-size:13px;color:var(--muted);text-align:right;padding-right:10px}
+  .bar-track{flex:1;background:#EDE9DC;border-radius:8px;height:24px;overflow:hidden}
+  .bar-fill{height:100%;background:linear-gradient(90deg,var(--red),#3F6B53);border-radius:8px;color:#fff;font-size:11px;display:flex;align-items:center;justify-content:flex-end;padding-right:8px;font-weight:700}
+  .matrix{position:relative;height:380px;background:linear-gradient(135deg,#fff,#F5F3EC);border:1px solid var(--line);border-radius:14px;margin:10px 0}
+  .axis{position:absolute;font-size:12px;color:var(--muted);font-weight:700}
+  .dot{position:absolute;transform:translate(-50%,-50%);color:#fff;font-size:12px;padding:5px 9px;border-radius:20px;white-space:nowrap;box-shadow:0 2px 6px rgba(0,0,0,.2);font-weight:700}
+  .dot.olay{background:var(--c-olay)} .dot.osm{background:var(--c-osm);color:#3a2e08} .dot.guyu{background:var(--c-guyu)} .dot.sky{background:var(--c-sky)}
+  .cloud{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;display:flex;flex-wrap:wrap;gap:8px 10px;align-items:center;justify-content:center}
+  .s1{font-size:13px;color:var(--muted)}
+  .s2{font-size:15px;color:#3c5243}
+  .s3{font-size:18px;color:var(--red);font-weight:700}
+  .s4{font-size:23px;color:var(--gold);font-weight:800}
+  table{width:100%;border-collapse:collapse;font-size:13px;margin:10px 0;background:var(--card);border-radius:10px;overflow:hidden}
+  th,td{border:1px solid var(--line);padding:9px 10px;text-align:left;vertical-align:top}
+  th{background:var(--red);color:#fff;font-weight:700}
+  tr:nth-child(even) td{background:#F7F5EE}
+  .quote{background:#EDE9DC;border-left:4px solid var(--gold);padding:11px 16px;margin:14px 0;border-radius:0 10px 10px 0;font-size:14px}
+  .quote .q{color:var(--red);font-weight:700}
+  .listnum{list-style:none;counter-reset:n}
+  .listnum li{position:relative;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:13px 14px 13px 50px;margin:10px 0}
+  .listnum li::before{counter-increment:n;content:counter(n);position:absolute;left:13px;top:13px;width:26px;height:26px;background:var(--red);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px}
+  .src{font-size:11px;color:#8a978d;border-top:1px dashed var(--line);margin-top:18px;padding-top:10px;line-height:1.6}
+  .flag{display:inline-block;font-size:10px;padding:2px 7px;border-radius:6px;font-weight:700;margin-left:6px}
+  .flag.a{background:#DCEFE0;color:#1E3D27}
+  .flag.b{background:#FFF2D6;color:#7a5a17}
+  .flag.c{background:#F1E6EF;color:#6b3a5e}
+  .back{display:inline-block;margin-bottom:18px;color:var(--red);text-decoration:none;font-size:13px;font-weight:700;border:1px solid var(--red);padding:6px 14px;border-radius:20px}
+  .back:hover{background:var(--red);color:#fff}
+  .hero{background:linear-gradient(135deg,var(--red-d),#2E5640);color:#fff;border-radius:18px;padding:34px;margin-bottom:8px}
+  .hero h1{color:#fff}
+  .hero .sub{color:#cfe0d2}
+  .pill{display:inline-block;background:rgba(255,255,255,.15);padding:4px 12px;border-radius:20px;font-size:12px;margin:4px 6px 0 0}
+  .b-olay{color:var(--c-olay);font-weight:800}
+  .b-osm{color:var(--c-osm);font-weight:800}
+  .b-guyu{color:var(--c-guyu);font-weight:800}
+  .b-sky{color:var(--c-sky);font-weight:800}
+  .legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12px;margin:6px 0 2px}
+  .legend span{display:inline-flex;align-items:center;gap:5px}
+  .legend i{width:12px;height:12px;border-radius:3px;display:inline-block}
+  /* ===== 移动端自适应 iOS Safari / Android Chrome ===== */
+  @media (max-width:820px){
+    .page{min-height:100dvh;padding:24px 18px 40px;}
+    .pageno{top:14px;right:16px;}
+    h1{font-size:27px;}
+    h2{font-size:21px;}
+    .sub{font-size:13px;margin-bottom:14px;}
+    .g3,.g2,.g4{grid-template-columns:1fr;}
+    .card{padding:15px 13px;}
+    .kpi{font-size:26px;}
+    .bar-name{width:74px;font-size:11px;padding-right:6px;}
+    .bar-track{height:20px;}
+    .bar-fill{font-size:10px;padding-right:5px;}
+    .matrix{height:auto;min-height:340px;padding:16px 10px 36px;overflow:hidden;}
+    .dot{font-size:10px;padding:4px 7px;white-space:normal;width:33%;line-height:1.3;}
+    .cloud{padding:12px 10px;gap:5px 6px;}
+    .s1{font-size:12px;} .s2{font-size:14px;} .s3{font-size:17px;} .s4{font-size:21px;}
+    table{font-size:12px;}
+    th,td{padding:7px 8px;}
+    .quote{font-size:14px;padding:9px 13px;}
+    .listnum li{padding:11px 12px 11px 46px;}
+    .listnum li::before{left:12px;width:24px;height:24px;font-size:13px;}
+    .src{font-size:10px;}
+    .flag{font-size:10px;}
+    .hero{padding:24px 20px;}
+    .legend{font-size:11px;gap:8px;}
+  }
+
+  /* iOS/Android 横向溢出兜底：彻底消除 iframe 内横向滚动导致的布局错位 */
+  .page{overflow-x:hidden;}
+  .tw{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:10px 0;}
+  .tw table{min-width:620px;}
+
+  /* 移动端柱状图修复：品牌名独立成行避免被条形遮挡；数值标签min-width保证可读 */
+  @media (max-width:820px){
+    .bar-row,.bar{flex-direction:column;align-items:stretch;margin:11px 0;}
+    .bar-name{width:auto !important;flex-shrink:1;text-align:left !important;padding-right:0;font-size:12.5px;line-height:1.4;overflow-wrap:anywhere;word-break:break-word;}
+    .bar-track{width:100%;}
+    .bar-fill{min-width:60px;}
+  }
+</style>
+</head>
+<body>
+
+<a class="back" href="index.html">← 竞品集结总门户</a>
+<!-- ============ P1 ============ -->
+<section class="page" id="p1">
+  <div class="hero">
+    <div class="pageno">01 / 10</div>
+    <h1>美白赛道横向总览</h1>
+    <p class="sub">国货植萃派 vs 国际成分派 — 把 EP.05 谷雨与 OLAY / 欧诗漫 / 肌肤未来放进一张表，讲清赛道格局与机会切口</p>
+    <div>
+      <span class="pill">赛道规模 ¥800亿+</span>
+      <span class="pill">四强同卷平价带</span>
+      <span class="pill">最大空白：真·敏感肌温和美白</span>
+    </div>
+  </div>
+  <h2>一页结论</h2>
+  <div class="grid g2">
+    <div class="card red"><div class="kpi">800亿+</div><div class="t">赛道大盘（欧睿2025预测）</div><p style="font-size:13px;color:var(--muted)">美白护肤品2025市场规模破800亿，CAGR 9–12%；功效型占比将从58%升至73%。是继抗老之后第二大高增速功效赛道。<span class="flag b">B·报告摘要(谨慎)</span></p></div>
+    <div class="card gold"><div class="kpi">4家</div><div class="t">格局：三派同台</div><p style="font-size:13px;color:var(--muted)">国际成分派(<b class="b-olay">OLAY</b>烟酰胺)、国货植萃派(<b class="b-osm">欧诗漫</b>珍珠 / <b class="b-guyu">谷雨</b>光甘草定)、国货猛药派(<b class="b-sky">肌肤未来</b>377)。中高端被资生堂/SK-II占据。</p></div>
+    <div class="card"><div class="kpi" style="color:var(--gold)">100–300</div><div class="t">价格带高度重叠</div><p style="font-size:13px;color:var(--muted)">四家主力成交全在100–300元平价区，差异化只剩"机理叙事+信任状"，同质化内卷严重。</p></div>
+    <div class="card"><div class="kpi" style="color:var(--c-sky)">1个</div><div class="t">最大空白机会</div><p style="font-size:13px;color:var(--muted)">四家都喊"温和"却都有过敏/刺激质疑。<b>真·可验证的敏感肌温和美白</b>是全赛道未占领的高地。</p></div>
+  </div>
+  <div class="quote"><span class="q">情报视角：</span>美白赛道的竞争本质是"成分机理叙事"的竞争。国际品牌用<b>经典成分+全渠道</b>守江山，国货用<b>植萃温和+文化IP</b>切增量，新锐用<b>单一猛药成分</b>打透细分——但三者都卡在"宣称温和、体验翻车"的信任缺口。这正是新品牌的切入点。</div>
+  <div class="src"><b>数据来源：</b>欧睿国际美白市场预测（book118报告摘要，B级·付费报告转载谨慎引用）｜OLAY香港官网/京东（A级）｜百度百科欧诗漫（A级·工商/专利）｜创业最前线/天下网商/肌肤未来官网（B级）｜今日头条美白榜单/天猫价格（C级）。各"销量/市占第一"多为品牌自陈或自媒体榜单，A级审计数据稀缺，详见 P10。</div>
+</section>
+
+<!-- ============ P2 ============ -->
+<section class="page" id="p2">
+  <div class="pageno">02 / 10</div>
+  <h2>市场全景 · 派系格局</h2>
+  <p class="sub">美白是结构性大赛道，但份额高度向头部集中（欧睿：前五大企业2025合计市占62.4%→2030年68.1%，马太效应）。</p>
+  <h3>派系份额示意（按成分路线划分，行业估算）</h3>
+  <div class="bar"><div class="bar-name">国际成分派</div><div class="bar-track"><div class="bar-fill" style="width:42%">OLAY/资生堂/欧莱雅 ~42%</div></div></div>
+  <div class="bar"><div class="bar-name">国货植萃派</div><div class="bar-track"><div class="bar-fill" style="width:33%;background:linear-gradient(90deg,#2F5D3A,#4C8259)">欧诗漫/谷雨/薇诺娜 ~33%</div></div></div>
+  <div class="bar"><div class="bar-name">国货猛药派</div><div class="bar-track"><div class="bar-fill" style="width:15%;background:linear-gradient(90deg,#2E7DA8,#4F97C2)">肌肤未来/城野医生377 ~15%</div></div></div>
+  <div class="bar"><div class="bar-name">其他/新成分</div><div class="bar-track"><div class="bar-fill" style="width:10%;background:linear-gradient(90deg,#999,#bbb)">麦角硫因/VC/熊果苷等 ~10%</div></div></div>
+  <div class="legend" style="margin-top:10px">
+    <span><i style="background:var(--c-olay)"></i>国际成分派（烟酰胺/4MSK/377）</span>
+    <span><i style="background:var(--c-guyu)"></i>国货植萃派（珍珠/光甘草定）</span>
+    <span><i style="background:var(--c-sky)"></i>国货猛药派（377专研）</span>
+  </div>
+  <div class="grid g2" style="margin-top:16px">
+    <div class="card"><div class="t" style="color:var(--c-olay)">OLAY（国际成分派·霸主）</div><p style="font-size:13px;color:var(--muted)">宝洁旗下，30年美白专研。抗糖化美白细分2025市占19.3%（欧睿）。全港No.1美白精华（NielsenIQ 2024.3–2025.2）。心智与全渠道最强，但增长见顶、依赖经典配方。<span class="flag b">B·报告摘要</span></p></div>
+    <div class="card"><div class="t" style="color:var(--c-osm)">欧诗漫（国货植萃·国民）</div><p style="font-size:13px;color:var(--muted)">1967始创、珍珠全产业链，连续5年国货美白第一（2020–2024）。"珍珠爷爷"IP翻红，2024线上GMV破40亿。线下根基最深。<span class="flag a">A·百科/访谈</span></p></div>
+    <div class="card"><div class="t" style="color:var(--c-guyu)">谷雨（国货植萃·新锐）</div><p style="font-size:13px;color:var(--muted)">光甘草定专研，抖音原生。2025销售额破60亿，抖音美白2025Q1市占12.23%第1。新中式+自研成分是增长引擎。<span class="flag b">B·行业榜单</span></p></div>
+    <div class="card"><div class="t" style="color:var(--c-sky)">肌肤未来（国货猛药·聚焦）</div><p style="font-size:13px;color:var(--muted)">环亚旗下，死磕377。国货377科学美白销量连续3年第一，2024国货377市占超70%。但单成分依赖、赛道天花板低。<span class="flag b">B·媒体深度</span></p></div>
+  </div>
+  <div class="src"><b>数据来源：</b>欧睿前五大市占/派系份额为行业报告估算值（book118摘要，B级·谨慎）；OLAY市占与全港第一（欧睿/NielsenIQ，B级·报告摘要 + OLAY香港官网A级）；欧诗漫连冠与GMV（百度百科A级 + 天下网商/媒体B级）；谷雨市占（C2CC/行业榜单B级）；肌肤未来市占（创业最前线B级 + 品牌官方A级披露）。条形图为相对格局示意，非精确绝对值。</div>
+</section>
+
+<!-- ============ P3 ============ -->
+<section class="page" id="p3">
+  <div class="pageno">03 / 10</div>
+  <h2>四强产品定位 · 卡位矩阵</h2>
+  <p class="sub">横轴=价格带（平价←→中高端），纵轴=成分属性（化学猛药↑↔植萃天然温和↓）。四家几乎全挤在"平价半区"。</p>
+  <div class="matrix">
+    <div class="axis" style="top:10px;left:50%;transform:translateX(-50%)">↑ 化学成分·猛药</div>
+    <div class="axis" style="bottom:10px;left:50%;transform:translateX(-50%)">↓ 植萃天然·温和</div>
+    <div class="axis" style="top:50%;left:8px;transform:translateY(-50%) rotate(-90deg)">成分属性</div>
+    <div class="axis" style="bottom:-26px;left:50%;transform:translateX(-50%)">价格带：平价 ◀ —————— ▶ 中高端</div>
+    <!-- 肌肤未来：猛药+超平价 左上 -->
+    <div class="dot sky" style="left:20%;top:22%">肌肤未来·377（猛药·超平价）</div>
+    <!-- OLAY：化学+中端 中上偏右 -->
+    <div class="dot olay" style="left:62%;top:30%">OLAY（烟酰胺·中端）</div>
+    <!-- 谷雨：植萃温和+平价中端 中下 -->
+    <div class="dot guyu" style="left:45%;top:72%">谷雨（光甘草定·平价-中端）</div>
+    <!-- 欧诗漫：植萃温和+平价 左下 -->
+    <div class="dot osm" style="left:26%;top:82%">欧诗漫（珍珠·平价国民）</div>
+  </div>
+  <div class="quote"><span class="q">读图结论：</span>四家全落在<b>平价半区（左半）</b>，中高端美白（右半）仍由资生堂、SK-II、倩碧等国际品牌把持。国货在平价区靠"成分叙事+性价比"内卷，真正的差异化机会在<b>右半区（中高端温和美白）</b>与<b>机理叙事升级（从单成分到复方全链路）</b>。<span class="flag c">推断</span></div>
+  <div class="src"><b>制图依据：</b>四家价格与成分属性来自 P4/P5 实测数据；中高端国际品牌占位为行业常识（资生堂新透白、SK-II环采钻白、倩碧302，均300–1000元带）。矩阵为定性定位示意，非精确坐标。</div>
+</section>
+
+<!-- ============ P4 ============ -->
+<section class="page" id="p4">
+  <div class="pageno">04 / 10</div>
+  <h2>配方拆解 · 核心成分对撞</h2>
+  <p class="sub">四家走四条不同的抑黑通路，但都主打"温和+有效"的矛盾统一——这正是技术难点，也是机会。</p>
+  <div class="tw"><table>
+    <tr><th style="width:90px">品牌</th><th>核心成分 / 机理</th><th>关键数据（宣称口径）</th><th>技术壁垒</th></tr>
+    <tr><td><b class="b-olay">OLAY</b></td><td>烟酰胺5%(99.7%纯)+传明酸3%（淡斑线）；烟酰胺+革糖素PRO（水光线）。双通路：阻断转运+抗糖减黄</td><td>淡斑应答率87.1%；水光2.7倍抑黑、6倍抗糖</td><td>30年美白专研、双品线互补、AB5D舒缓体系<span class="flag a">A·官网</span></td></tr>
+    <tr><td><b class="b-osm">欧诗漫</b></td><td>珍白因Pro（珍珠多肽提取，3418种多肽提纯707种）；全链路五环节截黑</td><td>宣称黑色素抑制率62.56%；温和性宣称377/光甘草定200倍</td><td>159项专利、珍珠全产业链、CNAS实验室<span class="flag a">A·百科</span></td></tr>
+    <tr><td><b class="b-guyu">谷雨</b></td><td>极光甘草（光甘草定）99%纯度+3项国家发明专利（提纯/包裹/靶向）</td><td>SGS报告：0.12%抑黑率115.54%（送检原料液）</td><td>自研提纯99%+28nm包裹3.4倍+MC1R靶向<span class="flag a">A·官网/专利</span></td></tr>
+    <tr><td><b class="b-sky">肌肤未来</b></td><td>377（苯乙基间苯二酚）+光甘草定+传明酸复方；专研"二代377"</td><td>377抑酪氨酸酶活性为曲酸2倍（行业常识）；国货377销量连续3年第一</td><td>中澳双实验室、环亚35年研发底、IFSCC首发<span class="flag b">B·官网/媒体</span></td></tr>
+  </table></div>
+  <div class="quote"><span class="q">机理对照：</span><b class="b-olay">OLAY</b>是"阻断转运+抗糖"双通路教科书；<b class="b-osm">欧诗漫</b>讲"珍珠全链路"文化叙事；<b class="b-guyu">谷雨</b>靠"光甘草定纯度+包裹"做技术感；<b class="b-sky">肌肤未来</b>押注377猛药但已转向复方。四家都未真正解决"强功效×真温和"的工程矛盾。<span class="flag c">分析</span></div>
+  <div class="src"><b>数据来源：</b>OLAY配方（OLAY香港官网/测评A+B级）；欧诗漫珍白因Pro与专利数（百度百科A级，抑制率为品牌宣称B/C）；谷雨纯度与SGS（官网A级，SGS为品牌送检原料液非成品）；肌肤未来377（官网/创业最前线B级）。所有"抑制率/应答率"均为品牌送检测试或宣称，非独立第三方统一标准，置信度有限。</div>
+</section>
+
+<!-- ============ P5 ============ -->
+<section class="page" id="p5">
+  <div class="pageno">05 / 10</div>
+  <h2>价格策略 · 锚点逻辑</h2>
+  <p class="sub">四家都把主战场压在100–300元，用"大牌成分平替"逻辑抢量；差异在套装锚点与渠道补贴。</p>
+  <div class="grid g4">
+    <div class="card" style="border-top:4px solid var(--c-olay)"><div class="kpi" style="color:var(--c-olay)">¥169</div><div class="t">OLAY·抗糖小白瓶60ml</div><p style="font-size:12px;color:var(--muted)">京东常卖价；双品月均成本约¥320。国际品牌溢价但仍卡平价带。<span class="flag a">A·京东</span></p></div>
+    <div class="card" style="border-top:4px solid var(--c-osm)"><div class="kpi" style="color:var(--c-osm)">平价</div><div class="t">欧诗漫·小白灯</div><p style="font-size:12px;color:var(--muted)">国民定价，主打"大牌功效、国货价格"，线下商超+抖音双轮。<span class="flag c">C·电商快照</span></p></div>
+    <div class="card" style="border-top:4px solid var(--c-guyu)"><div class="kpi" style="color:var(--c-guyu)">149–299</div><div class="t">谷雨·光感精华</div><p style="font-size:12px;color:var(--muted)">抖音爆款锚定，套组拉客单；新中式溢价轻。<span class="flag c">C·电商快照</span></p></div>
+    <div class="card" style="border-top:4px solid var(--c-sky)"><div class="kpi" style="color:var(--c-sky)">22–48</div><div class="t">肌肤未来·377面霜(中样)</div><p style="font-size:12px;color:var(--muted)">天猫小样/中样价，正装单价极低，用"成分猛药低价"引流。<span class="flag c">C·天猫</span></p></div>
+  </div>
+  <div class="quote"><span class="q">锚点逻辑对比：</span><b class="b-olay">OLAY</b>用"国际品牌+百元价"制造降维性价比；<b class="b-osm">欧诗漫</b>用"56年国民品牌"建立信任折价；<b class="b-guyu">谷雨</b>用"新中式+自研成分"做轻度溢价；<b class="b-sky">肌肤未来</b>用"377猛药超低价"打成分党流量。四种打法都指向同一结论：<b>美白赛道的定价权仍在"成分故事"而非"成分成本"</b>。<span class="flag c">分析</span></div>
+  <div class="src"><b>数据来源：</b>OLAY ¥169（京东A级快照，随促销波动）；欧诗漫/谷雨/肌肤未来价格为电商公开快照（C级，采集日波动大）。价格仅为到手价区间示意，不构成精确市调。</div>
+</section>
+
+<!-- ============ P6 ============ -->
+<section class="page" id="p6">
+  <div class="pageno">06 / 10</div>
+  <h2>消费者评价 · 好评/差评词云</h2>
+  <p class="sub">四家好评高度同质（提亮/性价比/肤感），差评却指向同一软肋——"温和"承诺与体验落差。</p>
+  <div class="grid g2">
+    <div class="card" style="border-top:4px solid var(--c-olay)">
+      <div class="t" style="color:var(--c-olay)">OLAY</div>
+      <p style="font-size:12px;color:#3c5243;margin:4px 0">✅ 好评词云</p>
+      <div class="cloud"><span class="s3">提亮快</span><span class="s2">性价比高</span><span class="s2">油皮亲妈</span><span class="s1">不黏腻</span><span class="s2">淡痘印</span><span class="s1">经典可靠</span></div>
+      <p style="font-size:12px;color:#9a4a5e;margin:8px 0 2px">⚠️ 差评词云</p>
+      <div class="cloud"><span class="s2">部分不耐受</span><span class="s1">防腐剂</span><span class="s2">需建立耐受</span><span class="s1">干皮紧绷</span></div>
+    </div>
+    <div class="card" style="border-top:4px solid var(--c-osm)">
+      <div class="t" style="color:var(--c-osm)">欧诗漫</div>
+      <p style="font-size:12px;color:#3c5243;margin:4px 0">✅ 好评词云</p>
+      <div class="cloud"><span class="s3">国民信赖</span><span class="s2">珍珠温和</span><span class="s2">老牌靠谱</span><span class="s1">不刺激</span><span class="s2">滋润</span><span class="s1">送礼体面</span></div>
+      <p style="font-size:12px;color:#9a4a5e;margin:8px 0 2px">⚠️ 差评词云</p>
+      <div class="cloud"><span class="s2">见效慢</span><span class="s2">略老土</span><span class="s1">包装旧</span><span class="s1">年轻感弱</span><span class="s1">部分无效</span></div>
+    </div>
+    <div class="card" style="border-top:4px solid var(--c-guyu)">
+      <div class="t" style="color:var(--c-guyu)">谷雨</div>
+      <p style="font-size:12px;color:#3c5243;margin:4px 0">✅ 好评词云</p>
+      <div class="cloud"><span class="s3">温和不刺激</span><span class="s2">香味好闻</span><span class="s2">新中式</span><span class="s1">提亮</span><span class="s2">肤感好</span><span class="s1">颜值高</span></div>
+      <p style="font-size:12px;color:#9a4a5e;margin:8px 0 2px">⚠️ 差评词云</p>
+      <div class="cloud"><span class="s2">过敏</span><span class="s2">反黑</span><span class="s1">没效果</span><span class="s1">虚假宣传</span><span class="s1">单成分依赖</span></div>
+    </div>
+    <div class="card" style="border-top:4px solid var(--c-sky)">
+      <div class="t" style="color:var(--c-sky)">肌肤未来</div>
+      <p style="font-size:12px;color:#3c5243;margin:4px 0">✅ 好评词云</p>
+      <div class="cloud"><span class="s3">肤感好</span><span class="s2">377猛</span><span class="s2">平价</span><span class="s1">吸收快</span><span class="s1">成分党</span></div>
+      <p style="font-size:12px;color:#9a4a5e;margin:8px 0 2px">⚠️ 差评词云</p>
+      <div class="cloud"><span class="s2">效果平淡</span><span class="s2">377刺激</span><span class="s1">单一依赖</span><span class="s1">天花板低</span></div>
+    </div>
+  </div>
+  <div class="quote"><span class="q">口碑悖论：</span>四家都不同程度承诺"温和/敏感肌可用"，但<b class="b-guyu">谷雨</b>、<b class="b-sky">肌肤未来</b>的黑猫投诉与小红书反馈里，"过敏/刺激/反黑"高频出现。这说明赛道存在一个被广泛承诺、却未被任何一家扎实兑现的承诺——<b>真·敏感肌可验证温和美白</b>。<span class="flag c">C·平台反馈推断</span></div>
+  <div class="src"><b>数据来源：</b>好评/差评词云为对各品牌小红书/黑猫/电商评论的高频词归纳（C级，样本偏差、非全量）；OLAY京东好评率97%（A级快照）。词云用于"需求与表达素材"发现，不证明市场规模或普遍结论。</div>
+</section>
+
+<!-- ============ P7 ============ -->
+<section class="page" id="p7">
+  <div class="pageno">07 / 10</div>
+  <h2>卖点拆解 · 叙事 × 对比</h2>
+  <p class="sub">按"×交叉拆解"格式，四家各用三轴叙事把成分党转成品牌信徒——这是方法论，不是结论照搬。</p>
+  <div class="grid g2">
+    <div class="card" style="border-top:4px solid var(--c-olay)"><div class="kpi" style="color:var(--c-olay);font-size:22px">科研护肤 × 双通路 × 高性价比</div><div class="t" style="color:var(--c-olay)">OLAY</div><p style="font-size:13px;color:var(--muted)">30年专研建立权威，"淡斑+去黄"双品覆盖全链路，国际品牌却百元价，降维打击。</p></div>
+    <div class="card" style="border-top:4px solid var(--c-osm)"><div class="kpi" style="color:var(--c-osm);font-size:22px">珍珠文化IP × 全产业链 × 国民温和</div><div class="t" style="color:var(--c-osm)">欧诗漫</div><p style="font-size:13px;color:var(--muted)">"珍珠爷爷"情感IP + 56年全产业链信任 + 国民平价，把"温和"做成文化资产。</p></div>
+    <div class="card" style="border-top:4px solid var(--c-guyu)"><div class="kpi" style="color:var(--c-guyu);font-size:22px">新中式 × 自研光甘草定 × 温和</div><div class="t" style="color:var(--c-guyu)">谷雨</div><p style="font-size:13px;color:var(--muted)">东方草木叙事 + 自研提纯专利 + "温和美白"心智，抖音原生打法成就增长。</p></div>
+    <div class="card" style="border-top:4px solid var(--c-sky)"><div class="kpi" style="color:var(--c-sky);font-size:22px">科学美白 × 377专研 × 成分党</div><div class="t" style="color:var(--c-sky)">肌肤未来</div><p style="font-size:13px;color:var(--muted)">死磕单一猛药成分 + 科学话术 + 高浓度标识，用成分党语言抢精准流量。</p></div>
+  </div>
+  <div class="quote"><span class="q">叙事共性：</span>四家都遵循"<b>权威成分/技术（信任锚）× 人群/场景（人群锚）× 情感/文化（情感锚）</b>"的三轴结构。差别只在锚点内容：OLAY锚"科研"、欧诗漫锚"文化"、谷雨锚"新中式"、肌肤未来锚"成分猛药"。<b>学会这套结构，你就能拆解任何竞品的传播逻辑。</b><span class="flag c">方法论</span></div>
+  <div class="src"><b>数据来源：</b>四家卖点提炼自各品牌官网/招股书/媒体访谈（A/B级）与电商详情页；三轴结构为基于内容的分析框架（推断），非品牌官方表述。</div>
+</section>
+
+<!-- ============ P8 ============ -->
+<section class="page" id="p8">
+  <div class="pageno">08 / 10</div>
+  <h2>痛点与机会 · 它没做好的 = 你的机会</h2>
+  <p class="sub">把四家共性痛点横向列出，正是新锐品牌可切入的空白——假设我方=新锐国货美白品牌。</p>
+  <div class="tw"><table>
+    <tr><th style="width:200px">四家共性痛点（事实）</th><th>对应机会切口（推断）</th><th>谁能先占</th></tr>
+    <tr><td>"温和"广泛承诺却普遍翻车（过敏/刺激/反黑投诉）</td><td><b>真·敏感肌温和美白</b>：用独立第三方人体实测报告把"温和"做成可验证承诺，而非口头宣称</td><td>空白·高价值</td></tr>
+    <tr><td>多为单成分或少数成分依赖（377/光甘草定/珍珠）</td><td><b>复方多通路全链路</b>：学OLAY双通路，做"抑制+阻断+代谢+修护"四步，避开单成分天花板</td><td>空白·中价值</td></tr>
+    <tr><td>成分透明度参差，抑制率多为品牌自检</td><td><b>成分透明+人体实测实证</b>：对标HBN"真功效实证"人设，公开第三方报告与方法学</td><td>空白·中价值</td></tr>
+    <tr><td>谷雨/肌肤未来重度依赖抖音，流量成本飙升（CPM 30→300）</td><td><b>渠道均衡+私域</b>：天猫京东基本盘 + 线下体验 + 私域复购，降低单渠道政策风险</td><td>部分空白</td></tr>
+    <tr><td>中高端美白被国际品牌占据，国货困在平价区</td><td><b>中高端温和美白</b>：用"验证型温和+复方科技"做轻溢价，切资生堂/SK-II的右半区</td><td>空白·高价值</td></tr>
+  </table></div>
+  <div class="quote"><span class="q">最大杠杆：</span>前两个痛点（温和翻车 + 单成分依赖）叠加，恰好指向一个未被占领的定位——<b>"敏感肌可用的复方全链路美白"</b>。这是把红宝石EP里"敏感肌抗老"机会点，平移到美白赛道的同源打法。<span class="flag c">推断</span></div>
+  <div class="src"><b>数据来源：</b>痛点事实来自 P4/P6 四家成分与口碑数据（A/B/C混合）；"温和翻车"以谷雨黑猫过敏投诉、肌肤未来377刺激反馈为据（C级个案，不推断普遍）；机会切口为策略推断（假设我方为新锐国货），非任何品牌官方信息。</div>
+</section>
+
+<!-- ============ P9 ============ -->
+<section class="page" id="p9">
+  <div class="pageno">09 / 10</div>
+  <h2>产品启示 · 如果做竞品怎么打</h2>
+  <p class="sub">基于四家已验证的事实与未占领的空白，给出五条可落地的打法（假设我方=新锐国货美白品牌）。</p>
+  <ol class="listnum">
+    <li><b>切"敏感肌真温和美白"空白</b>：把温和做成可验证——上市即附独立第三方人体耐受+功效报告，正面回应四家翻车痛点。<span class="flag c">推断</span></li>
+    <li><b>复方全链路，不做单成分赌注</b>：组合"抑制（光甘草定/377低浓度）+ 阻断（烟酰胺）+ 代谢（温和酸）+ 修护（神经酰胺）"，避开肌肤未来式单成分天花板。<span class="flag c">推断</span></li>
+    <li><b>对标HBN做"真功效实证"人设</b>：公开成分浓度、测试方法、真人前后对比，把"成分透明"变成品牌信任状，而非营销话术。<span class="flag c">推断</span></li>
+    <li><b>全渠道均衡，不单押抖音</b>：天猫京东做搜索基本盘 + 线下体验店/药房做信任 + 私域做复购，对冲流量成本与平台政策风险。<span class="flag c">推断</span></li>
+    <li><b>轻溢价切中高端</b>：用"验证型温和+复方科技"做300–500元带，填补国货平价区与国际高端之间的空白，而非在100–300红海里肉搏。<span class="flag c">推断</span></li>
+  </ol>
+  <div class="quote"><span class="q">一句话策略：</span>不打四家的"成分故事价格战"，改打"<b>可验证的温和 × 复方全链路 × 渠道均衡</b>"——把赛道最大的信任缺口，变成你的品牌护城河。</div>
+  <div class="src"><b>说明：</b>本页五条均为基于公开事实的<b>策略推断</b>（假设我方为新锐国货美白品牌），用于展示分析框架与方法论，非任何品牌官方信息。</div>
+</section>
+
+<!-- ============ P10 ============ -->
+<section class="page" id="p10">
+  <div class="pageno">10 / 10</div>
+  <h2>总结 + 数据来源与置信备注</h2>
+  <div class="card red" style="margin-bottom:14px"><div class="t" style="color:var(--red)">一句话总结</div><p style="font-size:14px;color:var(--muted)">美白是800亿大赛道，四家在平价区用不同机理叙事内卷；<b>未被占领的高地是"可验证的敏感肌温和复方美白"</b>——谁先把它做成信任状，谁就跳出红海。</p></div>
+  <h3>数据来源级别与置信备注</h3>
+  <div class="tw"><table>
+    <tr><th style="width:70px">级别</th><th>来源</th><th>用于本页的关键事实</th><th>注意事项</th></tr>
+    <tr><td><span class="flag a">A级</span></td><td>OLAY香港官网、京东商品页、百度百科（欧诗漫工商/专利）、品牌官网/专利（谷雨/肌肤未来官方披露）</td><td>OLAY全港No.1、京东¥169/好评率97%；欧诗漫159项专利/连冠5年；谷雨3项专利号；肌肤未来377销量第一（品牌自陈）</td><td>品牌自陈的"第一/销冠"需注明口径</td></tr>
+    <tr><td><span class="flag b">B级</span></td><td>欧睿报告摘要（book118转载）、NielsenIQ、创业最前线、天下网商、C2CC行业榜单、肌肤未来官网</td><td>赛道800亿/前五大市占；OLAY市占19.3%；欧诗漫GMV40亿；谷雨抖音市占12.23%；肌肤未来377市占70%</td><td>付费报告为<b>转载摘要</b>，精确数字谨慎；媒体深度含推算</td></tr>
+    <tr><td><span class="flag c">C级</span></td><td>今日头条美白榜单、天猫/京东价格快照、小红书/黑猫投诉词频</td><td>OLAY累计1.2亿瓶/半年200万瓶；四家价格区间；好评差评词云</td><td>自媒体榜单脆弱；价格随促销波动；个案不推断普遍</td></tr>
+  </table></div>
+  <div class="quote"><span class="q">⚠️ 必须诚实标注的冲突与局限：</span>
+  ① <b>肌肤未来营收</b>：beautytop100称2024营收3.2亿，创业最前线推算2023约10亿——口径不一，本页未采用绝对值；
+  ② <b>欧诗漫年销</b>：化妆品40亿 vs 集团总60亿，口径不同；
+  ③ <b>OLAY市占19.3%</b>来自付费报告摘要（D级转载），已降级为B·谨慎；
+  ④ 各家"抑制率/应答率"均为<b>品牌送检或宣称</b>，非独立第三方统一标准；
+  ⑤ 美白赛道A级审计财报数据稀缺，"销量/市占第一"多为品牌自陈或自媒体榜单。</div>
+  <div class="src"><b>完整来源清单：</b>欧睿国际《2025–2030中国美白产品行业研究报告》(book118摘要)｜NielsenIQ 2024.3–2025.2全港零售调查(OLAY官网引)｜百度百科"欧诗漫"词条｜创业最前线《肌肤未来能否靠377走出环亚影子》(2025.10)｜天下网商《欧诗漫年销40亿》(访谈)｜i-media欧诗漫年销报道｜C2CC抖音榜单｜OLAY香港官网/京东商品页｜谷雨/肌肤未来品牌官网与官方披露｜今日头条美白TOP榜单(多家)｜天猫/京东价格快照。所有结论均可回溯至上述来源；推断类内容已明确标注，未伪装为市场事实。</div>
+</section>
+
+</body>
+</html>

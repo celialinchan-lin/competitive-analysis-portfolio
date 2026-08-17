@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>竞品集结 EP.05 · 谷雨（美白精华 · 光甘草定派）</title>
+<style>
+  :root{
+    --red:#2F5D3A;          /* 东方草木绿 主色 */
+    --red-d:#1E3D27;
+    --gold:#C8A04B;         /* 金 高亮 */
+    --gold-light:#E6C75E;
+    --bg:#F3F8F3;
+    --card:#FFFFFF;
+    --ink:#1E2A22;
+    --muted:#5C6B5F;
+    --line:#DCE7DD;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:"PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--ink);line-height:1.65;-webkit-font-smoothing:antialiased}
+  .page{min-height:100vh;padding:40px;max-width:980px;margin:0 auto;position:relative}
+  .pageno{position:absolute;top:22px;right:30px;font-size:13px;color:var(--gold);font-weight:700;letter-spacing:1px}
+  h1{font-size:40px;line-height:1.2;margin-bottom:14px;color:var(--red-d)}
+  h2{font-size:26px;margin:8px 0 16px;color:var(--red);border-left:5px solid var(--gold);padding-left:12px}
+  h3{font-size:17px;margin:14px 0 8px;color:var(--red-d)}
+  .sub{font-size:14px;color:var(--muted);margin-bottom:22px}
+  .grid{display:grid;gap:16px}
+  .g3{grid-template-columns:repeat(3,1fr)}
+  .g2{grid-template-columns:repeat(2,1fr)}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;box-shadow:0 2px 10px rgba(47,93,58,.06)}
+  .card.red{border-top:4px solid var(--red)}
+  .card.gold{border-top:4px solid var(--gold)}
+  .kpi{font-size:32px;font-weight:800;color:var(--red);line-height:1.1}
+  .t{font-size:14px;font-weight:700;margin:6px 0 4px;color:var(--ink)}
+  .bar{display:flex;align-items:center;margin:9px 0}
+  .bar-name{width:96px;font-size:13px;color:var(--muted);text-align:right;padding-right:10px}
+  .bar-track{flex:1;background:#EAF1EA;border-radius:8px;height:24px;overflow:hidden}
+  .bar-fill{height:100%;background:linear-gradient(90deg,var(--red),#4C8259);border-radius:8px;color:#fff;font-size:11px;display:flex;align-items:center;justify-content:flex-end;padding-right:8px;font-weight:700}
+  .matrix{position:relative;height:360px;background:linear-gradient(135deg,#fff,#F3F8F3);border:1px solid var(--line);border-radius:14px;margin:10px 0}
+  .axis{position:absolute;font-size:12px;color:var(--muted)}
+  .dot{position:absolute;transform:translate(-50%,-50%);background:var(--red);color:#fff;font-size:12px;padding:5px 9px;border-radius:20px;white-space:nowrap;box-shadow:0 2px 6px rgba(47,93,58,.25);font-weight:700}
+  .dot.alt{background:var(--gold);color:#3a2e08}
+  .cloud{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;display:flex;flex-wrap:wrap;gap:8px 10px;align-items:center;justify-content:center}
+  .s1{font-size:13px;color:var(--muted)}
+  .s2{font-size:15px;color:#3c5243}
+  .s3{font-size:18px;color:var(--red);font-weight:700}
+  .s4{font-size:23px;color:var(--gold);font-weight:800}
+  table{width:100%;border-collapse:collapse;font-size:13px;margin:10px 0;background:var(--card);border-radius:10px;overflow:hidden}
+  th,td{border:1px solid var(--line);padding:9px 10px;text-align:left;vertical-align:top}
+  th{background:var(--red);color:#fff;font-weight:700}
+  tr:nth-child(even) td{background:#F6FAF5}
+  .quote{background:#EAF1EA;border-left:4px solid var(--gold);padding:11px 16px;margin:14px 0;border-radius:0 10px 10px 0;font-size:14px}
+  .quote .q{color:var(--red);font-weight:700}
+  .listnum{list-style:none;counter-reset:n}
+  .listnum li{position:relative;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:13px 14px 13px 50px;margin:10px 0}
+  .listnum li::before{counter-increment:n;content:counter(n);position:absolute;left:13px;top:13px;width:26px;height:26px;background:var(--red);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px}
+  .src{font-size:11px;color:#8a978d;border-top:1px dashed var(--line);margin-top:18px;padding-top:10px;line-height:1.6}
+  .flag{display:inline-block;font-size:10px;padding:2px 7px;border-radius:6px;font-weight:700;margin-left:6px}
+  .flag.a{background:#DCEFE0;color:#1E3D27}
+  .flag.b{background:#FFF2D6;color:#7a5a17}
+  .flag.c{background:#F1E6EF;color:#6b3a5e}
+  .back{display:inline-block;margin-bottom:18px;color:var(--red);text-decoration:none;font-size:13px;font-weight:700;border:1px solid var(--red);padding:6px 14px;border-radius:20px}
+  .back:hover{background:var(--red);color:#fff}
+  .hero{background:linear-gradient(135deg,var(--red-d),#3F7150);color:#fff;border-radius:18px;padding:34px;margin-bottom:8px}
+  .hero h1{color:#fff}
+  .hero .sub{color:#cfe0d2}
+  .pill{display:inline-block;background:rgba(255,255,255,.15);padding:4px 12px;border-radius:20px;font-size:12px;margin:4px 6px 0 0}
+  /* ===== 移动端自适应 iOS Safari / Android Chrome ===== */
+  @media (max-width:820px){
+    .page{min-height:100dvh;padding:24px 18px 40px;}
+    .pageno{top:14px;right:16px;}
+    h1{font-size:27px;}
+    h2{font-size:21px;}
+    h3{font-size:16px;}
+    .sub{font-size:13px;margin-bottom:14px;}
+    .g3,.g2{grid-template-columns:1fr;}
+    .card{padding:15px 13px;}
+    .kpi{font-size:26px;}
+    .bar-name{width:74px;font-size:11px;padding-right:6px;}
+    .bar-track{height:20px;}
+    .bar-fill{font-size:10px;padding-right:5px;}
+    .matrix{height:300px;}
+    .dot{font-size:11px;padding:4px 8px;}
+    .cloud{padding:12px 10px;gap:5px 6px;}
+    .s1{font-size:12px;} .s2{font-size:14px;} .s3{font-size:17px;} .s4{font-size:21px;}
+    table{font-size:12px;}
+    th,td{padding:7px 8px;}
+    .quote{font-size:14px;padding:9px 13px;}
+    .listnum li{padding:11px 12px 11px 46px;}
+    .listnum li::before{left:12px;width:24px;height:24px;font-size:13px;}
+    .src{font-size:10px;}
+    .flag{font-size:10px;}
+    .hero{padding:24px 20px;}
+  }
+
+  /* iOS/Android 横向溢出兜底：彻底消除 iframe 内横向滚动导致的布局错位 */
+  .page{overflow-x:hidden;}
+  .tw{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:10px 0;}
+  .tw table{min-width:620px;}
+
+  /* 移动端柱状图修复：品牌名独立成行避免被条形遮挡；数值标签min-width保证可读 */
+  @media (max-width:820px){
+    .bar-row,.bar{flex-direction:column;align-items:stretch;margin:11px 0;}
+    .bar-name{width:auto !important;flex-shrink:1;text-align:left !important;padding-right:0;font-size:12.5px;line-height:1.4;overflow-wrap:anywhere;word-break:break-word;}
+    .bar-track{width:100%;}
+    .bar-fill{min-width:60px;}
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ P1 ============ -->
+<section class="page" id="p1">
+  <a class="back" href="index.html">← 返回竞品集结总览</a>
+  <div class="pageno">EP.05 · P1 / 10</div>
+  <div class="hero">
+    <h1>谷雨 · 美白精华</h1>
+    <div class="sub">竞品集结 EP.05 — 光甘草定派 · 精准卡位"温和美白"的抖音原生爆品</div>
+    <span class="pill">品牌：谷雨（GUYU）</span>
+    <span class="pill">母公司：谷雨生物科技集团</span>
+    <span class="pill">核心成分：极光甘草（99%光甘草定）</span>
+    <span class="pill">定位：更适合中国人肤质的科学美白</span>
+  </div>
+  <h2>一页结论</h2>
+  <div class="grid g3">
+    <div class="card red">
+      <div class="kpi">60亿</div>
+      <div class="t">2025 销售额（同比≈50%）</div>
+      <p style="font-size:13px;color:var(--muted)">从 2020 年 3.5 亿 6 年涨 17 倍；抖音美白护肤 2025Q1 市占 12.23% 排名第 1，全年美妆总榜第 5。<span class="flag a">A·官方披露+B</span></p>
+    </div>
+    <div class="card gold">
+      <div class="kpi">99%</div>
+      <div class="t">光甘草定纯度（行业天花板）</div>
+      <p style="font-size:13px;color:var(--muted)">自研"极光甘草"配 3 项国家发明专利（提纯/28nm 包裹/靶向递送）+ 欧睿&沙利文美白第一双认证。<span class="flag a">A·官网+专利</span></p>
+    </div>
+    <div class="card">
+      <div class="kpi">93%</div>
+      <div class="t">线上渠道占比（2024）</div>
+      <p style="font-size:13px;color:var(--muted)">抖音投放占比 83%，自播&gt;50%。增长几乎系于单一成分+单一渠道，是最大的隐性风险。<span class="flag b">B·联合创始人披露</span></p>
+    </div>
+  </div>
+  <div class="quote"><span class="q">核心判断：</span>谷雨不是"又一个成分党"，而是<b>把一个冷门成分（光甘草定）做成了一个品类定义权</b>——靠"温和美白/无需耐受"精准切中中国人"易敏易反黑"的痛点，再用抖音流量极致放大。它的软肋（单成分依赖、线上依赖、抗老合规争议）恰恰是你的机会窗口。<span class="flag b">B·综合判断</span></div>
+  <div class="src"><b>数据来源：</b>谷雨官网（A级）｜百度百科工商信息（A级）｜北京商报/腾讯新闻（B级）｜C2CC 新妆大赏（B级）｜谷雨联合创始人公开披露（B级）｜行业白皮书/ima（B级）｜京东/黑猫（C级）。GMV 曲线为官方披露口径。</div>
+</section>
+
+<!-- ============ P2 ============ -->
+<section class="page" id="p2">
+  <a class="back" href="index.html">← 返回竞品集结总览</a>
+  <div class="pageno">EP.05 · P2 / 10</div>
+  <h1>市场全景</h1>
+  <p class="sub">美白是护肤第二大功效赛道；谷雨以"光甘草定专精"在抖音美白榜登顶，但在全域护肤 TOP20 中仍弱于珀莱雅/韩束/欧莱雅。</p>
+  <h3>抖音美白护肤市场 TOP 品牌（2025Q1，销售额）</h3>
+  <div class="bar"><div class="bar-name">谷雨</div><div class="bar-track"><div class="bar-fill" style="width:100%">5.15亿 · 12.23% · 均价200-300</div></div></div>
+  <div class="bar"><div class="bar-name">韩束</div><div class="bar-track"><div class="bar-fill" style="width:74%">3.83亿 · 9.09% · 100-200</div></div></div>
+  <div class="bar"><div class="bar-name">欧诗漫</div><div class="bar-track"><div class="bar-fill" style="width:48%">2.49亿 · 5.90% · 100-200</div></div></div>
+  <div class="bar"><div class="bar-name">自然堂</div><div class="bar-track"><div class="bar-fill" style="width:33%">1.72亿 · 4.08% · 200-300</div></div></div>
+  <div class="bar"><div class="bar-name">必扬</div><div class="bar-track"><div class="bar-fill" style="width:32%">1.63亿 · 3.88% · 200-300</div></div></div>
+  <div class="bar"><div class="bar-name">肌肤未来</div><div class="bar-track"><div class="bar-fill" style="width:31%">1.58亿 · 3.75% · 300-400</div></div></div>
+  <div class="bar"><div class="bar-name">玉兰油</div><div class="bar-track"><div class="bar-fill" style="width:27%">1.41亿 · 3.34% · 300-400</div></div></div>
+  <div class="bar"><div class="bar-name">HBN</div><div class="bar-track"><div class="bar-fill" style="width:12%">0.64亿 · 1.53% · 500-600</div></div></div>
+  <div class="quote"><span class="q">格局看点：</span>美白赛道集中度低（TOP1 仅 12.23%），远未到"一家通吃"。谷雨靠光甘草定差异化+抖音重度投放登顶，但身后韩束（9.09%、靠多肽+低价）、欧诗漫（珍珠多肽老牌）、肌肤未来（377 专精）贴得很紧。<b>这是一个"有龙头、无垄断"的战场，新品牌仍有切口。</b><span class="flag b">B·行业白皮书</span></div>
+  <h3>谷雨在全域护肤的位置</h3>
+  <div class="tw"><table>
+    <tr><th>维度</th><th>谷雨</th><th>对照（全域护肤 TOP）</th></tr>
+    <tr><td>2025 销售额</td><td>≈60 亿（美白专精）</td><td>珀莱雅 80亿+ / 韩束 73.6亿 / 欧莱雅 70亿+</td></tr>
+    <tr><td>渠道结构</td><td>线上 93%，抖音为核心</td><td>珀莱雅/韩束 天猫+抖音双强；欧莱雅全渠道</td></tr>
+    <tr><td>价格带</td><td>主力 100-300（平价）</td><td>国际品牌 800+；国货中高端 300-600</td></tr>
+    <tr><td>定位标签</td><td>温和美白 / 新中式 / 光甘草定专家</td><td>抗老 / 成分 / 科技</td></tr>
+  </table></div>
+  <div class="src"><b>数据来源：</b>抖音美白护肤 TOP 品牌表（B级·行业白皮书/ima 数据共享，2025Q1）｜全域护肤 TOP20 格局引用自 EP.01 韩束篇（C2CC×用户说）｜谷雨销售额（A级官方披露）。TOP 表为相对份额示意，绝对值以平台披露为准。<span class="flag b">B·行业报告</span></div>
+</section>
+
+<!-- ============ P3 ============ -->
+<section class="page" id="p3">
+  <a class="back" href="index.html">← 返回竞品集结总览</a>
+  <div class="pageno">EP.05 · P3 / 10</div>
+  <h1>产品定位</h1>
+  <p class="sub">谷雨把自己钉死在"温和美白"这一个词上——避开烟酰胺/A醇的"猛药"叙事，专攻中国人"易敏易反黑"的焦虑。</p>
+  <h3>卡位图：温和度 × 功效强度</h3>
+  <div class="matrix">
+    <div class="axis" style="left:12px;bottom:10px;transform:rotate(-90deg);transform-origin:left">温和度 →</div>
+    <div class="axis" style="right:14px;top:10px;">← 功效强度</div>
+    <div class="dot alt" style="left:30%;top:68%">谷雨（温和+中效）</div>
+    <div class="dot" style="left:66%;top:38%">OLAY小白瓶（需耐受+强效）</div>
+    <div class="dot" style="left:74%;top:62%">修丽可/科颜氏（猛药）</div>
+    <div class="dot" style="left:22%;top:34%">普通植物美白（弱效）</div>
+    <div class="dot" style="left:50%;top:82%">敏感肌修护（极温和）</div>
+  </div>
+  <div class="quote"><span class="q">差异化一句话：</span>"别人用猛药逼白，谷雨用植萃温柔地白"——<b>"无需建立耐受"</b>是它对标 OLAY 烟酰胺最锋利的一句话，直接把敏感肌/新手从"怕刺激的观望者"变成"敢下单的用户"。<span class="flag b">B·品牌定位+达人拆解</span></div>
+  <h3>谷雨产品矩阵（"白月光全家桶"）</h3>
+  <div class="tw"><table>
+    <tr><th>产品</th><th>角色</th><th>核心成分</th><th>定位锚点</th></tr>
+    <tr><td>光感美白焕亮精华液 / 舒白瓶</td><td>美白精华主角</td><td>极光甘草+麦角硫因+牡丹根</td><td>"温和淡斑不反黑"</td></tr>
+    <tr><td>光感水（精华露 150ml）</td><td>引流大单品</td><td>极光甘草+VC+积雪草</td><td>去黄提亮，券后≈149</td></tr>
+    <tr><td>美白奶罐霜</td><td>面霜爆款</td><td>极光甘草</td><td>"敏感肌可用"面霜</td></tr>
+    <tr><td>奶皮面膜</td><td>高频复购</td><td>极光甘草</td><td>买5得10，券后≈87</td></tr>
+    <tr><td>黑金针胶原弹次抛</td><td>进阶/抗老+美白</td><td>极光甘草+胶原</td><td>次抛，券后≈239起</td></tr>
+  </table></div>
+  <div class="src"><b>数据来源：</b>产品矩阵（B级·美妆行业报告/达人拆解）｜价格（C级·京东/天猫快照，2025-2026 波动）。"白月光全家桶"为行业对谷雨美白产品线的俗称。</div>
+</section>
+
+<!-- ============ P4 ============ -->
+<section class="page" id="p4">
+  <a class="back" href="index.html">← 返回竞品集结总览</a>
+  <div class="pageno">EP.05 · P4 / 10</div>
+  <h1>配方拆解</h1>
+  <p class="sub">谷雨的研发叙事全部围绕"把光甘草定这个难搞的成分驯服"展开——纯度、包裹、递送三道关，每一关都申请了专利。</p>
+  <div class="grid g3">
+    <div class="card red">
+      <div class="kpi" style="font-size:20px;color:var(--red)">① 提纯</div>
+      <div class="t">熔融结晶提纯专利</div>
+      <p style="font-size:13px;color:var(--muted)">专利号 ZL202311064877.2，将光甘草定纯度提升至 99%（行业天花板；毕马威报告口径 93%、部分报道 90%，以官网最高纯度宣传为准）。<span class="flag a">A·专利</span></p>
+    </div>
+    <div class="card gold">
+      <div class="kpi" style="font-size:20px;color:var(--gold)">② 包裹</div>
+      <div class="t">28nm 纳米包裹体</div>
+      <p style="font-size:13px;color:var(--muted)">专利号 ZL202411261016.8，粒径为常见包裹体 1/3，透皮吸收率提升 3.4 倍，解决"溶差、易析出"行业痛点。<span class="flag a">A·专利</span></p>
+    </div>
+    <div class="card">
+      <div class="kpi" style="font-size:20px;color:var(--red)">③ 递送</div>
+      <div class="t">MC1R 靶向共晶凝胶</div>
+      <p style="font-size:13px;color:var(--muted)">专利号 ZL202510475360.5，信号肽精准识别黑色素细胞受体，定向送达高纯度成分。<span class="flag a">A·专利</span></p>
+    </div>
+  </div>
+  <h3>美白机理路径（双通路净斑）</h3>
+  <div class="tw"><table>
+    <tr><th>路径</th><th>作用</th><th>谷雨的打法</th></tr>
+    <tr><td>黑色素通路</td><td>抑制酪氨酸酶、阻断合成</td><td>极光甘草（0.12% 经 SGS 实测黑色素相对含量 -86.62%，抑黑率 115.54%，报告 GZCPCH24006447-05_CN）</td></tr>
+    <tr><td>脂褐素通路</td><td>分解真皮深层沉积</td><td>针对黄褐斑/妊娠斑等激素型色斑</td></tr>
+    <tr><td>细胞充能</td><td>加速色素代谢转运</td><td>"先净后充"，防停用反黑</td></tr>
+    <tr><td>复配巩固</td><td>协同抑黑、防反黑</td><td>橙皮苷+欧蓍草"止色素体系"</td></tr>
+  </table></div>
+  <div class="quote"><span class="q">配方灵魂：</span>"ACE 光甘草定"组方（参考中医"君臣佐使"逻辑），把单一成分做成"复方叙事"。但需注意——<b>SGS 报告为品牌送检，且测的是 0.12% 原料液而非成品</b>，实际涂抹浓度与人体功效需以备案人体试验为准。<span class="flag a">A·SGS送检报告（方法待核）</span></div>
+  <div class="src"><b>数据来源：</b>三项专利号（A级·国家知识产权局公开）｜SGS 报告编号 GZCPCH24006447-05_CN（A级·品牌披露）｜纯度/包裹数据（A级·官网；B级·毕马威/搜狐报道口径不一，已并列）。美白机理为品牌宣称，建议以 NMPA 备案功效摘要复核。</div>
+</section>
+
+<!-- ============ P5 ============ -->
+<section class="page" id="p5">
+  <a class="back" href="index.html">← 返回竞品集结总览</a>
+  <div class="pageno">EP.05 · P5 / 10</div>
+  <h1>价格策略</h1>
+  <p class="sub">谷雨的定价是"平价主攻 + 高端试水翻车"——主力死守 100-300 元，证明"平价才是护城河"，但也暴露了向上溢价的心有余而力不足。</p>
+  <h3>核心单品到手价（电商快照，随促销波动）</h3>
+  <div class="tw"><table>
+    <tr><th>产品</th><th>规格</th><th>常卖价</th><th>历史最低</th><th>618价</th></tr>
+    <tr><td>光感美白焕亮精华液</td><td>30ml</td><td>¥189</td><td>¥149</td><td>¥178.81</td></tr>
+    <tr><td>光感舒白瓶（淡斑匀润）</td><td>30ml</td><td>¥189</td><td>¥149</td><td>¥178.81</td></tr>
+    <tr><td>光感水（精华露）</td><td>150ml</td><td>¥199</td><td>—</td><td>—</td></tr>
+    <tr><td>黑金针胶原弹次抛</td><td>1.5ml×60</td><td>¥299</td><td>¥239</td><td>¥275.74</td></tr>
+    <tr><td>光感水乳精华套装</td><td>150+100+45</td><td>¥529</td><td>¥439</td><td>¥494.45</td></tr>
+  </table></div>
+  <h3>锚点逻辑</h3>
+  <div class="grid g2">
+    <div class="card red"><div class="t">平价主攻（100-300）</div><p style="font-size:13px;color:var(--muted)">对标 OLAY 小白瓶（40ml 约 143）、欧诗漫小白灯，用"同等功效、更温和、更便宜"吃掉成分党与敏感肌。天猫销量前三：雪肌水乳≈192、奶罐霜≈178、光感水≈149。</p></div>
+    <div class="card gold"><div class="t">高端试水（翻车）</div><p style="font-size:13px;color:var(--muted)">2024 推"四时灵露"150ml 定价 1080→800 元、高能山参面霜 60g≈800-950 元，消费者不买账（四时灵露销量仅 100+）。暴露"平价基因"难以支撑高端溢价。</p></div>
+  </div>
+  <div class="quote"><span class="q">价格真相：</span>谷雨大部分单品 ≤300 元，用"大牌 1/4 价格 + 温和美白"制造占便宜感。但高端化失败说明——<b>当用户心智锚定"平价国货"，强行拔高只会反噬信任</b>。<span class="flag c">C·电商+媒体个案</span></div>
+  <div class="src"><b>数据来源：</b>京东/天猫价格快照（C级·采集于 2025-2026，随促销波动）｜高端试水价格与销量（B级·搜狐/创业最前线）。价格为到手价区间，非标价。</div>
+</section>
+
+<!-- ============ P6 ============ -->
+<section class="page" id="p6">
+  <a class="back" href="index.html">← 返回竞品集结总览</a>
+  <div class="pageno">EP.05 · P6 / 10</div>
+  <h1>消费者评价</h1>
+  <p class="sub">好评集中在"温和、不反黑、去黄"，差评集中在"过敏（与温和宣称冲突）、虚假宣传、客服推诿"——口碑呈现明显的两极。</p>
+  <h3>好评词云（正向）</h3>
+  <div class="cloud">
+    <span class="s4">温和不刺激</span><span class="s3">不反黑</span><span class="s3">去黄提亮</span><span class="s2">敏感肌可用</span><span class="s2">肤感滋润</span><span class="s2">坚持用有效</span><span class="s1">国货之光</span><span class="s1">香味好闻</span><span class="s1">性价比高</span><span class="s2">痘印变淡</span><span class="s1">无需避光</span>
+  </div>
+  <h3>差评词云（负向）</h3>
+  <div class="cloud">
+    <span class="s4">过敏烂脸</span><span class="s3">说敏感肌可用却过敏</span><span class="s3">虚假宣传</span><span class="s2">客服推诿</span><span class="s2">拒绝退款</span><span class="s2">没效果</span><span class="s1">越用越黄</span><span class="s1">闷痘</span><span class="s1">价格刺客</span>
+  </div>
+  <h3>平台好评率 & 典型投诉</h3>
+  <div class="tw"><table>
+    <tr><th>渠道/产品</th><th>好评率</th><th>评论数</th><th>备注</th></tr>
+    <tr><td>京东·舒白瓶</td><td>98%</td><td>20万+</td><td>美白淡斑匀润精华液 30ml</td></tr>
+    <tr><td>京东·精华油</td><td>97%</td><td>5千+</td><td>以油养肤线</td></tr>
+    <tr><td>京东·黑金针次抛</td><td>98%</td><td>2万+</td><td>胶原弹次抛</td></tr>
+    <tr><td>黑猫·过敏个案</td><td colspan="3">多起"使用精华/次抛后过敏烂脸"，涉诉金额 191-528 元；商家以"个体差异"拒退款</td></tr>
+  </table></div>
+  <div class="quote"><span class="q">口碑悖论：</span>谷雨喊"敏感肌可用、0 致敏"，但黑猫上恰恰有敏感肌用户用后过敏投诉——<b>宣称与体验的落差，是它最大的信任地雷</b>，也是你做竞品时最该放大的差异点。<span class="flag c">C·黑猫个案+平台快照</span></div>
+  <div class="src"><b>数据来源：</b>京东好评率/评论数（C级·平台页快照）｜黑猫投诉（C级·个案，不代表整体发生率）｜好评/差评词云（C级·达人测评+社媒语义归纳，非全量抽样）。个案不推断为普遍现象。</div>
+</section>
+
+<!-- ============ P7 ============ -->
+<section class="page" id="p7">
+  <a class="back" href="index.html">← 返回竞品集结总览</a>
+  <div class="pageno">EP.05 · P7 / 10</div>
+  <h1>卖点拆解</h1>
+  <p class="sub">按"× 交叉拆解"格式，从谷雨真实数据提炼三轴卖点：自研成分信任锚 × 温和人群锚 × 新中式情感锚。</p>
+  <div class="grid g3">
+    <div class="card red">
+      <div class="kpi" style="font-size:24px;color:var(--red)">自研成分</div>
+      <div class="t">信任锚</div>
+      <p style="font-size:13px;color:var(--muted)">极光甘草 99% 纯度 + 3 项国家发明专利 + 欧睿&沙利文美白第一双认证 + 新疆自建种植基地。把"成分定义权"攥在自己手里。<span class="flag a">A·专利+认证</span></p>
+    </div>
+    <div class="card gold">
+      <div class="kpi" style="font-size:24px;color:var(--gold)">温和人群</div>
+      <div class="t">人群锚</div>
+      <p style="font-size:13px;color:var(--muted)">瞄准 36.1% 敏感肌 + "易反黑"痛点，打"无需建立耐受"。把"怕刺激不敢美白"的人一刀切进来，这是 OLAY 烟酰胺做不到的。<span class="flag b">B·品牌宣称+达人</span></p>
+    </div>
+    <div class="card">
+      <div class="kpi" style="font-size:24px;color:var(--red)">新中式</div>
+      <div class="t">情感锚</div>
+      <p style="font-size:13px;color:var(--muted)">以"谷雨"节气命名 + 国风美学 + 文化自信，被《这就是中国成分》纪录片收录。把"买精华"变成"支持国货成分"，情绪价值拉满。<span class="flag b">B·品牌叙事</span></p>
+    </div>
+  </div>
+  <div class="quote"><span class="q">三轴逻辑：</span>成分（敢信）× 人群（敢用）× 文化（愿晒）。前两者解决"功效信任+安全焦虑"，第三者解决"社交货币与复购冲动"。<b>这套打法和红宝石的"早C晚A教育"、HBN 的"真功效实证"异曲同工——都是用一套叙事把成分党转化为品牌信徒。</b><span class="flag b">B·综合推断</span></div>
+  <div class="src"><b>数据来源：</b>自研成分/认证（A级·官网/沙利文）｜温和人群定位（B级·品牌宣称+达人拆解）｜新中式叙事（B级·毕马威新国货报告/媒体）。三轴为按"×交叉拆解"格式从真实数据提炼，非品牌官方表述。</div>
+</section>
+
+<!-- ============ P8 ============ -->
+<section class="page" id="p8">
+  <a class="back" href="index.html">← 返回竞品集结总览</a>
+  <div class="pageno">EP.05 · P8 / 10</div>
+  <h1>痛点与机会</h1>
+  <p class="sub">假设我方 = 新锐国货美白品牌。谷雨没做好的地方，就是你的切口。</p>
+  <div class="tw"><table>
+    <tr><th>谷雨的痛点（没做好）</th><th>你的机会（可切入）</th></tr>
+    <tr><td>① 宣称"敏感肌可用"却频现过敏投诉，信任落差大</td><td><b>真·敏感肌美白</b>：用第三方人体功效+斑贴试验公开背书，把"温和"做成可验证承诺而非口号</td></tr>
+    <tr><td>② 单成分（光甘草定）依赖，故事单薄</td><td><b>多通路复方美白</b>：光甘草定+烟酰胺+377 协同，覆盖"抑黑+阻断+代谢"全链路，避免单一成分风险</td></tr>
+    <tr><td>③ 线上 93% 依赖，流量成本飙升（CPM 30→300，佣金 40%→60%）</td><td><b>线下体验+私域</b>：用线下试用装/皮肤检测建立信任，降低对单一平台流量成本的脆弱性</td></tr>
+    <tr><td>④ 高端化翻车（四时灵露销量 100+），溢价无支撑</td><td><b>中端精品线</b>：不打"贵=好"，用成分透明+科研背书支撑 300-500 合理溢价</td></tr>
+    <tr><td>⑤ 抗老线合规争议（"抗衰"不在 26 类合规功效内）</td><td><b>合规先行</b>：所有宣称严格对齐 NMPA 26 类，把"合规"做成品牌信任资产</td></tr>
+    <tr><td>⑥ 第二增长曲线（粹律）未跑出，多品牌失败</td><td><b>主品牌内做品类延伸</b>：在美白主线下自然延展修护/抗氧，而非另起炉灶稀释资源</td></tr>
+  </table></div>
+  <div class="quote"><span class="q">最大切口：</span>谷雨用"温和"吸来了敏感肌，却没接住"真安全"的承诺。<b>谁能把"温和美白"从一句 slogan 变成一份可查的人体报告，谁就能从它嘴里抢肉吃。</b><span class="flag b">B·策略推断</span></div>
+  <div class="src"><b>数据来源：</b>痛点①⑥（C级·黑猫+媒体）｜痛点②③⑤（B级·腾讯新闻/搜狐/创业最前线）｜痛点④（B级·电商媒体）。"机会"列为基于公开事实的策略推断（假设我方为新锐国货），非谷雨官方信息。</div>
+</section>
+
+<!-- ============ P9 ============ -->
+<section class="page" id="p9">
+  <a class="back" href="index.html">← 返回竞品集结总览</a>
+  <div class="pageno">EP.05 · P9 / 10</div>
+  <h1>产品启示</h1>
+  <p class="sub">如果要做一款美白竞品，从这五个维度向谷雨"取长补短"。</p>
+  <ol class="listnum">
+    <li><b>成分要有"定义权"：</b>学谷雨把冷门有效成分做成独家专利叙事（纯度+包裹+递送三关），而不是堆砌大路货成分。但要比它更开放——主动公开第三方人体试验。</li>
+    <li><b>人群切得比它还细：</b>谷雨赢了"敏感肌美白"，你可以赢"痘肌美白""孕肌美白""男士去暗沉"等更窄但更高忠诚度的切口。</li>
+    <li><b>温和必须可验证：</b>直接把斑贴试验阴性率、SGS 人体报告放在详情页首屏，把谷雨"喊口号式温和"变成"数据式温和"。</li>
+    <li><b>渠道别学它的 93% 线上：</b>用线下体验店+私域复购对冲流量成本风险，反倒能在它最脆弱的地方建立壁垒。</li>
+    <li><b>合规是信任资产：</b>所有功效宣称对齐 NMPA 26 类，把"我们不敢乱说"做成卖点——恰恰针对谷雨抗老线翻车的心智空白。</li>
+  </ol>
+  <div class="quote"><span class="q">一句话启示：</span>谷雨证明了"单成分+强叙事+抖音流量"能跑出 60 亿，但也证明了<b>没有科研硬底盘和合规护栏，规模越大摔得越狠</b>。新品牌的机会不在复制它的流量，而在补上它缺的"可信"。<span class="flag b">B·综合推断</span></div>
+  <div class="src"><b>数据来源：</b>五条启示为基于本报告公开事实（A/B/C 级）整合出的策略判断，假设我方为新锐国货美白品牌；非对任何特定公司的执行建议。</div>
+</section>
+
+<!-- ============ P10 ============ -->
+<section class="page" id="p10">
+  <a class="back" href="index.html">← 返回竞品集结总览</a>
+  <div class="pageno">EP.05 · P10 / 10</div>
+  <h1>总结 & 来源</h1>
+  <div class="quote" style="font-size:16px"><span class="q">一句话总结：</span>谷雨是"把一个冷门成分做成品类定义权"的范本——赢在<b>极光甘草自研 + 温和人群卡位 + 新中式情感 + 抖音流量极致化</b>，困在<b>单成分依赖、93% 线上依赖、温和宣称与过敏现实的落差、高端化与合规两道墙</b>。</div>
+  <h3>数据来源与置信度清单</h3>
+  <div class="src">
+  <b>A 级（官方/专利/备案）：</b>谷雨官网（三大专利号 ZL202311064877.2 / ZL202411261016.8 / ZL202510475360.5、SGS 报告 GZCPCH24006447-05_CN、欧睿&沙利文双认证）｜百度百科工商信息（成立/法定代表人/注册资本）｜官方披露 GMV 曲线（2020→2025）。<br>
+  <b>B 级（行业媒体/券商/白皮书）：</b>北京商报、腾讯新闻（IPO/渠道/科研升级）｜C2CC 新妆大赏（抖音排名）｜搜狐/创业最前线（单成分依赖、流量成本、高端化翻车）｜ima 行业白皮书（抖音美白 TOP10、营销投放占比 83.31%）｜毕马威新国货报告（定位/ESG）。<br>
+  <b>C 级（平台快照/达人/个案）：</b>京东好评率与价格、天猫价格、黑猫投诉个案、达人测评词云。价格波动与个案不推断为普遍现象。<br>
+  <b>冲突标注：</b>光甘草定纯度官方 99%、毕马威 93%、搜狐 90%——口径不一已并列；抖音排名 C2CC 全年第5 / 飞瓜 2024 第8——时间段不同；SGS 报告为品牌送检、测原料液非成品，功效以备案人体试验为准。
+  </div>
+</section>
+
+</body>
+</html>
