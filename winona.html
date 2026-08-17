@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>竞品分析情报网 EP.09｜薇诺娜·舒敏特护霜</title>
+<style>
+  :root{
+    --red:#2E7D32; --red-deep:#1B5E20; --gold:#7CB342; --gold-light:#A5D6A7;
+    --bg:#07140B; --bg2:#0E1F14; --card:#132A1B; --card2:#1A3624;
+    --text:#EAF3EC; --muted:#9DBBA8; --line:#274A33; --good:#5FB87A; --bad:#E06B6B;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{background:var(--bg);color:var(--text);font-family:"PingFang SC","Microsoft YaHei",-apple-system,sans-serif;line-height:1.6;font-size:15px;}
+  .page{width:100%;max-width:920px;margin:0 auto;min-height:100vh;padding:54px 40px 40px;display:flex;flex-direction:column;justify-content:flex-start;border-bottom:1px solid var(--line);position:relative;}
+  .pageno{position:absolute;top:22px;right:40px;font-size:12px;color:var(--gold);letter-spacing:2px;font-weight:700;}
+  .tag{display:inline-block;background:var(--red);color:#fff;font-size:12px;padding:3px 12px;border-radius:20px;letter-spacing:1px;margin-bottom:14px;font-weight:700;}
+  h1{font-size:40px;line-height:1.25;font-weight:800;letter-spacing:1px;margin-bottom:8px;}
+  h2{font-size:26px;font-weight:800;margin-bottom:6px;color:var(--gold-light);}
+  h3{font-size:18px;font-weight:800;color:var(--text);margin:18px 0 8px;}
+  .sub{color:var(--muted);font-size:14px;margin-bottom:20px;}
+  .src{margin-top:auto;padding-top:18px;font-size:11px;color:var(--muted);border-top:1px dashed var(--line);}
+  .src b{color:var(--gold-light);}
+  .grid{display:grid;gap:14px;}
+  .g3{grid-template-columns:repeat(3,1fr);}
+  .g2{grid-template-columns:repeat(2,1fr);}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 16px;}
+  .card.red{border-left:4px solid var(--red);}
+  .card.gold{border-left:4px solid var(--gold);}
+  .kpi{font-size:34px;font-weight:800;color:var(--gold);line-height:1.1;}
+  .kpi.red{color:var(--red);}
+  .kpi small{font-size:13px;color:var(--muted);font-weight:400;}
+  .card .t{font-size:13px;color:var(--muted);margin-bottom:6px;}
+  .pill{display:inline-block;background:var(--card2);border:1px solid var(--line);border-radius:8px;padding:4px 10px;font-size:12px;margin:3px 4px 3px 0;color:var(--text);}
+  .pill.good{background:rgba(95,184,122,.15);border-color:var(--good);color:var(--good);}
+  .pill.bad{background:rgba(224,107,107,.15);border-color:var(--bad);color:var(--bad);}
+  .pill.gold{background:rgba(124,179,66,.14);border-color:var(--gold);color:var(--gold-light);}
+  .pill.new{background:rgba(124,179,66,.22);border-color:var(--gold);color:#DDF0C8;font-weight:700;}
+  .bar-row{display:flex;align-items:center;margin:7px 0;font-size:13px;}
+  .bar-name{width:108px;flex-shrink:0;color:var(--text);text-align:right;padding-right:10px;}
+  .bar-track{flex:1;background:var(--bg2);border-radius:6px;height:22px;overflow:hidden;position:relative;}
+  .bar-fill{height:100%;border-radius:6px;background:linear-gradient(90deg,var(--red-deep),var(--red));display:flex;align-items:center;justify-content:flex-end;padding-right:8px;font-size:11px;color:#fff;font-weight:700;}
+  .bar-fill.gold{background:linear-gradient(90deg,#3a5e1e,var(--gold));color:#0B1A0E;}
+  .bar-fill.dim{background:linear-gradient(90deg,#2a3a2e,#4a6b50);}
+  .matrix{position:relative;width:100%;height:340px;background:var(--bg2);border:1px solid var(--line);border-radius:14px;margin-top:8px;}
+  .axis-x{position:absolute;bottom:8px;width:100%;text-align:center;font-size:12px;color:var(--muted);}
+  .axis-y{position:absolute;left:8px;top:0;height:100%;writing-mode:vertical-rl;font-size:12px;color:var(--muted);}
+  .dot{position:absolute;transform:translate(-50%,-50%);padding:5px 10px;border-radius:20px;font-size:12px;font-weight:700;white-space:nowrap;}
+  .dot.me{background:var(--red);color:#fff;border:2px solid var(--gold);}
+  .dot.other{background:var(--card2);color:var(--text);border:1px solid var(--line);}
+  .cloud{display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px;padding:14px;background:var(--bg2);border-radius:14px;}
+  .cloud span{padding:3px 10px;border-radius:8px;line-height:1.5;}
+  .s1{font-size:13px;} .s2{font-size:16px;} .s3{font-size:20px;} .s4{font-size:25px;}
+  .cgood{background:rgba(95,184,122,.13);color:var(--good);}
+  .cbad{background:rgba(224,107,107,.13);color:var(--bad);}
+  .ctheme{font-size:15px;color:var(--gold-light);background:rgba(124,179,66,.1);padding:6px 14px;border-radius:10px;font-weight:700;}
+  .quote{border-left:3px solid var(--gold);padding:10px 16px;background:var(--card);border-radius:0 10px 10px 0;font-size:15px;color:var(--text);margin:10px 0;}
+  .quote .q{color:var(--gold-light);font-weight:800;}
+  table{width:100%;border-collapse:collapse;font-size:13px;margin-top:8px;}
+  th,td{border:1px solid var(--line);padding:9px 10px;text-align:left;vertical-align:top;}
+  th{background:var(--card2);color:var(--gold-light);font-weight:700;}
+  td .y{color:var(--good);} td .n{color:var(--bad);}
+  .listnum{counter-reset:l;list-style:none;}
+  .listnum li{counter-increment:l;position:relative;padding:12px 14px 12px 52px;background:var(--card);border:1px solid var(--line);border-radius:12px;margin-bottom:10px;}
+  .listnum li::before{content:counter(l);position:absolute;left:14px;top:12px;width:26px;height:26px;background:var(--red);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;}
+  .listnum li b{color:var(--gold-light);}
+  .foot{text-align:center;font-size:12px;color:var(--muted);padding:26px;}
+  .foot b{color:var(--gold-light);}
+  .flag{font-size:11px;padding:1px 6px;border-radius:5px;background:var(--card2);color:var(--muted);margin-left:4px;}
+  .flag.a{color:var(--good);} .flag.b{color:var(--gold-light);} .flag.c{color:var(--bad);}
+  .newzone{border:1px dashed var(--gold);border-radius:14px;padding:14px 16px;margin-top:14px;background:rgba(124,179,66,.06);}
+  .newzone .zh{font-size:13px;color:var(--gold-light);font-weight:800;margin-bottom:8px;}
+
+  @media (max-width:820px){
+    .page{min-height:100dvh;padding:24px 18px 40px;}
+    .pageno{top:14px;right:16px;}
+    h1{font-size:27px;}
+    h2{font-size:21px;}
+    h3{font-size:16px;}
+    .sub{font-size:13px;margin-bottom:14px;}
+    .g3,.g2{grid-template-columns:1fr;}
+    .card{padding:15px 13px;}
+    .kpi{font-size:26px;}
+    .bar-name{width:74px;font-size:11px;padding-right:6px;}
+    .bar-track{height:20px;}
+    .bar-fill{font-size:10px;padding-right:5px;}
+    .matrix{height:300px;}
+    .dot{font-size:11px;padding:4px 8px;}
+    .cloud{padding:12px 10px;gap:5px 6px;}
+    .s1{font-size:12px;} .s2{font-size:14px;} .s3{font-size:17px;} .s4{font-size:21px;}
+    table{font-size:12px;}
+    th,td{padding:7px 8px;}
+    .quote{font-size:14px;padding:9px 13px;}
+    .listnum li{padding:11px 12px 11px 46px;}
+    .listnum li::before{left:12px;width:24px;height:24px;font-size:13px;}
+    .src{font-size:10px;}
+    .flag{font-size:10px;}
+  }
+
+  .page{overflow-x:hidden;}
+  .tw{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:10px 0;}
+  .tw table{min-width:620px;}
+
+  @media (max-width:820px){
+    .bar-row,.bar{flex-direction:column;align-items:stretch;margin:11px 0;}
+    .bar-name{width:auto !important;flex-shrink:1;text-align:left !important;padding-right:0;font-size:12.5px;line-height:1.4;overflow-wrap:anywhere;word-break:break-word;}
+    .bar-track{width:100%;}
+    .bar-fill{min-width:60px;}
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ P1 ============ -->
+<section class="page" id="p1">
+  <div class="pageno">01 / 10</div>
+  <span class="tag">竞品分析情报网 · EP.09</span>
+  <h1>薇诺娜·舒敏特护霜<br>把"敏感肌修护"做成医研级刚需的标杆</h1>
+  <p class="sub">一个国货品牌如何用"云南植物科技(青刺果+马齿苋) × 医研共创(60项专利+63家医院临床) × 皮肤学级信任"，从敏感肌空白赛道做到连续五年第一；而它的增速承压与高度依赖大单品，正是后来者差异化切口。</p>
+  <div class="quote"><span class="q">一句话结论：</span>薇诺娜证明了"植物科技 × 医研背书 × 皮肤学级信任"能把敏感肌修护从冷门做成刚需；但<b>线上增速承压（-22.5%天猫）、特护霜单品依赖、抗老第二曲线(银核)待验证</b>，是后来者（尤其可复美/医美系）切入的窗口。<span class="flag b">B</span></div>
+  <div class="grid g3" style="margin-top:22px;">
+    <div class="card red">
+      <div class="kpi">49.09<small> 亿元</small></div>
+      <div class="t">规模 · 薇诺娜品牌营收(2024) <span class="flag a">A</span></div>
+      <p style="font-size:13px;color:var(--muted);margin-top:6px;">贝泰妮主品牌，占集团86.28%；2024双11敏感肌面霜赛道蝉联销售榜首，大单品策略强。<span class="flag a">A·年报</span></p>
+    </div>
+    <div class="card gold">
+      <div class="kpi red">19.4<small> %</small></div>
+      <div class="t">地位 · 皮肤学级护肤市占第一 <span class="flag a">A</span></div>
+      <p style="font-size:13px;color:var(--muted);margin-top:6px;">2025国内皮肤学级护肤品赛道份额约19.4%，连续多年第一（Euromonitor）；但天猫敏感肌排名第三，被高端+医美系挤压。</p>
+    </div>
+    <div class="card">
+      <div class="kpi red">5<small> 连冠</small></div>
+      <div class="t">心智 · 中国敏感肌销售额第一 <span class="flag b">B</span></div>
+      <p style="font-size:13px;color:var(--muted);margin-top:6px;">Frost&amp;Sullivan认证连续5年(2020-2024)中国敏感肌护肤品销售额第一、敏感肌防晒第一；医研信任状扎实。</p>
+    </div>
+  </div>
+  <div class="src"><b>数据来源：</b>贝泰妮(300957)2024/2025年报（A级：薇诺娜2024营收49.09亿/占86.28%、特护霜2.0升级、双11敏感肌面霜榜首；2025皮肤学级市场345.1亿、薇诺娜市占19.4%）｜Euromonitor统计（A级，市占引用）｜Frost&amp;Sullivan认证（B级，5连冠）｜用户说《2025线上敏感肌护理消费趋势》（B级，天猫TOP3/线上382.5亿）。置信度见第10页。</div>
+</section>
+
+<!-- ============ P2 ============ -->
+<section class="page" id="p2">
+  <div class="pageno">02 / 10</div>
+  <span class="tag">市场全景</span>
+  <h2>敏感肌护肤赛道全景（2025）</h2>
+  <p class="sub">敏感肌是近几年增长最快的功效赛道之一：皮肤学级护肤2025市场规模约345.1亿元（Euromonitor, A）；敏感肌大盘突破580亿元（行业报告, B/C）；线上敏感肌382.5亿元，液态精华(82亿)+乳液面霜(78亿)为核心品类。<span class="flag a">A</span> 条形为天猫敏感肌品牌相对规模示意。</p>
+  <div style="background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px;">
+    <div class="bar-row"><div class="bar-name">海蓝之谜</div><div class="bar-track"><div class="bar-fill dim" style="width:100%">25.6亿</div></div></div>
+    <div class="bar-row"><div class="bar-name">可复美</div><div class="bar-track"><div class="bar-fill dim" style="width:62%">15.9亿（+58.7%）</div></div></div>
+    <div class="bar-row"><div class="bar-name">薇诺娜</div><div class="bar-track"><div class="bar-fill" style="width:57%">14.7亿（-22.5%）</div></div></div>
+    <div class="bar-row"><div class="bar-name">理肤泉 / 雅漾</div><div class="bar-track"><div class="bar-fill dim" style="width:42%">约10-12亿</div></div></div>
+    <div class="bar-row"><div class="bar-name">玉泽 / 薇诺娜宝贝</div><div class="bar-track"><div class="bar-fill dim" style="width:28%">约6-8亿</div></div></div>
+  </div>
+  <div class="grid g3" style="margin-top:18px;">
+    <div class="card"><div class="t">格局</div><p><b style="color:var(--gold-light)">"高端+医美系抢份额"</b>：海蓝之谜居天猫敏感肌第一；可复美(医美/胶原)增速+58.7%冲至第二；薇诺娜虽皮肤学级市占第一，但天猫排名第三且同比-22.5%。</p></div>
+    <div class="card"><div class="t">薇诺娜坐标</div><p>皮肤学级市占 <b style="color:var(--good)">19.4%第一</b>（Euromonitor, A），但线上被高端国际+医美系双重挤压，增速承压，存量守成特征明显。</p></div>
+    <div class="card"><div class="t">赛道对照</div><p>同在敏感肌：薇诺娜(植物医研) vs 可复美(胶原/医美) vs 玉泽(皮肤屏障) vs 雅漾/理肤泉(温泉水)——机理与渠道逻辑分化明显。<span class="flag b">B</span></p></div>
+  </div>
+  <div class="src"><b>数据来源：</b>Euromonitor统计（A级，2025皮肤学级护肤345.1亿、薇诺娜市占19.4%）｜用户说《2025线上敏感肌护理消费趋势》（B级，天猫TOP3：海蓝之谜25.6/可复美15.9/薇诺娜14.7亿、薇诺娜同比-22.5%、线上382.5亿）｜ZVZO《中国敏感肌护肤行业发展趋势》(2026，B/C级，大盘580亿、增速21.3%)。注：各口径(全渠道/线上/皮肤学级)不同，对比需注意范围。</div>
+</section>
+
+<!-- ============ P3 ============ -->
+<section class="page" id="p3">
+  <div class="pageno">03 / 10</div>
+  <span class="tag">产品定位</span>
+  <h2>薇诺娜卡在什么位置？</h2>
+  <p class="sub">定位一句话：<b style="color:var(--gold-light)">"皮肤学级里的敏感肌修护专家"</b>——把云南植物科技做成屏障修护方案，卡位 精简温和 × 屏障修护 × 医研背书，价格 100-200 带 × 全敏感肌人群。坐标：大众敏感肌修护中高端 × 舒缓/修护/保湿全通路。</p>
+  <div class="matrix">
+    <div class="axis-y">价格带（低 → 高）</div>
+    <div class="axis-x">敏感肌修护强度 / 医研背书（基础舒缓 → 皮肤学级修护）</div>
+    <div class="dot me" style="left:38%;top:52%;">薇诺娜特护霜 50g ¥100-130</div>
+    <div class="dot other" style="left:60%;top:34%;">海蓝之谜 600+</div>
+    <div class="dot other" style="left:52%;top:42%;">修丽可/理肤泉 200-300</div>
+    <div class="dot other" style="left:30%;top:46%;">玉泽 80-150</div>
+    <div class="dot other" style="left:26%;top:58%;">雅漾/薇诺娜宝贝 100-180</div>
+    <div class="dot other" style="left:46%;top:60%;">可复美胶原 150-250</div>
+  </div>
+
+  <h3>同品牌大单品家族（按功效切分）</h3>
+  <div class="grid g2">
+    <div class="card red"><span class="pill gold">舒敏特护霜</span> 屏障修护·大单品锚（青刺果+马齿苋）</div>
+    <div class="card"><span class="pill gold">清透防晒乳</span> 敏感肌防晒（天猫防晒类目份额6.83%）</div>
+    <div class="card"><span class="pill gold">修白瓶</span> 边修屏障边美白（2024双11抖音美白精华TOP1）</div>
+    <div class="card"><span class="pill">银核系列</span> 敏感肌抗老（新赛道，对标EP.01蓝蛮腰）</div>
+  </div>
+
+  <div class="newzone">
+    <div class="zh">▍框架增强① · 剂型坐标（本系列玩法入口）</div>
+    <p style="font-size:13px;color:var(--muted);">本品<b style="color:var(--gold-light)">剂型 = 霜剂（面霜）</b>，正装 50g / 体验装 15g 双容量；真空按压泵包装。但薇诺娜的同品牌心智并不只绑在"霜"上——它已跑通<b>多剂型矩阵</b>：</p>
+    <div style="margin-top:8px;">
+      <span class="pill">霜 · 特护霜</span><span class="pill">次抛 · 屏障修护精华液</span><span class="pill">防晒乳 · 清透防晒</span><span class="pill">精华 · 修白瓶</span><span class="pill">抗老 · 银核系列</span><span class="pill">水乳/面膜 · 舒敏保湿线</span>
+    </div>
+    <p style="font-size:13px;color:var(--muted);margin-top:8px;"><b style="color:var(--gold-light)">启示：</b>"青刺苋+屏障修护"的消费者心智可脱离霜剂存在——换剂型（次抛/喷雾/精华油）即可承接同一信任状，这正是"对标同品牌、换剂型出新品"的现成范本。<span class="flag c">C·策略推断</span></p>
+  </div>
+  <div class="src"><b>数据来源：</b>贝泰妮年报（A级，特护霜2.0升级、清透防晒份额6.83%、修白瓶抖音TOP1、银核敏感肌抗老）｜各品牌官方旗舰店价格（C级快照）｜Euromonitor（A级，薇诺娜市占/类目排名）。坐标为基于公开价格的示意性卡位，非精确测量。</div>
+</section>
+
+<!-- ============ P4 ============ -->
+<section class="page" id="p4">
+  <div class="pageno">04 / 10</div>
+  <span class="tag">配方拆解</span>
+  <h2>核心：云南植物屏障修护体系</h2>
+  <p class="sub">薇诺娜把"青刺果油（促神经酰胺合成）+ 马齿苋（舒缓抗炎）"两大云南植物专利成分做成特护霜的修护主轴，协同双分子透明质酸+β-葡聚糖+牛油果树果脂，构成"舒缓抗炎 + 屏障修护 + 长效保湿"的精简体系，无酒精/香精/色素/刺激防腐剂。</p>
+  <div class="grid g2">
+    <div class="card red">
+      <div class="t">修护 · 屏障重建</div>
+      <p><span class="pill gold">青刺果油</span> 促进角质形成细胞合成神经酰胺（薇诺娜专利植物成分）<br><span class="pill">马齿苋提取物</span> 抑制炎症因子、舒缓泛红干痒刺痛（专利成分）<br><span class="pill">牛油果树果脂</span> 补充皮脂、强化屏障</p>
+    </div>
+    <div class="card">
+      <div class="t">舒缓 · 保湿 · 精简</div>
+      <p><span class="pill">双分子透明质酸钠</span> 分层补水<br><span class="pill">β-葡聚糖（蘑菇）</span> 促进屏障修复、提升耐受<br><span class="pill">无酒精/香精/色素/刺激防腐</span> 降低敏肌刺激</p>
+    </div>
+  </div>
+  <div class="quote" style="margin-top:18px;"><span class="q">机理标签：</span>"植物科技 × 临床实证"——青刺果解决"屏障自己长不好"，马齿苋解决"炎症反应"，双分子HA解决"缺水"。这是一套被63家医院皮肤科临床观察、128篇论文背书的成熟叙事，也是国货敏感肌（玉泽/可复美）共同对标的"医研修护范式"。<span class="flag a">A·临床/论文</span></div>
+  <div class="grid g3" style="margin-top:14px;">
+    <div class="card"><div class="kpi red" style="font-size:22px;">60项</div><div class="t">专利 + 11项核心技术 <span class="flag a">A</span></div></div>
+    <div class="card"><div class="kpi red" style="font-size:22px;">63家</div><div class="t">医院皮肤科临床验证 <span class="flag a">A</span></div></div>
+    <div class="card"><div class="kpi red" style="font-size:22px;">2.0</div><div class="t">青刺果多糖+微流控技术升级 <span class="flag a">A</span></div></div>
+  </div>
+
+  <div class="newzone">
+    <div class="zh">▍框架增强② · 载体 / 包装形态（包装即玩法）</div>
+    <div class="grid g2" style="margin-top:4px;">
+      <div class="card"><div class="t">剂型技术</div><p>2.0升级引入<b style="color:var(--gold-light)">微流控技术</b>提升活性物递送；真空按压泵设计杜绝霜体二次污染，契合"医用级安全"心智。</p></div>
+      <div class="card"><div class="t">包装 / 视觉</div><p>绿色医疗感VI + 真空泵"无菌"符号强化专业信任；云南非遗(甲马/彝绣)限定礼盒做文化绑定——<b style="color:var(--gold-light)">包装本身就是"安全/专业"的视觉证据</b>。</p></div>
+    </div>
+    <p style="font-size:13px;color:var(--muted);margin-top:8px;">第三方真人实测（品牌传播数据）：干燥改善+61.54%、耐受力+48.12%、屏障强韧+34.11%、红区-26.69%。<span class="flag c">C·品牌实测</span></p>
+  </div>
+  <div class="src"><b>数据来源：</b>中华皮肤科杂志刊文（A级，青刺果油促神经酰胺合成、含青刺果油与马齿苋特护霜屏障评估）｜贝泰妮年报（A级，60专利/11核心技术/63院临床/2.0微流控升级）｜品牌传播实测（C级，干燥+61.54%等，样本与方法未公开待核）｜各平台商品页（C级，真空泵/15g+50g容量）。注：具体添加浓度以备案为准。</div>
+</section>
+
+<!-- ============ P5 ============ -->
+<section class="page" id="p5">
+  <div class="pageno">05 / 10</div>
+  <span class="tag">价格策略</span>
+  <h2>皮肤学级里的"大众价"锚点</h2>
+  <p class="sub">薇诺娜用"医研背书 + 大众定价"卡位 100-200 元敏感肌修护带，显著低于海蓝之谜/修丽可，又高于基础药妆；质价比来自"皮肤学级信任平权"。<span class="flag c">C级·电商快照</span></p>
+  <div style="background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px;">
+    <div class="bar-row"><div class="bar-name">海蓝之谜/修丽可</div><div class="bar-track"><div class="bar-fill dim" style="width:100%">600-800+ 元</div></div></div>
+    <div class="bar-row"><div class="bar-name">薇诺娜特护霜·50g</div><div class="bar-track"><div class="bar-fill" style="width:22%">100-130 元（日常）</div></div></div>
+    <div class="bar-row"><div class="bar-name">理肤泉 / 雅漾</div><div class="bar-track"><div class="bar-fill dim" style="width:38%">150-250 元</div></div></div>
+    <div class="bar-row"><div class="bar-name">可复美胶原 / 玉泽</div><div class="bar-track"><div class="bar-fill dim" style="width:30%">80-250 元</div></div></div>
+    <div class="bar-row"><div class="bar-name">薇诺娜宝贝（婴童）</div><div class="bar-track"><div class="bar-fill dim" style="width:18%">60-120 元</div></div></div>
+  </div>
+  <div class="grid g3" style="margin-top:16px;">
+    <div class="card red"><div class="t">锚点① 日常 100-130</div><p>特护霜50g 京东自营常卖约¥106，大促低至¥58；15g体验装拉低尝鲜门槛，做"先试后买"的转化漏斗。</p></div>
+    <div class="card"><div class="t">锚点② 医研平权</div><p>皮肤学级信任（63院临床）但价格仅为海蓝之谜1/6，把"医生推荐"做成大众可负担，是国货难短期复制的资产。</p></div>
+    <div class="card"><div class="t">价格带被夹击</div><p>上被海蓝之谜/修丽可压制溢价，下被玉泽/基础药妆以更低倍价格抢量，中端腹背受敌，需靠心智而非价格守成。</p></div>
+  </div>
+  <div class="src"><b>数据来源：</b>京东/什么值得买/慢慢买商品页（C级快照，特护霜50g常卖¥106、历史最低¥58、促销¥68-86；15g+50g双容量）｜行业媒体（C级，敏感肌面霜均价区间）。价格随促销大幅波动，以官方旗舰店实时为准。</div>
+</section>
+
+<!-- ============ P6 ============ -->
+<section class="page" id="p6">
+  <div class="pageno">06 / 10</div>
+  <span class="tag">消费者评价</span>
+  <h2>好评词云 vs 差评痛点</h2>
+  <p class="sub">正向口碑以"舒缓退红、温和、医美后可用、回购高"为主，是敏感肌人群的高信任单品；负面声量集中于<b style="color:var(--bad)">个别过敏/售后拒退纠纷</b>与<b>大单品涨价感知</b>的个案，属低频但需注意的售后风险。下方词云为各平台高频词归纳。<span class="flag b">B/C</span></p>
+  <div class="grid g2">
+    <div>
+      <h3 style="color:var(--good)">✓ 好评词云</h3>
+      <div class="cloud">
+        <span class="cloud cgood s3">舒缓退红</span>
+        <span class="cloud cgood s2">温和不刺激</span>
+        <span class="cloud cgood s3">医美后可用</span>
+        <span class="cloud cgood s2">屏障修护</span>
+        <span class="cloud cgood s4">回购率高</span>
+        <span class="cloud cgood s2">敏感肌救星</span>
+        <span class="cloud cgood s2">换季必备</span>
+        <span class="cloud cgood s1">医生推荐</span>
+        <span class="cloud cgood s1">质地舒服</span>
+        <span class="cloud cgood s2">烂脸期友好</span>
+      </div>
+    </div>
+    <div>
+      <h3 style="color:var(--bad)">✗ 差评 / 痛点词云</h3>
+      <div class="cloud">
+        <span class="cloud cbad s3">个别过敏</span>
+        <span class="cloud cbad s3">售后拒退</span>
+        <span class="cloud cbad s2">超售后期争议</span>
+        <span class="cloud cbad s2">霸王条款感知</span>
+        <span class="cloud cbad s1">价格涨</span>
+        <span class="cloud cbad s1">个别搓泥</span>
+        <span class="cloud cbad s1">爆痘个案</span>
+        <span class="cloud cbad s2">增速放缓</span>
+      </div>
+    </div>
+  </div>
+  <div class="grid g3" style="margin-top:14px;">
+    <div class="card"><div class="kpi" style="font-size:22px;color:var(--good)">98%</div><div class="t">京东好评率（50g·20万+评论） <span class="flag c">C</span></div></div>
+    <div class="card"><div class="kpi" style="font-size:22px;color:var(--good)">47.31%</div><div class="t">OMO两年复购率（专柜） <span class="flag a">A</span></div></div>
+    <div class="card"><div class="kpi" style="font-size:22px;color:var(--bad)">个案</div><div class="t">黑猫过敏/退货纠纷（低频） <span class="flag c">C</span></div></div>
+  </div>
+  <div class="src"><b>数据来源：</b>京东商品页（C级，50g评论20万+、好评率98%）｜贝泰妮年报（A级，OMO专柜两年复购率47.31%）｜黑猫投诉个案（C级，过敏/退货纠纷涉诉132-480元，单一经历非整体率）｜各平台评价与社区（C级，舒缓/温和/回购描述）。差评声量以平台个案为主，不代表大规模用户差评；售后争议多源于"超售后期/试用1-2次"条款认知差异。</div>
+</section>
+
+<!-- ============ P7 ============ -->
+<section class="page" id="p7">
+  <div class="pageno">07 / 10</div>
+  <span class="tag">卖点拆解</span>
+  <h2>医研共创 × 大单品矩阵 × 皮肤学级信任</h2>
+  <p class="sub">薇诺娜消费者心智三杠杆（按"×交叉拆解"格式、从真实数据与品牌实际打法提炼）：用云南植物科技+临床实证建立医研信任、用特护霜大单品沉淀复购、用皮肤学级心智放大转化——三段构成"专业也能大众化"的护城河。</p>
+  <div class="grid g3">
+    <div class="card red">
+      <div class="kpi" style="font-size:22px;color:var(--red)">医研共创</div>
+      <div class="t">植物科技 · 信任锚</div>
+      <p style="font-size:13px;color:var(--muted);">青刺果+马齿苋云南专利植物成分；60项专利/11核心技术/63家医院临床/128篇论文，构建"临床实证"科学叙事，对标全球敏感肌医研范式。<span class="flag a">A级·临床/专利</span></p>
+    </div>
+    <div class="card gold">
+      <div class="kpi" style="font-size:22px;color:var(--gold)">大单品矩阵</div>
+      <div class="t">特护霜 · 复购锚</div>
+      <p style="font-size:13px;color:var(--muted);">特护霜为锚（双11敏感肌面霜榜首），延伸防晒/修白瓶/银核抗老/宝贝，覆盖修护→防晒→美白→抗老全链路，但特护霜单品依赖偏高。<span class="flag a">A级·年报</span></p>
+    </div>
+    <div class="card">
+      <div class="kpi" style="font-size:22px;color:var(--gold-light)">皮肤学级信任</div>
+      <div class="t">医生背书 · 心智锚</div>
+      <p style="font-size:13px;color:var(--muted);">从医院药房/医生推荐起家，连续5年敏感肌销售额第一（Frost&amp;Sullivan）；"皮肤学级"标签是国货难以短期复制的心智壁垒。<span class="flag b">B级·认证</span></p>
+    </div>
+  </div>
+
+  <div class="newzone">
+    <div class="zh">▍框架增强③ · 包装 / 视觉轴（可被对标复制）</div>
+    <p style="font-size:13px;color:var(--muted);">除成分/矩阵/信任三轴外，薇诺娜的<b style="color:var(--gold-light)">包装与视觉自成第四类卖点资产</b>：绿色医疗感VI传递"安全专业"、真空泵"无菌"符号强化医用级心智、云南非遗(甲马/彝绣)限定礼盒做文化绑定。这套视觉语言是可被对标复制的"信任状外壳"——换包装即换感知，正契合"同品牌换包装出新品"的玩法。</p>
+  </div>
+
+  <div class="quote" style="margin-top:18px;"><span class="q">三轴相乘而非相加：</span>医研共创提供<b>信任</b>、大单品矩阵提供<b>复购沉淀</b>、皮肤学级信任提供<b>转化放大</b>——这是薇诺娜能在国际品牌(雅漾/理肤泉)与医美系(可复美)夹击中守住皮肤学级第一的原因。其弱点也正在于此：特护霜依赖度高、银核抗老第二曲线待验证、线上增速承压。<span class="flag c">C·策略推断</span></div>
+  <div class="src"><b>数据来源：</b>中华皮肤科杂志/贝泰妮年报（A级，60专利/63院临床/128论文、特护霜榜首）｜Frost&amp;Sullivan（B级，5连冠）｜品牌视觉资料（C级，VI/真空泵/非遗礼盒）。三轴+包装轴为我按"×交叉拆解"格式从真实数据与品牌打法提炼，非示例照搬。</div>
+</section>
+
+<!-- ============ P8 ============ -->
+<section class="page" id="p8">
+  <div class="pageno">08 / 10</div>
+  <span class="tag">痛点与机会</span>
+  <h2>它没做好的 = 你的机会</h2>
+  <p class="sub">薇诺娜赢了"医研信任+敏感肌第一"心智，但在增速、单品依赖、第二曲线、渠道、售后五个维度留了口子。每一处，都是新品牌的差异化切口。</p>
+  <div class="tw"><table>
+    <tr><th style="width:30%">薇诺娜没做好的</th><th>你的机会（切口）</th></tr>
+    <tr><td><span class="n">线上增速承压</span><br>天猫敏感肌同比 -22.5%、被可复美(+58.7%)抢份额</td><td><span class="y">抓医美/胶原叙事红利</span>：用更锐的机理（胶原/微生态/屏障仿生）+ 抖音原生打法，承接流失的年轻敏肌用户</td></tr>
+    <tr><td><span class="n">特护霜单品依赖</span><br>大单品占大头，矩阵协同未完全释放</td><td><span class="y">剂型发散</span>：以同品牌"青刺苋+屏障"心智，发散次抛/喷雾/精华油，覆盖更多场景（见下方对标转化）</td></tr>
+    <tr><td><span class="n">抗老第二曲线弱</span><br>银核系列(敏感肌抗老)刚起步待验证</td><td><span class="y">敏感肌抗老一体</span>：直接对标 EP.01 蓝蛮腰（敏感肌抗老），用"修护+淡纹"复合功效切交叉人群</td></tr>
+    <tr><td><span class="n">个别售后/过敏纠纷</span><br>黑猫过敏退货个案、超期/试用条款争议</td><td><span class="y">服务即产品</span>：真人肤质顾问+过敏无忧退，正面回应"大厂售后慢/条款严"痛点</td></tr>
+    <tr><td><span class="n">高端溢价不足</span><br>价格带被海蓝之谜/修丽可压制</td><td><span class="y">精准卡位</span>：在玉泽平价与高端国际之间，用"成分稀缺性+体验设计"建立清晰价值差</td></tr>
+  </table></div>
+
+  <div class="newzone">
+    <div class="zh">▍框架增强④ · 对标转化路径（换剂型 / 换包装 切入）</div>
+    <p style="font-size:13px;color:var(--muted);">把"竞品分析"直接翻译成"自研产品定义"——这是本框架为你团队填内容时最高频的用法：</p>
+    <div class="tw"><table>
+      <tr><th style="width:22%">对标对象</th><th style="width:20%">换剂型</th><th style="width:20%">换包装</th><th>切入空白 / 差异点</th></tr>
+      <tr><td>特护霜（霜·屏障修护）</td><td><span class="y">次抛精华 / 喷雾</span></td><td>医美渠道专供无菌装</td><td><span class="y">医美术后修护场景</span>（高频、高客单、强专业背书）</td></tr>
+      <tr><td>银核系列（敏感肌抗老）</td><td><span class="y">面霜 / 精华油</span></td><td>高端抗老线独立视觉</td><td>对标 EP.01 蓝蛮腰，做"敏感肌抗老"差异矩阵</td></tr>
+      <tr><td>同品牌植物科技心智</td><td>任意剂型可承接</td><td>换视觉/IP联名</td><td>同信任状、不同触点，快速铺品不重塑心智</td></tr>
+    </table></div>
+    <p style="font-size:13px;color:var(--muted);margin-top:8px;"><b style="color:var(--gold-light)">玩法本质：</b>你不需要重新教育"敏感肌要修护屏障"，只需把薇诺娜验证过的信任状，<b>用不同剂型/包装重新封装</b>到价格带、渠道或场景的空白里。<span class="flag c">C·策略推断</span></p>
+  </div>
+  <div class="src"><b>数据来源：</b>用户说《2025线上敏感肌》（B级，薇诺娜-22.5%/可复美+58.7%）｜贝泰妮年报（A级，特护霜占比/银核新赛道/黑猫相关售后背景）｜黑猫投诉（C级，过敏/退货个案）｜各品牌公开定位（C级）。机会点与对标转化路径为基于公开事实的策略推断。</div>
+</section>
+
+<!-- ============ P9 ============ -->
+<section class="page" id="p9">
+  <div class="pageno">09 / 10</div>
+  <span class="tag">产品启示</span>
+  <h2>如果做竞品，怎么打？</h2>
+  <p class="sub">不打薇诺娜的"医研信任"正面战场，而是打它留给你的增速、单品依赖、第二曲线、价格带、服务空白。五条可执行策略（含对标转化落地）：</p>
+  <ol class="listnum">
+    <li><b>用"新机理"刷新敏感肌修护。</b>薇诺娜的青刺苋叙事成熟但被追赶，切口是换更新的成分话语（胶原/重组胶原、微生态、屏障仿生、外泌体），在"医研"维度做代际升级，而非在植物成分里内卷。</li>
+    <li><b>对标转化：换剂型铺场景。</b>承接特护霜"屏障修护"心智，用<b>次抛精华/喷雾/精华油</b>发散到医美术后、熬夜屏障、男士敏肌等细分场景，避免只做一款霜的正面竞争。</li>
+    <li><b>敏感肌抗老一体（对标 EP.01）。</b>银核系列验证"敏感肌抗老"是真实赛道；新品牌可对标蓝蛮腰打法，用"修护+淡纹"复合功效切交叉人群，并借本情报网已建好的抗老四强叙事。</li>
+    <li><b>服务即信任状。</b>针对薇诺娜个别过敏/退货纠纷与"大厂售后慢/条款严"印象，用真人肤质顾问+过敏无忧退+官方溯源防伪，把售后做成口碑壁垒。</li>
+    <li><b>卡准价格带缝隙 + 抖音原生打法。</b>在玉泽平价与海蓝之谜高端之间建立"成分稀缺性+体验设计"价值差；以内容电商+成分党种草承接被国际/老牌"教育成熟但未被满足"的Z世代敏肌需求。</li>
+  </ol>
+  <div class="src"><b>说明：</b>以上为基于薇诺娜公开竞争态势的"我方（假设为新锐敏感肌品牌）"策略推断，非薇诺娜官方信息。我方品牌定位、价格带、渠道资源需结合实际业务进一步定义；对标转化路径仅为方法论示例。</div>
+</section>
+
+<!-- ============ P10 ============ -->
+<section class="page" id="p10">
+  <div class="pageno">10 / 10</div>
+  <span class="tag">总结 + 来源</span>
+  <h2>一句话总结</h2>
+  <div class="quote"><span class="q">薇诺娜验证了一条路径：</span>把"云南植物科技 × 医研共创 × 皮肤学级信任"做成敏感肌修护刚需，能连续五年稳坐第一；但它把"规模与心智"守住了，把"增速与第二曲线"留给了后来者——新品牌的切口，就在皮肤学级最舒服的那块腹地之外，以及"同信任状、换剂型/换包装"的空白里。</div>
+
+  <h3 style="margin-top:18px;">数据来源与置信度清单</h3>
+  <div class="tw"><table>
+    <tr><th style="width:42%">来源</th><th style="width:12%">级别</th><th>用于本报告的结论</th></tr>
+    <tr><td>贝泰妮(300957)2024/2025年报</td><td><span class="y">A</span></td><td>薇诺娜2024营收49.09亿/占86.28%、特护霜2.0升级(青刺果多糖+微流控)、双11敏感肌面霜榜首、2025皮肤学级345.1亿/市占19.4%、OMO复购47.31%</td></tr>
+    <tr><td>Euromonitor 统计（年报引用）</td><td><span class="y">A</span></td><td>2025皮肤学级护肤345.1亿、薇诺娜市占约19.4%第一、类目排名</td></tr>
+    <tr><td>中华皮肤科杂志刊文</td><td><span class="y">A</span></td><td>青刺果油促神经酰胺合成、含青刺果油与马齿苋特护霜屏障修护评估（临床实证）</td></tr>
+    <tr><td>Frost&amp;Sullivan 认证</td><td>B</td><td>连续5年(2020-2024)中国敏感肌护肤品销售额第一、敏感肌防晒第一</td></tr>
+    <tr><td>用户说《2025线上敏感肌护理消费趋势》</td><td>B</td><td>天猫TOP3：海蓝之谜25.6/可复美15.9/薇诺娜14.7亿(-22.5%)；线上382.5亿、液态精华82亿+乳液面霜78亿</td></tr>
+    <tr><td>ZVZO《中国敏感肌护肤行业发展趋势》(2026)</td><td>B/C</td><td>敏感肌大盘2025突破580亿、增速21.3%、敏感肌人群4.2亿</td></tr>
+    <tr><td>京东/什么值得买/慢慢买商品页</td><td>C</td><td>特护霜50g常卖¥106、大促¥58、历史最低¥58、15g+50g双容量（随促销波动）</td></tr>
+    <tr><td>黑猫投诉个案</td><td>C</td><td>过敏/退货纠纷、超期/试用条款争议（单一经历，不代表整体率）</td></tr>
+    <tr><td>品牌传播实测/视觉资料</td><td>C</td><td>干燥+61.54%等实测（方法未公开待核）、绿色医疗VI/真空泵/非遗礼盒</td></tr>
+  </table></div>
+  <div class="src"><b>置信度说明：</b>A=公司公告/监管/官方/专利/临床论文；B=行业机构/认证/券商研报；C=平台快照/达人内容（波动大、存个案偏差）。标注"待核"处为需进一步验证的信息。本报告不构成对任何品牌的投资或购买建议。</div>
+</section>
+
+<div class="foot">竞品分析情报网 EP.09 · 薇诺娜·舒敏特护霜 ｜ 数据截至 2026-08 公开资料整理 ｜ 内容仅供产品研究与求职作品集使用</div>
+
+</body>
+</html>
