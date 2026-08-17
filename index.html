@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#0d0608">
-<title>竞品集结展示 · 总门户</title>
+<title>竞品分析情报网</title>
 <style>
   *{margin:0;padding:0;box-sizing:border-box;}
   html,body{height:100%;}
@@ -14,6 +14,7 @@
   .brand-title{font-size:20px;font-weight:800;color:#EBC76B;letter-spacing:1px;padding:0 22px;margin-bottom:2px;}
   .brand-sub{font-size:12px;color:#B89AA0;padding:0 22px 16px;border-bottom:1px solid #4a222a;margin-bottom:10px;}
   .nav-group{margin-bottom:8px;}
+  .nav-group-title{font-size:11px;font-weight:700;color:#8a6a70;letter-spacing:1.5px;padding:16px 22px 6px;border-top:1px dashed #4a222a;margin-top:8px;}
   .nav-brand{display:flex;align-items:center;gap:8px;padding:11px 22px;font-size:14px;font-weight:700;color:#F5EDE8;cursor:pointer;transition:background .15s;}
   .nav-brand:hover{background:#2e1318;}
   .nav-brand.active{background:#C8102E;color:#fff;}
@@ -72,7 +73,7 @@
 
 <div id="gate">
   <div class="gate-card">
-    <div class="gate-logo">竞品集结展示</div>
+    <div class="gate-logo">竞品分析情报网</div>
     <div class="gate-sub">国货抗老拆解系列 · 限阅内容</div>
     <div class="gate-tip">请输入访问验证码</div>
     <input id="gate-input" type="password" autocomplete="off" placeholder="验证码" />
@@ -84,13 +85,14 @@
 <div id="app">
 <header class="topbar">
   <button class="hamburger" onclick="toggleNav()" aria-label="打开菜单">&#9776;</button>
-  <span class="ttl">竞品集结展示</span>
+  <span class="ttl">竞品分析情报网</span>
 </header>
 
 <aside class="sidebar" id="sidebar">
-  <div class="brand-title">竞品集结展示</div>
-  <div class="brand-sub">国货抗老三强 · 拆解系列</div>
+  <div class="brand-title">竞品分析情报网</div>
+  <div class="brand-sub">国货护肤拆解 · 抗老四强 + 美白赛道</div>
 
+  <div class="nav-group-title">抗老四强</div>
   <div class="nav-group">
     <div class="nav-brand active" id="b-hs" onclick="openBrand('hanshu.html','hs',this)"><span class="dotc"></span>EP.01 韩束红蛮腰</div>
     <div class="nav-sub open" id="sub-hs">
@@ -155,6 +157,7 @@
     </div>
   </div>
 
+  <div class="nav-group-title">美白赛道</div>
   <div class="nav-group">
     <div class="nav-brand" id="b-gy" onclick="openBrand('guyu.html','gy',this)" style="border-left-color:#2F5D3A"><span class="dotc" style="background:#2F5D3A"></span>EP.05 谷雨美白精华</div>
     <div class="nav-sub" id="sub-gy">
@@ -197,7 +200,7 @@
 <div class="overlay" id="overlay" onclick="closeNav()"></div>
 
 <main class="main">
-  <iframe id="frame" title="竞品集结展示"></iframe>
+  <iframe id="frame" title="竞品分析情报网"></iframe>
 </main>
 </div>
 
