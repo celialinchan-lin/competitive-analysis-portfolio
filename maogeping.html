@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>竞品分析情报网 · 彩妆·EP02｜毛戈平 MAOGEPING 光影塑颜修容</title>
+<style>
+  :root{
+    --red:#B8923A; --red-deep:#3A2E15; --gold:#D8B35E; --gold-light:#E6CE8E;
+    --bg:#0E0C08; --bg2:#1A160E; --card:#1F1A11; --card2:#2C2517;
+    --text:#F2EAD9; --muted:#A99E86; --line:#2C2517; --good:#D8B35E; --bad:#C77B5A;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{background:var(--bg);color:var(--text);font-family:"PingFang SC","Microsoft YaHei",-apple-system,sans-serif;line-height:1.6;font-size:15px;}
+  .page{width:100%;max-width:920px;margin:0 auto;min-height:100vh;padding:54px 40px 40px;display:flex;flex-direction:column;justify-content:flex-start;border-bottom:1px solid var(--line);position:relative;}
+  .pageno{position:absolute;top:22px;right:40px;font-size:12px;color:var(--gold);letter-spacing:2px;font-weight:700;}
+  .tag{display:inline-block;background:var(--red);color:#fff;font-size:12px;padding:3px 12px;border-radius:20px;letter-spacing:1px;margin-bottom:14px;font-weight:700;}
+  h1{font-size:38px;line-height:1.25;font-weight:800;letter-spacing:1px;margin-bottom:8px;}
+  h2{font-size:26px;font-weight:800;margin-bottom:6px;color:var(--gold-light);}
+  h3{font-size:18px;font-weight:800;color:var(--text);margin:18px 0 8px;}
+  .sub{color:var(--muted);font-size:14px;margin-bottom:20px;}
+  .src{margin-top:auto;padding-top:18px;font-size:11px;color:var(--muted);border-top:1px dashed var(--line);}
+  .src b{color:var(--gold-light);}
+  .grid{display:grid;gap:14px;}
+  .g3{grid-template-columns:repeat(3,1fr);}
+  .g2{grid-template-columns:repeat(2,1fr);}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 16px;}
+  .card.red{border-left:4px solid var(--red);}
+  .card.gold{border-left:4px solid var(--gold);}
+  .kpi{font-size:32px;font-weight:800;color:var(--gold);line-height:1.1;}
+  .kpi.red{color:var(--red);}
+  .kpi small{font-size:13px;color:var(--muted);font-weight:400;}
+  .card .t{font-size:13px;color:var(--muted);margin-bottom:6px;}
+  .pill{display:inline-block;background:var(--card2);border:1px solid var(--line);border-radius:8px;padding:4px 10px;font-size:12px;margin:3px 4px 3px 0;color:var(--text);}
+  .pill.good{background:rgba(216,179,94,.15);border-color:var(--good);color:var(--good);}
+  .pill.bad{background:rgba(199,123,90,.15);border-color:var(--bad);color:var(--bad);}
+  .pill.gold{background:rgba(216,179,94,.14);border-color:var(--gold);color:var(--gold-light);}
+  .pill.new{background:rgba(216,179,94,.22);border-color:var(--gold);color:#F5EEDD;font-weight:700;}
+  .bar-row{display:flex;align-items:center;margin:7px 0;font-size:13px;}
+  .bar-name{width:108px;flex-shrink:0;color:var(--text);text-align:right;padding-right:10px;}
+  .bar-track{flex:1;background:var(--bg2);border-radius:6px;height:22px;overflow:hidden;position:relative;}
+  .bar-fill{height:100%;border-radius:6px;background:linear-gradient(90deg,var(--red-deep),var(--red));display:flex;align-items:center;justify-content:flex-end;padding-right:8px;font-size:11px;color:#fff;font-weight:700;}
+  .bar-fill.gold{background:linear-gradient(90deg,#3a2e15,var(--gold));color:#0E0C08;}
+  .bar-fill.dim{background:linear-gradient(90deg,#2C2517,#5a4a2a);}
+  .matrix{position:relative;width:100%;height:380px;background:var(--bg2);border:1px solid var(--line);border-radius:14px;margin-top:8px;}
+  .axis-x{position:absolute;bottom:8px;width:100%;text-align:center;font-size:12px;color:var(--muted);}
+  .axis-y{position:absolute;left:8px;top:0;height:100%;writing-mode:vertical-rl;font-size:12px;color:var(--muted);}
+  .dot{position:absolute;transform:translate(-50%,-50%);padding:5px 10px;border-radius:20px;font-size:12px;font-weight:700;white-space:nowrap;}
+  .dot.me{background:var(--red);color:#fff;border:2px solid var(--gold);}
+  .dot.other{background:var(--card2);color:var(--text);border:1px solid var(--line);}
+  .cloud{display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px;padding:14px;background:var(--bg2);border-radius:14px;}
+  .cloud span{padding:3px 10px;border-radius:8px;line-height:1.5;}
+  .s1{font-size:13px;} .s2{font-size:16px;} .s3{font-size:20px;} .s4{font-size:25px;}
+  .cgood{background:rgba(216,179,94,.13);color:var(--good);}
+  .cbad{background:rgba(199,123,90,.13);color:var(--bad);}
+  .ctheme{font-size:15px;color:var(--gold-light);background:rgba(216,179,94,.1);padding:6px 14px;border-radius:10px;font-weight:700;}
+  .quote{border-left:3px solid var(--gold);padding:10px 16px;background:var(--card);border-radius:0 10px 10px 0;font-size:15px;color:var(--text);margin:10px 0;}
+  .quote .q{color:var(--gold-light);font-weight:800;}
+  table{width:100%;border-collapse:collapse;font-size:13px;margin-top:8px;}
+  th,td{border:1px solid var(--line);padding:9px 10px;text-align:left;vertical-align:top;}
+  th{background:var(--card2);color:var(--gold-light);font-weight:700;}
+  td .y{color:var(--good);} td .n{color:var(--bad);}
+  .listnum{counter-reset:l;list-style:none;}
+  .listnum li{counter-increment:l;position:relative;padding:12px 14px 12px 52px;background:var(--card);border:1px solid var(--line);border-radius:12px;margin-bottom:10px;}
+  .listnum li::before{content:counter(l);position:absolute;left:14px;top:12px;width:26px;height:26px;background:var(--red);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;}
+  .listnum li b{color:var(--gold-light);}
+  .foot{text-align:center;font-size:12px;color:var(--muted);padding:26px;}
+  .foot b{color:var(--gold-light);}
+  .flag{font-size:11px;padding:1px 6px;border-radius:5px;background:var(--card2);color:var(--muted);margin-left:4px;}
+  .flag.a{color:var(--good);} .flag.b{color:var(--gold-light);} .flag.c{color:var(--bad);}
+  .newzone{border:1px dashed var(--gold);border-radius:14px;padding:14px 16px;margin-top:14px;background:rgba(216,179,94,.06);}
+  .newzone .zh{font-size:13px;color:var(--gold-light);font-weight:800;margin-bottom:8px;}
+
+  @media (max-width:820px){
+    .page{min-height:100dvh;padding:24px 18px 40px;}
+    .pageno{top:14px;right:16px;}
+    h1{font-size:25px;}
+    h2{font-size:21px;}
+    h3{font-size:16px;}
+    .sub{font-size:13px;margin-bottom:14px;}
+    .g3,.g2{grid-template-columns:1fr;}
+    .card{padding:15px 13px;}
+    .kpi{font-size:24px;}
+    .bar-name{width:74px;font-size:11px;padding-right:6px;}
+    .bar-track{height:20px;}
+    .bar-fill{font-size:10px;padding-right:5px;}
+    .matrix{height:320px;}
+    .dot{font-size:11px;padding:4px 8px;}
+    .cloud{padding:12px 10px;gap:5px 6px;}
+    .s1{font-size:12px;} .s2{font-size:14px;} .s3{font-size:17px;} .s4{font-size:21px;}
+    table{font-size:12px;}
+    th,td{padding:7px 8px;}
+    .quote{font-size:14px;padding:9px 13px;}
+    .listnum li{padding:11px 12px 11px 46px;}
+    .listnum li::before{left:12px;width:24px;height:24px;font-size:13px;}
+    .src{font-size:10px;}
+    .flag{font-size:10px;}
+  }
+  .page{overflow-x:hidden;}
+  .tw{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:10px 0;}
+  .tw table{min-width:640px;}
+  @media (max-width:820px){
+    .bar-row,.bar{flex-direction:column;align-items:stretch;margin:11px 0;}
+    .bar-name{width:auto !important;flex-shrink:1;text-align:left !important;padding-right:0;font-size:12.5px;line-height:1.4;}
+    .bar-track{width:100%;}
+    .bar-fill{min-width:60px;}
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ P1 ============ -->
+<section class="page" id="p1">
+  <div class="pageno">01 / 10</div>
+  <span class="tag">彩妆·EP02 · 毛戈平 MAOGEPING 光影塑颜修容</span>
+  <h1>毛戈平 光影塑颜修容<br>亚洲骨相定制的"修容界爱马仕"</h1>
+  <p class="sub">毛戈平（MAOGEPING）由知名化妆师毛戈平于 2000 年创立，品牌以东方美学与现代化妆艺术为母题，含鱼子酱提取物、人参根水、维他命 E 等养肤概念，授权零售覆盖专柜与线上（YesStyle 授权）。其修容线以"光影塑颜"系列为核心：高光粉饼（4.5g）、高光粉膏（16.5g，第四代官方 ¥720）、综合大师修容高光一体盘、故宫联名晒红修容渐变盘，主打亚洲女性骨骼结构定制。<span class="flag a">A/B</span></p>
+  <div class="quote"><span class="q">一句话结论：</span>毛戈平用"亚洲骨相定制 + 微米云母 + 三色渐变压盘 + 专业化妆师背书"占死高端专业修容心智，卡位 ¥213-720；亮点在<b>专业度 / 12h 持妆边界稳定 / 亚洲定制不显脏 / 斑贴低刺激（0.3）</b>，短板在<b>价格高、粉膏需手法门槛、含羟苯甲酯 + 羊毛脂（争议成分）、故宫款"0 滑石粉"与其他款含滑石粉存在版本差异待核</b>。<span class="flag c">C·电商快照</span></div>
+  <div class="grid g3" style="margin-top:22px;">
+    <div class="card red">
+      <div class="kpi">¥213<small> –720</small></div>
+      <div class="t">修容价格带 <span class="flag c">C</span></div>
+      <p style="font-size:13px;color:var(--muted);margin-top:6px;">粉饼 ¥213（常卖）/¥274（测评）；粉膏 ¥540-560（京东）/ 第四代官方 ¥720；一体盘 ¥684；故宫限定 ¥398。</p>
+    </div>
+    <div class="card gold">
+      <div class="kpi red">2万+</div>
+      <div class="t">京东评论 / 好评率 <span class="flag b">B</span></div>
+      <p style="font-size:13px;color:var(--muted);margin-top:6px;">粉饼 / 粉膏京东自营均为 2 万+ 评论、好评率 97%（京东商品页）；修容界专业口碑标杆。</p>
+    </div>
+    <div class="card">
+      <div class="kpi red">2000</div>
+      <div class="t">品牌创立年份 <span class="flag a">A</span></div>
+      <p style="font-size:13px;color:var(--muted);margin-top:6px;">化妆师同名品牌，专业彩妆资历深厚；含鱼子酱 / 人参 / VE 养肤概念，授权零售（YesStyle）。</p>
+    </div>
+  </div>
+  <div class="src"><b>数据来源：</b>毛戈平官网 / YesStyle 授权页（A 级，品牌沿革 / 成分宣称）｜京东商品页（B/C 级，价格 / 评论 / 好评率）｜国家药监局备案（A 级，备案号）。价格随促销与版本波动。</div>
+</section>
+
+<!-- ============ P2 ============ -->
+<section class="page" id="p2">
+  <div class="pageno">02 / 10</div>
+  <span class="tag">市场全景</span>
+  <h2>修容 / 高光赛道格局：专业高端由毛戈平独占</h2>
+  <p class="sub">修容的"粉体压制 + 亚洲肤色适配 + 专业背书"门槛高。彩棠凭唐毅 + 三效合一卡中端；毛戈平凭化妆师资历 + 骨相定制独占高端；花西子占国风大众、橘朵占平价入门、酵色占设计师质感。<span class="flag b">B/C</span></p>
+  <div class="tw"><table>
+    <tr><th style="width:16%">品牌</th><th style="width:20%">代表修容</th><th style="width:16%">价格带</th><th style="width:22%">核心定位</th><th>主渠道</th></tr>
+    <tr><td>橘朵</td><td>光影修容液 / 综合盘</td><td>¥32-59</td><td>平价入门 / 学生党</td><td>线上</td></tr>
+    <tr><td>酵色</td><td>面颊多用霜 / 补光灯盘</td><td>¥28-68</td><td>设计师质感 / 多用</td><td>线上</td></tr>
+    <tr><td>花西子</td><td>洛花弄影 / 蝶翼清影</td><td>¥129-159</td><td>东方国风 / 雕花</td><td>全渠道</td></tr>
+    <tr><td><span class="y">彩棠 TIMAGE</span></td><td>浮光掠影修容盘</td><td>¥179-298</td><td>三效合一 / 唐毅背书</td><td>天猫抖音京东</td></tr>
+    <tr><td><span class="y">毛戈平 MGP</span></td><td>光影塑颜粉饼 / 粉膏</td><td>¥213-720</td><td>专业化妆师 / 亚洲骨相定制</td><td>专柜+线上</td></tr>
+  </table></div>
+  <div class="grid g3" style="margin-top:16px;">
+    <div class="card"><div class="t">毛戈平卡位</div><p>独占 ¥213 以上的专业高端，靠"化妆师同名 + 骨相定制 + 养肤概念"与中端彩棠形成代差，承接对专业度要求高的用户。</p></div>
+    <div class="card"><div class="t">分化</div><p>彩棠赢多功能与新手友好、花西子赢国风声量、橘朵赢低价；毛戈平赢"专业 + 持妆 + 不显脏"，但价格与手法门槛把新手挡在门外。</p></div>
+    <div class="card"><div class="t">机会</div><p>"专业下沉（¥150-200 平替）+ 温和防腐（去羟苯 / 羊毛脂）+ 轻量包材"带是后来者切毛戈平之下的空白。<span class="flag c">C·推断</span></p></div>
+  </div>
+  <div class="src"><b>数据来源：</b>京东 / 天猫 / YesStyle（B/C 级，价格 / 评论 / 定位）｜搜狐 2026 修容粉饼测评（C 级，竞品参数，标注待核）。价格为快照，随促销波动。</div>
+</section>
+
+<!-- ============ P3 ============ -->
+<section class="page" id="p3">
+  <div class="pageno">03 / 10</div>
+  <span class="tag">产品定位</span>
+  <h2>彩妆六维坐标（主题色彩 × 包材 × 质地 × 持妆 × 肤质 × 地域）</h2>
+  <p class="sub">毛戈平的修容以"为亚洲女性骨骼结构定制"为内核，六维坐标用消费者语言表述如下。<span class="flag c">C</span></p>
+  <div class="tw"><table>
+    <tr><th style="width:15%">维度</th><th style="width:30%">坐标（消费者语言）</th><th>含义</th></tr>
+    <tr><td><span class="y">主题色彩</span></td><td>冷灰棕鼻影 + 暖棕修容 + 浅金高光</td><td>低饱和冷调棕褐，ΔE&lt;1.2 与东亚人鼻梁侧阴影明度差值匹配 91.7%，不显脏不偏红</td></tr>
+    <tr><td><span class="y">包材</span></td><td>黑金基础包装 + 自带小镜 + 双头刷</td><td>故宫限定为东方礼盒；粉饼便携，出差一盖搞定</td></tr>
+    <tr><td><span class="y">质地</span></td><td>粉饼（哑光压制）/ 粉膏（膏体，三质地七色泽）</td><td>粉质像"烟雾化开"，膏体浓郁奢润塑形</td></tr>
+    <tr><td><span class="y">持妆</span></td><td>强（12h T 区出油后修容边界模糊仅 +17%）</td><td>第三方 SGS 实测，优于 NARS / Kevyn Aucoin / MUFE</td></tr>
+    <tr><td><span class="y">肤质</span></td><td>任何肤质，偏专业用户</td><td>干皮需保湿、少量多次；粉膏门槛较高</td></tr>
+    <tr><td><span class="y">地域</span></td><td>中国面孔 / 亚洲骨相定制</td><td>南方湿热 / 北方干冷均适用，不挑地域</td></tr>
+  </table></div>
+  <h3 style="margin-top:18px;">定位矩阵（价格带 × 修容专业度）</h3>
+  <div class="matrix">
+    <div class="axis-y">修容专业度（入门 → 专业）</div>
+    <div class="axis-x">价格带（平价 → 高端）</div>
+    <div class="dot other" style="left:12%;top:85%;">橘朵 32-59</div>
+    <div class="dot other" style="left:18%;top:78%;">酵色 28-68</div>
+    <div class="dot other" style="left:40%;top:55%;">花西子 129-159</div>
+    <div class="dot other" style="left:50%;top:42%;">彩棠 179-298</div>
+    <div class="dot me" style="left:90%;top:14%;">毛戈平 213-720</div>
+  </div>
+  <div class="grid g2" style="margin-top:16px;">
+    <div class="card red"><div class="t">毛戈平占位</div><p>高端价格 + 最高专业度（骨相定制 + 化妆师背书 + 养肤），把"专业修容"做成奢侈品心智，正面承接彩棠之上的升级需求。</p></div>
+    <div class="card gold"><div class="t">空白区</div><p>"专业下沉（¥150-200 平替）+ 温和防腐 + 轻量包材"带（毛戈平价格高 / 含羟苯 + 羊毛脂 / 粉膏门槛）是差异化机会。<span class="flag c">C·推断</span></p></div>
+  </div>
+  <div class="src"><b>数据来源：</b>京东 / 天猫 / 官网（C 级，价格 / 定位 / 包材）｜搜狐 2026 测评（C 级，ΔE / 持妆 / 匹配度参数，第三方 SGS，标注待核）。坐标为基于公开价格的示意性卡位。</div>
+</section>
+
+<!-- ============ P4 ============ -->
+<section class="page" id="p4">
+  <div class="pageno">04 / 10</div>
+  <span class="tag">配方拆解</span>
+  <h2>粉体 / 色素 / 工艺（专业词）</h2>
+  <p class="sub">毛戈平光影塑颜高光修容粉饼的"配方"= 粉体基质 + 硅类肤感调节 + 色素体系 + 三色渐变压盘工艺 + 养肤添加。以滑石 / 云母 / 硅石为骨架，微米云母（8-12μm）+ 珍珠岩微粒实现反射率 62.3% 的自然高光。<span class="flag c">C</span></p>
+  <div class="tw"><table>
+    <tr><th style="width:22%">模块</th><th style="width:20%">成分 / 工艺</th><th style="width:32%">作用</th><th>备注</th></tr>
+    <tr><td>粉体基质</td><td>滑石粉 + 云母 + 合成氟金云母 + 硅石 + 氧化铝</td><td>粉体骨架 + 柔焦 + 贴肤</td><td>YesStyle 全成分</td></tr>
+    <tr><td>硅类肤感</td><td>聚甲基矽氧烷 + 山梨坦三油酸酯</td><td>延展、丝滑、不卡粉</td><td>硅处理肤感调节</td></tr>
+    <tr><td>油脂基底</td><td>辛酸 / 癸酸甘油三酯 + 羊毛脂</td><td>滋润、贴肤（膏体更明显）</td><td>羊毛脂少数致痘，待核</td></tr>
+    <tr><td>色素体系</td><td>CI77891 + 氧化铁类(CI77491/77492/77499)</td><td>浅金高光 + 冷灰棕 / 暖棕阴影</td><td>亚洲骨相定制调色</td></tr>
+    <tr><td>工艺</td><td>三色渐变压盘；微米云母(8-12μm)+珍珠岩微粒(反射率62.3%)；硅处理滑石粉(色牢度ISO105-B02 4级)</td><td>自然高光 + 色牢度高 + 取粉可控</td><td>搜狐 2026 测评（SGS）</td></tr>
+    <tr><td>养肤添加</td><td>0.8% 泛醇 + 神经酰胺 NP</td><td>舒缓、屏障（斑贴刺激评分 0.3，n=30）</td><td>优于 NARS(0.9)/MAC(1.2)</td></tr>
+    <tr><td>防腐</td><td>羟苯甲酯</td><td>防腐体系</td><td>尼泊金酯类，争议成分</td></tr>
+  </table></div>
+  <div class="newzone" style="border-color:var(--bad);background:rgba(199,123,90,.06);">
+    <div class="zh" style="color:var(--bad);">⚠ 冲突标注：故宫款"0 滑石粉"宣称 vs 粉饼含滑石粉</div>
+    <p style="font-size:13px;color:var(--text);">淘宝种草文称故宫系列 806 号"采用进口矿物粉体 + 微珠包裹技术、0 滑石粉"，但 YesStyle 授权页的<b>光影塑颜阴影修容粉饼全成分明确含滑石粉（Talc）</b>与羟苯甲酯、羊毛脂。差异来自<b>产品线 / 版本不同</b>（故宫限定盘 vs 常规粉饼），本报告以"成分库为当前可见版本、故宫款 0 滑石粉待核"处理，不臆断。</p>
+  </div>
+  <div class="grid g3" style="margin-top:14px;">
+    <div class="card"><div class="t">粉体完整度</div><p>微米云母 + 珍珠岩 + 硅处理滑石，是高专精度修容粉体方案；0.8% 泛醇 + 神经酰胺 NP 养肤添加是高端差异。</p></div>
+    <div class="card"><div class="t">调色壁垒</div><p>冷灰棕鼻影 ΔE&lt;1.2、匹配东亚人阴影明度 91.7%，是"不显脏"的核心技术支撑，非单纯色号。</p></div>
+    <div class="card"><div class="t">备案</div><p>浙 G 妆网备字 2021515332（粉饼）/ 2021507786（粉膏）/ 2022004091（一体盘）/ 2023009982（哑光粉饼）；非特殊化妆品。<span class="flag a">A</span></p></div>
+  </div>
+  <div class="src"><b>数据来源：</b>国家药监局备案（A 级，备案号 / 非特）｜YesStyle（C 级，全成分）｜搜狐 2026 测评（C 级，粒径 / 反射率 / 色牢度 / 斑贴，第三方 SGS，标注待核）。养肤添加量为测评披露，浓度以官方为准。</div>
+</section>
+
+<!-- ============ P5 ============ -->
+<section class="page" id="p5">
+  <div class="pageno">05 / 10</div>
+  <span class="tag">价格策略</span>
+  <h2>价格带与销量</h2>
+  <p class="sub">毛戈平修容呈"粉饼入门→粉膏进阶→一体盘 / 故宫限定"梯度：粉饼 4.5g 京东常卖 ¥213（历史低 ¥208 / 测评 ¥274）、粉膏 16.5g ¥540-560（第四代官方 ¥720）、综合大师一体盘 ¥684、故宫 806 晒红渐变盘 ¥398（12g）。整体卡位国际专业线（Kevyn Aucoin / MAC）与中端彩棠之间，靠专业与养肤支撑溢价。<span class="flag c">C</span></p>
+  <div style="background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px;">
+    <div class="bar-row"><div class="bar-name">粉饼常卖</div><div class="bar-track"><div class="bar-fill gold" style="width:30%">¥213（4.5g）</div></div></div>
+    <div class="bar-row"><div class="bar-name">故宫限定</div><div class="bar-track"><div class="bar-fill gold" style="width:56%">¥398（12g）</div></div></div>
+    <div class="bar-row"><div class="bar-name">粉膏京东</div><div class="bar-track"><div class="bar-fill gold" style="width:78%">¥540-560（16.5g）</div></div></div>
+    <div class="bar-row"><div class="bar-name">粉膏官方</div><div class="bar-track"><div class="bar-fill gold" style="width:100%">¥720（第四代）</div></div></div>
+    <div class="bar-row"><div class="bar-name">一体盘</div><div class="bar-track"><div class="bar-fill gold" style="width:95%">¥684</div></div></div>
+  </div>
+  <div class="grid g3" style="margin-top:16px;">
+    <div class="card red"><div class="t">高端卡位</div><p>¥213 起跳、粉膏 / 一体盘冲 ¥700，占"专业修容奢侈品"心智，与彩棠中端形成代差。</p></div>
+    <div class="card"><div class="t">梯度矩阵</div><p>粉饼（入门尝鲜）+ 粉膏（进阶）+ 故宫（礼赠），覆盖自用与送礼，色号 #800/#801/#806 扩展。</p></div>
+    <div class="card"><div class="t">风险</div><p>价格高、粉膏手法门槛、含羟苯 + 羊毛脂（争议）、故宫"0 滑石粉"版本差异待核。<span class="flag c">C</span></p></div>
+  </div>
+  <div class="src"><b>数据来源：</b>京东 / 天猫 / YesStyle（C 级，价格 / 评论 / 好评率快照）。以官方实时价为准；测评价与常卖价口径不同。</div>
+</section>
+
+<!-- ============ P6 ============ -->
+<section class="page" id="p6">
+  <div class="pageno">06 / 10</div>
+  <span class="tag">消费者评价</span>
+  <h2>口碑横向</h2>
+  <p class="sub">正向集中在"不飞粉不脏妆、粉质细腻烟雾化开、亚洲定制配色、自带刷镜、修容界爱马仕"；负向在"价格高、粉膏偏干需技巧、干皮紧绷、含争议防腐成分"。<span class="flag c">C</span></p>
+  <div class="tw"><table>
+    <tr><th style="width:15%">维度</th><th style="width:30%">正向高频词</th><th style="width:30%">负向 / 痛点</th><th>信号</th></tr>
+    <tr><td>色彩</td><td>亚洲定制不显脏 / 冷灰棕专业</td><td>深色需手法、新手易重手</td><td>专业强</td></tr>
+    <tr><td>质地</td><td>粉质细腻 / 烟雾化开 / 不飞粉</td><td>粉膏偏干、需少量多次</td><td>粉饼优、膏体门槛</td></tr>
+    <tr><td>持妆</td><td>12h 边界稳定 / 不脱妆</td><td>干皮出油后需补</td><td>持妆强项</td></tr>
+    <tr><td>包材</td><td>自带小镜 + 双头刷 / 便携</td><td>基础包装、无磁吸</td><td>实用但朴素</td></tr>
+    <tr><td>价值</td><td>专业值得 / 养肤概念</td><td>价格高、性价比弱</td><td>奢侈品心智</td></tr>
+  </table></div>
+  <div class="grid g2" style="margin-top:14px;">
+    <div class="card red"><div class="t">强专业 + 持妆 + 不显脏</div><p>骨相定制 + 三色渐变 + 养肤，让毛戈平成为"专业修容"代名词，承接对妆效要求高的进阶用户。</p></div>
+    <div class="card gold"><div class="t">可攻击口子</div><p>"专业下沉（¥150-200 平替）/ 温和防腐（去羟苯 + 羊毛脂）/ 轻量磁吸包材"是清晰短板，后来者用"同专业 + 换价格 / 换防腐"切。</p></div>
+  </div>
+  <div class="src"><b>数据来源：</b>京东 / 淘宝达人 / 微博（C 级，正向 / 负向高频词归纳）。差评以平台个案为主，不代表整体率；"粉膏偏干"为测评与用户共性反馈。</div>
+</section>
+
+<!-- ============ P7 ============ -->
+<section class="page" id="p7">
+  <div class="pageno">07 / 10</div>
+  <span class="tag">卖点拆解</span>
+  <h2>彩妆卖点五轴</h2>
+  <p class="sub">色彩轴（冷灰棕骨相）× 质地轴（微米云母柔焦）× 持妆轴（12h 边界稳定）× 包材轴（黑金 + 双头刷镜）× 肤感轴（贴肤不卡粉）× 护城河轴（专业化妆师背书 + 养肤添加）。<span class="flag c">C</span></p>
+  <div class="tw"><table>
+    <tr><th style="width:16%">轴</th><th style="width:28%">内容</th><th>说明</th></tr>
+    <tr><td><span class="y">色彩轴</span></td><td>冷灰棕鼻影 + 暖棕修容 + 浅金高光</td><td>ΔE&lt;1.2、匹配东亚阴影 91.7%，不偏红不显脏</td></tr>
+    <tr><td><span class="y">质地轴</span></td><td>微米云母柔焦粉体</td><td>粒径 8-12μm、反射率 62.3%，自然光感</td></tr>
+    <tr><td><span class="y">持妆轴</span></td><td>12h 边界稳定</td><td>T 区出油后模糊仅 +17%，优于国际专业线</td></tr>
+    <tr><td><span class="y">包材轴</span></td><td>黑金基础装 + 自带小镜 + 双头刷</td><td>便携补妆，故宫限定为东方礼盒</td></tr>
+    <tr><td><span class="y">肤感轴</span></td><td>贴肤不卡粉 + 养肤</td><td>0.8% 泛醇 + 神经酰胺 NP，斑贴 0.3</td></tr>
+    <tr><td><span class="n">护城河轴</span></td><td>专业化妆师背书 + 亚洲骨相定制</td><td>20 余年专业资历 + 养肤概念</td></tr>
+  </table></div>
+  <div class="quote" style="margin-top:16px;"><span class="q">洞察：</span>毛戈平的护城河来自"专业化妆师资历 + 亚洲骨相定制 + 养肤添加"，而非单纯价格或渠道；它把"专业修容与奢侈品心智"守住了，把"专业下沉、温和防腐、轻量包材"留给了后来者——用同专业度 + 换价格 / 换防腐即可切。<span class="flag c">C·策略推断</span></div>
+  <div class="src"><b>数据来源：</b>京东 / 天猫 / 官网（C 级，色彩 / 质地 / 包材）｜搜狐 2026 测评（C 级，参数，标注待核）。五轴为我按"彩妆卖点轴"格式提炼。</div>
+</section>
+
+<!-- ============ P8 ============ -->
+<section class="page" id="p8">
+  <div class="pageno">08 / 10</div>
+  <span class="tag">痛点与机会</span>
+  <h2>空白 = 你的机会</h2>
+  <p class="sub">把毛戈平短板轴与修容赛道空白叠加，得到可切入的切口。</p>
+  <div class="tw"><table>
+    <tr><th style="width:26%">赛道级空白</th><th>对应短板</th><th>你的切口</th></tr>
+    <tr><td><span class="n">专业下沉</span></td><td>价格高（¥213 起）</td><td><span class="y">¥150-200 专业平替</span></td></tr>
+    <tr><td><span class="n">温和防腐</span></td><td>含羟苯甲酯 + 羊毛脂</td><td><span class="y">无尼泊金 / 无羊毛脂</span></td></tr>
+    <tr><td><span class="n">轻量包材</span></td><td>基础包装、无磁吸</td><td><span class="y">磁吸 + 防污材质</span></td></tr>
+    <tr><td><span class="n">新手友好</span></td><td>粉膏需手法门槛</td><td><span class="y">新手导向渐变 + 教程</span></td></tr>
+    <tr><td><span class="n">养肤透明</span></td><td>养肤量未公开</td><td><span class="y">养肤成分浓度明示</span></td></tr>
+  </table></div>
+  <div class="newzone">
+    <div class="zh">▍对标转化路径（换色系 / 换包材 / 换质地 / 换持妆 / 换场景）</div>
+    <div class="tw"><table>
+      <tr><th style="width:20%">对标对象</th><th style="width:16%">换色系</th><th style="width:16%">换包材</th><th style="width:16%">换持妆</th><th>切入空白</th></tr>
+      <tr><td>毛戈平</td><td>平价灰粽</td><td>磁吸平替</td><td>日常版</td><td>专业下沉</td></tr>
+      <tr><td>彩棠</td><td>深肤色阴影</td><td>防指纹材质</td><td>成膜持久</td><td>珠光持久 + 防污</td></tr>
+      <tr><td>花西子</td><td>玉养色系</td><td>国风轻量</td><td>中等</td><td>同价带国风</td></tr>
+      <tr><td>橘朵</td><td>过渡色</td><td>简易→磁吸</td><td>升级</td><td>入门升级</td></tr>
+      <tr><td>酵色</td><td>养肤色</td><td>空气感</td><td>中等</td><td>养肤修容</td></tr>
+    </table></div>
+  </div>
+  <div class="src"><b>数据来源：</b>京东 / 天猫 / YesStyle（C 级，短板）｜搜狐 2026 测评（C 级，竞品参数）。空白与对标转化为基于公开事实的策略推断。</div>
+</section>
+
+<!-- ============ P9 ============ -->
+<section class="page" id="p9">
+  <div class="pageno">09 / 10</div>
+  <span class="tag">产品启示</span>
+  <h2>如果做新锐修容品牌，怎么打？</h2>
+  <p class="sub">不打毛戈平的"专业化妆师 + 奢侈品心智"正面战场，而是用"同专业度 + 空白价格 / 防腐 / 包材"切入。五条可执行策略：</p>
+  <ol class="listnum">
+    <li><b>专业下沉平替。</b>承接"亚洲骨相修容"心智，用 ¥150-200 价格 + 同等三色渐变与持妆，切毛戈平之下的专业需求。</li>
+    <li><b>温和防腐升级。</b>补毛戈平"含羟苯甲酯 + 羊毛脂"短板，以无尼泊金 + 无羊毛脂 + 明示养肤浓度建立敏感肌信任。</li>
+    <li><b>轻量磁吸包材。</b>补"基础包装、无磁吸"短板，把磁吸 + 防污材质 + 更轻量做成差异点。</li>
+    <li><b>新手友好导向。</b>针对粉膏手法门槛，做渐变引导 + 配套教程 + 双头刷，降低上手难度。</li>
+    <li><b>养肤透明化。</b>把泛醇 / 神经酰胺等养肤添加浓度明示，借毛戈平已验证的"养肤修容"趋势做透明沟通。</li>
+  </ol>
+  <div class="src"><b>说明：</b>以上为基于毛戈平公开竞争态势的"我方（假设为新锐修容品牌）"策略推断，非任何品牌官方信息。我方定位 / 价格 / 渠道需结合实际业务定义。</div>
+</section>
+
+<!-- ============ P10 ============ -->
+<section class="page" id="p10">
+  <div class="pageno">10 / 10</div>
+  <span class="tag">总结 + 来源</span>
+  <h2>一句话总结</h2>
+  <div class="quote"><span class="q">毛戈平给后来者的启示：</span>它证明"亚洲骨相定制 + 微米云母 + 三色渐变 + 专业化妆师背书 + 养肤"能占死高端专业修容心智，但它把"专业与奢侈品心智"守住了，把"专业下沉、温和防腐、轻量包材、新手友好"留给了后来者——切口从不在专业腹地，而在"同专业度、换价格 / 换防腐 / 换包材"的空白里。</div>
+
+  <h3 style="margin-top:18px;">数据来源与置信度清单</h3>
+  <div class="tw"><table>
+    <tr><th style="width:42%">来源</th><th style="width:12%">级别</th><th>用于本报告的结论</th></tr>
+    <tr><td>毛戈平官网 / YesStyle 授权页</td><td><span class="y">A</span></td><td>品牌沿革(2000创立)、鱼子/人参/VE 养肤宣称、全成分、授权零售</td></tr>
+    <tr><td>国家药监局备案</td><td><span class="y">A</span></td><td>浙G妆网备字2021515332/2021507786/2022004091/2023009982、非特殊化妆品</td></tr>
+    <tr><td>京东商品页</td><td>B/C</td><td>价格(粉饼¥213/粉膏¥540-560)、评论(2万+)、好评率(97%)快照</td></tr>
+    <tr><td>搜狐 2026 修容粉饼测评</td><td>C</td><td>粒径(8-12μm)/反射率(62.3%)/色牢度(ISO105-B02 4级)/ΔE(&lt;1.2,匹配91.7%)/斑贴(0.3)/12h持妆(+17%)，第三方SGS，标注待核</td></tr>
+    <tr><td>淘宝 / 微博 / 达人内容</td><td>C</td><td>口碑(不飞粉/不显脏/专业)与痛点(价格高/粉膏偏干/含争议防腐)</td></tr>
+  </table></div>
+  <div class="src"><b>置信度说明：</b>A=官方/备案；B=京东商品页(销量/好评)；C=平台快照/成分库/达人内容/第三方测评（波动大、存个案偏差）。"故宫款 0 滑石粉"宣称与粉饼成分库含滑石粉冲突，按产品线/版本差异待核处理；价格/销量为电商快照，随促销波动；养肤添加浓度为测评披露，以官方为准。本报告不构成投资或购买建议。</div>
+</section>
+
+<div class="foot">竞品分析情报网 · 彩妆·EP02 毛戈平 MAOGEPING 光影塑颜修容 ｜ 修容赛道 · 高端专业骨相定制 ｜ 数据截至 2026-08 公开资料整理 ｜ 内容仅供产品研究与求职作品集使用</div>
+
+</body>
+</html>
