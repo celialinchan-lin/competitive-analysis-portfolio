@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>竞品分析情报网 · EP.32｜安热沙 ANESSA 安耐晒 金瓶 防晒</title>
+<style>
+  :root{
+    --red:#C1121F; --red-deep:#7A0B13; --gold:#E2622E; --gold-light:#F2C3A5;
+    --bg:#1A0809; --bg2:#241011; --card:#2E1315; --card2:#3D1A1C;
+    --text:#F5E7E7; --muted:#B89A9A; --line:#3D1A1C; --good:#E2622E; --bad:#E08B9B;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{background:var(--bg);color:var(--text);font-family:"PingFang SC","Microsoft YaHei",-apple-system,sans-serif;line-height:1.6;font-size:15px;}
+  .page{width:100%;max-width:920px;margin:0 auto;min-height:100vh;padding:54px 40px 40px;display:flex;flex-direction:column;justify-content:flex-start;border-bottom:1px solid var(--line);position:relative;}
+  .pageno{position:absolute;top:22px;right:40px;font-size:12px;color:var(--gold);letter-spacing:2px;font-weight:700;}
+  .tag{display:inline-block;background:var(--red);color:#fff;font-size:12px;padding:3px 12px;border-radius:20px;letter-spacing:1px;margin-bottom:14px;font-weight:700;}
+  h1{font-size:38px;line-height:1.25;font-weight:800;letter-spacing:1px;margin-bottom:8px;}
+  h2{font-size:26px;font-weight:800;margin-bottom:6px;color:var(--gold-light);}
+  h3{font-size:18px;font-weight:800;color:var(--text);margin:18px 0 8px;}
+  .sub{color:var(--muted);font-size:14px;margin-bottom:20px;}
+  .src{margin-top:auto;padding-top:18px;font-size:11px;color:var(--muted);border-top:1px dashed var(--line);}
+  .src b{color:var(--gold-light);}
+  .grid{display:grid;gap:14px;}
+  .g3{grid-template-columns:repeat(3,1fr);}
+  .g2{grid-template-columns:repeat(2,1fr);}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 16px;}
+  .card.red{border-left:4px solid var(--red);}
+  .card.gold{border-left:4px solid var(--gold);}
+  .kpi{font-size:32px;font-weight:800;color:var(--gold);line-height:1.1;}
+  .kpi.red{color:var(--red);}
+  .kpi small{font-size:13px;color:var(--muted);font-weight:400;}
+  .card .t{font-size:13px;color:var(--muted);margin-bottom:6px;}
+  .pill{display:inline-block;background:var(--card2);border:1px solid var(--line);border-radius:8px;padding:4px 10px;font-size:12px;margin:3px 4px 3px 0;color:var(--text);}
+  .pill.good{background:rgba(226,98,46,.15);border-color:var(--good);color:var(--good);}
+  .pill.bad{background:rgba(224,139,155,.15);border-color:var(--bad);color:var(--bad);}
+  .pill.gold{background:rgba(226,98,46,.14);border-color:var(--gold);color:var(--gold-light);}
+  .pill.new{background:rgba(226,98,46,.22);border-color:var(--gold);color:#F5E4DD;font-weight:700;}
+  .bar-row{display:flex;align-items:center;margin:7px 0;font-size:13px;}
+  .bar-name{width:108px;flex-shrink:0;color:var(--text);text-align:right;padding-right:10px;}
+  .bar-track{flex:1;background:var(--bg2);border-radius:6px;height:22px;overflow:hidden;position:relative;}
+  .bar-fill{height:100%;border-radius:6px;background:linear-gradient(90deg,var(--red-deep),var(--red));display:flex;align-items:center;justify-content:flex-end;padding-right:8px;font-size:11px;color:#fff;font-weight:700;}
+  .bar-fill.gold{background:linear-gradient(90deg,#7a0b13,var(--gold));color:#1A0809;}
+  .bar-fill.dim{background:linear-gradient(90deg,#3d1a1c,#5e2a2c);}
+  .matrix{position:relative;width:100%;height:380px;background:var(--bg2);border:1px solid var(--line);border-radius:14px;margin-top:8px;}
+  .axis-x{position:absolute;bottom:8px;width:100%;text-align:center;font-size:12px;color:var(--muted);}
+  .axis-y{position:absolute;left:8px;top:0;height:100%;writing-mode:vertical-rl;font-size:12px;color:var(--muted);}
+  .dot{position:absolute;transform:translate(-50%,-50%);padding:5px 10px;border-radius:20px;font-size:12px;font-weight:700;white-space:nowrap;}
+  .dot.me{background:var(--red);color:#fff;border:2px solid var(--gold);}
+  .dot.other{background:var(--card2);color:var(--text);border:1px solid var(--line);}
+  .cloud{display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px;padding:14px;background:var(--bg2);border-radius:14px;}
+  .cloud span{padding:3px 10px;border-radius:8px;line-height:1.5;}
+  .s1{font-size:13px;} .s2{font-size:16px;} .s3{font-size:20px;} .s4{font-size:25px;}
+  .cgood{background:rgba(226,98,46,.13);color:var(--good);}
+  .cbad{background:rgba(224,139,155,.13);color:var(--bad);}
+  .ctheme{font-size:15px;color:var(--gold-light);background:rgba(226,98,46,.1);padding:6px 14px;border-radius:10px;font-weight:700;}
+  .quote{border-left:3px solid var(--gold);padding:10px 16px;background:var(--card);border-radius:0 10px 10px 0;font-size:15px;color:var(--text);margin:10px 0;}
+  .quote .q{color:var(--gold-light);font-weight:800;}
+  table{width:100%;border-collapse:collapse;font-size:13px;margin-top:8px;}
+  th,td{border:1px solid var(--line);padding:9px 10px;text-align:left;vertical-align:top;}
+  th{background:var(--card2);color:var(--gold-light);font-weight:700;}
+  td .y{color:var(--good);} td .n{color:var(--bad);}
+  .listnum{counter-reset:l;list-style:none;}
+  .listnum li{counter-increment:l;position:relative;padding:12px 14px 12px 52px;background:var(--card);border:1px solid var(--line);border-radius:12px;margin-bottom:10px;}
+  .listnum li::before{content:counter(l);position:absolute;left:14px;top:12px;width:26px;height:26px;background:var(--red);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;}
+  .listnum li b{color:var(--gold-light);}
+  .foot{text-align:center;font-size:12px;color:var(--muted);padding:26px;}
+  .foot b{color:var(--gold-light);}
+  .flag{font-size:11px;padding:1px 6px;border-radius:5px;background:var(--card2);color:var(--muted);margin-left:4px;}
+  .flag.a{color:var(--good);} .flag.b{color:var(--gold-light);} .flag.c{color:var(--bad);}
+  .newzone{border:1px dashed var(--gold);border-radius:14px;padding:14px 16px;margin-top:14px;background:rgba(226,98,46,.06);}
+  .newzone .zh{font-size:13px;color:var(--gold-light);font-weight:800;margin-bottom:8px;}
+
+  @media (max-width:820px){
+    .page{min-height:100dvh;padding:24px 18px 40px;}
+    .pageno{top:14px;right:16px;}
+    h1{font-size:25px;}
+    h2{font-size:21px;}
+    h3{font-size:16px;}
+    .sub{font-size:13px;margin-bottom:14px;}
+    .g3,.g2{grid-template-columns:1fr;}
+    .card{padding:15px 13px;}
+    .kpi{font-size:24px;}
+    .bar-name{width:74px;font-size:11px;padding-right:6px;}
+    .bar-track{height:20px;}
+    .bar-fill{font-size:10px;padding-right:5px;}
+    .matrix{height:320px;}
+    .dot{font-size:11px;padding:4px 8px;}
+    .cloud{padding:12px 10px;gap:5px 6px;}
+    .s1{font-size:12px;} .s2{font-size:14px;} .s3{font-size:17px;} .s4{font-size:21px;}
+    table{font-size:12px;}
+    th,td{padding:7px 8px;}
+    .quote{font-size:14px;padding:9px 13px;}
+    .listnum li{padding:11px 12px 11px 46px;}
+    .listnum li::before{left:12px;width:24px;height:24px;font-size:13px;}
+    .src{font-size:10px;}
+    .flag{font-size:10px;}
+  }
+  .page{overflow-x:hidden;}
+  .tw{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:10px 0;}
+  .tw table{min-width:640px;}
+  @media (max-width:820px){
+    .bar-row,.bar{flex-direction:column;align-items:stretch;margin:11px 0;}
+    .bar-name{width:auto !important;flex-shrink:1;text-align:left !important;padding-right:0;font-size:12.5px;line-height:1.4;}
+    .bar-track{width:100%;}
+    .bar-fill{min-width:60px;}
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ P1 ============ -->
+<section class="page" id="p1">
+  <div class="pageno">01 / 10</div>
+  <span class="tag">EP.32 · 安热沙 ANESSA 安耐晒 金瓶</span>
+  <h1>安热沙 安耐晒 金瓶<br>户外强UV防晒的"成膜科技"标杆</h1>
+  <p class="sub">资生堂集团（日本）旗下专业防晒品牌，金瓶是其户外防晒旗舰。核心用<b>化学防晒复配 + Aqua Booster EX 遇水强化 + Thermo Booster 遇热增强成膜科技</b>，把"防水防汗、越热越耐晒、户外强UV"做成海边/军训/运动场景的心智王者，是防晒赛道的高端户外锚点。</p>
+  <div class="quote"><span class="q">一句话结论：</span>安耐晒金瓶用"化学复配高倍 + Aqua/Thermo Booster 双成膜 + 50%+养肤"的组合，把安热沙做成户外防晒信任状天花板；亮点在<b>遇水遇热防护加乘、户外强UV稳定、品牌溢价硬</b>，短板在<b>含酒精(敏感肌刺痛)、价高、需频繁补涂、2小时后T区反光</b>。<span class="flag c">C·电商快照</span></div>
+  <div class="grid g3" style="margin-top:22px;">
+    <div class="card red">
+      <div class="kpi">¥298<small> /60ml</small></div>
+      <div class="t">官方定价 <span class="flag c">C</span></div>
+      <p style="font-size:13px;color:var(--muted);margin-top:6px;">官方定价298元/60ml，常年活动价浮动小；跨境约$19.6(53折)，评分4.9(322)。</p>
+    </div>
+    <div class="card gold">
+      <div class="kpi red">资生堂</div>
+      <div class="t">集团归属 <span class="flag a">A</span></div>
+      <p style="font-size:13px;color:var(--muted);margin-top:6px;">ANESSA 安热沙属 Shiseido 资生堂集团，日本专业防晒品牌，深耕户外多年。</p>
+    </div>
+    <div class="card">
+      <div class="kpi red">SPF50<small> + PA++++</small></div>
+      <div class="t">防护指数 <span class="flag a">A</span></div>
+      <p style="font-size:13px;color:var(--muted);margin-top:6px;">标注SPF50+ PA++++，Aqua Booster EX 遇水加乘，IPX级防水防汗。</p>
+    </div>
+  </div>
+  <div class="src"><b>数据来源：</b>安热沙官方/资生堂（A级，归属/SPF/技术）｜亚米/趣妈（C级，价格/评分）。具体浓度以备案为准。</div>
+</section>
+
+<!-- ============ P2 ============ -->
+<section class="page" id="p2">
+  <div class="pageno">02 / 10</div>
+  <span class="tag">市场全景</span>
+  <h2>防晒赛道格局：五条机理路线</h2>
+  <p class="sub">五条路线中，安热沙代表"化学吸收 + 强成膜（遇水/热加乘）"的户外路线，靠 Aqua/Thermo Booster 把防护做成"越水越热越强"，区别于平价物化结合与药妆广谱。<span class="flag b">B/C</span></p>
+  <div class="tw"><table>
+    <tr><th style="width:16%">路线</th><th style="width:18%">代表</th><th style="width:24%">核心机理</th><th style="width:22%">信任状</th><th>主渠道</th></tr>
+    <tr><td><span class="y">化学吸收+成膜</span></td><td>安热沙</td><td>化学剂+遇水/热成膜</td><td>资生堂/户外</td><td>电商+专柜</td></tr>
+    <tr><td><span class="y">物化结合吸收</span></td><td>蜜丝婷/欧莱雅</td><td>化学吸收+物理反射</td><td>平价/麦色滤</td><td>电商+跨境</td></tr>
+    <tr><td><span class="y">化学吸收+生物抗氧</span></td><td>理肤泉/薇诺娜</td><td>麦色滤+温泉水/植萃</td><td>药妆/敏感肌</td><td>药妆+电商</td></tr>
+    <tr><td><span class="y">屏障修护防晒</span></td><td>玉泽</td><td>物化+仿生脂质</td><td>上海家化/屏障</td><td>电商+药店</td></tr>
+    <tr><td><span class="y">纯物理屏蔽</span></td><td>薇诺娜(部分版)</td><td>氧化锌+二氧化钛</td><td>敏感肌/无酒精</td><td>电商+药店</td></tr>
+  </table></div>
+  <div class="grid g3" style="margin-top:16px;">
+    <div class="card"><div class="t">安热沙卡位</div><p>占"户外强UV + 遇水遇热加乘"心智，靠成膜科技与品牌溢价取胜。</p></div>
+    <div class="card"><div class="t">分化</div><p>蜜丝婷偏平价、理肤泉偏药妆广谱、怡思丁偏水感、玉泽偏屏障——安热沙赢在"户外成膜"。</p></div>
+    <div class="card"><div class="t">机会</div><p>"平价户外成膜 + 无酒精温和版"带（安热沙含酒精/价高）是空白。<span class="flag c">C·推断</span></p></div>
+  </div>
+  <div class="src"><b>数据来源：</b>各品牌官方（A/C级，机理/渠道）｜京东/天猫（C级，价格/评价）。路线归纳为基于公开信息的横向归类。</div>
+</section>
+
+<!-- ============ P3 ============ -->
+<section class="page" id="p3">
+  <div class="pageno">03 / 10</div>
+  <span class="tag">产品定位</span>
+  <h2>定位矩阵（价格 × 防护/专业强度）</h2>
+  <p class="sub">横轴=防护/专业强度（日常通勤 → 户外强UV），纵轴=价格带。安热沙卡位"高价、户外强UV顶端"，是防晒赛道的户外专业锚，与理肤泉（药妆广谱）形成高端双雄。</p>
+  <div class="matrix">
+    <div class="axis-y">价格带（低 → 高）</div>
+    <div class="axis-x">防护/专业强度（日常通勤 → 户外强UV）</div>
+    <div class="dot me" style="left:88%;top:20%;">安热沙 298</div>
+    <div class="dot other" style="left:78%;top:28%;">理肤泉 139-320</div>
+    <div class="dot other" style="left:62%;top:42%;">玉泽 128-228</div>
+    <div class="dot other" style="left:54%;top:48%;">薇诺娜 188-321</div>
+    <div class="dot other" style="left:40%;top:58%;">怡思丁 99-149</div>
+    <div class="dot other" style="left:26%;top:74%;">欧莱雅 59-130</div>
+    <div class="dot other" style="left:14%;top:84%;">蜜丝婷 59-85</div>
+  </div>
+  <div class="grid g2" style="margin-top:16px;">
+    <div class="card red"><div class="t">安热沙占位</div><p>高价户外专业锚，品牌溢价硬；靠成膜科技，不与平价拼价格。</p></div>
+    <div class="card gold"><div class="t">空白区</div><p>"平价户外成膜 + 无酒精温和"带（安热沙含酒精/价高）是差异化机会。</p></div>
+  </div>
+  <div class="src"><b>数据来源：</b>各品牌官方旗舰店价格（C级快照）｜资生堂信息（A级，归属）。坐标为基于公开价格的示意性卡位。</div>
+</section>
+
+<!-- ============ P4 ============ -->
+<section class="page" id="p4">
+  <div class="pageno">04 / 10</div>
+  <span class="tag">配方拆解</span>
+  <h2>核心成分 / 机理</h2>
+  <p class="sub">金瓶的核心机理：化学防晒复配（全波段吸收）+ Aqua Booster EX 遇水强化 / Thermo Booster 遇热增强成膜 + 50%+养肤成分（洋委陵菜根精萃/甘草酸/VE），是"户外强防护 + 养肤"的专业组合。<span class="flag a">A/C</span></p>
+  <div class="tw"><table>
+    <tr><th style="width:20%">成分</th><th style="width:22%">角色</th><th style="width:30%">机理</th><th>备注</th></tr>
+    <tr><td>化学防晒复配</td><td>吸收UVA/UVB</td><td>全波段高倍防护</td><td>金瓶体系</td></tr>
+    <tr><td>Aqua Booster EX</td><td>遇水成膜</td><td>遇水/汗防护加乘</td><td>独家专利</td></tr>
+    <tr><td>Thermo Booster</td><td>遇热增强</td><td>越热越耐晒</td><td>遇热防护加乘</td></tr>
+    <tr><td>洋委陵菜根/甘草酸</td><td>舒缓养肤</td><td>保湿维稳、抗氧</td><td>50%+养肤成分</td></tr>
+    <tr><td>(微量护肤级酒精)</td><td>溶剂</td><td>助渗透成膜</td><td>敏感肌需注意</td></tr>
+  </table></div>
+  <div class="grid g3" style="margin-top:14px;">
+    <div class="card"><div class="t">机理完整度</div><p>化学吸收+双成膜+养肤，户外专业级，单点竞品难全覆盖。</p></div>
+    <div class="card"><div class="t">温和度</div><p>含微量酒精，敏感肌/年轻群体有刺痛反馈（18-24岁T区刺痛17.4%）。</p></div>
+    <div class="card"><div class="t">形态</div><p>摇摇乐乳液、速成膜、不泛白、0油光，肤感是户外强项。<span class="flag c">C</span></p></div>
+  </div>
+  <div class="src"><b>数据来源：</b>安热沙官网/资生堂（A级，技术/成分）｜亚米/测评（C级，肤感/酒精）。具体浓度以备案为准。</div>
+</section>
+
+<!-- ============ P5 ============ -->
+<section class="page" id="p5">
+  <div class="pageno">05 / 10</div>
+  <span class="tag">价格策略</span>
+  <h2>价格带与销量</h2>
+  <p class="sub">官方定价 298元/60ml，常年活动价浮动小，是高端户外锚；跨境渠道约$19.6(53折)，亚米评分4.9(322)、周销1000+。品牌溢价稳，价差近倍于中端。<span class="flag c">C</span></p>
+  <div style="background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px;">
+    <div class="bar-row"><div class="bar-name">官方定价 60ml</div><div class="bar-track"><div class="bar-fill dim" style="width:100%">¥298 / 户外高端锚</div></div></div>
+    <div class="bar-row"><div class="bar-name">跨境到手</div><div class="bar-track"><div class="bar-fill" style="width:34%">≈¥140 (53折)</div></div></div>
+    <div class="bar-row"><div class="bar-name">亚米评分</div><div class="bar-track"><div class="bar-fill gold" style="width:82%">4.9 / 322评 / 周销1000+</div></div></div>
+  </div>
+  <div class="grid g3" style="margin-top:16px;">
+    <div class="card red"><div class="t">高端锚</div><p>298元封顶，凭资生堂信任状占户外高端，价差近倍但认知稳。</p></div>
+    <div class="card"><div class="t">渠道壁垒</div><p>官方+跨境+专柜，正品与可得性强，是核心护城河。</p></div>
+    <div class="card"><div class="t">风险</div><p>含酒精、价高、需每90分钟补涂，敏感肌与预算客群门槛高。<span class="flag c">C</span></p></div>
+  </div>
+  <div class="src"><b>数据来源：</b>安热沙官网/资生堂（A级，定价/技术）｜亚米/趣妈（C级，价格/评分/销量快照）。以官方实时价为准。</div>
+</section>
+
+<!-- ============ P6 ============ -->
+<section class="page" id="p6">
+  <div class="pageno">06 / 10</div>
+  <span class="tag">消费者评价</span>
+  <h2>口碑横向</h2>
+  <p class="sub">正向集中在"户外强防护、防水防汗、不晒黑、成膜快"；负向在"含酒精刺痛、价高、需补涂、2小时后T区反光"。<span class="flag c">C</span></p>
+  <div class="tw"><table>
+    <tr><th style="width:15%">维度</th><th style="width:30%">正向高频词</th><th style="width:30%">负向/痛点</th><th>信号</th></tr>
+    <tr><td>功效</td><td>户外强防护/不晒黑</td><td>需频繁补涂</td><td>户外强、日常弱</td></tr>
+    <tr><td>肤感</td><td>成膜快/不泛白/0油光</td><td>2小时后T区反光</td><td>户外友好</td></tr>
+    <tr><td>安全</td><td>养肤成分多</td><td>含酒精/敏感肌刺痛</td><td>温和有顾虑</td></tr>
+    <tr><td>价值</td><td>品牌信任/值得</td><td>价高</td><td>溢价强</td></tr>
+  </table></div>
+  <div class="grid g2" style="margin-top:14px;">
+    <div class="card red"><div class="t">强户外 + 品牌</div><p>资生堂信任状 + 成膜科技，让"户外防晒"成为最常购高端入口。</p></div>
+    <div class="card gold"><div class="t">可攻击口子</div><p>"含酒精/价高/敏感肌刺痛"是清晰短板，后来者用"同户外级无酒精温和版+更低门槛"切。</p></div>
+  </div>
+  <div class="src"><b>数据来源：</b>亚米/测评与社区（C级，正向/负向高频词归纳）。差评以平台个案为主，不代表整体率。</div>
+</section>
+
+<!-- ============ P7 ============ -->
+<section class="page" id="p7">
+  <div class="pageno">07 / 10</div>
+  <span class="tag">卖点拆解</span>
+  <h2>心智三轴</h2>
+  <p class="sub">信任锚（资生堂/户外防晒王者）× 功效锚（Aqua/Thermo Booster 双成膜）× 场景锚（海边/军训/运动户外）。<span class="flag c">C</span></p>
+  <div class="tw"><table>
+    <tr><th style="width:16%">轴</th><th style="width:28%">内容</th><th>说明</th></tr>
+    <tr><td><span class="y">信任锚</span></td><td>资生堂 / 户外防晒王者</td><td>大集团渠道信任，专业户外</td></tr>
+    <tr><td><span class="y">功效锚</span></td><td>Aqua+Thermo Booster</td><td>遇水遇热防护加乘</td></tr>
+    <tr><td><span class="y">场景锚</span></td><td>海边/军训/运动</td><td>户外强UV场景</td></tr>
+    <tr><td><span class="n">短板轴</span></td><td>含酒精/价高/补涂</td><td>温和与门槛是缺口</td></tr>
+  </table></div>
+  <div class="quote" style="margin-top:16px;"><span class="q">洞察：</span>安热沙的信任锚来自"资生堂 + 户外防晒王者 + 成膜科技"，而非温和；它把"户外强防护"守住了，把"无酒精温和、价格门槛、日常通勤友好"留给了后来者——用同户外级 + 换温和/换门槛即可切。<span class="flag c">C·策略推断</span></div>
+  <div class="src"><b>数据来源：</b>安热沙官方与资生堂（A/C级，信任/功效/场景）｜商品页（C级，成分/评价）。三轴为我按"×交叉拆解"格式提炼。</div>
+</section>
+
+<!-- ============ P8 ============ -->
+<section class="page" id="p8">
+  <div class="pageno">08 / 10</div>
+  <span class="tag">痛点与机会</span>
+  <h2>空白 = 你的机会</h2>
+  <p class="sub">把安热沙的短板轴与赛道空白叠加，得到可切入的切口。</p>
+  <div class="tw"><table>
+    <tr><th style="width:26%">赛道级空白</th><th>对应短板</th><th>你的切口</th></tr>
+    <tr><td><span class="n">平价户外成膜</span></td><td>安热沙价高</td><td><span class="y">平价遇水成膜版</span></td></tr>
+    <tr><td><span class="n">无酒精户外温和</span></td><td>安热沙含酒精</td><td><span class="y">无酒精户外版</span></td></tr>
+    <tr><td><span class="n">日常通勤友好</span></td><td>安热沙偏户外</td><td><span class="y">户外+通勤双用</span></td></tr>
+    <tr><td><span class="n">低补涂频率</span></td><td>安热沙90分钟补</td><td><span class="y">长效户外配方</span></td></tr>
+  </table></div>
+  <div class="newzone">
+    <div class="zh">▍对标转化路径（换剂型 / 换包装 / 换场景）</div>
+    <div class="tw"><table>
+      <tr><th style="width:20%">对标对象</th><th style="width:18%">换剂型</th><th style="width:18%">换包装</th><th>切入空白</th></tr>
+      <tr><td>安热沙</td><td>无酒精成膜版</td><td>通勤视觉</td><td>平价温和高倍</td></tr>
+      <tr><td>理肤泉</td><td>户外强UV版</td><td>运动视觉</td><td>药妆户外</td></tr>
+      <tr><td>蜜丝婷</td><td>户外成膜版</td><td>年轻视觉</td><td>平价户外</td></tr>
+      <tr><td>怡思丁</td><td>防水抗汗版</td><td>户外视觉</td><td>水感户外</td></tr>
+      <tr><td>玉泽</td><td>清爽不黏版</td><td>年轻化视觉</td><td>屏障户外</td></tr>
+    </table></div>
+  </div>
+  <div class="src"><b>数据来源：</b>安热沙官方（A/C级，短板）｜各平台评价（C级，痛点）。空白与对标转化为基于公开事实的策略推断。</div>
+</section>
+
+<!-- ============ P9 ============ -->
+<section class="page" id="p9">
+  <div class="pageno">09 / 10</div>
+  <span class="tag">产品启示</span>
+  <h2>如果做新锐防晒品牌，怎么打？</h2>
+  <p class="sub">不打安热沙的"户外专业 + 品牌溢价"正面战场，而是用"同户外级 + 空白温和/门槛"切入。五条可执行策略：</p>
+  <ol class="listnum">
+    <li><b>平价户外成膜。</b>承接"户外强防护"心智，做无酒精/低门槛遇水成膜版，正面回应安热沙价高/含酒精痛点。</li>
+    <li><b>无酒精户外温和。</b>用无酒精配方补安热沙"敏感肌刺痛"短板，把温和信任做成户外带差异点。</li>
+    <li><b>户外+通勤双用。</b>在户外级内做日常通勤友好质地，抢"纯户外"之外的双场景。</li>
+    <li><b>低补涂频率。</b>补安热沙"90分钟补涂"缺口，做长效户外配方。</li>
+    <li><b>机理组合创新。</b>在成膜之上加生物抗氧/屏障，从"防护"升级为"防护+修护"双效。</li>
+  </ol>
+  <div class="src"><b>说明：</b>以上为基于安热沙公开竞争态势的"我方（假设为新锐防晒品牌）"策略推断，非任何品牌官方信息。我方定位/价格/渠道需结合实际业务定义。</div>
+</section>
+
+<!-- ============ P10 ============ -->
+<section class="page" id="p10">
+  <div class="pageno">10 / 10</div>
+  <span class="tag">总结 + 来源</span>
+  <h2>一句话总结</h2>
+  <div class="quote"><span class="q">安热沙金瓶给后来者的启示：</span>它证明"化学复配高倍 + 双成膜科技 + 资生堂信任"能占死户外防晒心智，但它把"户外强防护"守住了，把"无酒精温和、价格门槛、日常通勤友好、低补涂"留给了后来者——切口从不在户外腹地，而在"同户外级、换温和/换门槛/换场景"的空白里。</div>
+
+  <h3 style="margin-top:18px;">数据来源与置信度清单</h3>
+  <div class="tw"><table>
+    <tr><th style="width:42%">来源</th><th style="width:12%">级别</th><th>用于本报告的结论</th></tr>
+    <tr><td>安热沙官网/资生堂</td><td><span class="y">A</span></td><td>归属(资生堂)/SPF50+ PA++++/Aqua Booster EX+Thermo Booster技术</td></tr>
+    <tr><td>亚米/趣妈/测评</td><td>C</td><td>价格(¥298/60ml，跨境53折)/评分(4.9)/销量(周1000+)/含酒精</td></tr>
+  </table></div>
+  <div class="src"><b>置信度说明：</b>A=官方/资生堂；C=平台快照/达人内容（波动大、存个案偏差）。"含酒精/敏感肌刺痛"为公开测评表述，标注待核；价格/评分为电商快照，随促销波动。本报告不构成投资或购买建议。</div>
+</section>
+
+<div class="foot">竞品分析情报网 · EP.32 安热沙 ANESSA 安耐晒 金瓶 防晒 ｜ 防晒赛道 · 户外强UV成膜 ｜ 数据截至 2026-08 公开资料整理 ｜ 内容仅供产品研究与求职作品集使用</div>
+
+</body>
+</html>

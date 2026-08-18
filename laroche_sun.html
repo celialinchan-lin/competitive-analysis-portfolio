@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>竞品分析情报网 · EP.33｜理肤泉 Anthelios 大哥大 防晒</title>
+<style>
+  :root{
+    --red:#2A5DB0; --red-deep:#163A73; --gold:#6FA8E0; --gold-light:#BCDDF5;
+    --bg:#070F1A; --bg2:#0E1726; --card:#11233A; --card2:#18304C;
+    --text:#E8EFF6; --muted:#90A6C2; --line:#18304C; --good:#6FA8E0; --bad:#E08B9B;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{background:var(--bg);color:var(--text);font-family:"PingFang SC","Microsoft YaHei",-apple-system,sans-serif;line-height:1.6;font-size:15px;}
+  .page{width:100%;max-width:920px;margin:0 auto;min-height:100vh;padding:54px 40px 40px;display:flex;flex-direction:column;justify-content:flex-start;border-bottom:1px solid var(--line);position:relative;}
+  .pageno{position:absolute;top:22px;right:40px;font-size:12px;color:var(--gold);letter-spacing:2px;font-weight:700;}
+  .tag{display:inline-block;background:var(--red);color:#fff;font-size:12px;padding:3px 12px;border-radius:20px;letter-spacing:1px;margin-bottom:14px;font-weight:700;}
+  h1{font-size:38px;line-height:1.25;font-weight:800;letter-spacing:1px;margin-bottom:8px;}
+  h2{font-size:26px;font-weight:800;margin-bottom:6px;color:var(--gold-light);}
+  h3{font-size:18px;font-weight:800;color:var(--text);margin:18px 0 8px;}
+  .sub{color:var(--muted);font-size:14px;margin-bottom:20px;}
+  .src{margin-top:auto;padding-top:18px;font-size:11px;color:var(--muted);border-top:1px dashed var(--line);}
+  .src b{color:var(--gold-light);}
+  .grid{display:grid;gap:14px;}
+  .g3{grid-template-columns:repeat(3,1fr);}
+  .g2{grid-template-columns:repeat(2,1fr);}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 16px;}
+  .card.red{border-left:4px solid var(--red);}
+  .card.gold{border-left:4px solid var(--gold);}
+  .kpi{font-size:32px;font-weight:800;color:var(--gold);line-height:1.1;}
+  .kpi.red{color:var(--red);}
+  .kpi small{font-size:13px;color:var(--muted);font-weight:400;}
+  .card .t{font-size:13px;color:var(--muted);margin-bottom:6px;}
+  .pill{display:inline-block;background:var(--card2);border:1px solid var(--line);border-radius:8px;padding:4px 10px;font-size:12px;margin:3px 4px 3px 0;color:var(--text);}
+  .pill.good{background:rgba(111,168,224,.15);border-color:var(--good);color:var(--good);}
+  .pill.bad{background:rgba(224,139,155,.15);border-color:var(--bad);color:var(--bad);}
+  .pill.gold{background:rgba(111,168,224,.14);border-color:var(--gold);color:var(--gold-light);}
+  .pill.new{background:rgba(111,168,224,.22);border-color:var(--gold);color:#E4F0F8;font-weight:700;}
+  .bar-row{display:flex;align-items:center;margin:7px 0;font-size:13px;}
+  .bar-name{width:108px;flex-shrink:0;color:var(--text);text-align:right;padding-right:10px;}
+  .bar-track{flex:1;background:var(--bg2);border-radius:6px;height:22px;overflow:hidden;position:relative;}
+  .bar-fill{height:100%;border-radius:6px;background:linear-gradient(90deg,var(--red-deep),var(--red));display:flex;align-items:center;justify-content:flex-end;padding-right:8px;font-size:11px;color:#fff;font-weight:700;}
+  .bar-fill.gold{background:linear-gradient(90deg,#163a73,var(--gold));color:#070F1A;}
+  .bar-fill.dim{background:linear-gradient(90deg,#18304c,#2c4a73);}
+  .matrix{position:relative;width:100%;height:380px;background:var(--bg2);border:1px solid var(--line);border-radius:14px;margin-top:8px;}
+  .axis-x{position:absolute;bottom:8px;width:100%;text-align:center;font-size:12px;color:var(--muted);}
+  .axis-y{position:absolute;left:8px;top:0;height:100%;writing-mode:vertical-rl;font-size:12px;color:var(--muted);}
+  .dot{position:absolute;transform:translate(-50%,-50%);padding:5px 10px;border-radius:20px;font-size:12px;font-weight:700;white-space:nowrap;}
+  .dot.me{background:var(--red);color:#fff;border:2px solid var(--gold);}
+  .dot.other{background:var(--card2);color:var(--text);border:1px solid var(--line);}
+  .cloud{display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px;padding:14px;background:var(--bg2);border-radius:14px;}
+  .cloud span{padding:3px 10px;border-radius:8px;line-height:1.5;}
+  .s1{font-size:13px;} .s2{font-size:16px;} .s3{font-size:20px;} .s4{font-size:25px;}
+  .cgood{background:rgba(111,168,224,.13);color:var(--good);}
+  .cbad{background:rgba(224,139,155,.13);color:var(--bad);}
+  .ctheme{font-size:15px;color:var(--gold-light);background:rgba(111,168,224,.1);padding:6px 14px;border-radius:10px;font-weight:700;}
+  .quote{border-left:3px solid var(--gold);padding:10px 16px;background:var(--card);border-radius:0 10px 10px 0;font-size:15px;color:var(--text);margin:10px 0;}
+  .quote .q{color:var(--gold-light);font-weight:800;}
+  table{width:100%;border-collapse:collapse;font-size:13px;margin-top:8px;}
+  th,td{border:1px solid var(--line);padding:9px 10px;text-align:left;vertical-align:top;}
+  th{background:var(--card2);color:var(--gold-light);font-weight:700;}
+  td .y{color:var(--good);} td .n{color:var(--bad);}
+  .listnum{counter-reset:l;list-style:none;}
+  .listnum li{counter-increment:l;position:relative;padding:12px 14px 12px 52px;background:var(--card);border:1px solid var(--line);border-radius:12px;margin-bottom:10px;}
+  .listnum li::before{content:counter(l);position:absolute;left:14px;top:12px;width:26px;height:26px;background:var(--red);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;}
+  .listnum li b{color:var(--gold-light);}
+  .foot{text-align:center;font-size:12px;color:var(--muted);padding:26px;}
+  .foot b{color:var(--gold-light);}
+  .flag{font-size:11px;padding:1px 6px;border-radius:5px;background:var(--card2);color:var(--muted);margin-left:4px;}
+  .flag.a{color:var(--good);} .flag.b{color:var(--gold-light);} .flag.c{color:var(--bad);}
+  .newzone{border:1px dashed var(--gold);border-radius:14px;padding:14px 16px;margin-top:14px;background:rgba(111,168,224,.06);}
+  .newzone .zh{font-size:13px;color:var(--gold-light);font-weight:800;margin-bottom:8px;}
+
+  @media (max-width:820px){
+    .page{min-height:100dvh;padding:24px 18px 40px;}
+    .pageno{top:14px;right:16px;}
+    h1{font-size:25px;}
+    h2{font-size:21px;}
+    h3{font-size:16px;}
+    .sub{font-size:13px;margin-bottom:14px;}
+    .g3,.g2{grid-template-columns:1fr;}
+    .card{padding:15px 13px;}
+    .kpi{font-size:24px;}
+    .bar-name{width:74px;font-size:11px;padding-right:6px;}
+    .bar-track{height:20px;}
+    .bar-fill{font-size:10px;padding-right:5px;}
+    .matrix{height:320px;}
+    .dot{font-size:11px;padding:4px 8px;}
+    .cloud{padding:12px 10px;gap:5px 6px;}
+    .s1{font-size:12px;} .s2{font-size:14px;} .s3{font-size:17px;} .s4{font-size:21px;}
+    table{font-size:12px;}
+    th,td{padding:7px 8px;}
+    .quote{font-size:14px;padding:9px 13px;}
+    .listnum li{padding:11px 12px 11px 46px;}
+    .listnum li::before{left:12px;width:24px;height:24px;font-size:13px;}
+    .src{font-size:10px;}
+    .flag{font-size:10px;}
+  }
+  .page{overflow-x:hidden;}
+  .tw{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:10px 0;}
+  .tw table{min-width:640px;}
+  @media (max-width:820px){
+    .bar-row,.bar{flex-direction:column;align-items:stretch;margin:11px 0;}
+    .bar-name{width:auto !important;flex-shrink:1;text-align:left !important;padding-right:0;font-size:12.5px;line-height:1.4;}
+    .bar-track{width:100%;}
+    .bar-fill{min-width:60px;}
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ P1 ============ -->
+<section class="page" id="p1">
+  <div class="pageno">01 / 10</div>
+  <span class="tag">EP.33 · 理肤泉 Anthelios 大哥大</span>
+  <h1>理肤泉 大哥大 防晒<br>药妆广谱"麦色滤"的敏感肌标杆</h1>
+  <p class="sub">欧莱雅集团（法国）旗下专业药妆品牌，Anthelios 大哥大是其面部防晒旗舰。核心用<b>麦色滤 Mexoryl XL/SX 广谱防护 + Mexoryl 400 超长UVA + 温泉水舒缓抗氧</b>，把"全波段高倍 + 敏感肌/医美专研 + 不泛白"做成皮肤科推荐的心智王者，是防晒赛道的药妆专业锚。</p>
+  <div class="quote"><span class="q">一句话结论：</span>大哥大用"麦色滤广谱 + Mexoryl 400 超长UVA + 温泉水"的组合，把理肤泉做成敏感肌/医美防晒信任状天花板；亮点在<b>全波段稳定、超长UVA防护、皮肤科推荐、不泛白</b>，短板在<b>部分版本含酒精、价高、国内外版本差异、国内声量弱于安热沙</b>。<span class="flag c">C·电商快照</span></div>
+  <div class="grid g3" style="margin-top:22px;">
+    <div class="card red">
+      <div class="kpi">¥139<small> –320</small></div>
+      <div class="t">50ml 价格区间 <span class="flag c">C</span></div>
+      <p style="font-size:13px;color:var(--muted);margin-top:6px;">国内渠道价差异大（约¥139-320），海外约€16-21/$35.9；官方参考中端偏上。</p>
+    </div>
+    <div class="card gold">
+      <div class="kpi red">欧莱雅</div>
+      <div class="t">集团归属 <span class="flag a">A</span></div>
+      <p style="font-size:13px;color:var(--muted);margin-top:6px;">La Roche-Posay 理肤泉属 L'Oréal 欧莱雅集团，法国药妆，皮肤科背景。</p>
+    </div>
+    <div class="card">
+      <div class="kpi red">SPF50<small> + 广谱</small></div>
+      <div class="t">防护指数 <span class="flag a">A</span></div>
+      <p style="font-size:13px;color:var(--muted);margin-top:6px;">麦色滤 XL + Mexoryl 400 超长UVA(380-400nm)，防水防汗防沙。</p>
+    </div>
+  </div>
+  <div class="src"><b>数据来源：</b>理肤泉官方/欧莱雅（A级，归属/SPF/麦色滤技术）｜海外药房/国内测评（C级，价格/版本差异）。具体浓度以备案为准。</div>
+</section>
+
+<!-- ============ P2 ============ -->
+<section class="page" id="p2">
+  <div class="pageno">02 / 10</div>
+  <span class="tag">市场全景</span>
+  <h2>防晒赛道格局：五条机理路线</h2>
+  <p class="sub">五条路线中，理肤泉代表"化学吸收（麦色滤广谱）+ 生物抗氧（温泉水）"的药妆路线，靠 Mexoryl 400 超长UVA 把防护做深，区别于户外成膜与平价物化结合。<span class="flag b">B/C</span></p>
+  <div class="tw"><table>
+    <tr><th style="width:16%">路线</th><th style="width:18%">代表</th><th style="width:24%">核心机理</th><th style="width:22%">信任状</th><th>主渠道</th></tr>
+    <tr><td><span class="y">化学吸收+生物抗氧</span></td><td>理肤泉/薇诺娜</td><td>麦色滤+温泉水/植萃</td><td>药妆/敏感肌</td><td>药妆+电商</td></tr>
+    <tr><td><span class="y">化学吸收+成膜</span></td><td>安热沙</td><td>化学剂+遇水/热成膜</td><td>资生堂/户外</td><td>电商+专柜</td></tr>
+    <tr><td><span class="y">物化结合吸收</span></td><td>蜜丝婷/欧莱雅</td><td>化学吸收+物理反射</td><td>平价/麦色滤</td><td>电商+跨境</td></tr>
+    <tr><td><span class="y">屏障修护防晒</span></td><td>玉泽</td><td>物化+仿生脂质</td><td>上海家化/屏障</td><td>电商+药店</td></tr>
+    <tr><td><span class="y">纯物理屏蔽</span></td><td>薇诺娜(部分版)</td><td>氧化锌+二氧化钛</td><td>敏感肌/无酒精</td><td>电商+药店</td></tr>
+  </table></div>
+  <div class="grid g3" style="margin-top:16px;">
+    <div class="card"><div class="t">理肤泉卡位</div><p>占"药妆广谱 + 敏感肌/医美专研"心智，靠麦色滤科技与皮肤科信任取胜。</p></div>
+    <div class="card"><div class="t">分化</div><p>安热沙偏户外成膜、蜜丝婷偏平价、怡思丁偏水感、玉泽偏屏障——理肤泉赢在"广谱药妆专业"。</p></div>
+    <div class="card"><div class="t">机会</div><p>"同麦色滤级平价 + 真无酒精稳定版 + 国内声量"带（理肤泉含酒精/价高/声量弱）是空白。<span class="flag c">C·推断</span></p></div>
+  </div>
+  <div class="src"><b>数据来源：</b>各品牌官方（A/C级，机理/渠道）｜京东/天猫（C级，价格/评价）。路线归纳为基于公开信息的横向归类。</div>
+</section>
+
+<!-- ============ P3 ============ -->
+<section class="page" id="p3">
+  <div class="pageno">03 / 10</div>
+  <span class="tag">产品定位</span>
+  <h2>定位矩阵（价格 × 防护/专业强度）</h2>
+  <p class="sub">横轴=防护/专业强度（日常通勤 → 户外强UV），纵轴=价格带。理肤泉卡位"中高价、药妆广谱专业"，与安热沙（户外）形成高端专业双雄，但理肤泉偏敏感肌/医美日常。</p>
+  <div class="matrix">
+    <div class="axis-y">价格带（低 → 高）</div>
+    <div class="axis-x">防护/专业强度（日常通勤 → 户外强UV）</div>
+    <div class="dot me" style="left:78%;top:28%;">理肤泉 139-320</div>
+    <div class="dot other" style="left:88%;top:20%;">安热沙 298</div>
+    <div class="dot other" style="left:62%;top:42%;">玉泽 128-228</div>
+    <div class="dot other" style="left:54%;top:48%;">薇诺娜 188-321</div>
+    <div class="dot other" style="left:40%;top:58%;">怡思丁 99-149</div>
+    <div class="dot other" style="left:26%;top:74%;">欧莱雅 59-130</div>
+    <div class="dot other" style="left:14%;top:84%;">蜜丝婷 59-85</div>
+  </div>
+  <div class="grid g2" style="margin-top:16px;">
+    <div class="card red"><div class="t">理肤泉占位</div><p>中高价药妆专业锚，皮肤科推荐；靠广谱，不与户外拼成膜。</p></div>
+    <div class="card gold"><div class="t">空白区</div><p>"同麦色滤级平价 + 真无酒精 + 国内声量"带（理肤泉含酒精/价高/声量弱）是差异化机会。</p></div>
+  </div>
+  <div class="src"><b>数据来源：</b>各品牌官方旗舰店价格（C级快照）｜欧莱雅信息（A级，归属）。坐标为基于公开价格的示意性卡位。</div>
+</section>
+
+<!-- ============ P4 ============ -->
+<section class="page" id="p4">
+  <div class="pageno">04 / 10</div>
+  <span class="tag">配方拆解</span>
+  <h2>核心成分 / 机理</h2>
+  <p class="sub">大哥大的核心机理：麦色滤 XL（Drometrizole Trisiloxane 7%）+ Bemotrizinol + 阿伏苯宗 + 二氧化钛（物理）全波段吸收 + Mexoryl 400 超长UVA + 温泉水/生育酚 生物抗氧，是"广谱防护 + 敏感肌舒缓"的专业组合。<span class="flag a">A/C</span></p>
+  <div class="tw"><table>
+    <tr><th style="width:20%">成分</th><th style="width:22%">角色</th><th style="width:30%">机理</th><th>备注</th></tr>
+    <tr><td>麦色滤 XL/SX</td><td>化学吸收</td><td>全波段UVA/UVB</td><td>欧莱雅专利广谱</td></tr>
+    <tr><td>Mexoryl 400</td><td>超长UVA</td><td>防护380-400nm深层</td><td>抗光老化关键</td></tr>
+    <tr><td>二氧化钛</td><td>物理反射</td><td>反射紫外线</td><td>部分版本添加</td></tr>
+    <tr><td>温泉水/生育酚</td><td>生物抗氧</td><td>舒缓+抗氧化</td><td>理肤泉温泉水</td></tr>
+    <tr><td>(部分版含酒精)</td><td>溶剂</td><td>助渗透</td><td>苯氧乙醇/酒精denat 版本差异</td></tr>
+  </table></div>
+  <div class="grid g3" style="margin-top:14px;">
+    <div class="card"><div class="t">机理完整度</div><p>麦色滤+Mexoryl 400+温泉水，广谱专业级，超长UVA是差异化。</p></div>
+    <div class="card"><div class="t">温和度</div><p>多数版本无香精/无 parabens；但海外版含酒精denat/苯氧乙醇，高敏人群需测。</p></div>
+    <div class="card"><div class="t">形态</div><p>流体乳液、速成膜、不泛白、不油光，眼科测试友好。<span class="flag c">C</span></p></div>
+  </div>
+  <div class="src"><b>数据来源：</b>理肤泉官网/欧莱雅（A级，技术/成分）｜海外药房成分表（C级，酒精denat/苯氧乙醇）。具体浓度以备案为准；国内外版本差异已标注。</div>
+</section>
+
+<!-- ============ P5 ============ -->
+<section class="page" id="p5">
+  <div class="pageno">05 / 10</div>
+  <span class="tag">价格策略</span>
+  <h2>价格带与销量</h2>
+  <p class="sub">国内 50ml 渠道价差异大（约¥139-320，版本/渠道不同），海外约€15.8-21.5/$35.9；定位中高价药妆专业锚，凭皮肤科信任稳居高端，但国内声量弱于安热沙。<span class="flag c">C</span></p>
+  <div style="background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px;">
+    <div class="bar-row"><div class="bar-name">国内参考价</div><div class="bar-track"><div class="bar-fill dim" style="width:100%">¥139-320 / 50ml 渠道差异大</div></div></div>
+    <div class="bar-row"><div class="bar-name">海外到手</div><div class="bar-track"><div class="bar-fill" style="width:40%">≈€16-21 / $35.9</div></div></div>
+    <div class="bar-row"><div class="bar-name">定位</div><div class="bar-track"><div class="bar-fill gold" style="width:64%">中高价药妆专业锚</div></div></div>
+  </div>
+  <div class="grid g3" style="margin-top:16px;">
+    <div class="card red"><div class="t">专业锚</div><p>麦色滤+皮肤科推荐，凭专业信任占中高价带，价差大但认知稳。</p></div>
+    <div class="card"><div class="t">渠道壁垒</div><p>药妆+电商+医院周边，正品与可得性强，是核心护城河。</p></div>
+    <div class="card"><div class="t">风险</div><p>含酒精版本、价高、国内外版本差异、国内声量弱于安热沙。<span class="flag c">C</span></p></div>
+  </div>
+  <div class="src"><b>数据来源：</b>理肤泉官网/欧莱雅（A级，定价/技术）｜海外药房/国内测评（C级，价格/版本快照）。以官方实时价为准。</div>
+</section>
+
+<!-- ============ P6 ============ -->
+<section class="page" id="p6">
+  <div class="pageno">06 / 10</div>
+  <span class="tag">消费者评价</span>
+  <h2>口碑横向</h2>
+  <p class="sub">正向集中在"不泛白、温和不刺激、皮肤科推荐、防护稳"；负向在"部分版本含酒精刺痛、价高、国内外版本差异、国内声量弱"。<span class="flag c">C</span></p>
+  <div class="tw"><table>
+    <tr><th style="width:15%">维度</th><th style="width:30%">正向高频词</th><th style="width:30%">负向/痛点</th><th>信号</th></tr>
+    <tr><td>功效</td><td>不泛白/防护稳/广谱</td><td>户外需补涂</td><td>日常强、户外弱</td></tr>
+    <tr><td>肤感</td><td>流体/成膜快/不油</td><td>部分版搓泥</td><td>日常友好</td></tr>
+    <tr><td>安全</td><td>药妆/皮肤科推荐</td><td>含酒精版刺痛</td><td>温和有顾虑</td></tr>
+    <tr><td>价值</td><td>专业信任/值得</td><td>价高/声量弱</td><td>溢价强</td></tr>
+  </table></div>
+  <div class="grid g2" style="margin-top:14px;">
+    <div class="card red"><div class="t">强专业 + 不泛白</div><p>麦色滤+皮肤科信任，让"敏感肌防晒"成为最常购专业入口。</p></div>
+    <div class="card gold"><div class="t">可攻击口子</div><p>"含酒精版/价高/声量弱"是清晰短板，后来者用"同麦色滤级无酒精平价版+国内声量"切。</p></div>
+  </div>
+  <div class="src"><b>数据来源：</b>海外药房/测评与社区（C级，正向/负向高频词归纳）。差评以平台个案为主，不代表整体率。</div>
+</section>
+
+<!-- ============ P7 ============ -->
+<section class="page" id="p7">
+  <div class="pageno">07 / 10</div>
+  <span class="tag">卖点拆解</span>
+  <h2>心智三轴</h2>
+  <p class="sub">信任锚（欧莱雅/药妆/皮肤科推荐）× 功效锚（麦色滤广谱+Mexoryl 400）× 场景锚（敏感肌/医美/日常通勤）。<span class="flag c">C</span></p>
+  <div class="tw"><table>
+    <tr><th style="width:16%">轴</th><th style="width:28%">内容</th><th>说明</th></tr>
+    <tr><td><span class="y">信任锚</span></td><td>欧莱雅/药妆/皮肤科</td><td>大集团+专业渠道信任</td></tr>
+    <tr><td><span class="y">功效锚</span></td><td>麦色滤+Mexoryl 400</td><td>全波段+超长UVA</td></tr>
+    <tr><td><span class="y">场景锚</span></td><td>敏感肌/医美/通勤</td><td>日常专业防护</td></tr>
+    <tr><td><span class="n">短板轴</span></td><td>含酒精/价高/声量弱</td><td>温和与声量是缺口</td></tr>
+  </table></div>
+  <div class="quote" style="margin-top:16px;"><span class="q">洞察：</span>理肤泉的信任锚来自"欧莱雅 + 药妆 + 皮肤科推荐 + 麦色滤"，而非温和与声量；它把"广谱专业"守住了，把"真无酒精稳定版、价格门槛、国内声量"留给了后来者——用同麦色滤级 + 换温和/换声量即可切。<span class="flag c">C·策略推断</span></div>
+  <div class="src"><b>数据来源：</b>理肤泉官方与欧莱雅（A/C级，信任/功效/场景）｜商品页（C级，成分/评价）。三轴为我按"×交叉拆解"格式提炼。</div>
+</section>
+
+<!-- ============ P8 ============ -->
+<section class="page" id="p8">
+  <div class="pageno">08 / 10</div>
+  <span class="tag">痛点与机会</span>
+  <h2>空白 = 你的机会</h2>
+  <p class="sub">把理肤泉的短板轴与赛道空白叠加，得到可切入的切口。</p>
+  <div class="tw"><table>
+    <tr><th style="width:26%">赛道级空白</th><th>对应短板</th><th>你的切口</th></tr>
+    <tr><td><span class="n">同麦色滤级平价</span></td><td>理肤泉价高</td><td><span class="y">平价麦色滤版</span></td></tr>
+    <tr><td><span class="n">真无酒精稳定版</span></td><td>理肤泉含酒精版</td><td><span class="y">无酒精广谱版</span></td></tr>
+    <tr><td><span class="n">国内声量</span></td><td>理肤泉声量弱</td><td><span class="y">国货药妆声量</span></td></tr>
+    <tr><td><span class="n">医美后友好</span></td><td>部分版刺激</td><td><span class="y">医美后专用</span></td></tr>
+  </table></div>
+  <div class="newzone">
+    <div class="zh">▍对标转化路径（换剂型 / 换包装 / 换场景）</div>
+    <div class="tw"><table>
+      <tr><th style="width:20%">对标对象</th><th style="width:18%">换剂型</th><th style="width:18%">换包装</th><th>切入空白</th></tr>
+      <tr><td>理肤泉</td><td>无酒精麦色滤版</td><td>国货药妆视觉</td><td>平价广谱温和</td></tr>
+      <tr><td>安热沙</td><td>药妆日常版</td><td>敏感肌视觉</td><td>药妆通勤</td></tr>
+      <tr><td>蜜丝婷</td><td>麦色滤版</td><td>年轻视觉</td><td>平价广谱</td></tr>
+      <tr><td>怡思丁</td><td>无香精版</td><td>学生视觉</td><td>平价水感无致敏</td></tr>
+      <tr><td>玉泽</td><td>清爽不黏版</td><td>年轻化视觉</td><td>屏障广谱</td></tr>
+    </table></div>
+  </div>
+  <div class="src"><b>数据来源：</b>理肤泉官方（A/C级，短板）｜各平台评价（C级，痛点）。空白与对标转化为基于公开事实的策略推断。</div>
+</section>
+
+<!-- ============ P9 ============ -->
+<section class="page" id="p9">
+  <div class="pageno">09 / 10</div>
+  <span class="tag">产品启示</span>
+  <h2>如果做新锐防晒品牌，怎么打？</h2>
+  <p class="sub">不打理肤泉的"药妆专业 + 麦色滤"正面战场，而是用"同广谱级 + 空白温和/声量"切入。五条可执行策略：</p>
+  <ol class="listnum">
+    <li><b>同麦色滤级平价。</b>承接"广谱专业"心智，做无酒精平价麦色滤版，正面回应理肤泉价高痛点。</li>
+    <li><b>真无酒精稳定版。</b>用无酒精配方补理肤泉"含酒精版刺痛"短板，把温和信任做成广谱带差异点。</li>
+    <li><b>国货药妆声量。</b>补理肤泉"国内声量弱"缺口，做国货药妆内容声量。</li>
+    <li><b>医美后专用。</b>补"部分版刺激"缺口，做医美后温和专用线。</li>
+    <li><b>机理组合创新。</b>在麦色滤之上加屏障/养肤，从"防护"升级为"防护+修护"双效。</li>
+  </ol>
+  <div class="src"><b>说明：</b>以上为基于理肤泉公开竞争态势的"我方（假设为新锐防晒品牌）"策略推断，非任何品牌官方信息。我方定位/价格/渠道需结合实际业务定义。</div>
+</section>
+
+<!-- ============ P10 ============ -->
+<section class="page" id="p10">
+  <div class="pageno">10 / 10</div>
+  <span class="tag">总结 + 来源</span>
+  <h2>一句话总结</h2>
+  <div class="quote"><span class="q">理肤泉大哥大给后来者的启示：</span>它证明"麦色滤广谱 + Mexoryl 400 超长UVA + 药妆信任"能占死敏感肌防晒心智，但它把"广谱专业"守住了，把"真无酒精稳定版、价格门槛、国内声量、医美后友好"留给了后来者——切口从不在专业腹地，而在"同广谱级、换温和/换声量/换场景"的空白里。</div>
+
+  <h3 style="margin-top:18px;">数据来源与置信度清单</h3>
+  <div class="tw"><table>
+    <tr><th style="width:42%">来源</th><th style="width:12%">级别</th><th>用于本报告的结论</th></tr>
+    <tr><td>理肤泉官网/欧莱雅</td><td><span class="y">A</span></td><td>归属(欧莱雅)/SPF50+广谱/麦色滤XL+SX+Mexoryl 400技术</td></tr>
+    <tr><td>海外药房成分表/国内测评</td><td>C</td><td>价格(¥139-320/海外€16-21)/酒精denat/苯氧乙醇版本差异</td></tr>
+  </table></div>
+  <div class="src"><b>置信度说明：</b>A=官方/欧莱雅；C=海外药房/平台快照/达人内容（波动大、存个案偏差）。"含酒精版/版本差异"为公开信息冲突点，已标注待核；价格/评分为电商快照，随促销波动。本报告不构成投资或购买建议。</div>
+</section>
+
+<div class="foot">竞品分析情报网 · EP.33 理肤泉 Anthelios 大哥大 防晒 ｜ 防晒赛道 · 药妆广谱麦色滤 ｜ 数据截至 2026-08 公开资料整理 ｜ 内容仅供产品研究与求职作品集使用</div>
+
+</body>
+</html>
