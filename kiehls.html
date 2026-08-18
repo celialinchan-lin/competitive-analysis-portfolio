@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>竞品分析情报网 · EP.28｜科颜氏 Kiehl's 控油</title>
+<style>
+  :root{
+    --red:#9F1239; --red-deep:#5E0B22; --gold:#D98A6A; --gold-light:#F0C9B8;
+    --bg:#160A0C; --bg2:#221012; --card:#2E161A; --card2:#3E1E24;
+    --text:#F6E9E9; --muted:#C09A9E; --line:#3E1E24; --good:#C77B5C; --bad:#E08B9B;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{background:var(--bg);color:var(--text);font-family:"PingFang SC","Microsoft YaHei",-apple-system,sans-serif;line-height:1.6;font-size:15px;}
+  .page{width:100%;max-width:920px;margin:0 auto;min-height:100vh;padding:54px 40px 40px;display:flex;flex-direction:column;justify-content:flex-start;border-bottom:1px solid var(--line);position:relative;}
+  .pageno{position:absolute;top:22px;right:40px;font-size:12px;color:var(--gold);letter-spacing:2px;font-weight:700;}
+  .tag{display:inline-block;background:var(--red);color:#fff;font-size:12px;padding:3px 12px;border-radius:20px;letter-spacing:1px;margin-bottom:14px;font-weight:700;}
+  h1{font-size:38px;line-height:1.25;font-weight:800;letter-spacing:1px;margin-bottom:8px;}
+  h2{font-size:26px;font-weight:800;margin-bottom:6px;color:var(--gold-light);}
+  h3{font-size:18px;font-weight:800;color:var(--text);margin:18px 0 8px;}
+  .sub{color:var(--muted);font-size:14px;margin-bottom:20px;}
+  .src{margin-top:auto;padding-top:18px;font-size:11px;color:var(--muted);border-top:1px dashed var(--line);}
+  .src b{color:var(--gold-light);}
+  .grid{display:grid;gap:14px;}
+  .g3{grid-template-columns:repeat(3,1fr);}
+  .g2{grid-template-columns:repeat(2,1fr);}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 16px;}
+  .card.red{border-left:4px solid var(--red);}
+  .card.gold{border-left:4px solid var(--gold);}
+  .kpi{font-size:32px;font-weight:800;color:var(--gold);line-height:1.1;}
+  .kpi.red{color:var(--red);}
+  .kpi small{font-size:13px;color:var(--muted);font-weight:400;}
+  .card .t{font-size:13px;color:var(--muted);margin-bottom:6px;}
+  .pill{display:inline-block;background:var(--card2);border:1px solid var(--line);border-radius:8px;padding:4px 10px;font-size:12px;margin:3px 4px 3px 0;color:var(--text);}
+  .pill.good{background:rgba(199,123,92,.15);border-color:var(--good);color:var(--good);}
+  .pill.bad{background:rgba(224,139,155,.15);border-color:var(--bad);color:var(--bad);}
+  .pill.gold{background:rgba(217,138,106,.14);border-color:var(--gold);color:var(--gold-light);}
+  .pill.new{background:rgba(217,138,106,.22);border-color:var(--gold);color:#F5E4D6;font-weight:700;}
+  .bar-row{display:flex;align-items:center;margin:7px 0;font-size:13px;}
+  .bar-name{width:108px;flex-shrink:0;color:var(--text);text-align:right;padding-right:10px;}
+  .bar-track{flex:1;background:var(--bg2);border-radius:6px;height:22px;overflow:hidden;position:relative;}
+  .bar-fill{height:100%;border-radius:6px;background:linear-gradient(90deg,var(--red-deep),var(--red));display:flex;align-items:center;justify-content:flex-end;padding-right:8px;font-size:11px;color:#fff;font-weight:700;}
+  .bar-fill.gold{background:linear-gradient(90deg,#5e0b22,var(--gold));color:#160A0C;}
+  .bar-fill.dim{background:linear-gradient(90deg,#3e1e24,#6b2a30);}
+  .matrix{position:relative;width:100%;height:380px;background:var(--bg2);border:1px solid var(--line);border-radius:14px;margin-top:8px;}
+  .axis-x{position:absolute;bottom:8px;width:100%;text-align:center;font-size:12px;color:var(--muted);}
+  .axis-y{position:absolute;left:8px;top:0;height:100%;writing-mode:vertical-rl;font-size:12px;color:var(--muted);}
+  .dot{position:absolute;transform:translate(-50%,-50%);padding:5px 10px;border-radius:20px;font-size:12px;font-weight:700;white-space:nowrap;}
+  .dot.me{background:var(--red);color:#fff;border:2px solid var(--gold);}
+  .dot.other{background:var(--card2);color:var(--text);border:1px solid var(--line);}
+  .cloud{display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px;padding:14px;background:var(--bg2);border-radius:14px;}
+  .cloud span{padding:3px 10px;border-radius:8px;line-height:1.5;}
+  .s1{font-size:13px;} .s2{font-size:16px;} .s3{font-size:20px;} .s4{font-size:25px;}
+  .cgood{background:rgba(199,123,92,.13);color:var(--good);}
+  .cbad{background:rgba(224,139,155,.13);color:var(--bad);}
+  .ctheme{font-size:15px;color:var(--gold-light);background:rgba(217,138,106,.1);padding:6px 14px;border-radius:10px;font-weight:700;}
+  .quote{border-left:3px solid var(--gold);padding:10px 16px;background:var(--card);border-radius:0 10px 10px 0;font-size:15px;color:var(--text);margin:10px 0;}
+  .quote .q{color:var(--gold-light);font-weight:800;}
+  table{width:100%;border-collapse:collapse;font-size:13px;margin-top:8px;}
+  th,td{border:1px solid var(--line);padding:9px 10px;text-align:left;vertical-align:top;}
+  th{background:var(--card2);color:var(--gold-light);font-weight:700;}
+  td .y{color:var(--good);} td .n{color:var(--bad);}
+  .listnum{counter-reset:l;list-style:none;}
+  .listnum li{counter-increment:l;position:relative;padding:12px 14px 12px 52px;background:var(--card);border:1px solid var(--line);border-radius:12px;margin-bottom:10px;}
+  .listnum li::before{content:counter(l);position:absolute;left:14px;top:12px;width:26px;height:26px;background:var(--red);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;}
+  .listnum li b{color:var(--gold-light);}
+  .foot{text-align:center;font-size:12px;color:var(--muted);padding:26px;}
+  .foot b{color:var(--gold-light);}
+  .flag{font-size:11px;padding:1px 6px;border-radius:5px;background:var(--card2);color:var(--muted);margin-left:4px;}
+  .flag.a{color:var(--good);} .flag.b{color:var(--gold-light);} .flag.c{color:var(--bad);}
+  .newzone{border:1px dashed var(--gold);border-radius:14px;padding:14px 16px;margin-top:14px;background:rgba(217,138,106,.06);}
+  .newzone .zh{font-size:13px;color:var(--gold-light);font-weight:800;margin-bottom:8px;}
+
+  @media (max-width:820px){
+    .page{min-height:100dvh;padding:24px 18px 40px;}
+    .pageno{top:14px;right:16px;}
+    h1{font-size:25px;}
+    h2{font-size:21px;}
+    h3{font-size:16px;}
+    .sub{font-size:13px;margin-bottom:14px;}
+    .g3,.g2{grid-template-columns:1fr;}
+    .card{padding:15px 13px;}
+    .kpi{font-size:24px;}
+    .bar-name{width:74px;font-size:11px;padding-right:6px;}
+    .bar-track{height:20px;}
+    .bar-fill{font-size:10px;padding-right:5px;}
+    .matrix{height:320px;}
+    .dot{font-size:11px;padding:4px 8px;}
+    .cloud{padding:12px 10px;gap:5px 6px;}
+    .s1{font-size:12px;} .s2{font-size:14px;} .s3{font-size:17px;} .s4{font-size:21px;}
+    table{font-size:12px;}
+    th,td{padding:7px 8px;}
+    .quote{font-size:14px;padding:9px 13px;}
+    .listnum li{padding:11px 12px 11px 46px;}
+    .listnum li::before{left:12px;width:24px;height:24px;font-size:13px;}
+    .src{font-size:10px;}
+    .flag{font-size:10px;}
+  }
+  .page{overflow-x:hidden;}
+  .tw{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:10px 0;}
+  .tw table{min-width:640px;}
+  @media (max-width:820px){
+    .bar-row,.bar{flex-direction:column;align-items:stretch;margin:11px 0;}
+    .bar-name{width:auto !important;flex-shrink:1;text-align:left !important;padding-right:0;font-size:12.5px;line-height:1.4;}
+    .bar-track{width:100%;}
+    .bar-fill{min-width:60px;}
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ P1 ============ -->
+<section class="page" id="p1">
+  <div class="pageno">01 / 10</div>
+  <span class="tag">EP.28 · 科颜氏 Kiehl's</span>
+  <h1>科颜氏 金盏花水<br>高端植萃控油的"经典大单品"标杆</h1>
+  <p class="sub">欧莱雅集团旗下美国高端护肤（1851 年创立于纽约），针对油痘肌的明星爽肤水。核心用<b>金盏花提取物 + 牛蒡根 + 尿囊素 + 洋甘菊/芦荟</b>，把"舒缓镇静 + 调节水油 + 收细毛孔"做进一瓶无酒精水，是高端植物控油的心智第一梯队，靠"湿敷文化"长青。</p>
+  <div class="quote"><span class="q">一句话结论：</span>金盏花水用"金盏花 + 牛蒡植物舒缓调水油"的高端植萃路线，把科颜氏的药房血统做成"油痘肌经典水"；亮点在<b>无酒精温和、经典大单品、湿敷文化、高端信任</b>，短板在<b>控油偏温和非强效、官方价高（250ml≈¥315）、渠道价差极大</b>。<span class="flag c">C·电商快照</span></div>
+  <div class="grid g3" style="margin-top:22px;">
+    <div class="card red">
+      <div class="kpi">250<small> ml</small></div>
+      <div class="t">经典装规格 <span class="flag a">A</span></div>
+      <p style="font-size:13px;color:var(--muted);margin-top:6px;">备案苏G妆网备字2025005130（国产版，苏州尚美生产）；另有125/500ml。</p>
+    </div>
+    <div class="card gold">
+      <div class="kpi red">¥315<small> 起</small></div>
+      <div class="t">官方 250ml 价 <span class="flag c">C</span></div>
+      <p style="font-size:13px;color:var(--muted);margin-top:6px;">天猫官方¥315–335；识货全网最低¥110（拼多多/淘宝），价差极大。</p>
+    </div>
+    <div class="card">
+      <div class="kpi red">7万<small> +</small></div>
+      <div class="t">识货总销量 <span class="flag c">C</span></div>
+      <p style="font-size:13px;color:var(--muted);margin-top:6px;">金盏花系列销量榜NO.1，经典大单品长青。</p>
+    </div>
+  </div>
+  <div class="src"><b>数据来源：</b>欧莱雅集团/科颜氏官方（A级，归属/品牌血统/备案）｜天猫/识货/香港mall（C级，价格/销量快照）。价格差异极大，以官方实时价为准。</div>
+</section>
+
+<!-- ============ P2 ============ -->
+<section class="page" id="p2">
+  <div class="pageno">02 / 10</div>
+  <span class="tag">市场全景</span>
+  <h2>控油赛道格局：五条机理路线</h2>
+  <p class="sub">控油五条路线中，科颜氏代表"植物控油收敛"的高端植萃路线，靠经典信任与湿敷文化取胜，与悦诗风吟（平价植萃）形成高低配。<span class="flag b">B/C</span></p>
+  <div class="tw"><table>
+    <tr><th style="width:18%">路线</th><th style="width:15%">代表</th><th style="width:22%">核心机理</th><th style="width:22%">信任状</th><th>主渠道</th></tr>
+    <tr><td><span class="y">植物控油收敛(高端)</span></td><td>科颜氏</td><td>金盏花+牛蒡调水油</td><td>高端/药房血统</td><td>专柜+电商</td></tr>
+    <tr><td><span class="y">植物控油收敛(平价)</span></td><td>悦诗风吟</td><td>绿茶多酚+金盏花</td><td>韩系/学生</td><td>电商+专柜</td></tr>
+    <tr><td><span class="y">BHA溶角栓</span></td><td>薇姿/露得清</td><td>水杨酸溶角栓</td><td>药妆/开架</td><td>药妆+电商</td></tr>
+    <tr><td><span class="y">物理吸附</span></td><td>旁氏(竹炭)</td><td>竹炭吸油</td><td>平价/基础</td><td>商超+电商</td></tr>
+    <tr><td><span class="y">温度控温</span></td><td>花印(薄荷醇)</td><td>薄荷醇清凉控温</td><td>日系/年轻</td><td>屈臣氏+电商</td></tr>
+  </table></div>
+  <div class="grid g3" style="margin-top:16px;">
+    <div class="card"><div class="t">科颜氏卡位</div><p>占"高端植物控油 + 经典大单品"心智，靠药房血统与湿敷文化长青。</p></div>
+    <div class="card"><div class="t">分化</div><p>悦诗风吟偏平价学生、薇姿偏药妆、旁氏偏物理、花印偏清凉——科颜氏赢在高端与经典。</p></div>
+    <div class="card"><div class="t">机会</div><p>"高端植物控油 + 透明价 + 功效验证"带（科颜氏价高、偏温和）是空白。<span class="flag c">C·推断</span></p></div>
+  </div>
+  <div class="src"><b>数据来源：</b>各品牌官方（A/C级，机理/渠道）｜天猫/识货（C级，价格/销量）。路线归纳为基于公开信息的横向归类。</div>
+</section>
+
+<!-- ============ P3 ============ -->
+<section class="page" id="p3">
+  <div class="pageno">03 / 10</div>
+  <span class="tag">产品定位</span>
+  <h2>定位矩阵（价格 × 控油/专业强度）</h2>
+  <p class="sub">横轴=控油/专业强度（基础保湿控油 → 复合微生态），纵轴=价格带。科颜氏卡位"高端、经典、温和植萃"，是控油赛道的价格天花板之一，与悦诗风吟（平价植萃）高低配。</p>
+  <div class="matrix">
+    <div class="axis-y">价格带（低 → 高）</div>
+    <div class="axis-x">控油/专业强度（基础保湿控油 → 复合微生态）</div>
+    <div class="dot me" style="left:74%;top:30%;">科颜氏 110-335</div>
+    <div class="dot other" style="left:18%;top:80%;">旁氏 15-30</div>
+    <div class="dot other" style="left:28%;top:70%;">露得清 39-46</div>
+    <div class="dot other" style="left:44%;top:52%;">薇姿 150-300</div>
+    <div class="dot other" style="left:58%;top:48%;">悦诗风吟 129-240</div>
+    <div class="dot other" style="left:42%;top:58%;">花印 49-69</div>
+  </div>
+  <div class="grid g2" style="margin-top:16px;">
+    <div class="card red"><div class="t">科颜氏占位</div><p>高端经典植萃，价格天花板；靠信任与湿敷文化而非机理强度，不与中端拼复合。</p></div>
+    <div class="card gold"><div class="t">空白区</div><p>"高端植物控油 + 透明价 + 可验证功效"带（科颜氏价高、偏温和、价差乱）是差异化机会。</p></div>
+  </div>
+  <div class="src"><b>数据来源：</b>各品牌官方旗舰店价格（C级快照）｜欧莱雅信息（A级，归属）。坐标为基于公开价格的示意性卡位。</div>
+</section>
+
+<!-- ============ P4 ============ -->
+<section class="page" id="p4">
+  <div class="pageno">04 / 10</div>
+  <span class="tag">配方拆解</span>
+  <h2>核心成分 / 机理</h2>
+  <p class="sub">金盏花水的核心机理：金盏花 + 牛蒡舒缓抗炎、调节水油 + 尿囊素修护 + 无酒精，是"温和调水油"的高端植萃路线。<span class="flag a">A/C</span></p>
+  <div class="tw"><table>
+    <tr><th style="width:20%">成分</th><th style="width:22%">角色</th><th style="width:30%">机理</th><th>备注</th></tr>
+    <tr><td>金盏花提取物</td><td>舒缓调油</td><td>舒缓镇静、调节水油、收细毛孔</td><td>核心灵魂成分</td></tr>
+    <tr><td>牛蒡根</td><td>舒缓</td><td>温和舒缓、改善干燥</td><td>植物辅助</td></tr>
+    <tr><td>尿囊素</td><td>修护</td><td>舒缓抗炎、修护屏障</td><td>紫草衍生</td></tr>
+    <tr><td>洋甘菊/芦荟</td><td>舒缓保湿</td><td>镇静、补水</td><td>无酒精配方</td></tr>
+    <tr><td>无酒精/无香精</td><td>温和</td><td>降低刺激</td><td>敏感肌可用</td></tr>
+  </table></div>
+  <div class="grid g3" style="margin-top:14px;">
+    <div class="card"><div class="t">机理完整度</div><p>舒缓+调油+修护三效，植萃温和路线，非化学强效（无酸/锌/BHA）。</p></div>
+    <div class="card"><div class="t">温和度顶级</div><p>无酒精无香精、不致粉刺，油痘肌/敏感肌可用，是核心信任。</p></div>
+    <div class="card"><div class="t">形态短板</div><p>以水形态为主，控油偏"日常平衡"非"强效祛痘"，功效天花板低。<span class="flag c">C</span></p></div>
+  </div>
+  <div class="src"><b>数据来源：</b>淘宝百科/香港mall 成分（C级）｜科颜氏官方（C级，宣称）｜备案苏G妆网备字2025005130（A级，国产版合规）。具体成分以备案为准。</div>
+</section>
+
+<!-- ============ P5 ============ -->
+<section class="page" id="p5">
+  <div class="pageno">05 / 10</div>
+  <span class="tag">价格策略</span>
+  <h2>价格带与销量</h2>
+  <p class="sub">官方 250ml ¥315–335；识货全网 ¥110–160（拼多多/淘宝最低¥110），香港mall HK$209/250ml。经典大单品，识货总销 7万+，金盏花系列销量榜 NO.1。高端定价但渠道价差极大。<span class="flag c">C</span></p>
+  <div style="background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px;">
+    <div class="bar-row"><div class="bar-name">官方 250ml(天猫)</div><div class="bar-track"><div class="bar-fill dim" style="width:100%">¥315–335 / 销量榜NO.1</div></div></div>
+    <div class="bar-row"><div class="bar-name">识货最低(拼多多)</div><div class="bar-track"><div class="bar-fill" style="width:54%">≈¥110 / 总销7万+</div></div></div>
+    <div class="bar-row"><div class="bar-name">香港mall 250ml</div><div class="bar-track"><div class="bar-fill gold" style="width:48%">HK$209</div></div></div>
+  </div>
+  <div class="grid g3" style="margin-top:16px;">
+    <div class="card red"><div class="t">经典溢价</div><p>高端药房信任 + 湿敷文化，支撑 250ml≈¥315 溢价，长青大单品。</p></div>
+    <div class="card"><div class="t">价差乱象</div><p>官方¥315 vs 拼多多¥110，价差近 3 倍，价格信任与正品焦虑并存。</p></div>
+    <div class="card"><div class="t">风险</div><p>控油偏温和非强效，新客易被"平价替代"分流；价差伤统一感知。<span class="flag c">C</span></p></div>
+  </div>
+  <div class="src"><b>数据来源：</b>天猫/识货/香港mall（C级，价格/销量快照）。以官方实时价为准；价差源于渠道与版本差异。</div>
+</section>
+
+<!-- ============ P6 ============ -->
+<section class="page" id="p6">
+  <div class="pageno">06 / 10</div>
+  <span class="tag">消费者评价</span>
+  <h2>口碑横向</h2>
+  <p class="sub">正向集中在"温和不刺激、湿敷舒服、调节水油、经典安心"；负向在"控油偏弱、价高、渠道价差乱、个别版本味道争议"。<span class="flag c">C</span></p>
+  <div class="tw"><table>
+    <tr><th style="width:15%">维度</th><th style="width:30%">正向高频词</th><th style="width:30%">负向/痛点</th><th>信号</th></tr>
+    <tr><td>功效</td><td>湿敷舒服/水油平衡</td><td>控油偏弱/祛痘有限</td><td>平衡强、强效弱</td></tr>
+    <tr><td>肤感</td><td>清爽/不闷痘</td><td>油皮夏天不够力</td><td>温和日常友好</td></tr>
+    <tr><td>安全</td><td>无酒精安心/经典</td><td>渠道价差/正品焦虑</td><td>信任强、价乱</td></tr>
+    <tr><td>价值</td><td>大瓶耐用/经典</td><td>官方价高</td><td>溢价靠信任</td></tr>
+  </table></div>
+  <div class="grid g2" style="margin-top:14px;">
+    <div class="card red"><div class="t">强经典 + 温和</div><p>药房血统 + 无酒精 + 湿敷文化，让"经典温和控油水"成为最强正向口碑。</p></div>
+    <div class="card gold"><div class="t">可攻击口子</div><p>"控油偏弱/价高/价差乱"是清晰短板，后来者用"同温和 + 透明价 + 可验证控油"切。</p></div>
+  </div>
+  <div class="src"><b>数据来源：</b>天猫/识货商品页与社区（C级，正向/负向高频词归纳）。差评以平台个案为主，不代表整体率。</div>
+</section>
+
+<!-- ============ P7 ============ -->
+<section class="page" id="p7">
+  <div class="pageno">07 / 10</div>
+  <span class="tag">卖点拆解</span>
+  <h2>心智三轴</h2>
+  <p class="sub">信任锚（欧莱雅/药房血统/经典）× 功效锚（金盏花+牛蒡调水油）× 场景锚（油痘肌湿敷日常）。<span class="flag c">C</span></p>
+  <div class="tw"><table>
+    <tr><th style="width:16%">轴</th><th style="width:28%">内容</th><th>说明</th></tr>
+    <tr><td><span class="y">信任锚</span></td><td>欧莱雅 / 1851药房 / 经典大单品</td><td>高端药房信任，强但价高</td></tr>
+    <tr><td><span class="y">功效锚</span></td><td>金盏花 + 牛蒡</td><td>植萃舒缓调油，非化学强效</td></tr>
+    <tr><td><span class="y">场景锚</span></td><td>油痘肌 / 湿敷 / 日常</td><td>经典水形态</td></tr>
+    <tr><td><span class="n">短板轴</span></td><td>价高/价差乱/控油温和</td><td>透明价与强效是缺口</td></tr>
+  </table></div>
+  <div class="quote" style="margin-top:16px;"><span class="q">洞察：</span>科颜氏的信任锚极硬（药房血统 + 经典），但它把"经典与温和"守住了，把"透明统一价、可验证控油功效、年轻化形态"留给了后来者——用同温和 + 换透明价/换功效验证即可切。<span class="flag c">C·策略推断</span></div>
+  <div class="src"><b>数据来源：</b>科颜氏官方与欧莱雅（A/C级，信任/功效/场景）｜商品页（C级，成分/评价）。三轴为我按"×交叉拆解"格式提炼。</div>
+</section>
+
+<!-- ============ P8 ============ -->
+<section class="page" id="p8">
+  <div class="pageno">08 / 10</div>
+  <span class="tag">痛点与机会</span>
+  <h2>空白 = 你的机会</h2>
+  <p class="sub">把科颜氏的短板轴与赛道空白叠加，得到可切入的切口。</p>
+  <div class="tw"><table>
+    <tr><th style="width:26%">赛道级空白</th><th>对应短板</th><th>你的切口</th></tr>
+    <tr><td><span class="n">透明统一价</span></td><td>科颜氏价差近3倍</td><td><span class="y">DTC统一价+正品溯源</span></td></tr>
+    <tr><td><span class="n">温和可验证控油</span></td><td>科颜氏控油温和</td><td><span class="y">无酒精+控油临床</span></td></tr>
+    <tr><td><span class="n">年轻化形态</span></td><td>科颜氏偏经典</td><td><span class="y">年轻化控油水/精华</span></td></tr>
+    <tr><td><span class="n">高端平价替代</span></td><td>科颜氏价高</td><td><span class="y">轻奢植物控油</span></td></tr>
+  </table></div>
+  <div class="newzone">
+    <div class="zh">▍对标转化路径（换剂型 / 换包装 / 换场景）</div>
+    <div class="tw"><table>
+      <tr><th style="width:20%">对标对象</th><th style="width:18%">换剂型</th><th style="width:18%">换包装</th><th>切入空白</th></tr>
+      <tr><td>科颜氏</td><td>控油微生态水</td><td>年轻化视觉</td><td>轻奢透明价控油</td></tr>
+      <tr><td>悦诗风吟</td><td>高端植萃版</td><td>轻奢视觉</td><td>高端植萃控油</td></tr>
+      <tr><td>薇姿</td><td>植萃+锌</td><td>敏感肌视觉</td><td>植萃调皮脂</td></tr>
+      <tr><td>旁氏</td><td>氨基酸+植萃</td><td>悦己视觉</td><td>温和平价控油</td></tr>
+      <tr><td>花印</td><td>无薄荷植萃</td><td>悦己视觉</td><td>非清凉控油</td></tr>
+    </table></div>
+  </div>
+  <div class="src"><b>数据来源：</b>科颜氏官方（A/C级，短板）｜各平台评价（C级，痛点）。空白与对标转化为基于公开事实的策略推断。</div>
+</section>
+
+<!-- ============ P9 ============ -->
+<section class="page" id="p9">
+  <div class="pageno">09 / 10</div>
+  <span class="tag">产品启示</span>
+  <h2>如果做新锐控油品牌，怎么打？</h2>
+  <p class="sub">不打科颜氏的"高端经典 + 药房信任"正面战场，而是用"同温和 + 空白透明价/功效验证/年轻化"切入。五条可执行策略：</p>
+  <ol class="listnum">
+    <li><b>同温和、透明统一价。</b>承接"无酒精植物控油"心智，做 DTC 统一价 + 正品溯源，正面补科颜氏价差近 3 倍的短板。</li>
+    <li><b>温和 + 可验证控油。</b>用独立临床数据补科颜氏"控油温和"短板，把信任做成可验证差异点。</li>
+    <li><b>年轻化形态。</b>做轻量化控油水/精华，抢"经典偏成熟"之外的年轻客群。</li>
+    <li><b>轻奢植物控油。</b>在平价植萃（悦诗风吟）与高端（科颜氏）之间卡"轻奢透明价"带。</li>
+    <li><b>机理组合创新。</b>金盏花+烟酰胺/锌，做"植萃舒缓+调皮脂"双效，突破纯植萃天花板。</li>
+  </ol>
+  <div class="src"><b>说明：</b>以上为基于科颜氏公开竞争态势的"我方（假设为新锐控油品牌）"策略推断，非任何品牌官方信息。我方定位/价格/渠道需结合实际业务定义。</div>
+</section>
+
+<!-- ============ P10 ============ -->
+<section class="page" id="p10">
+  <div class="pageno">10 / 10</div>
+  <span class="tag">总结 + 来源</span>
+  <h2>一句话总结</h2>
+  <div class="quote"><span class="q">科颜氏金盏花水给后来者的启示：</span>它证明"高端药房信任 + 植物温和 + 湿敷文化"能撑起长青大单品，但它把"经典与温和"守住了，把"透明统一价、可验证控油功效、年轻化形态、轻奢价位"留给了后来者——切口从不在经典腹地，而在"同温和、换透明价/换功效验证/换年轻化"的空白里。</div>
+
+  <h3 style="margin-top:18px;">数据来源与置信度清单</h3>
+  <div class="tw"><table>
+    <tr><th style="width:42%">来源</th><th style="width:12%">级别</th><th>用于本报告的结论</th></tr>
+    <tr><td>欧莱雅集团/科颜氏官方</td><td><span class="y">A</span></td><td>品牌归属/1851药房血统/备案苏G妆网备字2025005130</td></tr>
+    <tr><td>天猫/识货/香港mall</td><td>C</td><td>价格(¥110–335)/销量(总销7万+/榜NO.1)/规格250ml</td></tr>
+    <tr><td>淘宝百科/香港mall 成分</td><td>C</td><td>金盏花/牛蒡/尿囊素/无酒精配方</td></tr>
+    <tr><td>品牌官网</td><td>B/C</td><td>舒缓/调水油/收细毛孔宣称(claim)</td></tr>
+  </table></div>
+  <div class="src"><b>置信度说明：</b>A=公司公告/官方/备案；B=官网技术科普/认证；C=平台快照/达人内容（波动大、存个案偏差）。"湿敷文化/销量榜NO.1"等为渠道与社区表述；价格差异源于渠道与版本（进口/国产/限定），以官方实时价为准。本报告不构成投资或购买建议。</div>
+</section>
+
+<div class="foot">竞品分析情报网 · EP.28 科颜氏 Kiehl's 金盏花水 ｜ 控油赛道 · 高端植萃控油 ｜ 数据截至 2026-08 公开资料整理 ｜ 内容仅供产品研究与求职作品集使用</div>
+
+</body>
+</html>

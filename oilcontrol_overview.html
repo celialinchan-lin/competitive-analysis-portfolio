@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>竞品分析情报网 · 专题｜控油赛道总览</title>
+<style>
+  :root{
+    --red:#B8323A; --red-deep:#7A1E25; --gold:#E0894B; --gold-light:#F1C9A5;
+    --bg:#160A0C; --bg2:#201113; --card:#2A1518; --card2:#3A2024;
+    --text:#F4E9E9; --muted:#B89A9E; --line:#3A2024; --good:#C77B5C; --bad:#E08B9B;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{background:var(--bg);color:var(--text);font-family:"PingFang SC","Microsoft YaHei",-apple-system,sans-serif;line-height:1.6;font-size:15px;}
+  .page{width:100%;max-width:920px;margin:0 auto;min-height:100vh;padding:54px 40px 40px;display:flex;flex-direction:column;justify-content:flex-start;border-bottom:1px solid var(--line);position:relative;}
+  .pageno{position:absolute;top:22px;right:40px;font-size:12px;color:var(--gold);letter-spacing:2px;font-weight:700;}
+  .tag{display:inline-block;background:var(--red);color:#fff;font-size:12px;padding:3px 12px;border-radius:20px;letter-spacing:1px;margin-bottom:14px;font-weight:700;}
+  h1{font-size:38px;line-height:1.25;font-weight:800;letter-spacing:1px;margin-bottom:8px;}
+  h2{font-size:26px;font-weight:800;margin-bottom:6px;color:var(--gold-light);}
+  h3{font-size:18px;font-weight:800;color:var(--text);margin:18px 0 8px;}
+  .sub{color:var(--muted);font-size:14px;margin-bottom:20px;}
+  .src{margin-top:auto;padding-top:18px;font-size:11px;color:var(--muted);border-top:1px dashed var(--line);}
+  .src b{color:var(--gold-light);}
+  .grid{display:grid;gap:14px;}
+  .g3{grid-template-columns:repeat(3,1fr);}
+  .g2{grid-template-columns:repeat(2,1fr);}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 16px;}
+  .card.red{border-left:4px solid var(--red);}
+  .card.gold{border-left:4px solid var(--gold);}
+  .kpi{font-size:32px;font-weight:800;color:var(--gold);line-height:1.1;}
+  .kpi.red{color:var(--red);}
+  .kpi small{font-size:13px;color:var(--muted);font-weight:400;}
+  .card .t{font-size:13px;color:var(--muted);margin-bottom:6px;}
+  .pill{display:inline-block;background:var(--card2);border:1px solid var(--line);border-radius:8px;padding:4px 10px;font-size:12px;margin:3px 4px 3px 0;color:var(--text);}
+  .pill.good{background:rgba(199,123,92,.15);border-color:var(--good);color:var(--good);}
+  .pill.bad{background:rgba(224,139,155,.15);border-color:var(--bad);color:var(--bad);}
+  .pill.gold{background:rgba(224,131,60,.14);border-color:var(--gold);color:var(--gold-light);}
+  .pill.new{background:rgba(224,131,60,.22);border-color:var(--gold);color:#F5E4D6;font-weight:700;}
+  .bar-row{display:flex;align-items:center;margin:7px 0;font-size:13px;}
+  .bar-name{width:128px;flex-shrink:0;color:var(--text);text-align:right;padding-right:10px;}
+  .bar-track{flex:1;background:var(--bg2);border-radius:6px;height:22px;overflow:hidden;position:relative;}
+  .bar-fill{height:100%;border-radius:6px;background:linear-gradient(90deg,var(--red-deep),var(--red));display:flex;align-items:center;justify-content:flex-end;padding-right:8px;font-size:11px;color:#fff;font-weight:700;}
+  .bar-fill.gold{background:linear-gradient(90deg,#7a1e25,var(--gold));color:#160A0C;}
+  .bar-fill.dim{background:linear-gradient(90deg,#3a2024,#5e2a30);}
+  .matrix{position:relative;width:100%;height:380px;background:var(--bg2);border:1px solid var(--line);border-radius:14px;margin-top:8px;}
+  .axis-x{position:absolute;bottom:8px;width:100%;text-align:center;font-size:12px;color:var(--muted);}
+  .axis-y{position:absolute;left:8px;top:0;height:100%;writing-mode:vertical-rl;font-size:12px;color:var(--muted);}
+  .dot{position:absolute;transform:translate(-50%,-50%);padding:5px 10px;border-radius:20px;font-size:12px;font-weight:700;white-space:nowrap;}
+  .dot.me{background:var(--red);color:#fff;border:2px solid var(--gold);}
+  .dot.other{background:var(--card2);color:var(--text);border:1px solid var(--line);}
+  .cloud{display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px;padding:14px;background:var(--bg2);border-radius:14px;}
+  .cloud span{padding:3px 10px;border-radius:8px;line-height:1.5;}
+  .s1{font-size:13px;} .s2{font-size:16px;} .s3{font-size:20px;} .s4{font-size:25px;}
+  .cgood{background:rgba(199,123,92,.13);color:var(--good);}
+  .cbad{background:rgba(224,139,155,.13);color:var(--bad);}
+  .ctheme{font-size:15px;color:var(--gold-light);background:rgba(224,131,60,.1);padding:6px 14px;border-radius:10px;font-weight:700;}
+  .quote{border-left:3px solid var(--gold);padding:10px 16px;background:var(--card);border-radius:0 10px 10px 0;font-size:15px;color:var(--text);margin:10px 0;}
+  .quote .q{color:var(--gold-light);font-weight:800;}
+  table{width:100%;border-collapse:collapse;font-size:13px;margin-top:8px;}
+  th,td{border:1px solid var(--line);padding:9px 10px;text-align:left;vertical-align:top;}
+  th{background:var(--card2);color:var(--gold-light);font-weight:700;}
+  td .y{color:var(--good);} td .n{color:var(--bad);}
+  .listnum{counter-reset:l;list-style:none;}
+  .listnum li{counter-increment:l;position:relative;padding:12px 14px 12px 52px;background:var(--card);border:1px solid var(--line);border-radius:12px;margin-bottom:10px;}
+  .listnum li::before{content:counter(l);position:absolute;left:14px;top:12px;width:26px;height:26px;background:var(--red);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;}
+  .listnum li b{color:var(--gold-light);}
+  .foot{text-align:center;font-size:12px;color:var(--muted);padding:26px;}
+  .foot b{color:var(--gold-light);}
+  .flag{font-size:11px;padding:1px 6px;border-radius:5px;background:var(--card2);color:var(--muted);margin-left:4px;}
+  .flag.a{color:var(--good);} .flag.b{color:var(--gold-light);} .flag.c{color:var(--bad);}
+  .newzone{border:1px dashed var(--gold);border-radius:14px;padding:14px 16px;margin-top:14px;background:rgba(224,131,60,.06);}
+  .newzone .zh{font-size:13px;color:var(--gold-light);font-weight:800;margin-bottom:8px;}
+
+  @media (max-width:820px){
+    .page{min-height:100dvh;padding:24px 18px 40px;}
+    .pageno{top:14px;right:16px;}
+    h1{font-size:25px;}
+    h2{font-size:21px;}
+    h3{font-size:16px;}
+    .sub{font-size:13px;margin-bottom:14px;}
+    .g3,.g2{grid-template-columns:1fr;}
+    .card{padding:15px 13px;}
+    .kpi{font-size:24px;}
+    .bar-name{width:74px;font-size:11px;padding-right:6px;}
+    .bar-track{height:20px;}
+    .bar-fill{font-size:10px;padding-right:5px;}
+    .matrix{height:320px;}
+    .dot{font-size:11px;padding:4px 8px;}
+    .cloud{padding:12px 10px;gap:5px 6px;}
+    .s1{font-size:12px;} .s2{font-size:14px;} .s3{font-size:17px;} .s4{font-size:21px;}
+    table{font-size:12px;}
+    th,td{padding:7px 8px;}
+    .quote{font-size:14px;padding:9px 13px;}
+    .listnum li{padding:11px 12px 11px 46px;}
+    .listnum li::before{left:12px;width:24px;height:24px;font-size:13px;}
+    .src{font-size:10px;}
+    .flag{font-size:10px;}
+  }
+  .page{overflow-x:hidden;}
+  .tw{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:10px 0;}
+  .tw table{min-width:640px;}
+  @media (max-width:820px){
+    .bar-row,.bar{flex-direction:column;align-items:stretch;margin:11px 0;}
+    .bar-name{width:auto !important;flex-shrink:1;text-align:left !important;padding-right:0;font-size:12.5px;line-height:1.4;}
+    .bar-track{width:100%;}
+    .bar-fill{min-width:60px;}
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ P1 ============ -->
+<section class="page" id="p1">
+  <div class="pageno">01 / 10</div>
+  <div class="tag">竞品分析情报网 · 专题</div>
+  <h1>控油赛道总览<br>五条机理路线，从"化学溶角栓"到"清凉控温"</h1>
+  <p class="sub">本专题横向拆解控油赛道的六个标杆：<b>薇姿（复合微生态+矿物锌）、露得清（平价 BHA+抗菌）、悦诗风吟（绿茶植萃）、科颜氏（金盏花高端植萃）、旁氏（竹炭吸附+烟酰胺）、花印（薄荷醇清凉+吸附）</b>。控油是油皮最高频的"功效刚需"，六家机理路线分化明显、价格从 ¥15 到 ¥335 跨度极大——低端拼性价比与渠道、中端拼植萃、高端拼经典信任状，而"调皮脂(锌/烟酰胺)"与"微生态"是尚未被平价占满的升级方向。</p>
+  <div class="quote"><span class="q">一句话结论：</span>控油赛道已形成"复合微生态(薇姿) × 平价BHA抗菌(露得清) × 绿茶植萃(悦诗风吟) × 金盏花高端(科颜氏) × 竹炭吸附(旁氏) × 清凉控温(花印)"六强并立；<b>薇姿机理最完整但国内声量弱、露得清平价但缺临床/含SLS、悦诗风吟/科颜氏温和但偏基础、旁氏/花印低价但皂基/吸附非调皮脂</b>——各自的短板就是交叉空白。<span class="flag c">C·推断</span></div>
+  <div class="grid g3" style="margin-top:22px;">
+    <div class="card red">
+      <div class="kpi">5<small> 路线</small></div>
+      <div class="t">机理分化格局 <span class="flag b">B</span></div>
+      <p style="font-size:13px;color:var(--muted);margin-top:6px;">从化学溶角栓到矿物锌、植物收敛、物理吸附、清凉控温，六家各占一个机理心智，无一家通吃。</p>
+    </div>
+    <div class="card gold">
+      <div class="kpi red">¥15<small> –335</small></div>
+      <div class="t">价格带跨度 <span class="flag c">C</span></div>
+      <p style="font-size:13px;color:var(--muted);margin-top:6px;">旁氏15元起、科颜氏335封顶，低端拼性价比渠道、高端拼经典信任。</p>
+    </div>
+    <div class="card">
+      <div class="kpi red">20万<small> + 评论</small></div>
+      <div class="t">花印体量（京东） <span class="flag c">C</span></div>
+      <p style="font-size:13px;color:var(--muted);margin-top:6px;">花印男士控油洁面评论20万+、好评99%，线下渠道广度惊人。</p>
+    </div>
+  </div>
+  <div class="src"><b>数据来源：</b>各品牌官方（A级，归属/备案/成分）｜京东/天猫商品页（C级，价格/评论/好评率快照）。置信度见第10页。</div>
+</section>
+
+<!-- ============ P2 ============ -->
+<section class="page" id="p2">
+  <div class="pageno">02 / 10</div>
+  <span class="tag">市场全景 · 派系</span>
+  <h2>控油五大机理派系</h2>
+  <p class="sub">控油的本质是"溶角栓 + 调皮脂 + 收敛 + 吸附 + 控温"，但六个标杆走了五条不同的机理路线，对应不同的信任状与人群。<span class="flag b">B</span></p>
+  <div class="tw"><table>
+    <tr><th style="width:16%">派系</th><th style="width:16%">代表品牌</th><th style="width:22%">核心机理</th><th style="width:22%">信任状</th><th>主渠道</th></tr>
+    <tr><td><span class="y">复合微生态</span></td><td>薇姿</td><td>水杨酸+葡萄糖酸锌+二裂酵母+温泉水</td><td>欧莱雅/药妆/微生态</td><td>药妆+电商</td></tr>
+    <tr><td><span class="y">平价BHA抗菌</span></td><td>露得清</td><td>0.5%水杨酸+IPMP抗菌</td><td>强生/开架</td><td>药妆/电商</td></tr>
+    <tr><td><span class="y">绿茶植萃</span></td><td>悦诗风吟</td><td>绿茶多酚+马齿苋+金盏花</td><td>爱茉莉/韩系</td><td>电商+专柜</td></tr>
+    <tr><td><span class="y">金盏花高端</span></td><td>科颜氏</td><td>金盏花+牛蒡+尿囊素</td><td>欧莱雅/1851药房</td><td>专柜+电商</td></tr>
+    <tr><td><span class="y">竹炭吸附</span></td><td>旁氏</td><td>氨基酸+竹炭+烟酰胺</td><td>联合利华/平价</td><td>商超+电商</td></tr>
+    <tr><td><span class="y">清凉控温</span></td><td>花印</td><td>皂基+炭粉高岭土+薄荷醇+金缕梅</td><td>日系/渠道广</td><td>屈臣氏+CS+电商</td></tr>
+  </table></div>
+  <div class="grid g3" style="margin-top:16px;">
+    <div class="card"><div class="t">共性</div><p>全部围绕"去油/收敛/清洁"，但路径不同；中高端强调"专业/天然/经典"信任状。</p></div>
+    <div class="card"><div class="t">分化</div><p>薇姿/露得清偏"化学酸"、悦诗风吟/科颜氏偏"植物"、旁氏偏"吸附"、花印偏"清凉吸附"。</p></div>
+    <div class="card"><div class="t">机会</div><p>无一家覆盖"平价+氨基酸温和+调皮脂(锌/烟酰胺)+无传统防腐"全场景，<b>交叉空白即切口</b>。<span class="flag c">C·推断</span></p></div>
+  </div>
+  <div class="src"><b>数据来源：</b>各品牌官方（A/C级，机理/产品/渠道）｜京东/天猫（C级，价格/体量）。派系归纳为基于公开信息的横向归类。</div>
+</section>
+
+<!-- ============ P3 ============ -->
+<section class="page" id="p3">
+  <div class="pageno">03 / 10</div>
+  <span class="tag">定位矩阵</span>
+  <h2>六强定位矩阵（价格 × 控油/专业强度）</h2>
+  <p class="sub">横轴=控油/专业强度（基础清洁 → 复合微生态），纵轴=价格带。六品牌卡位清晰、错位明显，超低价带(花印/旁氏/露得清)最拥挤，中端植萃(悦诗风吟/薇姿)与高端经典(科颜氏)各占一端。</p>
+  <div class="matrix">
+    <div class="axis-y">价格带（低 → 高）</div>
+    <div class="axis-x">控油/专业强度（基础清洁 → 复合微生态）</div>
+    <div class="dot me" style="left:14%;top:84%;">花印 18-59</div>
+    <div class="dot other" style="left:18%;top:80%;">旁氏 15-20</div>
+    <div class="dot other" style="left:30%;top:70%;">露得清 39-46</div>
+    <div class="dot other" style="left:54%;top:50%;">悦诗风吟 129-240</div>
+    <div class="dot other" style="left:62%;top:44%;">薇姿 150-300</div>
+    <div class="dot other" style="left:76%;top:30%;">科颜氏 110-335</div>
+  </div>
+  <div class="grid g2" style="margin-top:16px;">
+    <div class="card red"><div class="t">最拥挤区</div><p>15-59 元超低价带：花印/旁氏/露得清三面交锋，价格与人群高度重叠，正面硬刚难。</p></div>
+    <div class="card gold"><div class="t">两端空白</div><p>"平价但氨基酸温和+调皮脂"与"年轻化微生态"之间，是机理相同但体验与安全差异化的机会。</p></div>
+  </div>
+  <div class="src"><b>数据来源：</b>各品牌官方旗舰店价格（C级快照）｜品牌信息（A级，归属）。坐标为基于公开价格的示意性卡位。</div>
+</section>
+
+<!-- ============ P4 ============ -->
+<section class="page" id="p4">
+  <div class="pageno">04 / 10</div>
+  <span class="tag">配方拆解</span>
+  <h2>核心成分 / 机理横向对比</h2>
+  <p class="sub">六个标杆的核心成分与机理标签对比——可见"控油"是共同终点，但路径（微生态/酸/植萃/吸附/清凉）各不相同。<span class="flag a">A/C</span></p>
+  <div class="tw"><table>
+    <tr><th style="width:14%">品牌</th><th style="width:26%">核心成分</th><th style="width:22%">机理标签</th><th style="width:14%">剂型</th><th>特点</th></tr>
+    <tr><td>薇姿</td><td>水杨酸+葡萄糖酸锌+二裂酵母+温泉水</td><td>复合微生态+矿物锌</td><td>洁面/精华</td><td>机理最完整</td></tr>
+    <tr><td>露得清</td><td>0.5%水杨酸+IPMP抗菌</td><td>BHA溶角栓+抗菌</td><td>洁面/膏</td><td>平价开架</td></tr>
+    <tr><td>悦诗风吟</td><td>绿茶多酚+马齿苋+金盏花+透明质酸</td><td>植萃收敛平衡</td><td>水乳</td><td>韩系学生党</td></tr>
+    <tr><td>科颜氏</td><td>金盏花+牛蒡+尿囊素</td><td>高端植萃收敛</td><td>爽肤水</td><td>经典无酒精</td></tr>
+    <tr><td>旁氏</td><td>氨基酸+竹炭+烟酰胺</td><td>吸附+调皮脂</td><td>洁面</td><td>平价吸附</td></tr>
+    <tr><td>花印</td><td>皂基+炭粉高岭土+薄荷醇+金缕梅</td><td>清凉控温+吸附+收敛</td><td>洁面</td><td>日系渠道广</td></tr>
+  </table></div>
+  <div class="grid g3" style="margin-top:14px;">
+    <div class="card"><div class="t">最"完整"</div><p>薇姿"酸+锌+微生态+温泉水"机理最完整，单点竞品难全覆盖。</p></div>
+    <div class="card"><div class="t">最"经典"</div><p>科颜氏金盏花、旁氏氨基酸体系，信任状与时间沉淀最硬。</p></div>
+    <div class="card"><div class="t">最"温和缺口"</div><p>六家均偏"皂基/酸/吸附/洗去"，<b>平价氨基酸+无传统防腐+驻留调皮脂</b>是共同未覆盖区。<span class="flag c">C</span></p></div>
+  </div>
+  <div class="src"><b>数据来源：</b>各品牌商品页/备案（C级，成分/剂型/宣称）｜官方（A级，归属/机理）。具体浓度以备案为准。</div>
+</section>
+
+<!-- ============ P5 ============ -->
+<section class="page" id="p5">
+  <div class="pageno">05 / 10</div>
+  <span class="tag">价格策略</span>
+  <h2>价格带横向对比</h2>
+  <p class="sub">六品牌主流单品价格带对比（C级快照，随促销波动）。超低价带(15-59)重叠最严重，是性价比与渠道并存的红区；科颜氏 335 元、薇姿 300 元封顶是高端锚。<span class="flag c">C</span></p>
+  <div style="background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px;">
+    <div class="bar-row"><div class="bar-name">科颜氏 250ml</div><div class="bar-track"><div class="bar-fill dim" style="width:100%">¥315 / 总销7万+ / 榜NO.1</div></div></div>
+    <div class="bar-row"><div class="bar-name">薇姿 净化洁面400ml</div><div class="bar-track"><div class="bar-fill dim" style="width:82%">HK$166-270 ≈¥150-300</div></div></div>
+    <div class="bar-row"><div class="bar-name">悦诗风吟 水光套装</div><div class="bar-track"><div class="bar-fill dim" style="width:64%">¥209 / 20万评论 / 98%</div></div></div>
+    <div class="bar-row"><div class="bar-name">露得清 200ml</div><div class="bar-track"><div class="bar-fill" style="width:24%">¥45.9 / 5000评论 / 96%</div></div></div>
+    <div class="bar-row"><div class="bar-name">旁氏 150g×2</div><div class="bar-track"><div class="bar-fill gold" style="width:21%">¥39.9 / 1万评论 / 98%</div></div></div>
+    <div class="bar-row"><div class="bar-name">花印 男士130g</div><div class="bar-track"><div class="bar-fill gold" style="width:31%">¥59 / 20万评论 / 99%</div></div></div>
+  </div>
+  <div class="grid g3" style="margin-top:16px;">
+    <div class="card red"><div class="t">重叠红区</div><p>15-59 元带：花印/旁氏/露得清三面交锋，价格非独占价值，需靠温和/安全/调皮脂差突围。</p></div>
+    <div class="card"><div class="t">高端锚</div><p>科颜氏金盏花(335)、薇姿(300)凭经典信任状占高端，价差近倍但认知稳。</p></div>
+    <div class="card"><div class="t">破局点</div><p>在重叠红区用"氨基酸温和/无传统防腐/调皮脂"建立清晰价值差，而非价格战。<span class="flag c">C·推断</span></p></div>
+  </div>
+  <div class="src"><b>数据来源：</b>各品牌官方旗舰店与电商平台（C级快照，价格随促销波动）。以官方实时价为准。</div>
+</section>
+
+<!-- ============ P6 ============ -->
+<section class="page" id="p6">
+  <div class="pageno">06 / 10</div>
+  <span class="tag">消费者评价</span>
+  <h2>口碑横向对比</h2>
+  <p class="sub">六品牌正向口碑共性（去油有效/清爽/渠道好买）明显，负向痛点各有侧重——这正是差异化切口的坐标。<span class="flag c">C</span></p>
+  <div class="tw"><table>
+    <tr><th style="width:13%">品牌</th><th style="width:30%">正向高频词</th><th style="width:30%">负向/痛点</th><th>口碑信号</th></tr>
+    <tr><td>薇姿</td><td>微生态/药妆信任/温和</td><td>国内声量弱/价高/洁面为主</td><td>机理强、认知弱</td></tr>
+    <tr><td>露得清</td><td>便宜/清爽/BHA有效</td><td>含SLS/缺临床/pH偏酸</td><td>性价比强、温和弱</td></tr>
+    <tr><td>悦诗风吟</td><td>清爽/学生友好/天然</td><td>功效基础/声量承压</td><td>温和强、强效弱</td></tr>
+    <tr><td>科颜氏</td><td>经典/金盏花/不刺激</td><td>控油温和/价差近3倍</td><td>信任强、性价比弱</td></tr>
+    <tr><td>旁氏</td><td>便宜/温和不紧绷/大容量</td><td>传统防腐/DMDM/控油偏弱</td><td>性价比强、惊喜弱</td></tr>
+    <tr><td>花印</td><td>便宜/泡沫丰富/油皮少年友好</td><td>皂基偏碱/磨砂/羟苯酯</td><td>渠道强、温和弱</td></tr>
+  </table></div>
+  <div class="grid g2" style="margin-top:14px;">
+    <div class="card red"><div class="t">共性信任</div><p>六家正向词都绕不开"去油/清爽/好买"，说明赛道内核是性价比+可得性，后来者必须先建渠道与价格信任。</p></div>
+    <div class="card gold"><div class="t">分化痛点</div><p>薇姿(声量)/露得清(SLS)/悦诗风吟(基础)/科颜氏(价差)/旁氏(DMDM)/花印(皂基)——每家留一个可攻击的口子。</p></div>
+  </div>
+  <div class="src"><b>数据来源：</b>各平台评价与社区（C级，正向/负向高频词归纳）｜京东商品页（C级，好评率）。差评以平台个案为主，不代表整体率。</div>
+</section>
+
+<!-- ============ P7 ============ -->
+<section class="page" id="p7">
+  <div class="pageno">07 / 10</div>
+  <span class="tag">卖点拆解</span>
+  <h2>六强心智三轴对比</h2>
+  <p class="sub">每个标杆的消费者心智都可拆为"信任锚 × 功效锚 × 场景锚"三轴。横向看，信任锚高度分化（药妆/开架/韩系/经典/平价/日系），差异在功效路径与场景聚焦。<span class="flag c">C</span></p>
+  <div class="tw"><table>
+    <tr><th style="width:12%">品牌</th><th style="width:22%">信任锚</th><th style="width:22%">功效锚</th><th style="width:22%">场景锚</th><th>短板轴</th></tr>
+    <tr><td>薇姿</td><td>欧莱雅/药妆/微生态</td><td>酸+锌+二裂酵母</td><td>油皮全脸日常</td><td>声量弱/价高</td></tr>
+    <tr><td>露得清</td><td>强生/开架</td><td>0.5%水杨酸+IPMP</td><td>学生平价控油</td><td>含SLS/缺临床</td></tr>
+    <tr><td>悦诗风吟</td><td>爱茉莉/韩系</td><td>绿茶多酚植萃</td><td>学生/年轻植萃</td><td>功效基础</td></tr>
+    <tr><td>科颜氏</td><td>1851药房/经典</td><td>金盏花+牛蒡</td><td>高端植萃平衡</td><td>价差大/温和</td></tr>
+    <tr><td>旁氏</td><td>联合利华/平价大牌</td><td>氨基酸+竹炭+烟酰胺</td><td>学生日常控油</td><td>DMDM/偏基础</td></tr>
+    <tr><td>花印</td><td>日系/渠道广</td><td>皂基+吸附+薄荷醇</td><td>油皮少年/男士</td><td>皂基/磨砂/羟苯酯</td></tr>
+  </table></div>
+  <div class="quote" style="margin-top:16px;"><span class="q">洞察：</span>六家的"信任锚"各占一个心智（药妆/开架/韩系/经典/平价/日系），但"功效锚"都偏基础清洁或单方机理——后来者若想切入，<b>不必重造信任锚（太慢），而是用同价格带 + 未被覆盖的"氨基酸温和/无传统防腐/调皮脂(锌·烟酰胺)/驻留"场景</b>做差异化。<span class="flag c">C·策略推断</span></div>
+  <div class="src"><b>数据来源：</b>各品牌官方（A/C级，信任/功效/场景）｜行业媒体（C级，心智归纳）。三轴为我按"×交叉拆解"格式从公开信息提炼。</div>
+</section>
+
+<!-- ============ P8 ============ -->
+<section class="page" id="p8">
+  <div class="pageno">08 / 10</div>
+  <span class="tag">痛点与机会</span>
+  <h2>横向空白 = 你的机会</h2>
+  <p class="sub">把六家的短板轴横向叠加，得到赛道级空白——这些空白是"对标转化"的最高频用法。</p>
+  <div class="tw"><table>
+    <tr><th style="width:26%">赛道级空白</th><th>对应六家短板</th><th>你的切口</th></tr>
+    <tr><td><span class="n">平价氨基酸温和</span></td><td>旁氏DMDM/花印皂基/露得清SLS</td><td><span class="y">无传统防腐氨基酸控油</span></td></tr>
+    <tr><td><span class="n">平价调皮脂</span></td><td>薇姿锌价高/旁氏花印靠吸附</td><td><span class="y">平价烟酰胺/PCA锌调皮脂</span></td></tr>
+    <tr><td><span class="n">分肤分龄</span></td><td>各家通用配方</td><td><span class="y">油皮/痘敏/男痘分线</span></td></tr>
+    <tr><td><span class="n">驻留控油</span></td><td>六家多洗去式洁面</td><td><span class="y">平价控油凝乳(驻留)</span></td></tr>
+    <tr><td><span class="n">年轻化微生态</span></td><td>薇姿微生态声量弱</td><td><span class="y">平价微生态控油</span>大众化</td></tr>
+  </table></div>
+  <div class="newzone">
+    <div class="zh">▍对标转化路径（换剂型 / 换包装 / 换场景）</div>
+    <div class="tw"><table>
+      <tr><th style="width:20%">对标对象</th><th style="width:18%">换剂型</th><th style="width:18%">换包装</th><th>切入空白</th></tr>
+      <tr><td>薇姿</td><td>平价微生态版</td><td>年轻化视觉</td><td>平价微生态控油</td></tr>
+      <tr><td>露得清</td><td>氨基酸无SLS</td><td>学生视觉</td><td>平价温和BHA</td></tr>
+      <tr><td>悦诗风吟</td><td>加锌调皮脂</td><td>年轻化视觉</td><td>植萃+调皮脂</td></tr>
+      <tr><td>科颜氏</td><td>平价控油水</td><td>年轻化视觉</td><td>轻奢平价水</td></tr>
+      <tr><td>旁氏</td><td>无DMDM氨基酸</td><td>学生敏感肌视觉</td><td>平价安全控油</td></tr>
+      <tr><td>花印</td><td>氨基酸无磨砂</td><td>学生敏感肌视觉</td><td>平价温和安全控油</td></tr>
+    </table></div>
+  </div>
+  <div class="src"><b>数据来源：</b>各品牌官方（A/C级，短板）｜各平台评价（C级，痛点）。空白与对标转化为基于公开事实的策略推断。</div>
+</section>
+
+<!-- ============ P9 ============ -->
+<section class="page" id="p9">
+  <div class="pageno">09 / 10</div>
+  <span class="tag">产品启示</span>
+  <h2>如果做新锐控油品牌，怎么打？</h2>
+  <p class="sub">不打任何一家的信任锚正面战场，而是用"同价格带 + 空白安全/调皮脂/剂型/分肤"切入。五条可执行策略：</p>
+  <ol class="listnum">
+    <li><b>同价格带、氨基酸温和。</b>承接六家验证的"平价控油"心智，做无传统防腐氨基酸洁面，正面回应旁氏DMDM、花印皂基、露得清SLS的痛点。</li>
+    <li><b>平价调皮脂升级。</b>在吸附之上加烟酰胺/PCA锌，从"吸附去油"升级为"吸附+调皮脂"双效，补薇姿锌价高之外的平价带。</li>
+    <li><b>分肤分龄矩阵。</b>做油皮/痘敏/男痘分线，用更强控价（DTC统一价+溯源）补科颜氏价差、旁氏基础款短板。</li>
+    <li><b>驻留控油形态。</b>补六家"洗去式"缺口，做平价控油凝乳/水，延长控油时长。</li>
+    <li><b>年轻化微生态。</b>把薇姿"微生态+矿物锌"做成平价年轻化版本，回应其国内声量弱的空白。</li>
+  </ol>
+  <div class="src"><b>说明：</b>以上为基于六家公开竞争态势的"我方（假设为新锐控油品牌）"策略推断，非任何品牌官方信息。我方定位/价格/渠道需结合实际业务定义；对标转化路径仅为方法论示例。</div>
+</section>
+
+<!-- ============ P10 ============ -->
+<section class="page" id="p10">
+  <div class="pageno">10 / 10</div>
+  <span class="tag">总结 + 来源</span>
+  <h2>一句话总结</h2>
+  <div class="quote"><span class="q">控油赛道给后来者的启示：</span>六家标杆证明"性价比 + 渠道 + 单方机理信任状"能撑起大单品，但它们把"价格与可得"守住了，把"氨基酸温和安全、平价调皮脂(锌·烟酰胺)、分肤分龄、驻留控油、年轻化微生态"留给了后来者——新品牌的切口，从不在任何一家的腹地，而在"同价格带、换剂型/换包装/换场景/换人群"的空白里。</div>
+
+  <h3 style="margin-top:18px;">数据来源与置信度清单</h3>
+  <div class="tw"><table>
+    <tr><th style="width:42%">来源</th><th style="width:12%">级别</th><th>用于本报告的结论</th></tr>
+    <tr><td>各品牌官方/母公司/备案</td><td><span class="y">A</span></td><td>归属/创立/收购；成分(水杨酸/锌/金盏花/竹炭/皂基等)；备案号</td></tr>
+    <tr><td>京东/天猫/识货商品页</td><td>C</td><td>价格(¥15-335)/评论量(1万-20万)/好评率(96-99%)/备案号</td></tr>
+    <tr><td>品牌官网/技术科普</td><td>B/C</td><td>微生态/温泉水/金盏花/机理claim（标注待核）</td></tr>
+    <tr><td>NGA 洗面奶测评</td><td>C</td><td>花印皂基PH9-10/磨砂/肤感</td></tr>
+  </table></div>
+  <div class="src"><b>置信度说明：</b>A=监管/官方/备案/年报；B=官网技术科普/认证；C=平台快照/达人内容（波动大、存个案偏差）。各"临床/院线"claim均为品牌或渠道表述，非独立长期临床，标注待核。价格/评论量为电商快照，随促销与时间波动。本报告不构成对任何品牌的投资或购买建议。</div>
+</section>
+
+<div class="foot">竞品分析情报网 · 专题·控油赛道总览 ｜ 横向对比 薇姿/露得清/悦诗风吟/科颜氏/旁氏/花印 ｜ 数据截至 2026-08 公开资料整理 ｜ 内容仅供产品研究与求职作品集使用</div>
+
+</body>
+</html>
