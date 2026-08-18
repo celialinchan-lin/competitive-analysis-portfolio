@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>竞品分析情报网 EP.19｜凡士林·修护晶冻（经典）</title>
+<style>
+  :root{
+    --red:#C8862A; --red-deep:#7A4E12; --gold:#E0A93B; --gold-light:#F0D79A;
+    --bg:#16110A; --bg2:#241B0F; --card:#2E2415; --card2:#473722;
+    --text:#F4EDE0; --muted:#B49E7C; --line:#4A3A20; --good:#E0A93B; --bad:#E57373;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{background:var(--bg);color:var(--text);font-family:"PingFang SC","Microsoft YaHei",-apple-system,sans-serif;line-height:1.6;font-size:15px;}
+  .page{width:100%;max-width:920px;margin:0 auto;min-height:100vh;padding:54px 40px 40px;display:flex;flex-direction:column;justify-content:flex-start;border-bottom:1px solid var(--line);position:relative;}
+  .pageno{position:absolute;top:22px;right:40px;font-size:12px;color:var(--gold);letter-spacing:2px;font-weight:700;}
+  .tag{display:inline-block;background:var(--red);color:#fff;font-size:12px;padding:3px 12px;border-radius:20px;letter-spacing:1px;margin-bottom:14px;font-weight:700;}
+  h1{font-size:40px;line-height:1.25;font-weight:800;letter-spacing:1px;margin-bottom:8px;}
+  h2{font-size:26px;font-weight:800;margin-bottom:6px;color:var(--gold-light);}
+  h3{font-size:18px;font-weight:800;color:var(--text);margin:18px 0 8px;}
+  .sub{color:var(--muted);font-size:14px;margin-bottom:20px;}
+  .src{margin-top:auto;padding-top:18px;font-size:11px;color:var(--muted);border-top:1px dashed var(--line);}
+  .src b{color:var(--gold-light);}
+  .grid{display:grid;gap:14px;}
+  .g3{grid-template-columns:repeat(3,1fr);}
+  .g2{grid-template-columns:repeat(2,1fr);}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 16px;}
+  .card.red{border-left:4px solid var(--red);}
+  .card.gold{border-left:4px solid var(--gold);}
+  .kpi{font-size:34px;font-weight:800;color:var(--gold);line-height:1.1;}
+  .kpi.red{color:var(--red);}
+  .kpi small{font-size:13px;color:var(--muted);font-weight:400;}
+  .card .t{font-size:13px;color:var(--muted);margin-bottom:6px;}
+  .pill{display:inline-block;background:var(--card2);border:1px solid var(--line);border-radius:8px;padding:4px 10px;font-size:12px;margin:3px 4px 3px 0;color:var(--text);}
+  .pill.good{background:rgba(224,169,59,.15);border-color:var(--good);color:var(--good);}
+  .pill.bad{background:rgba(229,115,115,.15);border-color:var(--bad);color:var(--bad);}
+  .pill.gold{background:rgba(224,169,59,.14);border-color:var(--gold);color:var(--gold-light);}
+  .pill.new{background:rgba(224,169,59,.22);border-color:var(--gold);color:#F7E9C6;font-weight:700;}
+  .bar-row{display:flex;align-items:center;margin:7px 0;font-size:13px;}
+  .bar-name{width:108px;flex-shrink:0;color:var(--text);text-align:right;padding-right:10px;}
+  .bar-track{flex:1;background:var(--bg2);border-radius:6px;height:22px;overflow:hidden;position:relative;}
+  .bar-fill{height:100%;border-radius:6px;background:linear-gradient(90deg,var(--red-deep),var(--red));display:flex;align-items:center;justify-content:flex-end;padding-right:8px;font-size:11px;color:#fff;font-weight:700;}
+  .bar-fill.gold{background:linear-gradient(90deg,#7a4e12,var(--gold));color:#16110A;}
+  .bar-fill.dim{background:linear-gradient(90deg,#473722,#6b5232);}
+  .matrix{position:relative;width:100%;height:340px;background:var(--bg2);border:1px solid var(--line);border-radius:14px;margin-top:8px;}
+  .axis-x{position:absolute;bottom:8px;width:100%;text-align:center;font-size:12px;color:var(--muted);}
+  .axis-y{position:absolute;left:8px;top:0;height:100%;writing-mode:vertical-rl;font-size:12px;color:var(--muted);}
+  .dot{position:absolute;transform:translate(-50%,-50%);padding:5px 10px;border-radius:20px;font-size:12px;font-weight:700;white-space:nowrap;}
+  .dot.me{background:var(--red);color:#fff;border:2px solid var(--gold);}
+  .dot.other{background:var(--card2);color:var(--text);border:1px solid var(--line);}
+  .cloud{display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px;padding:14px;background:var(--bg2);border-radius:14px;}
+  .cloud span{padding:3px 10px;border-radius:8px;line-height:1.5;}
+  .s1{font-size:13px;} .s2{font-size:16px;} .s3{font-size:20px;} .s4{font-size:25px;}
+  .cgood{background:rgba(224,169,59,.13);color:var(--good);}
+  .cbad{background:rgba(229,115,115,.13);color:var(--bad);}
+  .ctheme{font-size:15px;color:var(--gold-light);background:rgba(224,169,59,.1);padding:6px 14px;border-radius:10px;font-weight:700;}
+  .quote{border-left:3px solid var(--gold);padding:10px 16px;background:var(--card);border-radius:0 10px 10px 0;font-size:15px;color:var(--text);margin:10px 0;}
+  .quote .q{color:var(--gold-light);font-weight:800;}
+  table{width:100%;border-collapse:collapse;font-size:13px;margin-top:8px;}
+  th,td{border:1px solid var(--line);padding:9px 10px;text-align:left;vertical-align:top;}
+  th{background:var(--card2);color:var(--gold-light);font-weight:700;}
+  td .y{color:var(--good);} td .n{color:var(--bad);}
+  .listnum{counter-reset:l;list-style:none;}
+  .listnum li{counter-increment:l;position:relative;padding:12px 14px 12px 52px;background:var(--card);border:1px solid var(--line);border-radius:12px;margin-bottom:10px;}
+  .listnum li::before{content:counter(l);position:absolute;left:14px;top:12px;width:26px;height:26px;background:var(--red);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;}
+  .listnum li b{color:var(--gold-light);}
+  .foot{text-align:center;font-size:12px;color:var(--muted);padding:26px;}
+  .foot b{color:var(--gold-light);}
+  .flag{font-size:11px;padding:1px 6px;border-radius:5px;background:var(--card2);color:var(--muted);margin-left:4px;}
+  .flag.a{color:var(--good);} .flag.b{color:var(--gold-light);} .flag.c{color:var(--bad);}
+  .newzone{border:1px dashed var(--gold);border-radius:14px;padding:14px 16px;margin-top:14px;background:rgba(224,169,59,.06);}
+  .newzone .zh{font-size:13px;color:var(--gold-light);font-weight:800;margin-bottom:8px;}
+
+  @media (max-width:820px){
+    .page{min-height:100dvh;padding:24px 18px 40px;}
+    .pageno{top:14px;right:16px;}
+    h1{font-size:27px;}
+    h2{font-size:21px;}
+    h3{font-size:16px;}
+    .sub{font-size:13px;margin-bottom:14px;}
+    .g3,.g2{grid-template-columns:1fr;}
+    .card{padding:15px 13px;}
+    .kpi{font-size:26px;}
+    .bar-name{width:74px;font-size:11px;padding-right:6px;}
+    .bar-track{height:20px;}
+    .bar-fill{font-size:10px;padding-right:5px;}
+    .matrix{height:300px;}
+    .dot{font-size:11px;padding:4px 8px;}
+    .cloud{padding:12px 10px;gap:5px 6px;}
+    .s1{font-size:12px;} .s2{font-size:14px;} .s3{font-size:17px;} .s4{font-size:21px;}
+    table{font-size:12px;}
+    th,td{padding:7px 8px;}
+    .quote{font-size:14px;padding:9px 13px;}
+    .listnum li{padding:11px 12px 11px 46px;}
+    .listnum li::before{left:12px;width:24px;height:24px;font-size:13px;}
+    .src{font-size:10px;}
+    .flag{font-size:10px;}
+  }
+  .page{overflow-x:hidden;}
+  .tw{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:10px 0;}
+  .tw table{min-width:620px;}
+  @media (max-width:820px){
+    .bar-row,.bar{flex-direction:column;align-items:stretch;margin:11px 0;}
+    .bar-name{width:auto !important;flex-shrink:1;text-align:left !important;padding-right:0;font-size:12.5px;line-height:1.4;}
+    .bar-track{width:100%;}
+    .bar-fill{min-width:60px;}
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ P1 ============ -->
+<section class="page" id="p1">
+  <div class="pageno">01 / 10</div>
+  <span class="tag">竞品分析情报网 · EP.19</span>
+  <h1>凡士林·修护晶冻（经典）<br>把"微凝晶冻封闭锁水 + 极致平价"做成全民家庭标配</h1>
+  <p class="sub">联合利华旗下、百年经典品牌，修护晶冻以"医用级微凝晶冻（矿脂）"为核心，在皮肤表面形成封闭保护膜、减少 98% 表皮水分流失（抖音实测，C 级），定位"一罐多用"的极简基础修护——手肘/脚后跟/唇部/身体/面部皆可。京东修护晶冻 50g 500万+ 评论、99% 好评；特润修护精华霜（大白罐/雪融霜）已加神经酰胺+泛醇做升级。但定位纯封闭/无强功效、依赖经典矿脂、年轻化弱，是后来者用"同封闭 + 强功效复合 + 换包装"切的窗口。<span class="flag c">C</span></p>
+  <div class="quote"><span class="q">一句话结论：</span>凡士林证明了"微凝晶冻封闭锁水 × 极致平价 × 一罐多用"能把基础修护做成全民家庭标配（晶冻 50g 仅 12.9-16.9 元、500万+ 评论）；但它<b>定位纯封闭(无强功效)、依赖经典矿脂、年轻化弱、社媒靠自然流量</b>，是后来者用"同封闭 + 神经酰胺/泛醇强功效复合 + 换包装"抢份额的切口。<span class="flag c">C</span></div>
+  <div class="grid g3" style="margin-top:22px;">
+    <div class="card red">
+      <div class="kpi">联合利华<small> 旗下</small></div>
+      <div class="t">品牌 · 百年经典 <span class="flag a">A</span></div>
+      <p style="font-size:13px;color:var(--muted);margin-top:6px;">凡士林(Vaseline)归属联合利华，百余年底层科技"微凝晶冻(矿脂)"；经典修护晶冻原味，无香无酒精无色素。<span class="flag a">A·联合利华</span></p>
+    </div>
+    <div class="card gold">
+      <div class="kpi red">500万<small> +</small></div>
+      <div class="t">背书 · 晶冻50g 评论量 <span class="flag c">C</span></div>
+      <p style="font-size:13px;color:var(--muted);margin-top:6px;">京东修护晶冻 50g 500万+ 评论、99% 好评；100g ¥24.9；经典"一罐多用"国民心智极稳。<span class="flag c">C·京东</span></p>
+    </div>
+    <div class="card">
+      <div class="kpi red">¥12.9<small> -16.9</small></div>
+      <div class="t">价格 · 晶冻50g 国内 <span class="flag c">C</span></div>
+      <p style="font-size:13px;color:var(--muted);margin-top:6px;">修护晶冻 50g 常卖 12.9-16.9 元、100g 24.9 元；特润修护精华霜 360g 65-95 元(促销45-75)。<span class="flag c">C·电商</span></p>
+    </div>
+  </div>
+  <div class="src"><b>数据来源：</b>联合利华公开信息（A级，凡士林归属/百年微凝晶冻科技）｜京东（C级，晶冻50g 500万+评论/99%、价格12.9-16.9/100g 24.9）｜爱企查/今日头条（C级，特润修护360g 65-95、微凝晶冻/神经酰胺/泛醇、减少98%水分流失抖音实测）｜备案（C级，皖G妆网备字2022000986）。置信度见第10页。</div>
+</section>
+
+<!-- ============ P2 ============ -->
+<section class="page" id="p2">
+  <div class="pageno">02 / 10</div>
+  <span class="tag">市场全景</span>
+  <h2>保湿赛道 · 极致平价封闭修护阵营</h2>
+  <p class="sub">保湿基础盘里，凡士林是<b>"微凝晶冻封闭锁水 + 一罐多用"国民锚</b>，凭百年信任 + 极致低价 + 全身通用在中国稳居基础修护带；但增速被国货医研（薇诺娜/玉泽）与平价神经酰胺平替挤压，且功效叙事弱、依赖经典矿脂。<span class="flag b">B</span> 条形为各品牌相对体量示意（凡士林中国营收未单拆，为估算）。</p>
+  <div style="background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px;">
+    <div class="bar-row"><div class="bar-name">薇诺娜</div><div class="bar-track"><div class="bar-fill dim" style="width:100%">49.09亿(皮肤学级)</div></div></div>
+    <div class="bar-row"><div class="bar-name">玉泽</div><div class="bar-track"><div class="bar-fill dim" style="width:13%">约4-6亿</div></div></div>
+    <div class="bar-row"><div class="bar-name">启初(家化)</div><div class="bar-track"><div class="bar-fill dim" style="width:10%">估算(婴童)</div></div></div>
+    <div class="bar-row"><div class="bar-name">凡士林</div><div class="bar-track"><div class="bar-fill" style="width:12%">估算(国民)</div></div></div>
+    <div class="bar-row"><div class="bar-name">丝塔芙</div><div class="bar-track"><div class="bar-fill dim" style="width:14%">估算(大白罐)</div></div></div>
+  </div>
+  <div class="grid g3" style="margin-top:18px;">
+    <div class="card"><div class="t">格局</div><p><b style="color:var(--gold-light)">"国民锚 + 国货追"</b>：凡士林是封闭修护的国民标杆，但国货医研(薇诺娜49亿)体量远超，且平价神经酰胺/屏障平替大量涌现。</p></div>
+    <div class="card"><div class="t">凡士林坐标</div><p>联合利华 + 百年信任，全渠道(京东自营/天猫/屈臣氏)；晶冻是"一罐多用"大单品锚，但无强功效叙事。<span class="flag c">C</span></p></div>
+    <div class="card"><div class="t">对标意义</div><p>作为国民锚，凡士林给国货"封闭锁水/大容量"路线提供价格与信任参照，也是被平替对标的最直接对象。<span class="flag c">C·推断</span></p></div>
+  </div>
+  <div class="src"><b>数据来源：</b>贝泰妮年报（A级，薇诺娜49.09亿）｜用户说（B级，玉泽4-6亿等赛道对比）｜各品牌公开信息（C级，定位/渠道）。注：凡士林中国具体营收未单拆，条形体量为估算。</div>
+</section>
+
+<!-- ============ P3 ============ -->
+<section class="page" id="p3">
+  <div class="pageno">03 / 10</div>
+  <span class="tag">产品定位</span>
+  <h2>凡士林卡在什么位置？</h2>
+  <p class="sub">定位一句话：<b style="color:var(--gold-light)">"国民级里的极致平价封闭修护专家"</b>——把微凝晶冻（医用级矿脂）封闭锁水做成手肘/脚后跟/唇/身/脸一罐多用方案，卡位 封闭修护 × 极致低价 × 全人群全部位，价格晶冻 50g 12.9-16.9 元 × 全身通用场景。坐标：基础修护低端 × 封闭锁水日常。</p>
+  <div class="matrix">
+    <div class="axis-y">价格带（低 → 高）</div>
+    <div class="axis-x">适用部位（专项 → 全身一罐多用）</div>
+    <div class="dot me" style="left:14%;top:22%;">凡士林晶冻 50g 12.9-16.9</div>
+    <div class="dot other" style="left:18%;top:30%;">启初倍润 40g 28-38</div>
+    <div class="dot other" style="left:38%;top:24%;">丝塔芙大白罐 550g 89-129</div>
+    <div class="dot other" style="left:42%;top:32%;">珂润乳霜 40g 109-125</div>
+    <div class="dot other" style="left:30%;top:30%;">适乐肤C霜 85g 50-104</div>
+    <div class="dot other" style="left:58%;top:40%;">玉泽屏障 80-150</div>
+  </div>
+
+  <h3>同品牌大单品家族（按部位/功效切分）</h3>
+  <div class="grid g2">
+    <div class="card red"><span class="pill gold">修护晶冻(原味)</span> 微凝晶冻·一罐多用·国民大单品锚（50/100g）</div>
+    <div class="card"><span class="pill gold">特润修护精华霜</span> 大白罐/雪融霜·加神经酰胺+泛醇升级</div>
+    <div class="card"><span class="pill gold">护手霜系列</span> 4D玻尿酸+积雪草·干裂修护</div>
+    <div class="card"><span class="pill">身体乳/唇膏</span> 全身修护全品类矩阵</div>
+  </div>
+
+  <div class="newzone">
+    <div class="zh">▍框架增强① · 剂型坐标（本系列玩法入口）</div>
+    <p style="font-size:13px;color:var(--muted);">本品<b style="color:var(--gold-light)">剂型 = 晶冻（半透膏体）</b>，50/100g 为主；凡士林核心玩法在"一罐多用 + 极致低价"：</p>
+    <div style="margin-top:8px;">
+      <span class="pill">晶冻 · 原味</span><span class="pill">霜 · 特润修护</span><span class="pill">护手霜 · 4D玻尿酸</span><span class="pill">身体乳 · 润肤</span><span class="pill">唇膏 · 修护</span>
+    </div>
+    <p style="font-size:13px;color:var(--muted);margin-top:8px;"><b style="color:var(--gold-light)">启示：</b>"微凝晶冻封闭锁水"的心智可脱离晶冻存在——特润修护已加神经酰胺+泛醇做升级，但<b>国货"封闭+强功效(褪红/屏障)复合 + 年轻化视觉"仍空白</b>。<span class="flag c">C·策略推断</span></p>
+  </div>
+  <div class="src"><b>数据来源：</b>品牌官方与商品页（C级，产品体系/规格/价格）｜各品牌旗舰店价格（C级快照）｜京东（C级，类目评论）。坐标为基于公开价格的示意性卡位，非精确测量。</div>
+</section>
+
+<!-- ============ P4 ============ -->
+<section class="page" id="p4">
+  <div class="pageno">04 / 10</div>
+  <span class="tag">配方拆解</span>
+  <h2>核心：微凝晶冻（医用级矿脂）封闭锁水</h2>
+  <p class="sub">凡士林把"医用级微凝晶冻（矿脂）——在皮肤表面形成封闭保护膜、减少 98% 表皮水分流失（抖音实测，C 级）"做成基础修护主轴；特润修护精华霜（大白罐/雪融霜）已叠加神经酰胺 + 泛醇做升级，配合无香无酒精无色素、低敏测试、孕婴可用，定位"一罐多用、全身修护"。</p>
+  <div class="grid g2">
+    <div class="card red">
+      <div class="t">封闭 · 锁水 · 修护</div>
+      <p><span class="pill gold">微凝晶冻(医用级矿脂)</span> 封闭膜、减少98%水分流失<br><span class="pill">神经酰胺+泛醇</span> 特润修护款升级加成<br><span class="pill">甘油+玻尿酸(护手款)</span> 双重补水</p>
+    </div>
+    <div class="card">
+      <div class="t">安全 · 温和 · 全身</div>
+      <p><span class="pill">无香/酒精/色素</span> 低敏测试、孕婴可用<br><span class="pill">一罐多用</span> 手肘/脚后跟/唇/身/脸<br><span class="pill">积雪草+VE(护手款)</span> 舒缓修护</p>
+    </div>
+  </div>
+  <div class="quote" style="margin-top:18px;"><span class="q">机理标签：</span>"矿脂封闭 × 锁水"——微凝晶冻解决"外界刺激隔离与水分留驻"，神经酰胺+泛醇(特润款)解决"屏障修护"，是经典的<b>封闭型基础修护</b>，不主打急性褪红/强抗老，但"一罐多用"场景心智极稳。<span class="flag c">C·品牌/实测</span></div>
+  <div class="grid g3" style="margin-top:14px;">
+    <div class="card"><div class="kpi red" style="font-size:22px;">98%</div><div class="t">减少水分流失(实测) <span class="flag c">C</span></div></div>
+    <div class="card"><div class="kpi red" style="font-size:22px;">0</div><div class="t">香精/酒精/色素 <span class="flag c">C</span></div></div>
+    <div class="card"><div class="kpi red" style="font-size:22px;">一罐多用</div><div class="t">全身/孕婴可用 <span class="flag c">C</span></div></div>
+  </div>
+
+  <div class="newzone">
+    <div class="zh">▍框架增强② · 载体 / 包装形态（包装即玩法）</div>
+    <div class="grid g2" style="margin-top:4px;">
+      <div class="card"><div class="t">剂型技术</div><p>半透晶冻质地、清爽不油腻、易涂抹，<b style="color:var(--gold-light)">设计用于全身多部位</b>；50/100g 便携装契合"国民开架"心智。</p></div>
+      <div class="card"><div class="t">包装 / 视觉</div><p>凡士林蓝 + 经典晶冻罐 VI 传递"百年/药妆/可靠"信任；包装简洁国民感——<b style="color:var(--gold-light)">视觉与"可靠平价"心智一致</b>。</p></div>
+    </div>
+    <p style="font-size:13px;color:var(--muted);margin-top:8px;">对比：适乐肤蓝医疗/珂润柔粉/丝塔芙奶白/启初绿——凡士林的"蓝+经典罐"最国民但最"无年轻感"，功效表达与年轻化弱。<span class="flag c">C·策略推断</span></p>
+  </div>
+  <div class="src"><b>数据来源：</b>京东（C级，晶冻50g/100g价格/评论/质地）｜爱企查/今日头条（C级，特润修护360g/微凝晶冻/神经酰胺+泛醇/减少98%水分流失）｜备案（C级，皖G妆网备字2022000986）。注：具体添加浓度以备案为准。</div>
+</section>
+
+<!-- ============ P5 ============ -->
+<section class="page" id="p5">
+  <div class="pageno">05 / 10</div>
+  <span class="tag">价格策略</span>
+  <h2>极致低价里的"国民封闭"锚点</h2>
+  <p class="sub">凡士林用"百年信任 + 极致低价"卡位 12.9-16.9 元基础修护带，是赛道价格地板；特润修护精华霜 360g 65-95 元(促销45-75)做中端升级，护手霜 12.9-34.9 元做专项走量。<span class="flag c">C级·电商快照</span></p>
+  <div style="background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px;">
+    <div class="bar-row"><div class="bar-name">修丽可/高端</div><div class="bar-track"><div class="bar-fill dim" style="width:100%">300-600+ 元</div></div></div>
+    <div class="bar-row"><div class="bar-name">玉泽屏障</div><div class="bar-track"><div class="bar-fill dim" style="width:48%">80-150 元</div></div></div>
+    <div class="bar-row"><div class="bar-name">珂润乳霜</div><div class="bar-track"><div class="bar-fill dim" style="width:42%">109-125 元</div></div></div>
+    <div class="bar-row"><div class="bar-name">特润修护·360g</div><div class="bar-track"><div class="bar-fill" style="width:30%">65-95 元（促销45-75）</div></div></div>
+    <div class="bar-row"><div class="bar-name">凡士林晶冻·50g</div><div class="bar-track"><div class="bar-fill gold" style="width:14%">12.9-16.9 元（地板）</div></div></div>
+  </div>
+  <div class="grid g3" style="margin-top:16px;">
+    <div class="card red"><div class="t">锚点① 价格地板</div><p>晶冻 50g 仅 12.9-16.9 元、100g 24.9 元，把"百年/可靠"做成全民可负担的日常基础。</p></div>
+    <div class="card"><div class="t">锚点② 升级款</div><p>特润修护加神经酰胺+泛醇做中端升级(360g 65-95)，承接想要"不止封闭"的用户。</p></div>
+    <div class="card"><div class="t">价格带天花板低</div><p>定位超低价，向上被玉泽/珂润/丝塔芙占据中端，溢价能力弱、利润薄。</p></div>
+  </div>
+  <div class="src"><b>数据来源：</b>京东（C级快照，晶冻50g 12.9-16.9/100g 24.9/特润修护360g 65-95）｜各品牌旗舰店（C级，价格带对比）。价格随促销与渠道大幅波动，以官方旗舰店实时为准。</div>
+</section>
+
+<!-- ============ P6 ============ -->
+<section class="page" id="p6">
+  <div class="pageno">06 / 10</div>
+  <span class="tag">消费者评价</span>
+  <h2>好评词云 vs 差评痛点</h2>
+  <p class="sub">正向口碑以"便宜、一罐多用、润而不油、全身可用、孕婴安心"为主，是全家/干裂/性价比人群的高信任基础单品；负面声量集中于<b style="color:var(--bad)">功效感弱无亮点、纯封闭不补水、依赖经典矿脂、年轻化弱/品牌老化</b>。下方词云为各平台高频词归纳。<span class="flag c">C</span></p>
+  <div class="grid g2">
+    <div>
+      <h3 style="color:var(--good)">✓ 好评词云</h3>
+      <div class="cloud">
+        <span class="cloud cgood s3">便宜大碗</span>
+        <span class="cloud cgood s3">一罐多用</span>
+        <span class="cloud cgood s2">润而不油</span>
+        <span class="cloud cgood s3">全身可用</span>
+        <span class="cloud cgood s2">孕婴安心</span>
+        <span class="cloud cgood s2">干裂救星</span>
+        <span class="cloud cgood s1">国民放心</span>
+        <span class="cloud cgood s2">不黏腻</span>
+      </div>
+    </div>
+    <div>
+      <h3 style="color:var(--bad)">✗ 差评 / 痛点词云</h3>
+      <div class="cloud">
+        <span class="cloud cbad s3">功效感弱</span>
+        <span class="cloud cbad s3">纯封闭不补水</span>
+        <span class="cloud cbad s2">矿脂感</span>
+        <span class="cloud cbad s2">品牌老化</span>
+        <span class="cloud cbad s1">社媒声量低</span>
+        <span class="cloud cbad s1">无记忆点</span>
+        <span class="cloud cbad s2">夏天腻</span>
+      </div>
+    </div>
+  </div>
+  <div class="grid g3" style="margin-top:14px;">
+    <div class="card"><div class="kpi" style="font-size:22px;color:var(--good)">99%</div><div class="t">京东好评率 <span class="flag c">C</span></div></div>
+    <div class="card"><div class="kpi" style="font-size:22px;color:var(--bad)">功效弱</div><div class="t">无强功效叙事 <span class="flag c">C</span></div></div>
+    <div class="card"><div class="kpi" style="font-size:22px;color:var(--bad)">老化</div><div class="t">品牌年轻化弱 <span class="flag c">C</span></div></div>
+  </div>
+  <div class="src"><b>数据来源：</b>京东（C级，晶冻50g 500万+评论/99%、价格/质地）｜爱企查/今日头条（C级，特润修护/微凝晶冻/减少98%水分流失）｜各平台评价与社区（C级，便宜/一罐多用/孕婴可用描述）。差评声量以平台个案为主，不代表大规模用户差评。</div>
+</section>
+
+<!-- ============ P7 ============ -->
+<section class="page" id="p7">
+  <div class="pageno">07 / 10</div>
+  <span class="tag">卖点拆解</span>
+  <h2>百年信任 × 微凝晶冻 × 一罐多用</h2>
+  <p class="sub">凡士林消费者心智三杠杆（按"×交叉拆解"格式、从真实数据与品牌实际打法提炼）：用联合利华 + 百年历史建立信任、用微凝晶冻（医用级矿脂）做封闭锁水锚、用"一罐多用"放大全身场景——三段构成"可靠也能很便宜"的护城河。</p>
+  <div class="grid g3">
+    <div class="card red">
+      <div class="kpi" style="font-size:22px;color:var(--red)">百年信任</div>
+      <div class="t">联合利华 · 信任锚</div>
+      <p style="font-size:13px;color:var(--muted);">凡士林(Vaseline)归属联合利华，百余年底层科技"微凝晶冻"；构建"国民可靠科学"叙事。<span class="flag a">A级·联合利华</span></p>
+    </div>
+    <div class="card gold">
+      <div class="kpi" style="font-size:22px;color:var(--gold)">微凝晶冻</div>
+      <div class="t">封闭锁水 · 功效锚</div>
+      <p style="font-size:13px;color:var(--muted);">医用级矿脂形成封闭膜、减少98%水分流失(实测)；特润款加神经酰胺+泛醇，被国货平替直接对标。<span class="flag c">C级·实测</span></p>
+    </div>
+    <div class="card">
+      <div class="kpi" style="font-size:22px;color:var(--gold-light)">一罐多用</div>
+      <div class="t">全身 · 场景锚</div>
+      <p style="font-size:13px;color:var(--muted);">手肘/脚后跟/唇/身/脸皆可；全家通用、孕婴可用，场景心智极清晰但偏基础。<span class="flag c">C级·产品</span></p>
+    </div>
+  </div>
+
+  <div class="newzone">
+    <div class="zh">▍框架增强③ · 包装 / 视觉轴（可被对标复制）</div>
+    <p style="font-size:13px;color:var(--muted);">除信任/晶冻/一罐多用三轴外，凡士林的<b style="color:var(--gold-light)">包装与视觉自成第四类卖点资产</b>：蓝 + 经典晶冻罐 VI 传递"百年/药妆/可靠"、包装简洁国民感。这套视觉语言是<b>最国民但最"无年轻感"</b>——功效表达与年轻化弱，正契合"同封闭、换强功效视觉/换IP"的差异化空间。</p>
+  </div>
+
+  <div class="quote" style="margin-top:18px;"><span class="q">三轴相乘而非相加：</span>百年信任提供<b>信任</b>、微凝晶冻提供<b>封闭锁水证据</b>、一罐多用提供<b>全身场景</b>——这是凡士林能在国货医研夹击中守住国民基础修护头牌的原因。其弱点也正在于此：定位基础、功效叙事弱、品牌老化、社媒弱。<span class="flag c">C·策略推断</span></div>
+  <div class="src"><b>数据来源：</b>联合利华公开信息（A级，凡士林归属/百年微凝晶冻）｜京东（C级，价格/评论/质地）｜爱企查/今日头条（C级，特润修护/神经酰胺+泛醇/98%水分流失）｜备案（C级）。三轴+包装轴为我按"×交叉拆解"格式从真实数据与品牌打法提炼，非示例照搬。</div>
+</section>
+
+<!-- ============ P8 ============ -->
+<section class="page" id="p8">
+  <div class="pageno">08 / 10</div>
+  <span class="tag">痛点与机会</span>
+  <h2>它没做好的 = 你的机会</h2>
+  <p class="sub">凡士林赢了"百年信任 + 微凝晶冻 + 一罐多用"心智，但在功效叙事、年轻化视觉、品牌老化、平替、中国市场五个维度留了口子。每一处，都是新品牌的差异化切口。</p>
+  <div class="tw"><table>
+    <tr><th style="width:30%">凡士林没做好的</th><th>你的机会（切口）</th></tr>
+    <tr><td><span class="n">功效叙事弱</span><br>纯封闭，不补水不褪红</td><td><span class="y">功效复合升级</span>：在同封闭机理上加重组胶原/褪红/抗氧，做"封闭+功效"复合而非纯基础</td></tr>
+    <tr><td><span class="n">品牌老化</span><br>国民但年轻人无感</td><td><span class="y">年轻化视觉</span>：换包装/IP联名，把"可靠"做成年轻悦己而非"老牌"</td></tr>
+    <tr><td><span class="n">视觉无年轻感</span><br>蓝+经典罐平庸</td><td><span class="y">强功效视觉</span>：换包装/IP联名，把"封闭"做成有记忆点的专业</td></tr>
+    <tr><td><span class="n">国货平替对标</span><br>封闭类被低价对标</td><td><span class="y">机理+剂型升级</span>：换次抛/轻乳，做代际升级而非被平价内卷</td></tr>
+    <tr><td><span class="n">本地化内容弱</span><br>社媒靠自然流量</td><td><span class="y">抖音原生种草</span>：用真实干裂/全身实测，抢"基础修护=年轻家庭"心智</td></tr>
+  </table></div>
+
+  <div class="newzone">
+    <div class="zh">▍框架增强④ · 对标转化路径（换剂型 / 换包装 切入）</div>
+    <p style="font-size:13px;color:var(--muted);">把"竞品分析"直接翻译成"自研产品定义"：</p>
+    <div class="tw"><table>
+      <tr><th style="width:22%">对标对象</th><th style="width:20%">换剂型</th><th style="width:20%">换包装</th><th>切入空白 / 差异点</th></tr>
+      <tr><td>晶冻（半透膏）</td><td><span class="y">轻乳/次抛</span></td><td>强功效视觉</td><td><span class="y">高频日常封闭</span>（全脸、轻负担）</td></tr>
+      <tr><td>微凝晶冻封闭机理</td><td><span class="y">复合功效精华</span></td><td>年轻化IP</td><td>对标特润修护，做"封闭+褪红/屏障"复合</td></tr>
+      <tr><td>同品牌国民信任心智</td><td>任意剂型可承接</td><td>换视觉/IP联名</td><td>同信任状、不同触点，快速铺品不重塑心智</td></tr>
+    </table></div>
+    <p style="font-size:13px;color:var(--muted);margin-top:8px;"><b style="color:var(--gold-light)">玩法本质：</b>你不需要重新教育"干裂要封闭"，只需把凡士林验证过的晶冻信任状，<b>用强功效复合/轻质地/换视觉</b>重新封装到日常场景的空白里。<span class="flag c">C·策略推断</span></p>
+  </div>
+  <div class="src"><b>数据来源：</b>京东（C级，价格/评论/质地）｜爱企查/今日头条（C级，成分/场景）｜联合利华信息（A级，品牌归属）｜各品牌公开定位（C级）。机会点与对标转化路径为基于公开事实的策略推断。</div>
+</section>
+
+<!-- ============ P9 ============ -->
+<section class="page" id="p9">
+  <div class="pageno">09 / 10</div>
+  <span class="tag">产品启示</span>
+  <h2>如果做竞品，怎么打？</h2>
+  <p class="sub">不打凡士林的"百年信任"正面战场，而是打它留给你的功效叙事、年轻化、品牌老化、平替、中国市场空白。五条可执行策略（含对标转化落地）：</p>
+  <ol class="listnum">
+    <li><b>功效复合升级"封闭修护"。</b>凡士林定位纯封闭，切口是用同封闭机理 + 褪红/抗氧/胶原，做"封闭+功效"复合，承接想要"不只锁水"的用户。</li>
+    <li><b>对标转化：换轻剂型铺日常。</b>承接"微凝晶冻"心智，用<b>轻乳/精华/次抛</b>发散到高频日常屏障、熬夜修护场景，避开只做晶冻的正面竞争。</li>
+    <li><b>年轻化视觉换感知。</b>针对"品牌老化/视觉无年轻感"，用换包装/IP联名把"可靠"做成年轻悦己，抢年轻专业心智。</li>
+    <li><b>机理升级防平替。</b>在矿脂基础上加神经酰胺/泛醇/重组胶原，做代际升级而非被国货低价平替内卷。</li>
+    <li><b>抖音原生种草抢心智。</b>用真实干裂/全身实测，承接 Z 世代"基础修护=年轻家庭"心智，反制品牌老化。</li>
+  </ol>
+  <div class="src"><b>说明：</b>以上为基于凡士林公开竞争态势的"我方（假设为新锐封闭修护品牌）"策略推断，非凡士林官方信息。我方品牌定位、价格带、渠道资源需结合实际业务进一步定义；对标转化路径仅为方法论示例。</div>
+</section>
+
+<!-- ============ P10 ============ -->
+<section class="page" id="p10">
+  <div class="pageno">10 / 10</div>
+  <span class="tag">总结 + 来源</span>
+  <h2>一句话总结</h2>
+  <div class="quote"><span class="q">凡士林验证了一条路径：</span>把"微凝晶冻封闭锁水 × 一罐多用 × 极致平价"做成全民家庭基础修护标配，能沉淀 500万+ 评论的国民心智与百年信任；但它把"可靠与便宜"守住了，把"强功效叙事、年轻化"留给了后来者——新品牌的切口，就在基础最舒服的那块腹地之外，以及"同机理、强功效复合 + 换包装/换场景"的空白里。</div>
+
+  <h3 style="margin-top:18px;">数据来源与置信度清单</h3>
+  <div class="tw"><table>
+    <tr><th style="width:42%">来源</th><th style="width:12%">级别</th><th>用于本报告的结论</th></tr>
+    <tr><td>联合利华公开信息</td><td><span class="y">A</span></td><td>凡士林归属联合利华、百年微凝晶冻(矿脂)科技</td></tr>
+    <tr><td>京东</td><td>C</td><td>晶冻50g 500万+评论/99%、价格12.9-16.9/100g 24.9、质地</td></tr>
+    <tr><td>爱企查/今日头条</td><td>C</td><td>特润修护360g 65-95、微凝晶冻/神经酰胺+泛醇、减少98%水分流失(实测)</td></tr>
+    <tr><td>备案</td><td>C</td><td>皖G妆网备字2022000986、无香/酒精/色素</td></tr>
+    <tr><td>贝泰妮年报/用户说</td><td>A/B</td><td>薇诺娜49.09亿/玉泽4-6亿（赛道体量对比，凡士林中国营收未单拆为估算）</td></tr>
+  </table></div>
+  <div class="src"><b>置信度说明：</b>A=公司公告/监管/官方；B=行业机构/认证/媒体；C=平台快照/实测/达人内容（波动大、存个案偏差）。凡士林中国具体营收未单拆（估算），品牌"减少98%水分流失"为抖音实测标注"待核"。本报告不构成对任何品牌的投资或购买建议。</div>
+</section>
+
+<div class="foot">竞品分析情报网 EP.19 · 凡士林·修护晶冻（经典） ｜ 数据截至 2026-08 公开资料整理 ｜ 国民标杆对标 ｜ 内容仅供产品研究与求职作品集使用</div>
+
+</body>
+</html>
