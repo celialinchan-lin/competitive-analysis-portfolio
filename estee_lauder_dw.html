@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>竞品分析情报网 · 彩妆·EP09｜雅诗兰黛 Estée Lauder Double Wear 持妆粉底液</title>
+<style>
+  :root{
+    --red:#1E3A5F; --red-deep:#0E1C30; --gold:#C9A24B; --gold-light:#DDBE7E;
+    --bg:#0E0C08; --bg2:#1A160E; --card:#1F1A11; --card2:#2C2517;
+    --text:#F2EAD9; --muted:#A99E86; --line:#2C2517; --good:#D8B35E; --bad:#C77B5A;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{background:var(--bg);color:var(--text);font-family:"PingFang SC","Microsoft YaHei",-apple-system,sans-serif;line-height:1.6;font-size:15px;}
+  .page{width:100%;max-width:920px;margin:0 auto;min-height:100vh;padding:54px 40px 40px;display:flex;flex-direction:column;justify-content:flex-start;border-bottom:1px solid var(--line);position:relative;}
+  .pageno{position:absolute;top:22px;right:40px;font-size:12px;color:var(--gold);letter-spacing:2px;font-weight:700;}
+  .tag{display:inline-block;background:var(--red);color:#fff;font-size:12px;padding:3px 12px;border-radius:20px;letter-spacing:1px;margin-bottom:14px;font-weight:700;}
+  h1{font-size:38px;line-height:1.25;font-weight:800;letter-spacing:1px;margin-bottom:8px;}
+  h2{font-size:26px;font-weight:800;margin-bottom:6px;color:var(--gold-light);}
+  h3{font-size:18px;font-weight:800;color:var(--text);margin:18px 0 8px;}
+  .sub{color:var(--muted);font-size:14px;margin-bottom:20px;}
+  .src{margin-top:auto;padding-top:18px;font-size:11px;color:var(--muted);border-top:1px dashed var(--line);}
+  .src b{color:var(--gold-light);}
+  .grid{display:grid;gap:14px;}
+  .g3{grid-template-columns:repeat(3,1fr);}
+  .g2{grid-template-columns:repeat(2,1fr);}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 16px;}
+  .card.red{border-left:4px solid var(--red);}
+  .card.gold{border-left:4px solid var(--gold);}
+  .kpi{font-size:32px;font-weight:800;color:var(--gold);line-height:1.1;}
+  .kpi.red{color:var(--red);}
+  .kpi small{font-size:13px;color:var(--muted);font-weight:400;}
+  .card .t{font-size:13px;color:var(--muted);margin-bottom:6px;}
+  .pill{display:inline-block;background:var(--card2);border:1px solid var(--line);border-radius:8px;padding:4px 10px;font-size:12px;margin:3px 4px 3px 0;color:var(--text);}
+  .pill.good{background:rgba(216,179,94,.15);border-color:var(--good);color:var(--good);}
+  .pill.bad{background:rgba(199,123,90,.15);border-color:var(--bad);color:var(--bad);}
+  .pill.gold{background:rgba(216,179,94,.14);border-color:var(--gold);color:var(--gold-light);}
+  .pill.new{background:rgba(216,179,94,.22);border-color:var(--gold);color:#F5EEDD;font-weight:700;}
+  .bar-row{display:flex;align-items:center;margin:7px 0;font-size:13px;}
+  .bar-name{width:108px;flex-shrink:0;color:var(--text);text-align:right;padding-right:10px;}
+  .bar-track{flex:1;background:var(--bg2);border-radius:6px;height:22px;overflow:hidden;position:relative;}
+  .bar-fill{height:100%;border-radius:6px;background:linear-gradient(90deg,var(--red-deep),var(--red));display:flex;align-items:center;justify-content:flex-end;padding-right:8px;font-size:11px;color:#fff;font-weight:700;}
+  .bar-fill.gold{background:linear-gradient(90deg,#3a2e15,var(--gold));color:#0E0C08;}
+  .bar-fill.dim{background:linear-gradient(90deg,#2C2517,#5a4a2a);}
+  .matrix{position:relative;width:100%;height:380px;background:var(--bg2);border:1px solid var(--line);border-radius:14px;margin-top:8px;}
+  .axis-x{position:absolute;bottom:8px;width:100%;text-align:center;font-size:12px;color:var(--muted);}
+  .axis-y{position:absolute;left:8px;top:0;height:100%;writing-mode:vertical-rl;font-size:12px;color:var(--muted);}
+  .dot{position:absolute;transform:translate(-50%,-50%);padding:5px 10px;border-radius:20px;font-size:12px;font-weight:700;white-space:nowrap;}
+  .dot.me{background:var(--red);color:#fff;border:2px solid var(--gold);}
+  .dot.other{background:var(--card2);color:var(--text);border:1px solid var(--line);}
+  .cloud{display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px;padding:14px;background:var(--bg2);border-radius:14px;}
+  .cloud span{padding:3px 10px;border-radius:8px;line-height:1.5;}
+  .s1{font-size:13px;} .s2{font-size:16px;} .s3{font-size:20px;} .s4{font-size:25px;}
+  .cgood{background:rgba(216,179,94,.13);color:var(--good);}
+  .cbad{background:rgba(199,123,90,.13);color:var(--bad);}
+  .ctheme{font-size:15px;color:var(--gold-light);background:rgba(216,179,94,.1);padding:6px 14px;border-radius:10px;font-weight:700;}
+  .quote{border-left:3px solid var(--gold);padding:10px 16px;background:var(--card);border-radius:0 10px 10px 0;font-size:15px;color:var(--text);margin:10px 0;}
+  .quote .q{color:var(--gold-light);font-weight:800;}
+  table{width:100%;border-collapse:collapse;font-size:13px;margin-top:8px;}
+  th,td{border:1px solid var(--line);padding:9px 10px;text-align:left;vertical-align:top;}
+  th{background:var(--card2);color:var(--gold-light);font-weight:700;}
+  td .y{color:var(--good);} td .n{color:var(--bad);}
+  .listnum{counter-reset:l;list-style:none;}
+  .listnum li{counter-increment:l;position:relative;padding:12px 14px 12px 52px;background:var(--card);border:1px solid var(--line);border-radius:12px;margin-bottom:10px;}
+  .listnum li::before{content:counter(l);position:absolute;left:14px;top:12px;width:26px;height:26px;background:var(--red);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;}
+  .listnum li b{color:var(--gold-light);}
+  .foot{text-align:center;font-size:12px;color:var(--muted);padding:26px;}
+  .foot b{color:var(--gold-light);}
+  .flag{font-size:11px;padding:1px 6px;border-radius:5px;background:var(--card2);color:var(--muted);margin-left:4px;}
+  .flag.a{color:var(--good);} .flag.b{color:var(--gold-light);} .flag.c{color:var(--bad);}
+  .newzone{border:1px dashed var(--gold);border-radius:14px;padding:14px 16px;margin-top:14px;background:rgba(216,179,94,.06);}
+  .newzone .zh{font-size:13px;color:var(--gold-light);font-weight:800;margin-bottom:8px;}
+
+  @media (max-width:820px){
+    .page{min-height:100dvh;padding:24px 18px 40px;}
+    .pageno{top:14px;right:16px;}
+    h1{font-size:25px;}
+    h2{font-size:21px;}
+    h3{font-size:16px;}
+    .sub{font-size:13px;margin-bottom:14px;}
+    .g3,.g2{grid-template-columns:1fr;}
+    .card{padding:15px 13px;}
+    .kpi{font-size:24px;}
+    .bar-name{width:74px;font-size:11px;padding-right:6px;}
+    .bar-track{height:20px;}
+    .bar-fill{font-size:10px;padding-right:5px;}
+    .matrix{height:320px;}
+    .dot{font-size:11px;padding:4px 8px;}
+    .cloud{padding:12px 10px;gap:5px 6px;}
+    .s1{font-size:12px;} .s2{font-size:14px;} .s3{font-size:17px;} .s4{font-size:21px;}
+    table{font-size:12px;}
+    th,td{padding:7px 8px;}
+    .quote{font-size:14px;padding:9px 13px;}
+    .listnum li{padding:11px 12px 11px 46px;}
+    .listnum li::before{left:12px;width:24px;height:24px;font-size:13px;}
+    .src{font-size:10px;}
+    .flag{font-size:10px;}
+  }
+  .page{overflow-x:hidden;}
+  .tw{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:10px 0;}
+  .tw table{min-width:640px;}
+  @media (max-width:820px){
+    .bar-row,.bar{flex-direction:column;align-items:stretch;margin:11px 0;}
+    .bar-name{width:auto !important;flex-shrink:1;text-align:left !important;padding-right:0;font-size:12.5px;line-height:1.4;}
+    .bar-track{width:100%;}
+    .bar-fill{min-width:60px;}
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ P1 ============ -->
+<section class="page" id="p1">
+  <div class="pageno">01 / 10</div>
+  <span class="tag">彩妆·EP09 · 雅诗兰黛 DW 持妆粉底液（国际持妆标杆）</span>
+  <h1>雅诗兰黛 Double Wear<br>全球长青的"24-36h 持妆"标杆</h1>
+  <p class="sub">雅诗兰黛（Estée Lauder）由雅诗兰黛夫人于 1946 年创立，隶属雅诗兰黛集团；Double Wear 持妆粉底液于 1997 年首发，是国际持妆粉底的技术标杆，以硅系成膜实现超长持妆、无油无酒精配方，横跨全球市场数十年仍居主流。<span class="flag a">A/B</span></p>
+  <div class="quote"><span class="q">一句话结论：</span>DW 用"硅系成膜 + 无油无酒精 + 庞大色号体系(>55-70) + 跨境低价¥199-272"占死国际持妆心智，卡位 ¥200-490；亮点在<b>硅系成膜超长持妆 / 无油无酒精 / 色号体系庞大(&gt;55-70) / 跨境低价¥199-272</b>，短板在<b>无内置泵 / 干皮易卡粉 / 不致痘官方 vs skinsort 提示 / 原产国美国 vs 比利时冲突 / 官方¥490 vs 跨境巨大价差</b>。<span class="flag c">C·电商快照</span></div>
+  <div class="grid g3" style="margin-top:22px;">
+    <div class="card red">
+      <div class="kpi">¥200<small> –490</small></div>
+      <div class="t">价格带 <span class="flag c">C</span></div>
+      <p style="font-size:13px;color:var(--muted);margin-top:6px;">官方旗舰 ¥490（二代 30ml）/ 天猫领券 ¥455 / 京东全球购跨境 ¥199-272；跨境渠道价低近一半。</p>
+    </div>
+    <div class="card gold">
+      <div class="kpi red">5万+</div>
+      <div class="t">京东评论 / 好评率 <span class="flag b">B</span></div>
+      <p style="font-size:13px;color:var(--muted);margin-top:6px;">京东全球购自营评论 5 万+、好评率 93%（京东商品页）；国际持妆销量标杆。</p>
+    </div>
+    <div class="card">
+      <div class="kpi red">1946</div>
+      <div class="t">品牌创立年份 <span class="flag a">A</span></div>
+      <p style="font-size:13px;color:var(--muted);margin-top:6px;">雅诗兰黛集团，DW 1997 首发；硅系成膜持妆技术长青，国际持妆标杆。</p>
+    </div>
+  </div>
+  <div class="src"><b>数据来源：</b>EL 中国 / 美国 / 香港官网（A 级，品牌沿革 / 成分宣称）｜京东商品页（B/C 级，价格 / 评论 / 好评率）｜CosDNA / skinsort / 什么值得买（B/C 级，跨境价 / 成分 / 口碑）。价格随渠道与促销波动。</div>
+</section>
+
+<!-- ============ P2 ============ -->
+<section class="page" id="p2">
+  <div class="pageno">02 / 10</div>
+  <span class="tag">市场全景</span>
+  <h2>底妆 / 粉底赛道格局：国际持妆技术壁垒 vs 国货追赶</h2>
+  <p class="sub">粉底的"成膜持妆 + 色号体系 + 跨国供应链"门槛高。兰蔻持妆与 DW 凭硅系成膜技术占国际持妆双雄；彩棠凭分肤分场景 + 磁吸替换卡中端；毛戈平凭养肤水奶油占高端国货；花西子占定妆散粉补位。<span class="flag b">B/C</span></p>
+  <div class="tw"><table>
+    <tr><th style="width:16%">品牌</th><th style="width:20%">代表粉底</th><th style="width:16%">价格带</th><th style="width:22%">核心定位</th><th>主渠道</th></tr>
+    <tr><td>花西子</td><td>空气蜜粉（定妆）</td><td>¥129-169</td><td>国风定妆 / 散粉补位</td><td>全渠道</td></tr>
+    <tr><td>彩棠 TIMAGE</td><td>小圆管粉底液</td><td>¥75-219</td><td>分肤分场景 / 磁吸替换</td><td>天猫抖音京东</td></tr>
+    <tr><td>毛戈平 MGP</td><td>光感柔润粉底液</td><td>¥380</td><td>养肤水奶油 / 高端国货</td><td>专柜+线上</td></tr>
+    <tr><td><span class="y">雅诗兰黛 EL</span></td><td>Double Wear 持妆</td><td>¥200-490</td><td>国际持妆标杆 / 硅系成膜</td><td>跨境+官方旗舰</td></tr>
+    <tr><td><span class="y">兰蔻 LANCÔME</span></td><td>持妆轻透粉底液</td><td>¥239-490</td><td>国际持妆 / 同梯队</td><td>跨境+专柜</td></tr>
+  </table></div>
+  <div class="grid g3" style="margin-top:16px;">
+    <div class="card"><div class="t">DW 卡位</div><p>国际持妆标杆、硅系成膜、色号庞大，靠"24-36h 持妆"心智横跨全球；跨境低价(¥199-272)直接冲击国货价格带。</p></div>
+    <div class="card"><div class="t">格局分化</div><p>国际持妆壁垒(DW/兰蔻)技术领先；国货(彩棠/毛戈平/花西子)以分肤、养肤、定妆补位追赶，价格与本地化更灵活。</p></div>
+    <div class="card"><div class="t">机会</div><p>"泵头改良 + 干皮友好版 + 养肤升级 + ¥150-250 价格带 + 色号本地化"是国货切 DW 之下的空白。<span class="flag c">C·推断</span></p></div>
+  </div>
+  <div class="src"><b>数据来源：</b>京东 / 天猫 / 官网（B/C 级，价格 / 定位 / 渠道）｜什么值得买（B 级，跨境价差）。价格为快照，随促销与渠道波动。</div>
+</section>
+
+<!-- ============ P3 ============ -->
+<section class="page" id="p3">
+  <div class="pageno">03 / 10</div>
+  <span class="tag">产品定位</span>
+  <h2>彩妆六维坐标（主题色彩 × 包材 × 质地 × 持妆 × 肤质 × 地域）</h2>
+  <p class="sub">DW 以"硅系成膜超长持妆"为内核，六维坐标用消费者语言表述如下。<span class="flag c">C</span></p>
+  <div class="tw"><table>
+    <tr><th style="width:15%">维度</th><th style="width:30%">坐标（消费者语言）</th><th>含义</th></tr>
+    <tr><td><span class="y">主题色彩</span></td><td>色号 C/N/W + 数字（冷 / 中性 / 暖）</td><td>经典 &gt;55 色 / 新版 70 色（区域口径待核），体系庞大覆盖广</td></tr>
+    <tr><td><span class="y">包材</span></td><td>磨砂玻璃瓶 + 金盖，无内置泵</td><td>质感高级，但取粉需自配泵头，是已知短板</td></tr>
+    <tr><td><span class="y">质地</span></td><td>液态粉底</td><td>轻薄易推开，遮瑕中强，成膜后贴合</td></tr>
+    <tr><td><span class="y">持妆</span></td><td>24h（经典）/ 36h（新版），控油抗汗抗湿防水</td><td>硅系成膜技术，color-true 抗转移，持妆标杆</td></tr>
+    <tr><td><span class="y">肤质</span></td><td>无油主打油 / 混油</td><td>干皮易卡粉、易显干纹（官方称全肤质，实测存争议）</td></tr>
+    <tr><td><span class="y">地域</span></td><td>抗湿抗热 → 南方湿热适用</td><td>新版保湿改善干冷；SPF10 偏低，高原 / 强紫外线不足</td></tr>
+  </table></div>
+  <h3 style="margin-top:18px;">定位矩阵（价格带 × 持妆力）</h3>
+  <div class="matrix">
+    <div class="axis-y">持妆力（弱 → 强）</div>
+    <div class="axis-x">价格带（平价 → 高端）</div>
+    <div class="dot other" style="left:13%;top:58%;">花西子 129-169</div>
+    <div class="dot other" style="left:20%;top:52%;">彩棠 75-219</div>
+    <div class="dot other" style="left:55%;top:46%;">毛戈平 380</div>
+    <div class="dot other" style="left:68%;top:22%;">兰蔻 239-490</div>
+    <div class="dot me" style="left:72%;top:12%;">DW 200-490</div>
+  </div>
+  <div class="grid g2" style="margin-top:16px;">
+    <div class="card red"><div class="t">DW 占位</div><p>中高价格 + 最高持妆力（硅系成膜 24-36h），把"国际持妆标杆"做成技术与心智双护城河，正面承接国货之上的升级需求。</p></div>
+    <div class="card gold"><div class="t">空白区</div><p>"泵头改良 + 干皮友好 + 养肤升级 + ¥150-250 + 色号本地化"带（DW 无泵 / 干皮卡粉 / 价高 / 本地化弱）是差异化机会。<span class="flag c">C·推断</span></p></div>
+  </div>
+  <div class="src"><b>数据来源：</b>京东 / 天猫 / 官网（C 级，价格 / 定位 / 包材）｜EL 美国官网（A 级，色号 / 持妆宣称）。坐标为基于公开价格的示意性卡位；色号数存区域口径冲突待核。</div>
+</section>
+
+<!-- ============ P4 ============ -->
+<section class="page" id="p4">
+  <div class="pageno">04 / 10</div>
+  <span class="tag">配方拆解</span>
+  <h2>成膜剂 / 硅类 / 色素 / 工艺（专业词）</h2>
+  <p class="sub">DW 的"配方"= 硅系成膜聚合物 + 大量硅油肤感调节 + 矿物 / 氧化铁色素体系 + 无油无酒精基底 + 新版养肤添加。以三甲基硅烷氧基硅酸酯（Trimethylsiloxysilicate）为成膜核心，形成防水抗转移膜。<span class="flag c">C</span></p>
+  <div class="tw"><table>
+    <tr><th style="width:22%">模块</th><th style="width:20%">成分 / 工艺</th><th style="width:32%">作用</th><th>备注</th></tr>
+    <tr><td>成膜剂</td><td>三甲基硅烷氧基硅酸酯(Trimethylsiloxysilicate) + 硅交联聚合物</td><td>成膜核心，防水抗转移、超长持妆</td><td>CosDNA 全成分</td></tr>
+    <tr><td>硅类肤感</td><td>环戊硅氧烷 + 大量硅油(PEG-PPG-18-18 聚二甲基硅氧烷)</td><td>延展、丝滑、轻薄、贴肤</td><td>硅处理肤感调节</td></tr>
+    <tr><td>着色体系</td><td>云母 + 氧化铁类 + CI77891(二氧化钛)</td><td>色号覆盖 + 自然遮瑕 + 提亮</td><td>C/N/W 多色号体系</td></tr>
+    <tr><td>保湿</td><td>丁二醇</td><td>基础保湿、助分散</td><td>无油基底</td></tr>
+    <tr><td>防腐</td><td>苯氧乙醇</td><td>防腐体系</td><td>两版均无乙醇(无酒精)</td></tr>
+    <tr><td>新版养肤</td><td>烟酰胺 + 透明质酸钠 + 虎杖发酵物</td><td>舒缓、保湿、屏障(新版添加)</td><td>低置信，以官方为准</td></tr>
+    <tr><td>备案</td><td>二代 国妆特进字 20250875（1W1，特妆-防晒 SPF10）</td><td>进口特殊化妆品（防晒类）</td><td>旧版 J20170582 待核</td></tr>
+  </table></div>
+  <div class="newzone" style="border-color:var(--bad);background:rgba(199,123,90,.06);">
+    <div class="zh" style="color:var(--bad);">⚠ 冲突标注：干皮友好 / 不致痘 / 原产国 三项存冲突，待核</div>
+    <p style="font-size:13px;color:var(--text);">① <b>干皮友好</b>：官方宣称"全肤质适用"，但用户实测与测评普遍反馈干皮易卡粉、显干纹，以"无油主打油 / 混油、干皮需加强保湿"处理，不臆断。<br>② <b>不致痘</b>：官方未标不致痘，skinsort 提示部分成分有致痘风险，二者口径冲突，待核。<br>③ <b>原产国</b>：旧版备案(国妆特进字 J20170582)标注生产国美国，但市场信息出现"原产国比利时"，来源冲突，待核。</p>
+  </div>
+  <div class="grid g3" style="margin-top:14px;">
+    <div class="card"><div class="t">成膜完整度</div><p>Trimethylsiloxysilicate + 硅交联聚合物是成熟高耐久成膜方案，新版 Polymer Mesh Matrix（低置信）进一步强化贴肤。</p></div>
+    <div class="card"><div class="t">配方壁垒</div><p>无油无酒精 + 庞大色号 + 硅系成膜，是 DW 数十年持妆口碑的技术底座，非单纯营销。</p></div>
+    <div class="card"><div class="t">备案</div><p>二代 国妆特进字 20250875（1W1，特妆-防晒类 SPF10）；旧版 国妆特进字 J20170582（生产国美国 / 原产国比利时冲突待核）。<span class="flag a">A</span></p></div>
+  </div>
+  <div class="src"><b>数据来源：</b>国家药监局备案（A 级，备案号 / 特妆）｜CosDNA（B 级，全成分）｜skinsort（C/B 级，致痘提示）｜EL 官网（A 级，宣称）。养肤添加量为新版披露，浓度以官方为准。</div>
+</section>
+
+<!-- ============ P5 ============ -->
+<section class="page" id="p5">
+  <div class="pageno">05 / 10</div>
+  <span class="tag">价格策略</span>
+  <h2>价格带与渠道价差</h2>
+  <p class="sub">DW 呈"跨境低价 → 天猫领券 → 官方旗舰"梯度：跨境(京东全球购 / 什么值得买)低至 ¥199-272，天猫领券约 ¥455，官方旗舰 ¥490（二代 30ml）。官方价与跨境价差近一倍，跨境低价直接冲击国货同价格带。<span class="flag c">C</span></p>
+  <div style="background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px;">
+    <div class="bar-row"><div class="bar-name">跨境低价</div><div class="bar-track"><div class="bar-fill gold" style="width:41%">¥199-272（京东全球购）</div></div></div>
+    <div class="bar-row"><div class="bar-name">天猫领券</div><div class="bar-track"><div class="bar-fill gold" style="width:93%">¥455</div></div></div>
+    <div class="bar-row"><div class="bar-name">官方旗舰</div><div class="bar-track"><div class="bar-fill gold" style="width:100%">¥490（二代 30ml）</div></div></div>
+  </div>
+  <div class="grid g3" style="margin-top:16px;">
+    <div class="card red"><div class="t">价差巨大</div><p>官方 ¥490 vs 跨境 ¥199-272，价差近一倍；跨境版因地区 / 批次差异，口碑参差，影响品牌一致性。</p></div>
+    <div class="card"><div class="t">渠道梯度</div><p>跨境走量抢认知、官方守溢价；天猫领券做中间缓冲，整体卡位国际专业线（兰蔻）与中端国货之间。</p></div>
+    <div class="card"><div class="t">风险</div><p>跨境低价冲击国货 ¥150-250 带；版本 / 产地不一引发"是不是正品"疑虑，削弱高端信任。<span class="flag c">C</span></p></div>
+  </div>
+  <div class="src"><b>数据来源：</b>京东 / 天猫 / 什么值得买（C 级，价格 / 跨境价差快照）。以官方实时价为准；跨境价随汇率与促销波动。</div>
+</section>
+
+<!-- ============ P6 ============ -->
+<section class="page" id="p6">
+  <div class="pageno">06 / 10</div>
+  <span class="tag">消费者评价</span>
+  <h2>口碑横向</h2>
+  <p class="sub">正向集中在"超长持妆、控油强、遮瑕强、色号全"；负向在"无泵难取、干皮带卡粉、氧化暗沉、跨境版本参差"。<span class="flag c">C</span></p>
+  <div class="tw"><table>
+    <tr><th style="width:15%">维度</th><th style="width:30%">正向高频词</th><th style="width:30%">负向 / 痛点</th><th>信号</th></tr>
+    <tr><td>持妆</td><td>超长持妆 / 控油抗汗 / 一天不脱</td><td>干皮出油后卡粉、局部斑驳</td><td>持妆强项</td></tr>
+    <tr><td>遮瑕</td><td>遮瑕强 / 毛孔隐形 / 色号准</td><td>厚涂假面、氧化暗沉</td><td>遮瑕优</td></tr>
+    <tr><td>色号</td><td>色号全 / C/N/W 好选</td><td>区域色号口径不一、难试色</td><td>体系庞大</td></tr>
+    <tr><td>包材</td><td>磨砂瓶质感高级</td><td>无内置泵、难取量、易浪费</td><td>无泵短板</td></tr>
+    <tr><td>价值</td><td>跨境性价比高</td><td>官方偏贵、跨境版本参差</td><td>价差双刃</td></tr>
+  </table></div>
+  <div class="grid g2" style="margin-top:14px;">
+    <div class="card red"><div class="t">强持妆 + 遮瑕 + 色号全</div><p>硅系成膜 + 庞大色号让 DW 成为"国际持妆"代名词，承接对妆效持久要求高的进阶用户。</p></div>
+    <div class="card gold"><div class="t">可攻击口子</div><p>"加泵头 + 干皮友好 + 抗暗沉 + 价格下探¥150-250 + 色号本地化"是清晰短板，后来者用"同持妆 + 换包材 / 换肤感"切。</p></div>
+  </div>
+  <div class="src"><b>数据来源：</b>京东 / 淘宝达人 / 微博（C 级，正向 / 负向高频词归纳）｜skinsort（C/B 级，致痘与肤感提示）。差评以平台个案为主，不代表整体率；"无泵 / 干皮卡粉"为测评与用户共性反馈。</div>
+</section>
+
+<!-- ============ P7 ============ -->
+<section class="page" id="p7">
+  <div class="pageno">07 / 10</div>
+  <span class="tag">卖点拆解</span>
+  <h2>粉底卖点六轴</h2>
+  <p class="sub">色彩轴（庞大色号 C/N/W）× 质地轴（液态轻薄）× 持妆轴（硅系成膜 24-36h）× 包材轴（磨砂玻璃瓶金盖·无泵短板）× 肤感轴（无油控油）× 护城河轴（全球长青标杆 + 成膜技术）。<span class="flag c">C</span></p>
+  <div class="tw"><table>
+    <tr><th style="width:16%">轴</th><th style="width:28%">内容</th><th>说明</th></tr>
+    <tr><td><span class="y">色彩轴</span></td><td>庞大色号体系 C/N/W + 数字</td><td>经典 &gt;55 色 / 新版 70 色（区域口径待核），覆盖冷/中/暖</td></tr>
+    <tr><td><span class="y">质地轴</span></td><td>液态粉底、轻薄易推</td><td>成膜后贴合，遮瑕中强</td></tr>
+    <tr><td><span class="y">持妆轴</span></td><td>硅系成膜 24h(经典)/36h(新版)</td><td>控油抗汗抗湿防水，color-true 抗转移</td></tr>
+    <tr><td><span class="y">包材轴</span></td><td>磨砂玻璃瓶 + 金盖（无内置泵）</td><td>质感高级，但取粉需自配泵，短板明显</td></tr>
+    <tr><td><span class="y">肤感轴</span></td><td>无油控油配方</td><td>主打油 / 混油；干皮易卡粉</td></tr>
+    <tr><td><span class="n">护城河轴</span></td><td>全球长青标杆 + 成膜技术</td><td>1997 首发、跨国长青，国际持妆心智</td></tr>
+  </table></div>
+  <div class="quote" style="margin-top:16px;"><span class="q">洞察：</span>DW 的护城河来自"硅系成膜技术 + 庞大色号 + 全球长青标杆"，而非单靠渠道或价格；它把"国际持妆标杆"守住了，把"泵头改良、干皮友好、养肤升级、价格下探、色号本地化"留给了后来者——用同持妆力 + 换包材 / 换肤感 / 换价格即可切。<span class="flag c">C·策略推断</span></div>
+  <div class="src"><b>数据来源：</b>京东 / 天猫 / 官网（C 级，色彩 / 质地 / 包材）｜EL 美国官网（A 级，色号 / 持妆宣称）。六轴为我按"粉底卖点轴"格式提炼。</div>
+</section>
+
+<!-- ============ P8 ============ -->
+<section class="page" id="p8">
+  <div class="pageno">08 / 10</div>
+  <span class="tag">痛点与机会</span>
+  <h2>空白 = 你的机会</h2>
+  <p class="sub">把 DW 短板轴与粉底赛道空白叠加，得到可切入的切口。</p>
+  <div class="tw"><table>
+    <tr><th style="width:26%">赛道级空白</th><th>对应短板</th><th>你的切口</th></tr>
+    <tr><td><span class="n">泵头改良</span></td><td>无内置泵、难取量</td><td><span class="y">标配按压泵头</span></td></tr>
+    <tr><td><span class="n">干皮友好</span></td><td>干皮易卡粉、显干纹</td><td><span class="y">干皮友好版 / 保湿基底</span></td></tr>
+    <tr><td><span class="n">养肤升级</span></td><td>经典版偏纯粹持妆</td><td><span class="y">烟酰胺 / 透明质酸养肤</span></td></tr>
+    <tr><td><span class="n">价格下探</span></td><td>官方 ¥490、跨境参差</td><td><span class="y">¥150-250 价格带</span></td></tr>
+    <tr><td><span class="n">色号本地化</span></td><td>区域色号口径不一</td><td><span class="y">本地肤色定制色号</span></td></tr>
+  </table></div>
+  <div class="newzone">
+    <div class="zh">▍对标转化路径（换包材 / 换肤感 / 换养肤 / 换价格 / 换色号）</div>
+    <div class="tw"><table>
+      <tr><th style="width:20%">对标对象</th><th style="width:16%">换包材</th><th style="width:16%">换肤感</th><th style="width:16%">换养肤</th><th>切入空白</th></tr>
+      <tr><td>彩棠</td><td>磁吸替换 + 泵头</td><td>分肤分场景</td><td>中等</td><td>泵头 + 分肤</td></tr>
+      <tr><td>毛戈平</td><td>养肤瓶身</td><td>水奶油润感</td><td>养肤强</td><td>干皮友好 + 养肤</td></tr>
+      <tr><td>花西子</td><td>国风轻量</td><td>定妆补位</td><td>玉养</td><td>定妆散粉补位</td></tr>
+      <tr><td>兰蔻</td><td>同梯队泵头</td><td>轻透润</td><td>中等</td><td>同梯队持妆</td></tr>
+      <tr><td>DW</td><td>加泵头</td><td>干皮友好版</td><td>新版养肤</td><td>正面切短板</td></tr>
+    </table></div>
+  </div>
+  <div class="src"><b>数据来源：</b>京东 / 天猫 / 官网（C 级，短板）｜EL 美国官网（A 级，新版养肤宣称）。空白与对标转化为基于公开事实的策略推断。</div>
+</section>
+
+<!-- ============ P9 ============ -->
+<section class="page" id="p9">
+  <div class="pageno">09 / 10</div>
+  <span class="tag">产品启示</span>
+  <h2>如果做新锐持妆粉底，怎么打？</h2>
+  <p class="sub">不打 DW 的"国际持妆标杆 + 全球长青"正面战场，而是用"同持妆力 + 空白包材 / 肤感 / 价格"切入。五条可执行策略：</p>
+  <ol class="listnum">
+    <li><b>硅系成膜持妆打底。</b>承接 DW 已验证的"硅系成膜 24h 级持妆"心智，用同等成膜技术建立"长青持妆"信任，正面比拼持妆力。</li>
+    <li><b>泵头改良。</b>补 DW"无内置泵、难取量"短板，标配按压泵头，降低用量浪费与上手门槛，做成体验差异点。</li>
+    <li><b>干皮友好版。</b>针对 DW"干皮易卡粉"痛点，做保湿基底 / 干皮友好版，承接被 DW 劝退的干皮与混干用户。</li>
+    <li><b>养肤升级。</b>补经典版"偏纯粹持妆"，加入烟酰胺 / 透明质酸 / 虎杖发酵等养肤成分，借 DW 新版趋势做透明沟通。</li>
+    <li><b>¥150-250 价格带。</b>卡在 DW 跨境价与官方价之间的空白，用"同持妆 + 更友好包材肤感"切其之下的升级需求。</li>
+  </ol>
+  <div class="src"><b>说明：</b>以上为基于 DW 公开竞争态势的"我方（假设为新锐持妆粉底品牌）"策略推断，非任何品牌官方信息。我方定位 / 价格 / 渠道需结合实际业务定义。</div>
+</section>
+
+<!-- ============ P10 ============ -->
+<section class="page" id="p10">
+  <div class="pageno">10 / 10</div>
+  <span class="tag">总结 + 来源</span>
+  <h2>一句话总结</h2>
+  <div class="quote"><span class="q">DW 给后来者的启示：</span>它证明"硅系成膜 + 庞大色号 + 无油无酒精 + 全球长青标杆"能占死国际持妆心智，但它把"国际持妆与技术壁垒"守住了，把"泵头改良、干皮友好、养肤升级、价格下探、色号本地化"留给了后来者——切口从不在持妆腹地，而在"同持妆力、换包材 / 换肤感 / 换价格"的空白里。</div>
+
+  <h3 style="margin-top:18px;">数据来源与置信度清单</h3>
+  <div class="tw"><table>
+    <tr><th style="width:42%">来源</th><th style="width:12%">级别</th><th>用于本报告的结论</th></tr>
+    <tr><td>EL 中国 / 美国 / 香港官网</td><td><span class="y">A</span></td><td>品牌沿革(1946创立/DW 1997首发)、成分宣称、色号与持妆(24h/36h)、SPF10、新版养肤</td></tr>
+    <tr><td>国家药监局备案</td><td><span class="y">A</span></td><td>二代 国妆特进字20250875(1W1,特妆-防晒类SPF10)；旧版 J20170582（原产国冲突待核）</td></tr>
+    <tr><td>京东商品页</td><td>B/C</td><td>价格(官方¥490/天猫¥455/跨境¥199-272)、评论(5万+)、好评率(93%)快照</td></tr>
+    <tr><td>CosDNA</td><td>B</td><td>全成分(三甲基硅烷氧基硅酸酯/环戊硅氧烷/丁二醇/云母/氧化铁/CI77891/苯氧乙醇)、无油无酒精</td></tr>
+    <tr><td>skinsort</td><td>C/B</td><td>致痘风险提示、肤质反馈（与官方"全肤质/不致痘"冲突待核）</td></tr>
+    <tr><td>什么值得买 / womanandhome</td><td>B/C</td><td>跨境价差、版本口碑、持妆测评参数</td></tr>
+  </table></div>
+  <div class="src"><b>置信度说明：</b>A=官方/备案；B=京东商品页(销量/好评)/CosDNA(成分)；C=平台快照/达人内容/第三方测评（波动大、存个案偏差）。价格与销量为电商快照，随促销波动；24h vs 36h 为版本差异；色号数(&gt;55/70/24)、原产国(美国vs比利时)、不致痘(官方vs skinsort)存冲突，以官方与 NMPA 备案为准；养肤添加浓度为新版披露，以官方为准。本报告不构成投资或购买建议。</div>
+</section>
+
+<div class="foot">竞品分析情报网 · 彩妆·EP09 雅诗兰黛 Estée Lauder Double Wear 持妆粉底液 ｜ 底妆赛道 · 国际持妆标杆 ｜ 数据截至 2026-08 公开资料整理 ｜ 内容仅供产品研究与求职作品集使用</div>
+
+</body>
+</html>

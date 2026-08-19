@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>竞品分析情报网 · 彩妆·EP06｜彩棠 TIMAGE 小圆管粉底液</title>
+<style>
+  :root{
+    --red:#2E6E5C; --red-deep:#16352C; --gold:#7FB8A6; --gold-light:#A8D8C8;
+    --bg:#0E0C08; --bg2:#1A160E; --card:#1F1A11; --card2:#2C2517;
+    --text:#F2EAD9; --muted:#A99E86; --line:#2C2517; --good:#D8B35E; --bad:#C77B5A;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{background:var(--bg);color:var(--text);font-family:"PingFang SC","Microsoft YaHei",-apple-system,sans-serif;line-height:1.6;font-size:15px;}
+  .page{width:100%;max-width:920px;margin:0 auto;min-height:100vh;padding:54px 40px 40px;display:flex;flex-direction:column;justify-content:flex-start;border-bottom:1px solid var(--line);position:relative;}
+  .pageno{position:absolute;top:22px;right:40px;font-size:12px;color:var(--gold);letter-spacing:2px;font-weight:700;}
+  .tag{display:inline-block;background:var(--red);color:#fff;font-size:12px;padding:3px 12px;border-radius:20px;letter-spacing:1px;margin-bottom:14px;font-weight:700;}
+  h1{font-size:38px;line-height:1.25;font-weight:800;letter-spacing:1px;margin-bottom:8px;}
+  h2{font-size:26px;font-weight:800;margin-bottom:6px;color:var(--gold-light);}
+  h3{font-size:18px;font-weight:800;color:var(--text);margin:18px 0 8px;}
+  .sub{color:var(--muted);font-size:14px;margin-bottom:20px;}
+  .src{margin-top:auto;padding-top:18px;font-size:11px;color:var(--muted);border-top:1px dashed var(--line);}
+  .src b{color:var(--gold-light);}
+  .grid{display:grid;gap:14px;}
+  .g3{grid-template-columns:repeat(3,1fr);}
+  .g2{grid-template-columns:repeat(2,1fr);}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 16px;}
+  .card.red{border-left:4px solid var(--red);}
+  .card.gold{border-left:4px solid var(--gold);}
+  .kpi{font-size:32px;font-weight:800;color:var(--gold);line-height:1.1;}
+  .kpi.red{color:var(--red);}
+  .kpi small{font-size:13px;color:var(--muted);font-weight:400;}
+  .card .t{font-size:13px;color:var(--muted);margin-bottom:6px;}
+  .pill{display:inline-block;background:var(--card2);border:1px solid var(--line);border-radius:8px;padding:4px 10px;font-size:12px;margin:3px 4px 3px 0;color:var(--text);}
+  .pill.good{background:rgba(216,179,94,.15);border-color:var(--good);color:var(--good);}
+  .pill.bad{background:rgba(199,123,90,.15);border-color:var(--bad);color:var(--bad);}
+  .pill.gold{background:rgba(216,179,94,.14);border-color:var(--gold);color:var(--gold-light);}
+  .pill.new{background:rgba(216,179,94,.22);border-color:var(--gold);color:#F5EEDD;font-weight:700;}
+  .bar-row{display:flex;align-items:center;margin:7px 0;font-size:13px;}
+  .bar-name{width:108px;flex-shrink:0;color:var(--text);text-align:right;padding-right:10px;}
+  .bar-track{flex:1;background:var(--bg2);border-radius:6px;height:22px;overflow:hidden;position:relative;}
+  .bar-fill{height:100%;border-radius:6px;background:linear-gradient(90deg,var(--red-deep),var(--red));display:flex;align-items:center;justify-content:flex-end;padding-right:8px;font-size:11px;color:#fff;font-weight:700;}
+  .bar-fill.gold{background:linear-gradient(90deg,#3a2e15,var(--gold));color:#0E0C08;}
+  .bar-fill.dim{background:linear-gradient(90deg,#2C2517,#5a4a2a);}
+  .matrix{position:relative;width:100%;height:380px;background:var(--bg2);border:1px solid var(--line);border-radius:14px;margin-top:8px;}
+  .axis-x{position:absolute;bottom:8px;width:100%;text-align:center;font-size:12px;color:var(--muted);}
+  .axis-y{position:absolute;left:8px;top:0;height:100%;writing-mode:vertical-rl;font-size:12px;color:var(--muted);}
+  .dot{position:absolute;transform:translate(-50%,-50%);padding:5px 10px;border-radius:20px;font-size:12px;font-weight:700;white-space:nowrap;}
+  .dot.me{background:var(--red);color:#fff;border:2px solid var(--gold);}
+  .dot.other{background:var(--card2);color:var(--text);border:1px solid var(--line);}
+  .cloud{display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px;padding:14px;background:var(--bg2);border-radius:14px;}
+  .cloud span{padding:3px 10px;border-radius:8px;line-height:1.5;}
+  .s1{font-size:13px;} .s2{font-size:16px;} .s3{font-size:20px;} .s4{font-size:25px;}
+  .cgood{background:rgba(216,179,94,.13);color:var(--good);}
+  .cbad{background:rgba(199,123,90,.13);color:var(--bad);}
+  .ctheme{font-size:15px;color:var(--gold-light);background:rgba(216,179,94,.1);padding:6px 14px;border-radius:10px;font-weight:700;}
+  .quote{border-left:3px solid var(--gold);padding:10px 16px;background:var(--card);border-radius:0 10px 10px 0;font-size:15px;color:var(--text);margin:10px 0;}
+  .quote .q{color:var(--gold-light);font-weight:800;}
+  table{width:100%;border-collapse:collapse;font-size:13px;margin-top:8px;}
+  th,td{border:1px solid var(--line);padding:9px 10px;text-align:left;vertical-align:top;}
+  th{background:var(--card2);color:var(--gold-light);font-weight:700;}
+  td .y{color:var(--good);} td .n{color:var(--bad);}
+  .listnum{counter-reset:l;list-style:none;}
+  .listnum li{counter-increment:l;position:relative;padding:12px 14px 12px 52px;background:var(--card);border:1px solid var(--line);border-radius:12px;margin-bottom:10px;}
+  .listnum li::before{content:counter(l);position:absolute;left:14px;top:12px;width:26px;height:26px;background:var(--red);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;}
+  .listnum li b{color:var(--gold-light);}
+  .foot{text-align:center;font-size:12px;color:var(--muted);padding:26px;}
+  .foot b{color:var(--gold-light);}
+  .flag{font-size:11px;padding:1px 6px;border-radius:5px;background:var(--card2);color:var(--muted);margin-left:4px;}
+  .flag.a{color:var(--good);} .flag.b{color:var(--gold-light);} .flag.c{color:var(--bad);}
+  .newzone{border:1px dashed var(--gold);border-radius:14px;padding:14px 16px;margin-top:14px;background:rgba(216,179,94,.06);}
+  .newzone .zh{font-size:13px;color:var(--gold-light);font-weight:800;margin-bottom:8px;}
+
+  @media (max-width:820px){
+    .page{min-height:100dvh;padding:24px 18px 40px;}
+    .pageno{top:14px;right:16px;}
+    h1{font-size:25px;}
+    h2{font-size:21px;}
+    h3{font-size:16px;}
+    .sub{font-size:13px;margin-bottom:14px;}
+    .g3,.g2{grid-template-columns:1fr;}
+    .card{padding:15px 13px;}
+    .kpi{font-size:24px;}
+    .bar-name{width:74px;font-size:11px;padding-right:6px;}
+    .bar-track{height:20px;}
+    .bar-fill{font-size:10px;padding-right:5px;}
+    .matrix{height:320px;}
+    .dot{font-size:11px;padding:4px 8px;}
+    .cloud{padding:12px 10px;gap:5px 6px;}
+    .s1{font-size:12px;} .s2{font-size:14px;} .s3{font-size:17px;} .s4{font-size:21px;}
+    table{font-size:12px;}
+    th,td{padding:7px 8px;}
+    .quote{font-size:14px;padding:9px 13px;}
+    .listnum li{padding:11px 12px 11px 46px;}
+    .listnum li::before{left:12px;width:24px;height:24px;font-size:13px;}
+    .src{font-size:10px;}
+    .flag{font-size:10px;}
+  }
+  .page{overflow-x:hidden;}
+  .tw{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:10px 0;}
+  .tw table{min-width:640px;}
+  @media (max-width:820px){
+    .bar-row,.bar{flex-direction:column;align-items:stretch;margin:11px 0;}
+    .bar-name{width:auto !important;flex-shrink:1;text-align:left !important;padding-right:0;font-size:12.5px;line-height:1.4;}
+    .bar-track{width:100%;}
+    .bar-fill{min-width:60px;}
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ P1 ============ -->
+<section class="page" id="p1">
+  <div class="pageno">01 / 10</div>
+  <span class="tag">彩妆·EP06 · 彩棠 TIMAGE 小圆管粉底液</span>
+  <h1>彩棠 小圆管粉底液<br>专为中国面孔定制的"分肤持妆"国货底妆</h1>
+  <p class="sub">彩棠（TIMAGE）由专业化妆师唐毅创立（2011 或 2014 待核），2019 年被珀莱雅收购，是主打"中国妆 原生美"的专业化妆师品牌。产品以"分肤三版 + 粉底遮瑕二合一 + 磁吸替换"为母题，覆盖干皮 / 混油 / 油皮三版，定位国货专业底妆。<span class="flag a">A/B</span></p>
+  <div class="quote"><span class="q">一句话结论：</span>彩棠用"唐毅专业背书 + 分肤三版（干/混油/油）+ 磁吸替换遮瑕 + 7:3 黄金粉体"卡位国货专业底妆，价格 ¥75-219；亮点在<b>分肤精准定制 / 24h 宣称持妆 / 粉底+遮瑕二合一磁吸替换 / 7:3 柔光粉体</b>，短板在<b>24h 宣称 vs 第三方实测仅 6-8h、代工厂（上海创元 vs 莹特丽）待核、SPF 宣称待核、完整成分与 CI 号待核</b>。<span class="flag c">C·电商快照</span></div>
+  <div class="grid g3" style="margin-top:22px;">
+    <div class="card red">
+      <div class="kpi">¥75<small> –219</small></div>
+      <div class="t">价格带（30ml）<span class="flag c">C</span></div>
+      <p style="font-size:13px;color:var(--muted);margin-top:6px;">拼多多低至 ¥75；天猫混油 2.0 #110N 到手约 ¥219；京东 2.0 #200 到手 ¥194（常卖 ¥219）。</p>
+    </div>
+    <div class="card gold">
+      <div class="kpi red">10万+</div>
+      <div class="t">京东评论 / 好评率 <span class="flag b">B</span></div>
+      <p style="font-size:13px;color:var(--muted);margin-top:6px;">京东 2.0 #200 评论 10 万+、好评率 98%（京东商品页）；混油 1.0 #100 评论 2 万+、98%。</p>
+    </div>
+    <div class="card">
+      <div class="kpi red">2019</div>
+      <div class="t">珀莱雅系专业底妆 <span class="flag a">A</span></div>
+      <p style="font-size:13px;color:var(--muted);margin-top:6px;">唐毅创立、珀莱雅 2019 收购；"中国妆 原生美"专业化妆师品牌，分肤三版定制底妆。</p>
+    </div>
+  </div>
+  <div class="src"><b>数据来源：</b>珀莱雅官网 / 京东商品页（A/B 级，品牌沿革 / 价格 / 评论 / 好评率）｜国家药监局备案（A 级，备案号）。价格随促销波动，唐毅创立年 2011/2014 冲突待核。</div>
+</section>
+
+<!-- ============ P2 ============ -->
+<section class="page" id="p2">
+  <div class="pageno">02 / 10</div>
+  <span class="tag">市场全景</span>
+  <h2>底妆 / 粉底赛道格局：国货专业与国风大众夹击国际持妆标杆</h2>
+  <p class="sub">底妆的"粉体压制 + 肤色适配 + 持妆成膜 + 专业背书"门槛高。花西子占国风大众、彩棠凭唐毅 + 分肤三版 + 磁吸替换卡中端专业、毛戈平占高端国货、雅诗兰黛 DW 与兰蔻持妆占国际持妆标杆。<span class="flag b">B/C</span></p>
+  <div class="tw"><table>
+    <tr><th style="width:16%">品牌</th><th style="width:20%">代表底妆</th><th style="width:16%">价格带</th><th style="width:22%">核心定位</th><th>主渠道</th></tr>
+    <tr><td>花西子</td><td>空气蜜粉 / 粉底液</td><td>¥129-169</td><td>东方国风 / 雕花大众</td><td>全渠道</td></tr>
+    <tr><td><span class="y">彩棠 TIMAGE</span></td><td>小圆管粉底液（分肤三版）</td><td>¥75-219</td><td>唐毅专业 / 分肤定制 / 磁吸替换</td><td>天猫抖音京东</td></tr>
+    <tr><td>毛戈平</td><td>光感柔润粉底 / 气垫</td><td>¥380</td><td>高端国货 / 专业骨相</td><td>专柜+线上</td></tr>
+    <tr><td>雅诗兰黛</td><td>Double Wear 持妆粉底</td><td>¥200-490</td><td>国际持妆标杆 / 油皮亲妈</td><td>全渠道</td></tr>
+    <tr><td>兰蔻</td><td>持妆轻透粉底</td><td>¥239-490</td><td>国际持妆 / 轻薄养肤</td><td>全渠道</td></tr>
+  </table></div>
+  <div class="grid g3" style="margin-top:16px;">
+    <div class="card"><div class="t">光谱</div><p>从"国货国风大众（花西子）→ 国货专业中端（彩棠）→ 高端国货（毛戈平）→ 国际持妆标杆（DW/兰蔻）"，价格与专业度同步抬升。</p></div>
+    <div class="card"><div class="t">彩棠卡位</div><p>唐毅 + 分肤三版 + 磁吸替换遮瑕居中，承接"想要专业分肤但嫌 DW/毛戈平贵、又嫌花西子不够专业"的中间人群。</p></div>
+    <div class="card"><div class="t">机会</div><p>"专业下沉（¥150-200 平替）+ 温和防腐 + 轻量磁吸 + 养肤透明"带是彩棠之上、DW 之下的空白。<span class="flag c">C·推断</span></p></div>
+  </div>
+  <div class="src"><b>数据来源：</b>京东 / 天猫（B/C 级，价格 / 定位 / 渠道）｜珀莱雅官网（A 级，品牌沿革）。价格为快照，随促销波动。</div>
+</section>
+
+<!-- ============ P3 ============ -->
+<section class="page" id="p3">
+  <div class="pageno">03 / 10</div>
+  <span class="tag">产品定位</span>
+  <h2>彩妆六维坐标（主题色彩 × 包材 × 质地 × 持妆 × 肤质 × 地域）</h2>
+  <p class="sub">彩棠小圆管以"专为中国面孔分肤定制"为内核，六维坐标用消费者语言表述如下。<span class="flag c">C</span></p>
+  <div class="tw"><table>
+    <tr><th style="width:15%">维度</th><th style="width:30%">坐标（消费者语言）</th><th>含义</th></tr>
+    <tr><td><span class="y">主题色彩</span></td><td>色号三调五色：黄调 #100/#110/#101、粉调 #200、橄榄调 #301</td><td>黄调（鹅绒白/云纱白/素瓷白）、粉调（芙玉白）、橄榄调（苔露白），覆盖中国面孔肤色三向</td></tr>
+    <tr><td><span class="y">包材</span></td><td>小圆管 + 旋转按压泵 + 磁吸替换遮瑕 + 肤质配色</td><td>正装管体 + 泵头出液 + 同色遮瑕磁吸替换芯，按肤质配色区分</td></tr>
+    <tr><td><span class="y">质地</span></td><td>液态乳液感（油皮微润奶油 / 混油柔雾 / 干皮轻透柔光）</td><td>分肤三版质地：油皮润、混油雾、干皮透，7:3 粉体柔光</td></tr>
+    <tr><td><span class="y">持妆</span></td><td>宣称 24h（SGS 品牌资料）/ 第三方实测 35℃ 约 6h</td><td>植萃雾瓷控妆膜；实测与宣称存在差距（冲突待核）</td></tr>
+    <tr><td><span class="y">肤质</span></td><td>分干 / 混油 / 油三版，敏肌不致痘宣称</td><td>按肤质分版定制，宣称不致痘，适合分区护理</td></tr>
+    <tr><td><span class="y">地域</span></td><td>混油宜湿热 / 干皮宜干冷（推断）</td><td>分版对应地域气候：混油版适配南方湿热、干皮版适配北方干冷</td></tr>
+  </table></div>
+  <h3 style="margin-top:18px;">定位矩阵（价格带 × 底妆专业度）</h3>
+  <div class="matrix">
+    <div class="axis-y">底妆专业度（大众 → 专业化妆师）</div>
+    <div class="axis-x">价格带（平价 → 高端）</div>
+    <div class="dot other" style="left:26%;top:70%;">花西子 129-169</div>
+    <div class="dot other" style="left:74%;top:26%;">毛戈平 380</div>
+    <div class="dot other" style="left:86%;top:18%;">雅诗兰黛DW 200-490</div>
+    <div class="dot other" style="left:90%;top:22%;">兰蔻 239-490</div>
+    <div class="dot me" style="left:50%;top:43%;">彩棠 75-219</div>
+  </div>
+  <div class="grid g2" style="margin-top:16px;">
+    <div class="card red"><div class="t">彩棠占位</div><p>中端价格 + 中高专业度（唐毅 + 分肤三版 + 磁吸替换），把"专业底妆"做成国货可负担心智，正面承接花西子之上的升级需求与 DW 之下的下沉需求。</p></div>
+    <div class="card gold"><div class="t">空白区</div><p>"专业下沉（¥150-200 平替）+ 温和防腐 + 轻量磁吸 + 养肤透明"带（DW 无泵/价高、毛戈平价高）是差异化机会。<span class="flag c">C·推断</span></p></div>
+  </div>
+  <div class="src"><b>数据来源：</b>京东 / 天猫 / 官网（C 级，价格 / 定位 / 包材）｜第三方测评（C 级，持妆实测，标注待核）。坐标为基于公开价格的示意性卡位。</div>
+</section>
+
+<!-- ============ P4 ============ -->
+<section class="page" id="p4">
+  <div class="pageno">04 / 10</div>
+  <span class="tag">配方拆解</span>
+  <h2>粉体 / 保湿 / 植萃 / 工艺（专业词）</h2>
+  <p class="sub">彩棠小圆管的"配方"= 硅类粉体基质 + 保湿体系 + 植萃添加 + 硅处理粉体 + 苯氧乙醇 防腐。以环五聚二甲基硅氧烷成膜为骨架，氢氧化铝 / 氧化锡调控粉体，三乙氧基辛基硅烷硅处理改善肤感。<span class="flag a">A</span></p>
+  <div class="tw"><table>
+    <tr><th style="width:22%">模块</th><th style="width:20%">成分 / 工艺</th><th style="width:32%">作用</th><th>备注</th></tr>
+    <tr><td>粉体基质</td><td>环五聚二甲基硅氧烷（成膜）+ 氢氧化铝 + 氧化锡</td><td>硅类成膜 + 粉体骨架 + 柔焦贴肤</td><td>备案片段已验证</td></tr>
+    <tr><td>保湿</td><td>泛醇 + 丁二醇 + 己二醇</td><td>保湿、舒缓、协助贴肤</td><td>备案片段已验证</td></tr>
+    <tr><td>植萃</td><td>油橄榄叶提取物 + 蜂胶提取物</td><td>舒缓、养肤概念</td><td>备案片段已验证</td></tr>
+    <tr><td>硅处理</td><td>三乙氧基辛基硅烷</td><td>硅处理粉体，改善丝滑与贴肤</td><td>备案片段已验证</td></tr>
+    <tr><td>防腐</td><td>苯氧乙醇</td><td>防腐体系</td><td>相对温和，备案片段</td></tr>
+    <tr><td>品牌宣称</td><td>马齿苋 / 金盏花 / 油橄榄植萃 + PCA 锌控油 + 7:3 粉体</td><td>养肤 + 控油 + 柔光粉体</td><td>7:3 粉体比例待核</td></tr>
+  </table></div>
+  <div class="newzone" style="border-color:var(--bad);background:rgba(199,123,90,.06);">
+    <div class="zh" style="color:var(--bad);">⚠ 冲突标注：持妆宣称 / SPF / 代工厂</div>
+    <p style="font-size:13px;color:var(--text);">① <b>24h 宣称 vs 实测：</b>品牌 SGS 资料宣称 24h 持妆，第三方实测 35℃ 仅约 6-8h，差距如实标注、待核。② <b>SPF：</b>部分渠道称 SPF30+，但备案与官方未见 SPF 标注，按"无 SPF（待核）"处理。③ <b>代工厂：</b>产地宁波彩棠，代工有"上海创元 vs 莹特丽"两种说法，待核。④ <b>完整成分 / CI 号：</b>仅见片段，完整成分与色号 CI 待核。</p>
+  </div>
+  <div class="grid g3" style="margin-top:14px;">
+    <div class="card"><div class="t">粉体完整度</div><p>硅类成膜 + 铝/锡粉体 + 硅处理，是稳态专业底妆粉体方案；泛醇 + 双二醇保湿是国货底妆常见高端差异。</p></div>
+    <div class="card"><div class="t">养肤壁垒</div><p>油橄榄叶 + 蜂胶 + 马齿苋 / 金盏花植萃 + PCA 锌控油，是"养肤底妆"的核心沟通点，非单纯粉体。</p></div>
+    <div class="card"><div class="t">备案</div><p>浙 G 妆网备字　混油 1.0：2024015663-2024015667、2024021020；2.0：2026000820-2026000822；奶皮气垫 2026000455-2026000469；国产非特。<span class="flag a">A</span></p></div>
+  </div>
+  <div class="src"><b>数据来源：</b>国家药监局备案 / guidechem 转药监局（A 级，备案号 / 国产非特 / 成分片段）｜品牌资料（C 级，24h/SGS/植萃宣称）。完整成分与 7:3 比例以官方为准。</div>
+</section>
+
+<!-- ============ P5 ============ -->
+<section class="page" id="p5">
+  <div class="pageno">05 / 10</div>
+  <span class="tag">价格策略</span>
+  <h2>价格带与渠道到手价</h2>
+  <p class="sub">彩棠小圆管呈"小样尝鲜 → 正装主力 → 替换遮瑕芯"梯度：拼多多低至 ¥75（渠道版存疑）、天猫混油 2.0 #110N 到手约 ¥219、京东 2.0 #200 到手 ¥194（常卖 ¥219），整体卡位花西子之上、DW/毛戈平之下，靠分肤与磁吸替换支撑溢价。<span class="flag c">C</span></p>
+  <div style="background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px;">
+    <div class="bar-row"><div class="bar-name">拼多多低</div><div class="bar-track"><div class="bar-fill gold" style="width:16%">¥75</div></div></div>
+    <div class="bar-row"><div class="bar-name">京东到手</div><div class="bar-track"><div class="bar-fill gold" style="width:42%">¥194（#200）</div></div></div>
+    <div class="bar-row"><div class="bar-name">京东常卖</div><div class="bar-track"><div class="bar-fill gold" style="width:48%">¥219（#200）</div></div></div>
+    <div class="bar-row"><div class="bar-name">天猫到手</div><div class="bar-track"><div class="bar-fill gold" style="width:48%">¥219（混油2.0 #110N）</div></div></div>
+  </div>
+  <div class="grid g3" style="margin-top:16px;">
+    <div class="card red"><div class="t">中端卡位</div><p>¥75 起跳、正装冲 ¥219，占"国货专业底妆"心智，与花西子大众、DW/毛戈平高端形成梯度。</p></div>
+    <div class="card"><div class="t">梯度矩阵</div><p>小样（尝鲜）+ 正装（主力）+ 磁吸替换遮瑕芯（复购），覆盖首购与回购，分肤三版扩展色号。</p></div>
+    <div class="card"><div class="t">风险</div><p>拼多多版质地存疑、24h 实测不足、SPF/代工厂/完整成分待核。<span class="flag c">C</span></p></div>
+  </div>
+  <div class="src"><b>数据来源：</b>京东 / 天猫 / 拼多多（C 级，价格 / 到手价快照）。以官方实时价为准；拼多多低价为渠道版，质地存疑。</div>
+</section>
+
+<!-- ============ P6 ============ -->
+<section class="page" id="p6">
+  <div class="pageno">06 / 10</div>
+  <span class="tag">消费者评价</span>
+  <h2>口碑横向</h2>
+  <p class="sub">正向集中在"分肤精准、不卡粉、磁吸替换方便、回购榜第一"；负向在"24h 实测不足、干皮拔干、拼多多版质地存疑"。<span class="flag c">C</span></p>
+  <div class="tw"><table>
+    <tr><th style="width:15%">维度</th><th style="width:30%">正向高频词</th><th style="width:30%">负向 / 痛点</th><th>信号</th></tr>
+    <tr><td>分肤</td><td>分肤精准 / 选对版不闷痘</td><td>干皮版仍偏拔干</td><td>分肤强</td></tr>
+    <tr><td>质地</td><td>不卡粉 / 奶油柔雾 / 贴肤</td><td>拼多多版质地存疑</td><td>正装优、渠道版风险</td></tr>
+    <tr><td>持妆</td><td>日常够用 / 柔光自然</td><td>24h 实测不足（约 6-8h）</td><td>宣称存差距</td></tr>
+    <tr><td>包材</td><td>磁吸替换方便 / 泵头卫生</td><td>小圆管占地、遮瑕芯偏小</td><td>磁吸是亮点</td></tr>
+    <tr><td>价值</td><td>回购榜第一 / 性价比高</td><td>渠道低价扰乱正装心智</td><td>复购强</td></tr>
+  </table></div>
+  <div class="grid g2" style="margin-top:14px;">
+    <div class="card red"><div class="t">强分肤 + 磁吸 + 回购</div><p>分肤三版 + 磁吸替换遮瑕 + 高复购，让彩棠成为"国货专业底妆"代表，承接对专业度要求高的进阶用户。</p></div>
+    <div class="card gold"><div class="t">可攻击口子</div><p>"专业下沉（¥150-200 平替）/ 温和防腐透明 / 轻量磁吸 / 养肤浓度明示"是清晰短板，后来者用"同分肤 + 换价格 / 换透明"切。</p></div>
+  </div>
+  <div class="src"><b>数据来源：</b>京东 / 淘宝达人 / 什么值得买（C 级，正向 / 负向高频词归纳）。差评以平台个案为主，不代表整体率；"干皮拔干"为测评与用户共性反馈。</div>
+</section>
+
+<!-- ============ P7 ============ -->
+<section class="page" id="p7">
+  <div class="pageno">07 / 10</div>
+  <span class="tag">卖点拆解</span>
+  <h2>彩妆卖点五轴（含护城河）</h2>
+  <p class="sub">色彩轴（三调五色）× 质地轴（7:3 粉体柔光）× 持妆轴（植萃雾瓷控妆膜）× 包材轴（小圆管磁吸替换）× 肤感轴（分肤贴肤）× 护城河轴（唐毅专业 + 分肤定制）。<span class="flag c">C</span></p>
+  <div class="tw"><table>
+    <tr><th style="width:16%">轴</th><th style="width:28%">内容</th><th>说明</th></tr>
+    <tr><td><span class="y">色彩轴</span></td><td>三调五色（黄/粉/橄榄）</td><td>#100/#110/#101 黄调、#200 粉调、#301 橄榄调，覆盖中国面孔肤色三向</td></tr>
+    <tr><td><span class="y">质地轴</span></td><td>7:3 黄金粉体柔光</td><td>柔光粉体 + 三重研磨，液态乳液感（油润/混油雾/干透）</td></tr>
+    <tr><td><span class="y">持妆轴</span></td><td>植萃雾瓷控妆膜</td><td>软硬双膜：硬膜御水油汗、软膜柔韧服帖；微囊包裹 + PCA 锌分区控油</td></tr>
+    <tr><td><span class="y">包材轴</span></td><td>小圆管 + 旋转按压泵 + 磁吸替换遮瑕</td><td>泵头出液卫生、同色遮瑕磁吸替换芯，按肤质配色</td></tr>
+    <tr><td><span class="y">肤感轴</span></td><td>分肤贴肤</td><td>分干/混油/油三版，敏肌不致痘宣称，分区护理</td></tr>
+    <tr><td><span class="n">护城河轴</span></td><td>唐毅专业 + 分肤定制</td><td>专业化妆师背书 + 专为中国面孔分肤三版，非单纯价格或渠道</td></tr>
+  </table></div>
+  <div class="quote" style="margin-top:16px;"><span class="q">洞察：</span>彩棠的护城河来自"唐毅专业背书 + 分肤三版定制 + 磁吸替换遮瑕"，而非单纯价格或渠道；它把"国货专业底妆"心智守住了，把"专业下沉、温和防腐透明、养肤浓度明示"留给了后来者——用同分肤度 + 换价格 / 换透明即可切。<span class="flag c">C·策略推断</span></div>
+  <div class="src"><b>数据来源：</b>京东 / 天猫 / 官网（C 级，色彩 / 质地 / 包材）｜品牌资料（C 级，持妆技术，标注待核）。五轴为我按"彩妆卖点轴"格式提炼。</div>
+</section>
+
+<!-- ============ P8 ============ -->
+<section class="page" id="p8">
+  <div class="pageno">08 / 10</div>
+  <span class="tag">痛点与机会</span>
+  <h2>空白 = 你的机会</h2>
+  <p class="sub">把彩棠短板轴与底妆赛道空白叠加，得到可切入的切口。</p>
+  <div class="tw"><table>
+    <tr><th style="width:26%">赛道级空白</th><th>对应短板</th><th>你的切口</th></tr>
+    <tr><td><span class="n">专业下沉</span></td><td>DW/毛戈平价格高（¥200-490）</td><td><span class="y">¥150-200 专业平替</span></td></tr>
+    <tr><td><span class="n">温和防腐</span></td><td>养肤浓度未透明</td><td><span class="y">养肤成分浓度明示 + 温和防腐</span></td></tr>
+    <tr><td><span class="n">轻量磁吸</span></td><td>DW 无泵、正装占地</td><td><span class="y">磁吸替换 + 轻量包材</span></td></tr>
+    <tr><td><span class="n">新手友好</span></td><td>分肤选版门槛</td><td><span class="y">选色指引 + 分肤教程</span></td></tr>
+    <tr><td><span class="n">养肤透明</span></td><td>完整成分 / CI 待核</td><td><span class="y">养肤成分与浓度透明化</span></td></tr>
+  </table></div>
+  <div class="newzone">
+    <div class="zh">▍对标转化路径（换泵头 / 换分肤 / 换价格 / 换形态 / 换养肤）</div>
+    <div class="tw"><table>
+      <tr><th style="width:20%">对标对象</th><th style="width:16%">换泵头</th><th style="width:16%">换分肤</th><th style="width:16%">换养肤</th><th>切入空白</th></tr>
+      <tr><td>雅诗兰黛 DW</td><td>加旋转按压泵</td><td>加分肤三版</td><td>加植萃养肤</td><td>DW 无泵 + 单一版</td></tr>
+      <tr><td>毛戈平</td><td>换磁吸替换</td><td>换分肤三版</td><td>换温和防腐</td><td>毛戈平价高 + 单一版</td></tr>
+      <tr><td>花西子</td><td>换粉底液形态</td><td>换分肤三版</td><td>换养肤透明</td><td>同价带国风粉底</td></tr>
+      <tr><td>兰蔻</td><td>加磁吸替换</td><td>换分肤定制</td><td>加浓度明示</td><td>国际养肤透明化</td></tr>
+    </table></div>
+  </div>
+  <div class="src"><b>数据来源：</b>京东 / 天猫（C 级，短板）｜品牌资料（C 级，竞品参数）。空白与对标转化为基于公开事实的策略推断。</div>
+</section>
+
+<!-- ============ P9 ============ -->
+<section class="page" id="p9">
+  <div class="pageno">09 / 10</div>
+  <span class="tag">产品启示</span>
+  <h2>如果做新锐国货粉底，怎么打？</h2>
+  <p class="sub">不打彩棠的"唐毅专业 + 分肤三版"正面战场，而是用"同分肤度 + 空白价格 / 防腐透明 / 包材"切入。五条可执行策略：</p>
+  <ol class="listnum">
+    <li><b>分肤精准。</b>承接"专为中国面孔分肤定制"心智，用干/混油/油三版 + 三调五色，切 DW/毛戈平之下的专业需求。</li>
+    <li><b>磁吸替换。</b>补"正装占地、无泵"短板，把旋转按压泵 + 磁吸替换遮瑕芯做成复购差异点。</li>
+    <li><b>养肤透明。</b>把油橄榄叶 / 蜂胶 / 泛醇等养肤添加浓度明示，借彩棠已验证的"养肤底妆"趋势做透明沟通。</li>
+    <li><b>价格带卡位。</b>用 ¥150-250 价格带，切在国际持妆标杆（DW/兰蔻 ¥200-490）与高端国货（毛戈平 ¥380）之间的空白。</li>
+    <li><b>新手友好。</b>针对分肤选版门槛，做选色指引 + 分肤教程 + 肤质自测，降低上手难度。</li>
+  </ol>
+  <div class="src"><b>说明：</b>以上为基于彩棠公开竞争态势的"我方（假设为新锐国货粉底品牌）"策略推断，非任何品牌官方信息。我方定位 / 价格 / 渠道需结合实际业务定义。</div>
+</section>
+
+<!-- ============ P10 ============ -->
+<section class="page" id="p10">
+  <div class="pageno">10 / 10</div>
+  <span class="tag">总结 + 来源</span>
+  <h2>一句话总结</h2>
+  <div class="quote"><span class="q">彩棠给后来者的启示：</span>它证明"唐毅专业背书 + 分肤三版 + 磁吸替换遮瑕 + 7:3 柔光粉体"能占死国货专业底妆心智，但它把"专业与分肤定制"守住了，把"专业下沉、温和防腐透明、轻量磁吸、养肤浓度明示"留给了后来者——切口从不在专业腹地，而在"同分肤度、换价格 / 换透明 / 换包材"的空白里。</div>
+
+  <h3 style="margin-top:18px;">数据来源与置信度清单</h3>
+  <div class="tw"><table>
+    <tr><th style="width:42%">来源</th><th style="width:12%">级别</th><th>用于本报告的结论</th></tr>
+    <tr><td>珀莱雅官网</td><td><span class="y">A</span></td><td>品牌沿革（唐毅创立 / 珀莱雅 2019 收购）、"中国妆 原生美"专业化妆师品牌定位</td></tr>
+    <tr><td>国家药监局备案 / guidechem 转药监局</td><td><span class="y">A</span></td><td>浙G妆网备字 混油1.0:2024015663-2024015667、2024021020；2.0:2026000820-2026000822；奶皮气垫2026000455-2026000469；国产非特；成分片段</td></tr>
+    <tr><td>京东商品页</td><td>B/C</td><td>价格（拼多多¥75 / 天猫到手¥219 / 京东到手¥194 常卖¥219）、评论（2.0 #200 10万+ / 1.0 #100 2万+）、好评率（98%）快照</td></tr>
+    <tr><td>什么值得买</td><td>D</td><td>到手价 / 促销渠道比对（价格梯度参考）</td></tr>
+    <tr><td>淘宝 / 青眼·新浪 / 搜狐</td><td>C</td><td>口碑（分肤精准 / 不卡粉 / 磁吸替换 / 回购第一）与痛点（24h 实测不足 / 干皮拔干 / 拼多多版质地存疑）</td></tr>
+  </table></div>
+  <div class="src"><b>置信度说明：</b>A=官方/备案；B=京东商品页(销量/好评)；C=平台快照/成分库/达人内容/第三方测评（波动大、存个案偏差）；D=促销比价渠道。价格/销量为电商快照，随促销波动；24h 持妆为品牌宣称、第三方实测约 6-8h，差距待核；完整成分 / CI 号 / SPF / 代工厂（上海创元 vs 莹特丽）/ 唐毅创立年（2011 vs 2014）均待核。本报告不构成投资或购买建议。</div>
+</section>
+
+<div class="foot">竞品分析情报网 · 彩妆·EP06 彩棠 TIMAGE 小圆管粉底液 ｜ 底妆赛道 · 国货专业分肤持妆 ｜ 数据截至 2026-08 公开资料整理 ｜ 内容仅供产品研究与求职作品集使用</div>
+
+</body>
+</html>
