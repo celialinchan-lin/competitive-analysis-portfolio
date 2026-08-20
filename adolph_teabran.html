@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>竞品分析情报网 · 个护·EP08｜阿道夫 ADOLPH 茶麸洗发水</title>
+<style>
+  :root{
+    --red:#8C5A2B; --red-deep:#5E3A1C; --gold:#C9A24B; --gold-light:#E0C89C;
+    --bg:#1A140E; --bg2:#241B12; --card:#2C2117; --card2:#362819;
+    --text:#F5EEE3; --muted:#C7B49C; --line:#4A3826; --good:#5BB98C; --bad:#D9727A;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{background:var(--bg);color:var(--text);font-family:"PingFang SC","Microsoft YaHei",-apple-system,sans-serif;line-height:1.6;font-size:15px;}
+  .page{width:100%;max-width:920px;margin:0 auto;min-height:100vh;padding:54px 40px 40px;display:flex;flex-direction:column;justify-content:flex-start;border-bottom:1px solid var(--line);position:relative;}
+  .pageno{position:absolute;top:22px;right:40px;font-size:12px;color:var(--gold);letter-spacing:2px;font-weight:700;}
+  .tag{display:inline-block;background:var(--red);color:#fff;font-size:12px;padding:3px 12px;border-radius:20px;letter-spacing:1px;margin-bottom:14px;font-weight:700;}
+  h1{font-size:38px;line-height:1.25;font-weight:800;letter-spacing:1px;margin-bottom:8px;}
+  h2{font-size:26px;font-weight:800;margin-bottom:6px;color:var(--gold-light);}
+  h3{font-size:18px;font-weight:800;color:var(--text);margin:18px 0 8px;}
+  .sub{color:var(--muted);font-size:14px;margin-bottom:20px;}
+  .src{margin-top:auto;padding-top:18px;font-size:11px;color:var(--muted);border-top:1px dashed var(--line);}
+  .src b{color:var(--gold-light);}
+  .grid{display:grid;gap:14px;}
+  .g3{grid-template-columns:repeat(3,1fr);}
+  .g2{grid-template-columns:repeat(2,1fr);}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 16px;}
+  .card.red{border-left:4px solid var(--red);}
+  .card.gold{border-left:4px solid var(--gold);}
+  .kpi{font-size:32px;font-weight:800;color:var(--gold);line-height:1.1;}
+  .kpi.red{color:var(--red);}
+  .kpi small{font-size:13px;color:var(--muted);font-weight:400;}
+  .card .t{font-size:13px;color:var(--muted);margin-bottom:6px;}
+  .pill{display:inline-block;background:var(--card2);border:1px solid var(--line);border-radius:8px;padding:4px 10px;font-size:12px;margin:3px 4px 3px 0;color:var(--text);}
+  .pill.good{background:rgba(91,185,140,.15);border-color:var(--good);color:var(--good);}
+  .pill.bad{background:rgba(217,114,122,.15);border-color:var(--bad);color:var(--bad);}
+  .pill.gold{background:rgba(201,162,75,.14);border-color:var(--gold);color:var(--gold-light);}
+  .pill.new{background:rgba(201,162,75,.22);border-color:var(--gold);color:#F5EEDD;font-weight:700;}
+  .bar-row{display:flex;align-items:center;margin:7px 0;font-size:13px;}
+  .bar-name{width:108px;flex-shrink:0;color:var(--text);text-align:right;padding-right:10px;}
+  .bar-track{flex:1;background:var(--bg2);border-radius:6px;height:22px;overflow:hidden;position:relative;}
+  .bar-fill{height:100%;border-radius:6px;background:linear-gradient(90deg,var(--red-deep),var(--red));display:flex;align-items:center;justify-content:flex-end;padding-right:8px;font-size:11px;color:#fff;font-weight:700;}
+  .bar-fill.gold{background:linear-gradient(90deg,#3a2e15,var(--gold));color:#0E0C08;}
+  .bar-fill.dim{background:linear-gradient(90deg,#362819,#7a6033);}
+  .matrix{position:relative;width:100%;height:380px;background:var(--bg2);border:1px solid var(--line);border-radius:14px;margin-top:8px;}
+  .axis-x{position:absolute;bottom:8px;width:100%;text-align:center;font-size:12px;color:var(--muted);}
+  .axis-y{position:absolute;left:8px;top:0;height:100%;writing-mode:vertical-rl;font-size:12px;color:var(--muted);}
+  .dot{position:absolute;transform:translate(-50%,-50%);padding:5px 10px;border-radius:20px;font-size:12px;font-weight:700;white-space:nowrap;}
+  .dot.me{background:var(--red);color:#fff;border:2px solid var(--gold);}
+  .dot.other{background:var(--card2);color:var(--text);border:1px solid var(--line);}
+  .cloud{display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px;padding:14px;background:var(--bg2);border-radius:14px;}
+  .cloud span{padding:3px 10px;border-radius:8px;line-height:1.5;}
+  .s1{font-size:13px;} .s2{font-size:16px;} .s3{font-size:20px;} .s4{font-size:25px;}
+  .cgood{background:rgba(91,185,140,.13);color:var(--good);}
+  .cbad{background:rgba(217,114,122,.13);color:var(--bad);}
+  .ctheme{font-size:15px;color:var(--gold-light);background:rgba(201,162,75,.1);padding:6px 14px;border-radius:10px;font-weight:700;}
+  .quote{border-left:3px solid var(--gold);padding:10px 16px;background:var(--card);border-radius:0 10px 10px 0;font-size:15px;color:var(--text);margin:10px 0;}
+  .quote .q{color:var(--gold-light);font-weight:800;}
+  table{width:100%;border-collapse:collapse;font-size:13px;margin-top:8px;}
+  th,td{border:1px solid var(--line);padding:9px 10px;text-align:left;vertical-align:top;}
+  th{background:var(--card2);color:var(--gold-light);font-weight:700;}
+  td .y{color:var(--good);} td .n{color:var(--bad);}
+  .listnum{counter-reset:l;list-style:none;}
+  .listnum li{counter-increment:l;position:relative;padding:12px 14px 12px 52px;background:var(--card);border:1px solid var(--line);border-radius:12px;margin-bottom:10px;}
+  .listnum li::before{content:counter(l);position:absolute;left:14px;top:12px;width:26px;height:26px;background:var(--red);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;}
+  .listnum li b{color:var(--gold-light);}
+  .foot{text-align:center;font-size:12px;color:var(--muted);padding:26px;}
+  .foot b{color:var(--gold-light);}
+  .flag{font-size:11px;padding:1px 6px;border-radius:5px;background:var(--card2);color:var(--muted);margin-left:4px;}
+  .flag.a{color:var(--good);} .flag.b{color:var(--gold-light);} .flag.c{color:var(--bad);}
+  .newzone{border:1px dashed var(--gold);border-radius:14px;padding:14px 16px;margin-top:14px;background:rgba(201,162,75,.06);}
+  .newzone .zh{font-size:13px;color:var(--gold-light);font-weight:800;margin-bottom:8px;}
+
+  @media (max-width:820px){
+    .page{min-height:100dvh;padding:24px 18px 40px;}
+    .pageno{top:14px;right:16px;}
+    h1{font-size:25px;}
+    h2{font-size:21px;}
+    h3{font-size:16px;}
+    .sub{font-size:13px;margin-bottom:14px;}
+    .g3,.g2{grid-template-columns:1fr;}
+    .card{padding:15px 13px;}
+    .kpi{font-size:24px;}
+    .bar-name{width:74px;font-size:11px;padding-right:6px;}
+    .bar-track{height:20px;}
+    .bar-fill{font-size:10px;padding-right:5px;}
+    .matrix{height:320px;}
+    .dot{font-size:11px;padding:4px 8px;}
+    .cloud{padding:12px 10px;gap:5px 6px;}
+    .s1{font-size:12px;} .s2{font-size:14px;} .s3{font-size:17px;} .s4{font-size:21px;}
+    table{font-size:12px;}
+    th,td{padding:7px 8px;}
+    .quote{font-size:14px;padding:9px 13px;}
+    .listnum li{padding:11px 12px 11px 46px;}
+    .listnum li::before{left:12px;width:24px;height:24px;font-size:13px;}
+    .src{font-size:10px;}
+    .flag{font-size:10px;}
+  }
+  .page{overflow-x:hidden;}
+  .tw{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:10px 0;}
+  .tw table{min-width:640px;}
+  @media (max-width:820px){
+    .bar-row,.bar{flex-direction:column;align-items:stretch;margin:11px 0;}
+    .bar-name{width:auto !important;flex-shrink:1;text-align:left !important;padding-right:0;font-size:12.5px;line-height:1.4;}
+    .bar-track{width:100%;}
+    .bar-fill{min-width:60px;}
+  }
+</style>
+</head>
+<body>
+
+<nav style="position:sticky;top:0;z-index:99;background:rgba(26,20,14,.94);border-bottom:1px solid var(--line);backdrop-filter:blur(6px);padding:8px 14px;display:flex;gap:6px;flex-wrap:wrap;font-size:12px;align-items:center;">
+  <a href="#p1" style="color:var(--gold-light);text-decoration:none;padding:3px 8px;border:1px solid var(--line);border-radius:8px;">01 封面</a>
+  <a href="#p2" style="color:var(--gold-light);text-decoration:none;padding:3px 8px;border:1px solid var(--line);border-radius:8px;">02 全景</a>
+  <a href="#p3" style="color:var(--gold-light);text-decoration:none;padding:3px 8px;border:1px solid var(--line);border-radius:8px;">03 坐标</a>
+  <a href="#p4" style="color:var(--gold-light);text-decoration:none;padding:3px 8px;border:1px solid var(--line);border-radius:8px;">04 配方</a>
+  <a href="#p5" style="color:var(--gold-light);text-decoration:none;padding:3px 8px;border:1px solid var(--line);border-radius:8px;">05 价格</a>
+  <a href="#p6" style="color:var(--gold-light);text-decoration:none;padding:3px 8px;border:1px solid var(--line);border-radius:8px;">06 口碑</a>
+  <a href="#p7" style="color:var(--gold-light);text-decoration:none;padding:3px 8px;border:1px solid var(--line);border-radius:8px;">07 卖点</a>
+  <a href="#p8" style="color:var(--gold-light);text-decoration:none;padding:3px 8px;border:1px solid var(--line);border-radius:8px;">08 痛点</a>
+  <a href="#p9" style="color:var(--gold-light);text-decoration:none;padding:3px 8px;border:1px solid var(--line);border-radius:8px;">09 启示</a>
+  <a href="#p10" style="color:var(--gold-light);text-decoration:none;padding:3px 8px;border:1px solid var(--line);border-radius:8px;">10 来源</a>
+  <span style="color:var(--muted);margin-left:auto;">竞品分析情报网 · 个护·EP08 阿道夫茶麸</span>
+</nav>
+
+<!-- ============ P1 ============ -->
+<section class="page" id="p1">
+  <div class="pageno">01 / 10</div>
+  <span class="tag">个护·EP08 · 阿道夫 茶麸洗发水</span>
+  <h1>阿道夫 茶麸洗发水<br>茶麸保养 · 袪屑止痒系列</h1>
+  <p class="sub">阿道夫（ADOLPH）由广州阿道夫个人护理用品有限公司运营，2013 年创立于广州，定位"国货高端香氛洗护"；2023 年王一博代言强化年轻心智。以"茶麸植物养护 + 香氛"为内核，跻身国货洗护头部。<span class="flag c">C</span></p>
+  <div class="quote"><span class="q">一句话结论：</span>"植物去屑专利 + 香氛护城河"的国货洗护头部——用<b>茶麸古法植物养护（茶麸 2.0 自研茶玻因）+ 舒安因®植物去屑专利 + 爱的味道香氛</b>建立差异化；短板在<b>"无硅油无硫酸盐"宣称需逐 SKU 核备案（旧版成分未公开）/ 去屑率 99.9% 待第三方实证 / 代工研产销分离</b>。<span class="flag c">C·电商快照</span></div>
+  <div class="grid g3" style="margin-top:22px;">
+    <div class="card red">
+      <div class="kpi">¥50<small> –86</small></div>
+      <div class="t">茶麸系列价格带 <span class="flag c">C</span></div>
+      <p style="font-size:13px;color:var(--muted);margin-top:6px;">茶麸袪屑止痒 350ml×3 ¥86、茶麸 2.0 350ml ¥79、茶麸控油 200ml ¥50.85；中高端卡位，覆盖尝鲜到正装。</p>
+    </div>
+    <div class="card gold">
+      <div class="kpi red">2013</div>
+      <div class="t">品牌创立年份 <span class="flag c">C</span></div>
+      <p style="font-size:13px;color:var(--muted);margin-top:6px;">广州阿道夫创立，国货高端香氛洗护；2023 王一博代言，2025 茶麸 2.0 上市强化植物养护线。</p>
+    </div>
+    <div class="card">
+      <div class="kpi red">8年</div>
+      <div class="t">国货销售份额第一（PR） <span class="flag c">C·待核</span></div>
+      <p style="font-size:13px;color:var(--muted);margin-top:6px;">Worldpanel 2018-2025 国产品牌销售份额 8 年第一（品牌 PR，待核）；抖音 TOP20 个护 #10（1.69 亿）。</p>
+    </div>
+  </div>
+  <div class="src"><b>数据来源：</b>阿道夫官网 / 京东商品页（C 级，品牌沿革 / 价格 / 评论）｜观研天下（B 级，抖音 TOP20）｜雪球转引 Worldpanel（C 级，份额第一，待核）｜王一博代言 PR（C 级）。价格随促销与版本波动。</div>
+</section>
+
+<!-- ============ P2 ============ -->
+<section class="page" id="p2">
+  <div class="pageno">02 / 10</div>
+  <span class="tag">市场全景</span>
+  <h2>个护 / 洗发水赛道格局：国货洗护头部的香氛 + 植物双引擎</h2>
+  <p class="sub">国货洗护进入"香氛 + 植物"双引擎时代。阿道夫以香氛护城河 + 茶麸植物养护卡位中高端，在抖音渠道与国货份额上均有头部表现。<span class="flag b">B/C</span></p>
+  <div class="tw"><table>
+    <tr><th style="width:26%">市场表现</th><th style="width:20%">数据</th><th style="width:18%">渠道 / 口径</th><th>级别</th></tr>
+    <tr><td>阿道夫 2025 抖音 TOP20 个护</td><td>#10（1.69 亿）</td><td>抖音 / 观研天下</td><td><span class="y">B</span></td></tr>
+    <tr><td>天然香系列 抖音双11 头发护理</td><td>TOP10</td><td>抖音双11</td><td><span class="n">C</span></td></tr>
+    <tr><td>Worldpanel 2018-2025 国产品牌销售份额</td><td>8 年第一</td><td>品牌 PR（雪球转引）</td><td><span class="n">C·待核</span></td></tr>
+  </table></div>
+  <div class="grid g3" style="margin-top:16px;">
+    <div class="card"><div class="t">阿道夫卡位</div><p>中高端香氛洗护头部，抖音 TOP20 #10（1.69 亿）、天然香系列双11 头发护理 TOP10，渠道声量与头部地位吻合。</p></div>
+    <div class="card"><div class="t">双引擎</div><p>"香氛护城河 + 茶麸植物养护"双线并进，区别于纯功效或纯香氛品牌，形成差异化心智。</p></div>
+    <div class="card"><div class="t">机会 / 待核</div><p>Worldpanel 8 年第一为品牌 PR（雪球转引），待核；"无硅油无硫酸盐"宣称需逐 SKU 核备案。<span class="flag c">C·待核</span></p></div>
+  </div>
+  <div class="src"><b>数据来源：</b>观研天下（B 级，抖音 TOP20）｜阿道夫官网 / 行业媒体（C 级，双11 TOP10 / 品牌 PR）｜雪球转引 Worldpanel（C 级，份额第一，待核）。份额第一为品牌自报，待第三方核实。</div>
+</section>
+
+<!-- ============ P3 ============ -->
+<section class="page" id="p3">
+  <div class="pageno">03 / 10</div>
+  <span class="tag">产品定位</span>
+  <h2>个护六维坐标（功效机理 × 发质人群 × 香型 × 质地 × 价格定位 × 地域）</h2>
+  <p class="sub">阿道夫茶麸洗发水以"植物去屑 + 茶麸控油 + 香氛"为内核，六维坐标用消费者语言表述如下。<span class="flag c">C</span></p>
+  <div class="tw"><table>
+    <tr><th style="width:15%">维度</th><th style="width:30%">坐标（消费者语言）</th><th>含义</th></tr>
+    <tr><td><span class="y">功效机理</span></td><td>植物去屑 + 茶麸控油 + 香氛</td><td>舒安因®植物去屑专利 + 茶麸控油 + 香氛护城河</td></tr>
+    <tr><td><span class="y">发质人群</span></td><td>油头 / 屑头 / 追求天然中高端</td><td>面向油头、头屑人群，及偏好天然植物理念的中高端用户</td></tr>
+    <tr><td><span class="y">香型</span></td><td>经典香氛 / 山海经东方美学</td><td>"爱的味道"经典香氛 + 山海经东方美学联名香型</td></tr>
+    <tr><td><span class="y">质地</span></td><td>乳液状</td><td>乳液质地，易起泡、好冲洗</td></tr>
+    <tr><td><span class="y">价格定位</span></td><td>中高端</td><td>¥50-86，高于开架平价、低于国际高端修护</td></tr>
+    <tr><td><span class="y">地域</span></td><td>全国</td><td>全渠道全国铺货，线上声量集中于一二线及内容电商</td></tr>
+  </table></div>
+  <h3 style="margin-top:18px;">定位矩阵（价格带 × 功效专业度）</h3>
+  <div class="matrix">
+    <div class="axis-y">功效专业度（入门 → 专业）</div>
+    <div class="axis-x">价格带（大众 → 高端）</div>
+    <div class="dot other" style="left:92%;top:14%;">卡诗 159-300</div>
+    <div class="dot other" style="left:36%;top:52%;">KONO 45-56</div>
+    <div class="dot other" style="left:30%;top:46%;">滋源 30-60</div>
+    <div class="dot other" style="left:42%;top:38%;">Spes 50-70</div>
+    <div class="dot me" style="left:46%;top:30%;">阿道夫 50-86</div>
+  </div>
+  <div class="grid g2" style="margin-top:16px;">
+    <div class="card red"><div class="t">阿道夫占位</div><p>中高端价格 + 香氛/植物养护专业度，把"国货高端香氛 + 茶麸植物去屑"做成心智，正面承接追求天然与留香的中高端用户。</p></div>
+    <div class="card gold"><div class="t">空白区</div><p>"无硅油无硫酸盐逐 SKU 做实备案 + 去屑率第三方实证 + 成分透明"带是信任洼地，后来者可用透明化切。<span class="flag c">C·推断</span></p></div>
+  </div>
+  <div class="src"><b>数据来源：</b>京东 / 天猫 / 官网（C 级，价格 / 定位 / 质地 / 香型）｜观研天下（B 级，抖音份额）。坐标为基于公开价格的示意性卡位。</div>
+</section>
+
+<!-- ============ P4 ============ -->
+<section class="page" id="p4">
+  <div class="pageno">04 / 10</div>
+  <span class="tag">配方拆解</span>
+  <h2>备案主单品 / 表活 / 去屑专利 / 茶麸 2.0（专业词 + 备案证据）</h2>
+  <p class="sub">茶麸系列以 NMPA 备案单品为骨架，茶麸 2.0（2025/5 上市）升级为"自研茶玻因 + 双牛氨基酸复配 APG 表活 + 无硅油"。旧版全成分未公开，需逐 SKU 核备案。<span class="flag a">A/B</span></p>
+  <div class="tw"><table>
+    <tr><th style="width:26%">备案单品</th><th style="width:18%">备案号</th><th style="width:24%">电商快照</th><th>级别</th></tr>
+    <tr><td>阿道夫茶麸袪屑止痒洗发水</td><td>粤G妆网备字2020013379</td><td>京东 350ml×3 ¥86 / 5000 评论 97%；生产：广州德谷个人护理（粤妆20160754）</td><td><span class="y">A/B</span></td></tr>
+    <tr><td>茶麸祛屑止痒冰护理（新版）</td><td>粤G妆网备字2023083814</td><td>京东 50ml×2 ¥8.9 / 2 万评论 98%</td><td><span class="y">B</span></td></tr>
+    <tr><td>茶麸控油</td><td>粤G妆网备字2020018908</td><td>200ml ¥50.85</td><td><span class="y">B</span></td></tr>
+    <tr><td>茶麸 2.0（2025/5 上市）</td><td>C2CC 行业媒体</td><td>¥79 / 350ml；自研茶玻因 + 双牛氨基酸复配 APG + 无硅油</td><td><span class="n">C</span></td></tr>
+  </table></div>
+  <div class="newzone" style="border-color:var(--bad);background:rgba(217,114,122,.06);">
+    <div class="zh" style="color:var(--bad);">⚠ 冲突标注：官网宣称「无硅油、无硫酸盐」 vs 旧版成分未公开 / 同系列含硅油款</div>
+    <p style="font-size:13px;color:var(--text);">茶麸 2.0 宣称"双牛氨基酸复配 APG + 无硅油"（C-行业媒体），但旧版（粤G2020013379）全成分未公开、第三方测评指同系列存在含硅油款，故<span class="flag c">无硅油无硫酸盐待核</span>；植物去屑专利舒安因®（侧柏叶提取物 + 迷迭香叶水 + 糖脂，中国发明专利 ZL202211293418.7）靶向抑制马拉色菌 <span class="flag c">去屑99.9%待实证</span>（品牌自报，待第三方实证）。</p>
+  </div>
+  <div class="grid g3" style="margin-top:14px;">
+    <div class="card"><div class="t">茶麸 2.0 升级</div><p>自研茶玻因（茶麸萃取 18 项专利、德国恒温破壁、纯度 98%）+ 双牛氨基酸复配 APG 表活 + 无硅油（C-行业媒体）。</p></div>
+    <div class="card"><div class="t">备案可信</div><p>主单品均持 NMPA 粤G 备案；生产企业广州德谷个人护理（粤妆20160754）。<span class="flag a">A</span></p></div>
+    <div class="card"><div class="t">去屑专利</div><p>舒安因® 中国发明专利 ZL202211293418.7，植物去屑 vs 传统化学去屑（ZPT/OCT）温和但见效慢。</p></div>
+  </div>
+  <div class="src"><b>数据来源：</b>国家药监局备案（A 级，粤G2020013379 / 2023083814 / 2020018908 / 粤妆20160754）｜京东商品页（B 级，价格 / 评论 / 好评率）｜C2CC 传媒（C 级，茶麸 2.0 / 茶玻因）。旧版 2020013379 全成分未公开，无硅油无硫酸盐待核；去屑 99.9% 为品牌自报，待实证。</div>
+</section>
+
+<!-- ============ P5 ============ -->
+<section class="page" id="p5">
+  <div class="pageno">05 / 10</div>
+  <span class="tag">价格策略</span>
+  <h2>价格带与卡位</h2>
+  <p class="sub">茶麸系列呈"冰护理尝鲜→控油入门→袪屑止痒正装→茶麸 2.0 升级"梯度，整体卡位中高端（¥50-86），对比 KONO（¥45-56）与卡诗（¥159-300）形成价格梯度。<span class="flag c">C</span></p>
+  <div style="background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px;">
+    <div class="bar-row"><div class="bar-name">茶麸控油200ml</div><div class="bar-track"><div class="bar-fill gold" style="width:30%">¥50.85</div></div></div>
+    <div class="bar-row"><div class="bar-name">茶麸2.0 350ml</div><div class="bar-track"><div class="bar-fill gold" style="width:47%">¥79</div></div></div>
+    <div class="bar-row"><div class="bar-name">袪屑止痒350ml×3</div><div class="bar-track"><div class="bar-fill gold" style="width:51%">¥86</div></div></div>
+    <div class="bar-row"><div class="bar-name">KONO 对标</div><div class="bar-track"><div class="bar-fill dim" style="width:33%">¥45-56</div></div></div>
+    <div class="bar-row"><div class="bar-name">卡诗 对标</div><div class="bar-track"><div class="bar-fill dim" style="width:100%">¥159-300</div></div></div>
+  </div>
+  <div class="grid g3" style="margin-top:16px;">
+    <div class="card red"><div class="t">中高端卡位</div><p>¥50 起跳、套装冲 ¥86，占"国货高端香氛 + 茶麸植物养护"心智，高于开架平价、低于国际高端。</p></div>
+    <div class="card"><div class="t">梯度矩阵</div><p>冰护理小样（尝鲜引流）+ 控油 / 袪屑止痒（复购）+ 茶麸 2.0（升级），覆盖新客到老客。</p></div>
+    <div class="card"><div class="t">对标</div><p>对比 KONO（¥45-56）更贵、对比卡诗（¥159-300）更亲民，居中卡位清晰。<span class="flag c">C</span></p></div>
+  </div>
+  <div class="src"><b>数据来源：</b>京东商品页（B/C 级，价格快照）。以官方实时价为准；常卖价与促销价口径不同。</div>
+</section>
+
+<!-- ============ P6 ============ -->
+<section class="page" id="p6">
+  <div class="pageno">06 / 10</div>
+  <span class="tag">消费者评价</span>
+  <h2>口碑横向</h2>
+  <p class="sub">京东数据：茶麸袪屑止痒 5000 评论 97%、茶麸祛屑止痒冰护理 2 万评论 98%（B）。正向集中在"香氛留香、控油蓬松、去屑体感"；负向在"部分反馈香精重、敏感头皮刺激"。<span class="flag b">B</span></p>
+  <div class="tw"><table>
+    <tr><th style="width:15%">维度</th><th style="width:30%">正向高频词</th><th style="width:30%">负向 / 痛点</th><th>信号</th></tr>
+    <tr><td>香氛</td><td>香氛留香 / "爱的味道"</td><td>部分反馈香精重</td><td>留香强</td></tr>
+    <tr><td>控油</td><td>控油蓬松</td><td>—</td><td>油头友好</td></tr>
+    <tr><td>去屑</td><td>去屑体感</td><td>—</td><td>体感成立</td></tr>
+    <tr><td>温和</td><td>—</td><td>敏感头皮刺激（部分反馈）</td><td>敏感需谨慎</td></tr>
+    <tr><td>价格</td><td>中高端性价比</td><td>—</td><td>中高端心智</td></tr>
+  </table></div>
+  <div class="grid g2" style="margin-top:14px;">
+    <div class="card red"><div class="t">强香氛 + 植物养护</div><p>香氛留香、控油蓬松、去屑体感构成核心口碑，茶麸植物养护被正向感知，支撑中高端定位。</p></div>
+    <div class="card gold"><div class="t">可攻击口子</div><p>"香精重 / 敏感头皮刺激"是清晰短板，"无硅油无硫酸盐逐 SKU 做实 + 去屑率第三方实证"可补信任。<span class="flag c">C·待系统复核</span></p></div>
+  </div>
+  <div class="src"><b>数据来源：</b>京东商品页（B 级，评论数 / 好评率：袪屑止痒 5000 评论 97%、冰护理 2 万评论 98%）｜达人 / 平台反馈（C 级，正向 / 负向高频词）。差评以平台个案为主；敏感刺激反馈待系统复核。</div>
+</section>
+
+<!-- ============ P7 ============ -->
+<section class="page" id="p7">
+  <div class="pageno">07 / 10</div>
+  <span class="tag">卖点拆解</span>
+  <h2>个护卖点五轴</h2>
+  <p class="sub">功效轴（植物去屑）× 配方轴（茶麸古法养护）× 专利轴（舒安因®）× 价格轴（中高端）× 护城河轴（国货头部 + 香氛）。<span class="flag c">C</span></p>
+  <div class="tw"><table>
+    <tr><th style="width:16%">轴</th><th style="width:28%">内容</th><th>说明</th></tr>
+    <tr><td><span class="y">① 植物养护轴</span></td><td>茶麸植物养护（千年古法升级）</td><td>茶麸古法升级为茶麸 2.0 自研茶玻因（18 项专利、纯度 98%）</td></tr>
+    <tr><td><span class="y">② 去屑专利轴</span></td><td>舒安因® 植物去屑专利</td><td>中国发明专利 ZL202211293418.7，侧柏叶 + 迷迭香 + 糖脂，靶向抑制马拉色菌</td></tr>
+    <tr><td><span class="n">③ 无硅油无硫酸盐轴</span></td><td>无硅油无硫酸盐（宣称）</td><td>官网宣称，需逐 SKU 核备案 —— <span class="flag c">无硅油无硫酸盐待核</span></td></tr>
+    <tr><td><span class="y">④ 香氛轴</span></td><td>香氛留香（"爱的味道"）</td><td>经典香氛 + 山海经东方美学联名，香氛护城河</td></tr>
+    <tr><td><span class="y">⑤ 背书轴</span></td><td>国货头部背书（8 年第一 PR）</td><td>Worldpanel 2018-2025 国产品牌份额 8 年第一（品牌 PR，待核）</td></tr>
+  </table></div>
+  <div class="quote" style="margin-top:16px;"><span class="q">洞察：</span>阿道夫的护城河来自"茶麸文化 IP + 植物去屑专利（舒安因®）+ 香氛护城河 + 国货头部背书"，而非单纯价格或渠道；它把"香氛 + 植物养护心智"守住了，把"逐 SKU 透明备案、去屑率第三方实证、成分透明"留给了后来者——用"同香氛 + 换透明 / 换实证"切。<span class="flag c">C·策略推断</span></div>
+  <div class="src"><b>数据来源：</b>京东 / 天猫 / 官网（C 级，功效 / 价格 / 配方 / 卖点）｜国家药监局备案（A 级，专利 ZL202211293418.7）。五轴为我按"个护卖点轴"格式提炼；无硅油无硫酸盐待核。</div>
+</section>
+
+<!-- ============ P8 ============ -->
+<section class="page" id="p8">
+  <div class="pageno">08 / 10</div>
+  <span class="tag">痛点与机会</span>
+  <h2>空白 = 你的机会</h2>
+  <p class="sub">把阿道夫短板轴与洗发水赛道空白叠加，得到可切入的切口（诚实标注冲突）。</p>
+  <div class="newzone" style="border-color:var(--bad);background:rgba(217,114,122,.06);">
+    <div class="zh" style="color:var(--bad);">⚠ 核心冲突：官网「无硅油、无硫酸盐」宣称 vs 旧版成分未公开 / 同系列含硅油款</div>
+    <p style="font-size:13px;color:var(--text);">官网（adolph.cn）宣称茶麸系列「无硅油、无硫酸盐」（C-品牌官网）；茶麸 2.0 用「双牛氨基酸复配 APG」（C-行业媒体）；但旧版（粤G2020013379）全成分未公开，第三方测评指同系列存在含硅油款（茶麸祛屑止痒冰护理含硅油 / 茶麸祛油止痒冰护理无硅油）→ 「无硅油无硫酸盐」需逐 SKU 核备案，<span class="flag c">无硅油无硫酸盐待核</span>。去屑专利舒安因®（侧柏叶提取物 + 迷迭香叶水 + 糖脂）中国发明专利 ZL202211293418.7，靶向抑制马拉色菌 <span class="flag c">去屑99.9%待实证</span>（品牌自报，待第三方实证，C）。植物去屑 vs 传统化学去屑（ZPT/OCT）温和但见效慢。代工（广州德谷）研产销分离。</p>
+  </div>
+  <div class="tw"><table>
+    <tr><th style="width:26%">赛道级空白</th><th>对应短板</th><th>你的切口</th></tr>
+    <tr><td><span class="n">逐 SKU 透明备案</span></td><td>旧版成分未公开 / 含硅油款并存</td><td><span class="y">全成分逐 SKU 公开 + 无硅油无硫酸盐做实</span></td></tr>
+    <tr><td><span class="n">去屑率第三方实证</span></td><td>99.9% 仅品牌自报</td><td><span class="y">第三方功效测试报告背书</span></td></tr>
+    <tr><td><span class="n">温和表活版</span></td><td>敏感头皮刺激反馈</td><td><span class="y">氨基酸 / APG 温和表活</span></td></tr>
+    <tr><td><span class="n">见效速度</span></td><td>植物去屑见效慢</td><td><span class="y">功效数据 + 周期护理方案</span></td></tr>
+    <tr><td><span class="n">研产销一体</span></td><td>代工（广州德谷）分离</td><td><span class="y">自控供应链建立信任</span></td></tr>
+  </table></div>
+  <div class="src"><b>数据来源：</b>阿道夫官网（C 级，无硅油无硫酸盐宣称）｜C2CC 传媒（C 级，茶麸 2.0 / 茶玻因 / 舒安因）｜国家药监局备案（A 级，粤G 备案 / 专利 ZL202211293418.7）｜第三方测评（C 级，含硅油款）。无硅油无硫酸盐待核、去屑 99.9% 待实证。</div>
+</section>
+
+<!-- ============ P9 ============ -->
+<section class="page" id="p9">
+  <div class="pageno">09 / 10</div>
+  <span class="tag">产品启示</span>
+  <h2>阿道夫路径：可学的护城河，与要避的坑</h2>
+  <p class="sub">阿道夫用"茶麸文化 IP + 植物去屑专利 + 香氛"构建差异化护城河，是可学路径；但"无硅油无硫酸盐"宣称需逐单品做实备案、去屑率需第三方实证，避免重蹈 KONO 软文翻车。五条可执行策略：</p>
+  <ol class="listnum">
+    <li><b>文化 IP + 专利双护城河。</b>学阿道夫把"茶麸古法"升级为自研茶玻因（18 项专利）、并用舒安因®植物去屑专利建立技术壁垒，而非只打营销。</li>
+    <li><b>宣称逐单品做实备案。</b>"无硅油无硫酸盐"必须逐 SKU 核 NMPA 备案，避免 KONO 式"软文宣称与备案不符"翻车——以备案成分为准对外沟通。</li>
+    <li><b>去屑率第三方实证。</b>99.9% 等数据须有第三方功效测试报告背书，植物去屑见效慢，更需用周期数据补用户信任。</li>
+    <li><b>香氛做差异化而非噱头。</b>把"爱的味道 + 山海经东方美学"做成可感知、可复购的香氛资产，承接中高端用户。</li>
+    <li><b>控供应链与成分透明。</b>代工研产销分离时，用全成分透明 + 自控/可溯供应链建立可信沟通，切阿道夫"旧版成分未公开"的信任洼地。</li>
+  </ol>
+  <div class="src"><b>说明：</b>以上为基于阿道夫公开竞争态势的"我方（假设新锐国货洗护品牌）"策略推断，非任何品牌官方信息。我方定位 / 价格 / 渠道需结合实际业务定义。</div>
+</section>
+
+<!-- ============ P10 ============ -->
+<section class="page" id="p10">
+  <div class="pageno">10 / 10</div>
+  <span class="tag">总结 + 来源</span>
+  <h2>一句话总结</h2>
+  <div class="quote"><span class="q">阿道夫给后来者的启示：</span>它证明"茶麸文化 IP + 植物去屑专利（舒安因®）+ 香氛护城河 + 国货头部背书"能占死国货中高端香氛洗护心智，但它把"香氛 + 植物养护"守住了，把"逐 SKU 透明备案、去屑率第三方实证、成分透明"留给了后来者——切口从不在香氛腹地，而在"同香氛、换透明 / 换实证"的信任洼地里。</div>
+
+  <h3 style="margin-top:18px;">数据来源与置信度清单</h3>
+  <div class="tw"><table>
+    <tr><th style="width:42%">来源</th><th style="width:12%">级别</th><th>用于本报告的结论</th></tr>
+    <tr><td>国家药监局备案（粤G妆网备字 2020013379 / 2023083814 / 2020018908；粤妆20160754；专利 ZL202211293418.7）</td><td><span class="y">A</span></td><td>茶麸系列主单品备案、生产企业、舒安因® 植物去屑专利</td></tr>
+    <tr><td>观研天下</td><td>B</td><td>阿道夫 2025 抖音 TOP20 个护 #10（1.69 亿）</td></tr>
+    <tr><td>京东商品页</td><td>B</td><td>价格（袪屑止痒 ¥86 / 茶麸 2.0 ¥79 / 控油 ¥50.85）、评论（5000 评论 97% / 冰护理 2 万评论 98%）</td></tr>
+    <tr><td>阿道夫官网</td><td>C</td><td>茶麸系列「无硅油、无硫酸盐」宣称、品牌沿革、王一博代言（2023）</td></tr>
+    <tr><td>C2CC 传媒</td><td>C</td><td>茶麸 2.0（2025/5 上市）、茶玻因、舒安因®、双牛氨基酸复配 APG</td></tr>
+    <tr><td>黄冈新闻网</td><td>C</td><td>茶玻因 / 舒安因® 相关报道</td></tr>
+    <tr><td>雪球（转引 Worldpanel）</td><td>C</td><td>2018-2025 国产品牌销售份额 8 年第一（待核）</td></tr>
+    <tr><td>王一博代言 PR</td><td>C</td><td>2023 年代言</td></tr>
+  </table></div>
+  <div class="src"><b>置信度说明：</b>A=官方/备案/监管；B=观研天下、京东商品页（销量/好评）；C=平台快照/达人内容/品牌 PR（波动大、存个案偏差）。价格/销量为电商快照，随促销波动；官网宣称「无硅油无硫酸盐」与旧版成分未公开 / 同系列含硅油款冲突，<span class="flag c">无硅油无硫酸盐待核</span>；舒安因® 靶向抑制马拉色菌「去屑99.9%」为品牌自报，<span class="flag c">去屑99.9%待实证</span>；Worldpanel 8 年第一为品牌 PR（雪球转引），待核。本报告不构成投资或购买建议。</div>
+</section>
+
+<div class="foot">竞品分析情报网 · 个护·EP08 阿道夫 ADOLPH 茶麸洗发水 ｜ 个护赛道 · 国货高端香氛洗护 ｜ 数据截至 2026-08 公开资料整理 ｜ 内容仅供产品研究与求职作品集使用</div>
+
+</body>
+</html>

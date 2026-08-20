@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>竞品分析情报网 · 个护·EP06｜KONO 卡厘 黑标小K瓶 控油奢护洗发水</title>
+<style>
+  :root{
+    --red:#5B3A8C; --red-deep:#3A2259; --gold:#C9A24B; --gold-light:#E6D5A8;
+    --bg:#16121F; --bg2:#1F1830; --card:#251C38; --card2:#2E2342;
+    --text:#F2ECF7; --muted:#B9AECB; --line:#3C2F55; --good:#5BB98C; --bad:#D9727A;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{background:var(--bg);color:var(--text);font-family:"PingFang SC","Microsoft YaHei",-apple-system,sans-serif;line-height:1.6;font-size:15px;}
+  .nav{position:sticky;top:0;z-index:50;background:var(--bg2);border-bottom:1px solid var(--line);display:flex;flex-wrap:wrap;gap:4px;padding:8px 14px;justify-content:center;}
+  .nav a{color:var(--muted);text-decoration:none;font-size:12px;font-weight:700;padding:3px 9px;border-radius:20px;border:1px solid var(--line);}
+  .nav a:hover{color:var(--gold-light);border-color:var(--gold);background:var(--card);}
+  .page{width:100%;max-width:920px;margin:0 auto;min-height:100vh;padding:54px 40px 40px;display:flex;flex-direction:column;justify-content:flex-start;border-bottom:1px solid var(--line);position:relative;}
+  .pageno{position:absolute;top:22px;right:40px;font-size:12px;color:var(--gold);letter-spacing:2px;font-weight:700;}
+  .tag{display:inline-block;background:var(--red);color:#fff;font-size:12px;padding:3px 12px;border-radius:20px;letter-spacing:1px;margin-bottom:14px;font-weight:700;}
+  h1{font-size:38px;line-height:1.25;font-weight:800;letter-spacing:1px;margin-bottom:8px;}
+  h2{font-size:26px;font-weight:800;margin-bottom:6px;color:var(--gold-light);}
+  h3{font-size:18px;font-weight:800;color:var(--text);margin:18px 0 8px;}
+  .sub{color:var(--muted);font-size:14px;margin-bottom:20px;}
+  .src{margin-top:auto;padding-top:18px;font-size:11px;color:var(--muted);border-top:1px dashed var(--line);}
+  .src b{color:var(--gold-light);}
+  .grid{display:grid;gap:14px;}
+  .g3{grid-template-columns:repeat(3,1fr);}
+  .g2{grid-template-columns:repeat(2,1fr);}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 16px;}
+  .card.red{border-left:4px solid var(--red);}
+  .card.gold{border-left:4px solid var(--gold);}
+  .kpi{font-size:32px;font-weight:800;color:var(--gold);line-height:1.1;}
+  .kpi.red{color:var(--red);}
+  .kpi small{font-size:13px;color:var(--muted);font-weight:400;}
+  .card .t{font-size:13px;color:var(--muted);margin-bottom:6px;}
+  .pill{display:inline-block;background:var(--card2);border:1px solid var(--line);border-radius:8px;padding:4px 10px;font-size:12px;margin:3px 4px 3px 0;color:var(--text);}
+  .pill.good{background:rgba(201,162,75,.15);border-color:var(--good);color:var(--good);}
+  .pill.bad{background:rgba(217,114,122,.15);border-color:var(--bad);color:var(--bad);}
+  .pill.gold{background:rgba(201,162,75,.14);border-color:var(--gold);color:var(--gold-light);}
+  .pill.new{background:rgba(201,162,75,.22);border-color:var(--gold);color:#F5EEDD;font-weight:700;}
+  .bar-row{display:flex;align-items:center;margin:7px 0;font-size:13px;}
+  .bar-name{width:108px;flex-shrink:0;color:var(--text);text-align:right;padding-right:10px;}
+  .bar-track{flex:1;background:var(--bg2);border-radius:6px;height:22px;overflow:hidden;position:relative;}
+  .bar-fill{height:100%;border-radius:6px;background:linear-gradient(90deg,var(--red-deep),var(--red));display:flex;align-items:center;justify-content:flex-end;padding-right:8px;font-size:11px;color:#fff;font-weight:700;}
+  .bar-fill.gold{background:linear-gradient(90deg,var(--red-deep),var(--gold));color:#16121F;}
+  .bar-fill.dim{background:linear-gradient(90deg,var(--card2),var(--gold));}
+  .matrix{position:relative;width:100%;height:380px;background:var(--bg2);border:1px solid var(--line);border-radius:14px;margin-top:8px;}
+  .axis-x{position:absolute;bottom:8px;width:100%;text-align:center;font-size:12px;color:var(--muted);}
+  .axis-y{position:absolute;left:8px;top:0;height:100%;writing-mode:vertical-rl;font-size:12px;color:var(--muted);}
+  .dot{position:absolute;transform:translate(-50%,-50%);padding:5px 10px;border-radius:20px;font-size:12px;font-weight:700;white-space:nowrap;}
+  .dot.me{background:var(--red);color:#fff;border:2px solid var(--gold);}
+  .dot.other{background:var(--card2);color:var(--text);border:1px solid var(--line);}
+  .cloud{display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px;padding:14px;background:var(--bg2);border-radius:14px;}
+  .cloud span{padding:3px 10px;border-radius:8px;line-height:1.5;}
+  .s1{font-size:13px;} .s2{font-size:16px;} .s3{font-size:20px;} .s4{font-size:25px;}
+  .cgood{background:rgba(201,162,75,.13);color:var(--good);}
+  .cbad{background:rgba(217,114,122,.13);color:var(--bad);}
+  .ctheme{font-size:15px;color:var(--gold-light);background:rgba(201,162,75,.1);padding:6px 14px;border-radius:10px;font-weight:700;}
+  .quote{border-left:3px solid var(--gold);padding:10px 16px;background:var(--card);border-radius:0 10px 10px 0;font-size:15px;color:var(--text);margin:10px 0;}
+  .quote .q{color:var(--gold-light);font-weight:800;}
+  table{width:100%;border-collapse:collapse;font-size:13px;margin-top:8px;}
+  th,td{border:1px solid var(--line);padding:9px 10px;text-align:left;vertical-align:top;}
+  th{background:var(--card2);color:var(--gold-light);font-weight:700;}
+  td .y{color:var(--good);} td .n{color:var(--bad);}
+  .listnum{counter-reset:l;list-style:none;}
+  .listnum li{counter-increment:l;position:relative;padding:12px 14px 12px 52px;background:var(--card);border:1px solid var(--line);border-radius:12px;margin-bottom:10px;}
+  .listnum li::before{content:counter(l);position:absolute;left:14px;top:12px;width:26px;height:26px;background:var(--red);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;}
+  .listnum li b{color:var(--gold-light);}
+  .foot{text-align:center;font-size:12px;color:var(--muted);padding:26px;}
+  .foot b{color:var(--gold-light);}
+  .flag{font-size:11px;padding:1px 6px;border-radius:5px;background:var(--card2);color:var(--muted);margin-left:4px;}
+  .flag.a{color:var(--good);} .flag.b{color:var(--gold-light);} .flag.c{color:var(--bad);}
+  .newzone{border:1px dashed var(--gold);border-radius:14px;padding:14px 16px;margin-top:14px;background:rgba(201,162,75,.06);}
+  .newzone .zh{font-size:13px;color:var(--gold-light);font-weight:800;margin-bottom:8px;}
+
+  @media (max-width:820px){
+    .page{min-height:100dvh;padding:24px 18px 40px;}
+    .pageno{top:14px;right:16px;}
+    h1{font-size:25px;}
+    h2{font-size:21px;}
+    h3{font-size:16px;}
+    .sub{font-size:13px;margin-bottom:14px;}
+    .g3,.g2{grid-template-columns:1fr;}
+    .card{padding:15px 13px;}
+    .kpi{font-size:24px;}
+    .bar-name{width:74px;font-size:11px;padding-right:6px;}
+    .bar-track{height:20px;}
+    .bar-fill{font-size:10px;padding-right:5px;}
+    .matrix{height:320px;}
+    .dot{font-size:11px;padding:4px 8px;}
+    .cloud{padding:12px 10px;gap:5px 6px;}
+    .s1{font-size:12px;} .s2{font-size:14px;} .s3{font-size:17px;} .s4{font-size:21px;}
+    table{font-size:12px;}
+    th,td{padding:7px 8px;}
+    .quote{font-size:14px;padding:9px 13px;}
+    .listnum li{padding:11px 12px 11px 46px;}
+    .listnum li::before{left:12px;width:24px;height:24px;font-size:13px;}
+    .src{font-size:10px;}
+    .flag{font-size:10px;}
+  }
+  .page{overflow-x:hidden;}
+  .tw{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:10px 0;}
+  .tw table{min-width:640px;}
+  @media (max-width:820px){
+    .bar-row,.bar{flex-direction:column;align-items:stretch;margin:11px 0;}
+    .bar-name{width:auto !important;flex-shrink:1;text-align:left !important;padding-right:0;font-size:12.5px;line-height:1.4;}
+    .bar-track{width:100%;}
+    .bar-fill{min-width:60px;}
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="#p1">01 封面</a>
+  <a href="#p2">02 市场</a>
+  <a href="#p3">03 坐标</a>
+  <a href="#p4">04 配方</a>
+  <a href="#p5">05 价格</a>
+  <a href="#p6">06 口碑</a>
+  <a href="#p7">07 卖点</a>
+  <a href="#p8">08 机会</a>
+  <a href="#p9">09 启示</a>
+  <a href="#p10">10 来源</a>
+</nav>
+
+<!-- ============ P1 ============ -->
+<section class="page" id="p1">
+  <div class="pageno">01 / 10</div>
+  <span class="tag">个护·EP06 · KONO 卡厘 黑标小K瓶 控油奢护洗发水</span>
+  <h1>KONO 卡厘 黑标小K瓶<br>控油奢护洗发水（控油蓬松）</h1>
+  <p class="sub">KONO 卡厘隶属广州凡岛网络科技（WIS / KONO / 赫系 / 墨雪同体系），2018 年创立，国货品牌；定位"沙龙级中高端控油蓬松"，是抖音洗护起量的标杆大单品。<span class="flag a">A</span></p>
+  <div class="quote"><span class="q">一句话定位：</span>凡岛系抖音起量标杆，硫酸盐体系撑起的控油蓬松大单品。其起量靠"单功效聚焦（控油蓬松）+ 套装极致性价比 + 自播 / 达播内容打法"，但<b>配方壁垒由硫酸盐体系（非氨基酸）+ 含硅油撑起</b>，与部分"氨基酸 / 无硫酸盐 / 无硅油"软文包装存在直接矛盾（详见 P4 / P10）。<span class="flag b">B·品观</span></div>
+  <div class="grid g3" style="margin-top:22px;">
+    <div class="card red">
+      <div class="kpi">2018</div>
+      <div class="t">品牌创立年份 <span class="flag a">A</span></div>
+      <p style="font-size:13px;color:var(--muted);margin-top:6px;">广州凡岛网络科技旗下，国货；与 WIS / 赫系 / 墨雪同属凡岛系"赛马 + 数据驱动"打法。</p>
+    </div>
+    <div class="card gold">
+      <div class="kpi red">TOP1</div>
+      <div class="t">抖音洗护 TOP1（2022-23 连续两年） <span class="flag b">B</span></div>
+      <p style="font-size:13px;color:var(--muted);margin-top:6px;">凡岛系抖音起量标杆；2024 抖音洗护 GMV 3.51 亿，2025 已转全渠道。</p>
+    </div>
+    <div class="card">
+      <div class="kpi red">¥50<small> –95</small></div>
+      <div class="t">价格定位（大众中高端） <span class="flag b">B</span></div>
+      <p style="font-size:13px;color:var(--muted);margin-top:6px;">黑标奢护到手约 52-56 元 / 500ml，轻盈控油 ¥59 / 750ml，套装成交均价约 95 元。</p>
+    </div>
+  </div>
+  <div class="src"><b>数据来源：</b>NMPA 备案（A 级，品牌体系 / 备案粤G妆网备字 2024368152 / 2024308340）｜品观（B 级，抖音洗护 TOP1 / 2024 GMV 3.51 亿 / 套装均价）｜什么值得买（B 级，黑标奢护到手价）｜京东商品页（B 级，轻盈控油 ¥59 / 750ml）。价格随促销波动。</div>
+</section>
+
+<!-- ============ P2 ============ -->
+<section class="page" id="p2">
+  <div class="pageno">02 / 10</div>
+  <span class="tag">市场全景</span>
+  <h2>抖音洗护起量公式：凡岛系如何用 KONO 跑出标杆</h2>
+  <p class="sub">KONO 是凡岛系"赛马 + 数据驱动"打法下跑出的洗护大单品：控油蓬松单功效切入 → 洗护套装极致性价比 → 自播 + 达播内容放量 → 明星背书收口。但凡岛系通病为差评率偏高、复购存疑。<span class="flag b">B/C</span></p>
+  <div class="grid g2" style="margin-top:6px;">
+    <div class="card gold"><div class="t">① 控油蓬松单功效</div><p>单点聚焦"控油蓬松"，以明确功效心智切油头 / 扁塌人群，降低认知门槛。</p></div>
+    <div class="card gold"><div class="t">② 洗护套装性价比</div><p>洗发 + 护发套装做极致性价比，拉高客单与尝鲜转化（套装成交均价约 95 元）。</p></div>
+    <div class="card gold"><div class="t">③ 自播 + 达播</div><p>品牌自播稳基本盘，达播矩阵做放量，是抖音起量的核心流量引擎。</p></div>
+    <div class="card gold"><div class="t">④ 明星背书</div><p>刘诗诗代言（2025）收口品牌调性，强化"沙龙级中高端"认知。<span class="flag c">C·PR稿</span></p></div>
+  </div>
+  <div class="tw" style="margin-top:16px;"><table>
+    <tr><th style="width:16%">时间</th><th style="width:30%">关键指标</th><th style="width:14%">级别</th><th>说明</th></tr>
+    <tr><td>2022-23</td><td>连续两年抖音洗护 TOP1</td><td><span class="y">B</span></td><td>凡岛系抖音起量标杆，奠定洗护心智</td></tr>
+    <tr><td>2024</td><td>抖音洗护 GMV 3.51 亿</td><td><span class="y">B</span></td><td>品观披露，单平台大单品体量</td></tr>
+    <tr><td>2025</td><td>抖音 TOP20 第 20 位（GMV 1.11 亿，同比 −45%）</td><td><span class="y">B</span></td><td>观研天下《2025 洗发水报告》；已转全渠道</td></tr>
+    <tr><td>2025</td><td>刘诗诗代言</td><td><span class="n">C</span></td><td>明星背书收口，PR 稿口径</td></tr>
+  </table></div>
+  <div class="grid g3" style="margin-top:16px;">
+    <div class="card"><div class="t">达播引擎</div><p>自播 + 达播矩阵是抖音起量核心，凡岛系"赛马 + 数据驱动"快速测款放大。（B/C）</p></div>
+    <div class="card"><div class="t">转全渠道</div><p>2025 抖音 TOP20 同比 −45%，增长重心由抖音单平台转向全渠道经营。（B）</p></div>
+    <div class="card"><div class="t">软肋</div><p>凡岛系通病：差评率偏高、复购存疑，产品力与复购为后续隐忧。（B/C·待系统复核）</p></div>
+  </div>
+  <div class="src"><b>数据来源：</b>品观（B 级，抖音洗护 TOP1 / 2024 GMV 3.51 亿 / 套装均价）｜观研天下《2025 洗发水报告》（B 级，2025 抖音 TOP20 第 20 位、GMV 1.11 亿、同比 −45%、已转全渠道）｜刘诗诗代言 PR 稿（C 级）｜蝉妈妈（C 级，达播 / 复购参考）。销量为平台口径，随口径波动。</div>
+</section>
+
+<!-- ============ P3 ============ -->
+<section class="page" id="p3">
+  <div class="pageno">03 / 10</div>
+  <span class="tag">产品定位</span>
+  <h2>个护六维坐标（功效机理 × 发质人群 × 香型 × 质地 × 价格定位 × 地域）</h2>
+  <p class="sub">KONO 卡厘黑标小K瓶以"控油蓬松 + 沙龙奢护"为内核，六维坐标用消费者语言表述如下。<span class="flag a">A</span></p>
+  <div class="tw"><table>
+    <tr><th style="width:15%">维度</th><th style="width:30%">坐标（消费者语言）</th><th>含义</th></tr>
+    <tr><td><span class="y">功效机理</span></td><td>控油蓬松 + 滋养</td><td>主打控油蓬松，叠加烟酰胺 / 泛醇等做滋养，针对扁塌油头</td></tr>
+    <tr><td><span class="y">发质人群</span></td><td>油头 / 扁塌 / 混合头皮</td><td>面向易出油、发根扁塌与混合性头皮人群；敏感头皮需谨慎（含硫酸盐 + 硅油）</td></tr>
+    <tr><td><span class="y">香型</span></td><td>东方雅致（国际调香师）/ 栀子花香</td><td>国际调香师参与，栀子花香型，主打沙龙级留香</td></tr>
+    <tr><td><span class="y">质地</span></td><td>乳液泵压</td><td>乳液质地 + 泵压瓶，取用便捷，主打高端使用感</td></tr>
+    <tr><td><span class="y">价格定位</span></td><td>大众中高端</td><td>¥50-95，黑标奢护到手约 52-56 元 / 500ml，卡位百元内大牌体验</td></tr>
+    <tr><td><span class="y">地域</span></td><td>全国，南方湿热更适用</td><td>控油逻辑契合南方湿热头皮；北方干冷偏干非主打场景</td></tr>
+  </table></div>
+  <h3 style="margin-top:18px;">定位矩阵（价格带 × 功效专业度）</h3>
+  <div class="matrix">
+    <div class="axis-y">功效专业度（入门 → 专业）</div>
+    <div class="axis-x">价格带（大众 → 高端）</div>
+    <div class="dot other" style="left:90%;top:14%;">卡诗 159-300</div>
+    <div class="dot other" style="left:18%;top:70%;">蜂花 30-60</div>
+    <div class="dot me" style="left:34%;top:46%;">KONO 50-95</div>
+  </div>
+  <div class="grid g2" style="margin-top:16px;">
+    <div class="card red"><div class="t">KONO 占位</div><p>大众中高端（¥50-95）+ 沙龙感控油蓬松，把"百元内大牌体验"做成抖音爆品心智，正面承接控油蓬松刚需用户。</p></div>
+    <div class="card gold"><div class="t">空白区</div><p>"真氨基酸 + 无硅油 + 成分透明"带（KONO 实为硫酸盐体系 + 含硅油、软文包装存诚信风险）是成分党差异化机会。<span class="flag c">C·推断</span></p></div>
+  </div>
+  <div class="src"><b>数据来源：</b>NMPA 备案（A 级，功效 / 质地 / 成分）｜品观 / 京东 / 什么值得买（B 级，价格 / 定位）｜国际调香师 / 香型（A 级全成分 + B 级商品页描述）。坐标为基于公开价格的示意性卡位。</div>
+</section>
+
+<!-- ============ P4 ============ -->
+<section class="page" id="p4">
+  <div class="pageno">04 / 10</div>
+  <span class="tag">配方拆解</span>
+  <h2>表活体系 / 硅油 / 卖点成分 / 备案证据（专业词）</h2>
+  <p class="sub">KONO 卡厘黑标小K瓶的"配方"= 硫酸盐表活体系 + 含硅油顺滑 + 烟酰胺 / 发酵物 / 植萃卖点。以 SLES + ALS + CAPB + COCAMIDE MEA + TEA-DODECYLBENZENESULFONATE 为骨架，非氨基酸体系，且含 DIMETHICONOL（硅油）。<span class="flag a">A</span></p>
+  <div class="tw"><table>
+    <tr><th style="width:22%">模块</th><th style="width:30%">成分 / 工艺</th><th style="width:24%">作用</th><th>备注</th></tr>
+    <tr><td>表活体系</td><td>SODIUM LAURETH SULFATE（SLES）+ AMMONIUM LAURYL SULFATE（ALS）+ COCAMIDOPROPYL BETAINE（CAPB）+ COCAMIDE MEA + TEA-DODECYLBENZENESULFONATE</td><td>硫酸盐系清洁，非氨基酸 / 非 APG</td><td>清洁力强、成本低的经典体系</td></tr>
+    <tr><td>硅油</td><td>DIMETHICONOL</td><td>顺滑、防打结</td><td>含硅油，非无硅油</td></tr>
+    <tr><td>卖点成分</td><td>烟酰胺（NIACINAMIDE）、半乳糖酵母发酵物 / 半乳糖益生元、金黄洋甘菊（CHRYSANTHEMUM INDICUM EXTRACT）、泛醇</td><td>皮脂调控宣称 / 滋养 / 舒缓</td><td>卖点背书，非去屑活性物</td></tr>
+    <tr><td>备案</td><td>主单品 粤G妆网备字 2024368152（控油奢护）；同系 轻盈控油 粤G妆网备字 2024308340</td><td>国产非特备案</td><td>轻盈控油 京东 750ml ¥59 / 50 万评论 97%</td></tr>
+  </table></div>
+  <div class="newzone" style="border-color:var(--bad);background:rgba(217,114,122,.06);">
+    <div class="zh" style="color:var(--bad);">⚠ 冲突标注：软文"氨基酸 / 无硫酸盐 / 无硅油" vs 备案全成分（SLES + ALS + 含硅油 DIMETHICONOL）</div>
+    <p style="font-size:13px;color:var(--text);">多个软文 / 带货稿（淘宝百科、什么值得买好物等）称 KONO「氨基酸体系 / 无硫酸盐 / 无硅油」，与备案全成分（SLES + ALS 硫酸盐体系，且含硅油 DIMETHICONOL）<b>直接矛盾</b>。本报告以 A 级备案为准，上述软文为<b>虚假宣传</b>。控油奢护款全成分亦未见明确去屑活性物，"祛屑"宣称需核具体 SKU（详见 P8）。</p>
+  </div>
+  <div class="grid g3" style="margin-top:14px;">
+    <div class="card"><div class="t">备案证据</div><p>主单品 粤G妆网备字 2024368152（控油奢护）；同系轻盈控油 粤G妆网备字 2024308340，京东 750ml ¥59 / 50 万评论 97%。<span class="flag a">A</span></p></div>
+    <div class="card"><div class="t">表活真相</div><p>SLES + ALS + CAPB + COCAMIDE MEA + TEA-DODECYLBENZENESULFONATE，硫酸盐体系，非氨基酸；含 DIMETHICONOL 硅油。</p></div>
+    <div class="card"><div class="t">卖点成分</div><p>烟酰胺、半乳糖酵母发酵物 / 半乳糖益生元、金黄洋甘菊、泛醇，主打控油滋养舒缓，但非去屑活性物。</p></div>
+  </div>
+  <div class="src"><b>数据来源：</b>NMPA 备案（A 级，粤G妆网备字 2024368152 / 2024308340）｜台湾总代理全成分表（A 级，表活 / 硅油 / 卖点成分）｜京东商品页（B 级，轻盈控油 ¥59 / 750ml / 50 万评论 / 97% 好评）｜淘宝百科 / 什么值得买好物（C 级，软文话术，与备案冲突，已标注虚假宣传）。</div>
+</section>
+
+<!-- ============ P5 ============ -->
+<section class="page" id="p5">
+  <div class="pageno">05 / 10</div>
+  <span class="tag">价格策略</span>
+  <h2>价格带与卡位</h2>
+  <p class="sub">KONO 黑标奢护到手约 52-56 元 / 500ml（什么值得买 2025-07），轻盈控油 ¥59 / 750ml（京东），套装成交均价约 95 元（2024 品观）；对比高端卡诗 ¥159-300、平价蜂花 ¥30-60，KONO 卡位"大众中高端"。<span class="flag b">B</span></p>
+  <div style="background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px;">
+    <div class="bar-row"><div class="bar-name">蜂花 30-60</div><div class="bar-track"><div class="bar-fill dim" style="width:20%">¥30-60</div></div></div>
+    <div class="bar-row"><div class="bar-name">黑标奢护</div><div class="bar-track"><div class="bar-fill gold" style="width:19%">¥52-56/500ml</div></div></div>
+    <div class="bar-row"><div class="bar-name">轻盈控油</div><div class="bar-track"><div class="bar-fill gold" style="width:20%">¥59/750ml</div></div></div>
+    <div class="bar-row"><div class="bar-name">套装均价</div><div class="bar-track"><div class="bar-fill gold" style="width:32%">约¥95</div></div></div>
+    <div class="bar-row"><div class="bar-name">卡诗 159-300</div><div class="bar-track"><div class="bar-fill dim" style="width:100%">¥159-300</div></div></div>
+  </div>
+  <div class="grid g3" style="margin-top:16px;">
+    <div class="card red"><div class="t">大众中高端卡位</div><p>¥50 起跳、套装冲 ¥95，占"百元内大牌体验"心智，上接卡诗、下压蜂花。</p></div>
+    <div class="card"><div class="t">套装杠杆</div><p>洗护套装做极致性价比（成交均价约 95 元），拉高客单与尝鲜转化，是抖音起量关键。</p></div>
+    <div class="card"><div class="t">风险</div><p>软文"氨基酸 / 无硫酸盐 / 无硅油"与备案（硫酸盐 + 硅油）矛盾，价格力背后存成分诚信风险。<span class="flag a">A</span></p></div>
+  </div>
+  <div class="src"><b>数据来源：</b>什么值得买（B 级，黑标奢护到手 52-56 元 / 500ml，2025-07）｜京东商品页（B 级，轻盈控油 ¥59 / 750ml）｜品观（B 级，套装成交均价约 95 元 / 2024）｜卡诗 / 蜂花价格带（B 级，公开商品页）。条形为基于公开价格的示意性对比，以官方实时价为准。</div>
+</section>
+
+<!-- ============ P6 ============ -->
+<section class="page" id="p6">
+  <div class="pageno">06 / 10</div>
+  <span class="tag">消费者评价</span>
+  <h2>口碑横向</h2>
+  <p class="sub">京东轻盈控油款 50 万评论、好评率 97%（B）。正向集中在"控油蓬松、留香、性价比"；负向（凡岛系通病）集中在"清洁力过强、长期用头皮干痒、差评率偏高"，负向结论标注待系统复核。<span class="flag b">B</span></p>
+  <div class="tw"><table>
+    <tr><th style="width:15%">维度</th><th style="width:30%">正向高频词</th><th style="width:30%">负向 / 痛点</th><th>信号</th></tr>
+    <tr><td>功效</td><td>控油蓬松明显</td><td>清洁力过强、长期用头皮干痒</td><td>控油强</td></tr>
+    <tr><td>气味</td><td>留香持久 / 栀子花香</td><td>香型两极分化</td><td>香氛接受</td></tr>
+    <tr><td>价格</td><td>性价比高</td><td>套装虚高存疑</td><td>性价比</td></tr>
+    <tr><td>复购</td><td>尝鲜复购</td><td>差评率偏高、复购存疑</td><td>待系统复核</td></tr>
+  </table></div>
+  <div class="grid g2" style="margin-top:14px;">
+    <div class="card red"><div class="t">控油蓬松 + 留香 + 性价比</div><p>50 万评论 97% 好评（京东轻盈控油款），控油蓬松与栀子花留香是核心正向心智，性价比承接大众中高端用户。</p></div>
+    <div class="card gold"><div class="t">可攻击口子</div><p>"温和表活（氨基酸 / APG）+ 无硅油选项 + 敏感头皮友好 + 成分透明"是凡岛系通病短板，成分党可切。</p></div>
+  </div>
+  <div class="src"><b>数据来源：</b>京东商品页（B 级，轻盈控油 50 万评论 / 97% 好评、正向高频词）｜凡岛系差评率 / 复购（B/C 级，平台共性反馈，标注待系统复核）。差评以平台个案为主，不代表整体率；"清洁力过强 / 头皮干痒"为备案（硫酸盐 + 硅油）与用户共性反馈交叉印证。</div>
+</section>
+
+<!-- ============ P7 ============ -->
+<section class="page" id="p7">
+  <div class="pageno">07 / 10</div>
+  <span class="tag">卖点拆解</span>
+  <h2>个护卖点五轴</h2>
+  <p class="sub">功效轴（控油蓬松）× 质地轴（乳液泵压 · 沙龙感）× 香氛轴（国际调香师留香）× 背书轴（六项专利）× 价格轴（百元内大牌体验）。<span class="flag b">B/C</span></p>
+  <div class="tw"><table>
+    <tr><th style="width:16%">轴</th><th style="width:28%">内容</th><th>说明</th></tr>
+    <tr><td><span class="y">① 功效轴</span></td><td>控油蓬松（多肽 / 皮脂调控宣称）</td><td>单功效聚焦，主打油头 / 扁塌的控油蓬松，以皮脂调控话术支撑</td></tr>
+    <tr><td><span class="y">② 质地轴</span></td><td>沙龙奢护（黑白松露概念）</td><td>乳液泵压 + 黑白松露概念，营造沙龙级高端使用感</td></tr>
+    <tr><td><span class="y">③ 香氛轴</span></td><td>香氛留香（国际调香师）</td><td>国际调香师参与，栀子花香型，主打持久留香</td></tr>
+    <tr><td><span class="y">④ 背书轴</span></td><td>六项专利背书</td><td>以六项专利做技术与合规背书（具体专利号待核）<span class="flag c">C·待核</span></td></tr>
+    <tr><td><span class="n">⑤ 价格轴</span></td><td>高性价比（百元内大牌体验）</td><td>¥50-95 卡位大众中高端，"百元内大牌体验"为核心转化钩子</td></tr>
+  </table></div>
+  <div class="quote" style="margin-top:16px;"><span class="q">洞察：</span>KONO 的五轴把"抖音起量"做成可复制模板——功效聚焦 + 沙龙质感 + 香氛记忆 + 专利背书 + 极致性价比；但背书轴与价格轴均建立在"硫酸盐体系 + 含硅油"的低成本配方上，与"氨基酸 / 无硅油"软文包装矛盾，护城河实为渠道与内容，而非配方壁垒。<span class="flag a">A·备案</span></div>
+  <div class="src"><b>数据来源：</b>京东 / 商品页（B 级，功效 / 质地 / 香氛 / 价格）｜专利背书（C 级，六项专利为商品宣传口径，具体专利号待核）｜国际调香师（A 级全成分 + B 级商品描述）。五轴为我按"个护卖点轴"格式提炼。</div>
+</section>
+
+<!-- ============ P8 ============ -->
+<section class="page" id="p8">
+  <div class="pageno">08 / 10</div>
+  <span class="tag">痛点与机会</span>
+  <h2>空白 = 你的机会</h2>
+  <p class="sub">把 KONO 短板轴与洗护赛道空白叠加，得到可切入的切口。</p>
+  <div class="tw"><table>
+    <tr><th style="width:26%">KONO 短板</th><th>赛道级空白</th><th>你的切口</th></tr>
+    <tr><td><span class="n">硫酸盐 + 硅油体系</span></td><td>敏感头皮 / 长期用刺激争议</td><td><span class="y">真氨基酸 / APG 温和表活</span></td></tr>
+    <tr><td><span class="n">软文"无硅油"失实</span></td><td>无硅油真实需求</td><td><span class="y">真无硅油变体 + 成分透明</span></td></tr>
+    <tr><td><span class="n">"祛屑"宣称待核</span></td><td>明确去屑活性物需求</td><td><span class="y">含明确去屑剂 SKU</span></td></tr>
+    <tr><td><span class="n">凡岛系产品力 / 复购软肋</span></td><td>复购与信任洼地</td><td><span class="y">成分党复购型单品</span></td></tr>
+  </table></div>
+  <div class="newzone">
+    <div class="zh">▍成分党机会：聚焦"真氨基酸 + 无硅油"细分</div>
+    <p style="font-size:13px;color:var(--text);">KONO 用硫酸盐体系（SLES + ALS）降成本起量、却用"氨基酸 / 无硫酸盐 / 无硅油"软文包装，构成可攻击的信任缺口。其控油奢护款全成分未见明确去屑活性物，"祛屑"宣称需核具体 SKU。后来者以"说备案、做备案"的真氨基酸 + 无硅油 + 明确去屑活性物切成分党细分，即可正面补其短板。<span class="flag a">A·备案</span></p>
+  </div>
+  <div class="src"><b>数据来源：</b>NMPA 备案（A 级，硫酸盐表活 / 含硅油 DIMETHICONOL / 控油奢护款未见明确去屑活性物）｜品观 / 京东（B 级，价格 / 复购参考）｜凡岛系差评通病（B/C 级）。空白与切口为基于公开事实的策略推断。</div>
+</section>
+
+<!-- ============ P9 ============ -->
+<section class="page" id="p9">
+  <div class="pageno">09 / 10</div>
+  <span class="tag">产品启示</span>
+  <h2>如果做新锐国货控油洗发品牌，怎么打？</h2>
+  <p class="sub">学 KONO 的"起量打法"，补 KONO 的"成分短板"。五条可执行策略：</p>
+  <ol class="listnum">
+    <li><b>单功效聚焦。</b>承接 KONO 验证的"控油蓬松单功效"心智，用清晰功效切入油头 / 扁塌人群，降低认知门槛。</li>
+    <li><b>套装极致性价比。</b>学其洗护套装杠杆（成交均价约 95 元）拉高客单与尝鲜转化，把性价比做成转化钩子。</li>
+    <li><b>内容打法。</b>学其自播 + 达播矩阵与明星背书收口，用"赛马 + 数据驱动"快速测款放大。</li>
+    <li><b>自建产品壁垒。</b>抖音起量靠打法，但产品壁垒必须自建；用真氨基酸 + 无硅油 + 明确去屑活性物，补 KONO 配方短板。</li>
+    <li><b>诚信沟通。</b>KONO 用硫酸盐体系降成本起量、却用"氨基酸 / 无硅油"软文包装 → 诚信风险；立项以备案为准做透明沟通，切其信任洼地。</li>
+  </ol>
+  <div class="src"><b>说明：</b>以上为基于 KONO 公开竞争态势的"我方（假设为新锐国货控油洗发品牌）"策略推断，非任何品牌官方信息。我方定位 / 价格 / 渠道需结合实际业务定义。</div>
+</section>
+
+<!-- ============ P10 ============ -->
+<section class="page" id="p10">
+  <div class="pageno">10 / 10</div>
+  <span class="tag">总结 + 来源</span>
+  <h2>一句话总结</h2>
+  <div class="quote"><span class="q">KONO 给后来者的启示：</span>它证明"单功效聚焦（控油蓬松）+ 套装极致性价比 + 自播 / 达播内容打法 + 明星背书"能跑出抖音洗护标杆（2022-23 连续两年 TOP1、2024 GMV 3.51 亿），但它把"渠道与内容起量"守住了，把"真氨基酸、无硅油、成分透明、复购信任"留给了后来者——切口不在其流量腹地，而在"同打法起量、换真温和 / 真无硅油 / 换诚信沟通"的信任洼地里。</div>
+
+  <div class="newzone" style="border-color:var(--bad);background:rgba(217,114,122,.06);">
+    <div class="zh" style="color:var(--bad);">⚠ 冲突结论：软文"氨基酸 / 无硫酸盐 / 无硅油" vs 备案（SLES + ALS + 含硅油 DIMETHICONOL）</div>
+    <p style="font-size:13px;color:var(--text);">多个软文 / 带货稿（淘宝百科、什么值得买好物等）称 KONO「氨基酸体系 / 无硫酸盐 / 无硅油」，与 A 级备案全成分（SLES + ALS 硫酸盐体系 + 含硅油 DIMETHICONOL）直接矛盾。本报告以备案为准，上述软文判定为<b>虚假宣传</b>；"祛屑"宣称亦需核具体 SKU（控油奢护款全成分未见明确去屑活性物）。</p>
+  </div>
+
+  <h3 style="margin-top:18px;">数据来源与置信度清单</h3>
+  <div class="tw"><table>
+    <tr><th style="width:42%">来源</th><th style="width:12%">级别</th><th>用于本报告的结论</th></tr>
+    <tr><td>NMPA 备案（粤G妆网备字 2024368152 / 2024308340）</td><td><span class="y">A</span></td><td>主单品控油奢护 / 同系轻盈控油备案；硫酸盐表活（SLES+ALS+CAPB 等）、含硅油 DIMETHICONOL、卖点成分、未见明确去屑活性物，为准</td></tr>
+    <tr><td>台湾总代理全成分表</td><td><span class="y">A</span></td><td>完整全成分（表活 / 硅油 / 卖点成分）证据，用于配方拆解与冲突判定</td></tr>
+    <tr><td>品观</td><td>B</td><td>抖音洗护 2022-23 连续两年 TOP1、2024 GMV 3.51 亿、套装成交均价约 95 元</td></tr>
+    <tr><td>观研天下《2025 洗发水报告》</td><td>B</td><td>2025 抖音 TOP20 第 20 位、GMV 1.11 亿、同比 −45%、已转全渠道</td></tr>
+    <tr><td>京东商品页</td><td>B</td><td>轻盈控油 ¥59 / 750ml、50 万评论、97% 好评；价格 / 口碑快照</td></tr>
+    <tr><td>什么值得买</td><td>B</td><td>黑标奢护到手 52-56 元 / 500ml（2025-07）</td></tr>
+    <tr><td>蝉妈妈</td><td>C</td><td>达播 / 复购参考（波动大，待系统复核）</td></tr>
+    <tr><td>刘诗诗代言 PR 稿</td><td>C</td><td>2025 明星背书（收口品牌调性）</td></tr>
+  </table></div>
+  <div class="src"><b>置信度说明：</b>A=官方/备案/监管全成分（为准）；B=品观、观研天下、京东商品页、什么值得买（销量/价格/口碑快照，随促销波动）；C=蝉妈妈、代言 PR 稿（平台快照/PR，波动大、存个案偏差）。凡软文"氨基酸/无硫酸盐/无硅油"与 A 级备案（SLES+ALS+含硅油 DIMETHICONOL）冲突，以备案为准，软文为虚假宣传；"祛屑"宣称需核具体 SKU（控油奢护款全成分未见明确去屑活性物）；六项专利具体专利号待核。本报告不构成投资或购买建议。</div>
+</section>
+
+<div class="foot">竞品分析情报网 · 个护·EP06 KONO 卡厘 黑标小K瓶 控油奢护洗发水 ｜ 个护赛道 · 抖音起量标杆控油蓬松 ｜ 数据截至 2026-08 公开资料整理 ｜ 内容仅供产品研究与求职作品集使用</div>
+
+</body>
+</html>
