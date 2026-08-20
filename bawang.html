@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>竞品分析情报网 · 洗护·EP01｜霸王 BAWANG 防脱洗发液</title>
+<style>
+  :root{
+    --red:#8B1E1E; --red-deep:#3A0D0D; --gold:#B8860B; --gold-light:#D4A95C;
+    --bg:#0E0C08; --bg2:#1A160E; --card:#1F1A11; --card2:#2C2517;
+    --text:#F2EAD9; --muted:#A99E86; --line:#2C2517; --good:#D8B35E; --bad:#C77B5A;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{background:var(--bg);color:var(--text);font-family:"PingFang SC","Microsoft YaHei",-apple-system,sans-serif;line-height:1.6;font-size:15px;}
+  .page{width:100%;max-width:920px;margin:0 auto;min-height:100vh;padding:54px 40px 40px;display:flex;flex-direction:column;justify-content:flex-start;border-bottom:1px solid var(--line);position:relative;}
+  .pageno{position:absolute;top:22px;right:40px;font-size:12px;color:var(--gold);letter-spacing:2px;font-weight:700;}
+  .tag{display:inline-block;background:var(--red);color:#fff;font-size:12px;padding:3px 12px;border-radius:20px;letter-spacing:1px;margin-bottom:14px;font-weight:700;}
+  h1{font-size:38px;line-height:1.25;font-weight:800;letter-spacing:1px;margin-bottom:8px;}
+  h2{font-size:26px;font-weight:800;margin-bottom:6px;color:var(--gold-light);}
+  h3{font-size:18px;font-weight:800;color:var(--text);margin:18px 0 8px;}
+  .sub{color:var(--muted);font-size:14px;margin-bottom:20px;}
+  .src{margin-top:auto;padding-top:18px;font-size:11px;color:var(--muted);border-top:1px dashed var(--line);}
+  .src b{color:var(--gold-light);}
+  .grid{display:grid;gap:14px;}
+  .g3{grid-template-columns:repeat(3,1fr);}
+  .g2{grid-template-columns:repeat(2,1fr);}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 16px;}
+  .card.red{border-left:4px solid var(--red);}
+  .card.gold{border-left:4px solid var(--gold);}
+  .kpi{font-size:32px;font-weight:800;color:var(--gold);line-height:1.1;}
+  .kpi.red{color:var(--red);}
+  .kpi small{font-size:13px;color:var(--muted);font-weight:400;}
+  .card .t{font-size:13px;color:var(--muted);margin-bottom:6px;}
+  .pill{display:inline-block;background:var(--card2);border:1px solid var(--line);border-radius:8px;padding:4px 10px;font-size:12px;margin:3px 4px 3px 0;color:var(--text);}
+  .pill.good{background:rgba(216,179,94,.15);border-color:var(--good);color:var(--good);}
+  .pill.bad{background:rgba(199,123,90,.15);border-color:var(--bad);color:var(--bad);}
+  .pill.gold{background:rgba(216,179,94,.14);border-color:var(--gold);color:var(--gold-light);}
+  .pill.new{background:rgba(216,179,94,.22);border-color:var(--gold);color:#F5EEDD;font-weight:700;}
+  .bar-row{display:flex;align-items:center;margin:7px 0;font-size:13px;}
+  .bar-name{width:108px;flex-shrink:0;color:var(--text);text-align:right;padding-right:10px;}
+  .bar-track{flex:1;background:var(--bg2);border-radius:6px;height:22px;overflow:hidden;position:relative;}
+  .bar-fill{height:100%;border-radius:6px;background:linear-gradient(90deg,var(--red-deep),var(--red));display:flex;align-items:center;justify-content:flex-end;padding-right:8px;font-size:11px;color:#fff;font-weight:700;}
+  .bar-fill.gold{background:linear-gradient(90deg,#3a2e15,var(--gold));color:#0E0C08;}
+  .bar-fill.dim{background:linear-gradient(90deg,#2C2517,#5a4a2a);}
+  .matrix{position:relative;width:100%;height:380px;background:var(--bg2);border:1px solid var(--line);border-radius:14px;margin-top:8px;}
+  .axis-x{position:absolute;bottom:8px;width:100%;text-align:center;font-size:12px;color:var(--muted);}
+  .axis-y{position:absolute;left:8px;top:0;height:100%;writing-mode:vertical-rl;font-size:12px;color:var(--muted);}
+  .dot{position:absolute;transform:translate(-50%,-50%);padding:5px 10px;border-radius:20px;font-size:12px;font-weight:700;white-space:nowrap;}
+  .dot.me{background:var(--red);color:#fff;border:2px solid var(--gold);}
+  .dot.other{background:var(--card2);color:var(--text);border:1px solid var(--line);}
+  .cloud{display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px;padding:14px;background:var(--bg2);border-radius:14px;}
+  .cloud span{padding:3px 10px;border-radius:8px;line-height:1.5;}
+  .s1{font-size:13px;} .s2{font-size:16px;} .s3{font-size:20px;} .s4{font-size:25px;}
+  .cgood{background:rgba(216,179,94,.13);color:var(--good);}
+  .cbad{background:rgba(199,123,90,.13);color:var(--bad);}
+  .ctheme{font-size:15px;color:var(--gold-light);background:rgba(216,179,94,.1);padding:6px 14px;border-radius:10px;font-weight:700;}
+  .quote{border-left:3px solid var(--gold);padding:10px 16px;background:var(--card);border-radius:0 10px 10px 0;font-size:15px;color:var(--text);margin:10px 0;}
+  .quote .q{color:var(--gold-light);font-weight:800;}
+  table{width:100%;border-collapse:collapse;font-size:13px;margin-top:8px;}
+  th,td{border:1px solid var(--line);padding:9px 10px;text-align:left;vertical-align:top;}
+  th{background:var(--card2);color:var(--gold-light);font-weight:700;}
+  td .y{color:var(--good);} td .n{color:var(--bad);}
+  .listnum{counter-reset:l;list-style:none;}
+  .listnum li{counter-increment:l;position:relative;padding:12px 14px 12px 52px;background:var(--card);border:1px solid var(--line);border-radius:12px;margin-bottom:10px;}
+  .listnum li::before{content:counter(l);position:absolute;left:14px;top:12px;width:26px;height:26px;background:var(--red);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;}
+  .listnum li b{color:var(--gold-light);}
+  .foot{text-align:center;font-size:12px;color:var(--muted);padding:26px;}
+  .foot b{color:var(--gold-light);}
+  .flag{font-size:11px;padding:1px 6px;border-radius:5px;background:var(--card2);color:var(--muted);margin-left:4px;}
+  .flag.a{color:var(--good);} .flag.b{color:var(--gold-light);} .flag.c{color:var(--bad);}
+  .newzone{border:1px dashed var(--gold);border-radius:14px;padding:14px 16px;margin-top:14px;background:rgba(216,179,94,.06);}
+  .newzone .zh{font-size:13px;color:var(--gold-light);font-weight:800;margin-bottom:8px;}
+
+  @media (max-width:820px){
+    .page{min-height:100dvh;padding:24px 18px 40px;}
+    .pageno{top:14px;right:16px;}
+    h1{font-size:25px;}
+    h2{font-size:21px;}
+    h3{font-size:16px;}
+    .sub{font-size:13px;margin-bottom:14px;}
+    .g3,.g2{grid-template-columns:1fr;}
+    .card{padding:15px 13px;}
+    .kpi{font-size:24px;}
+    .bar-name{width:74px;font-size:11px;padding-right:6px;}
+    .bar-track{height:20px;}
+    .bar-fill{font-size:10px;padding-right:5px;}
+    .matrix{height:320px;}
+    .dot{font-size:11px;padding:4px 8px;}
+    .cloud{padding:12px 10px;gap:5px 6px;}
+    .s1{font-size:12px;} .s2{font-size:14px;} .s3{font-size:17px;} .s4{font-size:21px;}
+    table{font-size:12px;}
+    th,td{padding:7px 8px;}
+    .quote{font-size:14px;padding:9px 13px;}
+    .listnum li{padding:11px 12px 11px 46px;}
+    .listnum li::before{left:12px;width:24px;height:24px;font-size:13px;}
+    .src{font-size:10px;}
+    .flag{font-size:10px;}
+  }
+  .page{overflow-x:hidden;}
+  .tw{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:10px 0;}
+  .tw table{min-width:640px;}
+  @media (max-width:820px){
+    .bar-row,.bar{flex-direction:column;align-items:stretch;margin:11px 0;}
+    .bar-name{width:auto !important;flex-shrink:1;text-align:left !important;padding-right:0;font-size:12.5px;line-height:1.4;}
+    .bar-track{width:100%;}
+    .bar-fill{min-width:60px;}
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ P1 ============ -->
+<section class="page" id="p1">
+  <div class="pageno">01 / 10</div>
+  <span class="tag">洗护·EP01 · 霸王 防脱洗发液</span>
+  <h1>霸王 防脱洗发液<br>中药世家的特证防脱老牌</h1>
+  <p class="sub">霸王（BAWANG）由陈启源于 1989 年 5 月在广州创立，母公司霸王国际（01338.HK）2009 年港交所上市，以"中药世家"中草药日化为母题，主打防脱 / 固发 / 育发；2005 年成龙代言"Duang"梗成为国民级记忆点。其防脱洗发液持国妆特字 20258240（育发类特证），在大众开架带以"中药防脱"建立心智。<span class="flag a">A/B</span></p>
+  <div class="quote"><span class="q">一句话结论：</span>霸王用"中药世家 + 国妆特字 20258240 育发类特证 + 侧柏叶 / 生姜中药防脱 + 大众开架价格"占死大众中药防脱心智，卡位 ¥35-79；亮点在<b>持育发类特证（合规宣称防脱）/ 中药防脱植萃（侧柏叶 + 生姜）/ 大众平价老牌信任</b>，短板在<b>营销"氨基酸无硅油无硫酸盐"与备案（SLES + 硅油）直接矛盾 / 基础款完整成分未公开 / 敏感头皮含 SLES 需谨慎</b>。<span class="flag c">C·电商快照</span></div>
+  <div class="grid g3" style="margin-top:22px;">
+    <div class="card red">
+      <div class="kpi">¥35<small> –79</small></div>
+      <div class="t">防脱洗发液价格带 <span class="flag c">C</span></div>
+      <p style="font-size:13px;color:var(--muted);margin-top:6px;">京东防脱丰盈 380ml 常卖 ¥49（历史低 ¥42.33）；80ml 小样 ¥13.9；大众开架定位，覆盖自用与尝鲜。</p>
+    </div>
+    <div class="card gold">
+      <div class="kpi red">特字<br>20258240</div>
+      <div class="t">国妆特字（育发类特证） <span class="flag a">A</span></div>
+      <p style="font-size:13px;color:var(--muted);margin-top:6px;">2025-07-28 NMPA 送达，特妆育发类；区别于普通化妆品违规宣称防脱，是其合规防脱的核心壁垒。</p>
+    </div>
+    <div class="card">
+      <div class="kpi red">1989</div>
+      <div class="t">品牌创立年份 <span class="flag a">A</span></div>
+      <p style="font-size:13px;color:var(--muted);margin-top:6px;">陈启源广州创立，中药世家；母公司霸王国际（01338.HK）2009 港交所上市，老牌中药日化资历深厚。</p>
+    </div>
+  </div>
+  <div class="src"><b>数据来源：</b>霸王官网 / 2025 年报（A 级，品牌沿革 / 上市 / 特证宣称）｜国家药监局备案（A 级，国妆特字 20258240 / 粤妆 20160039）｜京东商品页（B/C 级，价格 / 评论 / 好评率）｜中国新闻网（B 级，品牌背景）。价格随促销与版本波动。</div>
+</section>
+
+<!-- ============ P2 ============ -->
+<section class="page" id="p2">
+  <div class="pageno">02 / 10</div>
+  <span class="tag">市场全景</span>
+  <h2>洗护 / 洗发水赛道格局：国货突围 vs 国际高端</h2>
+  <p class="sub">洗发水的"防脱特证 + 表活体系 + 发质适配"门槛分化明显。本批五强中，霸王凭中药特证防脱独占大众专业带；滋源 / Spes 凭无硅油 / 氨基酸 / 香氛卡中端新锐；Off&amp;Relax 凭氨基酸温和冲中高；卡诗凭高端修护独占国际顶端。<span class="flag b">B/C</span></p>
+  <div class="tw"><table>
+    <tr><th style="width:16%">品牌</th><th style="width:20%">代表产品</th><th style="width:16%">价格带</th><th style="width:22%">核心定位</th><th>主渠道</th></tr>
+    <tr><td>卡诗 KÉRASTASE</td><td>双重功能 / 白金</td><td>¥159-300</td><td>国际高端 / 修护</td><td>专柜+线上</td></tr>
+    <tr><td>Off&amp;Relax</td><td>氨基酸温和洗护</td><td>¥99-149</td><td>日系氨基酸 / 中高</td><td>天猫抖音京东</td></tr>
+    <tr><td>Spes</td><td>蓬松香氛 / 海盐</td><td>¥50-70</td><td>新锐香氛 / 蓬松</td><td>线上</td></tr>
+    <tr><td>滋源 SEEYOUNG</td><td>无硅油洗头水</td><td>¥30-60</td><td>无硅油 / 中端新锐</td><td>全渠道</td></tr>
+    <tr><td><span class="y">霸王 BAWANG</span></td><td>防脱洗发液</td><td>¥35-79</td><td>中药特证防脱 / 大众</td><td>全渠道</td></tr>
+  </table></div>
+  <div class="grid g3" style="margin-top:16px;">
+    <div class="card"><div class="t">霸王卡位</div><p>在 ¥35-79 大众带以"国妆特字 20258240 育发类特证 + 中药防脱"独占专业防脱心智，正面承接对防脱合规有要求的用户。</p></div>
+    <div class="card"><div class="t">分化</div><p>滋源赢无硅油、Spes 赢香氛蓬松、Off&amp;Relax 赢氨基酸温和、卡诗赢高端修护；霸王赢"特证防脱 + 平价 + 老牌信任"，但与无硅油 / 氨基酸新锐形成代差。</p></div>
+    <div class="card"><div class="t">机会</div><p>"成分透明 + 温和表活 + 无硅油选项 + 年轻化沟通"带是后来者切霸王"营销与备案矛盾"的信任洼地。<span class="flag c">C·推断</span></p></div>
+  </div>
+  <div class="src"><b>数据来源：</b>京东 / 天猫（B/C 级，价格 / 定位 / 评论）｜霸王 2025 年报（A 级，品牌沿革）。价格为快照，随促销波动。</div>
+</section>
+
+<!-- ============ P3 ============ -->
+<section class="page" id="p3">
+  <div class="pageno">03 / 10</div>
+  <span class="tag">产品定位</span>
+  <h2>洗护六维坐标（功效机理 × 发质人群 × 香型 × 质地 × 价格定位 × 地域）</h2>
+  <p class="sub">霸王的防脱洗发液以"中药育发 + 国妆特证"为内核，六维坐标用消费者语言表述如下。<span class="flag c">C</span></p>
+  <div class="tw"><table>
+    <tr><th style="width:15%">维度</th><th style="width:30%">坐标（消费者语言）</th><th>含义</th></tr>
+    <tr><td><span class="y">功效机理</span></td><td>防脱 / 固发为主，兼顾控油去屑 + 基础修护</td><td>持特证主打育发防脱，配方兼顾油性头皮的控油去屑与发丝基础修护</td></tr>
+    <tr><td><span class="y">发质人群</span></td><td>油头 / 脱发 / 头屑；敏感头皮需谨慎</td><td>含 SLES + MIT 类防腐剂，敏感 / 屏障受损头皮可能刺激，需谨慎</td></tr>
+    <tr><td><span class="y">香型</span></td><td>药香 / 清香（日用香精）</td><td>中药植萃带来药感香气，叠加日用香精做清新调和</td></tr>
+    <tr><td><span class="y">质地</span></td><td>乳白 / 啫喱状，含硅油 + 焦糖色</td><td>含聚二甲基硅氧烷，顺滑但偏厚重，焦糖色来自植萃调色</td></tr>
+    <tr><td><span class="y">价格定位</span></td><td>大众开架</td><td>¥35-79，覆盖小样尝鲜到正装，平价国民带</td></tr>
+    <tr><td><span class="y">地域</span></td><td>南方湿热更适配；北方干冷 / 高原非主打</td><td>控油去屑逻辑契合南方湿热头皮，干冷 / 高原偏干非主打场景</td></tr>
+  </table></div>
+  <h3 style="margin-top:18px;">定位矩阵（价格带 × 功效专业度）</h3>
+  <div class="matrix">
+    <div class="axis-y">功效专业度（入门 → 专业）</div>
+    <div class="axis-x">价格带（大众 → 高端）</div>
+    <div class="dot other" style="left:90%;top:14%;">卡诗 159-300</div>
+    <div class="dot other" style="left:75%;top:48%;">Off&amp;Relax 99-149</div>
+    <div class="dot other" style="left:40%;top:55%;">Spes 50-70</div>
+    <div class="dot other" style="left:24%;top:46%;">滋源 30-60</div>
+    <div class="dot me" style="left:18%;top:16%;">霸王 35-79</div>
+  </div>
+  <div class="grid g2" style="margin-top:16px;">
+    <div class="card red"><div class="t">霸王占位</div><p>大众价格 + 最高专业度（国妆特证育发类 + 中药防脱），把"合规专业防脱"做成平价心智，正面承接特证防脱的刚需用户。</p></div>
+    <div class="card gold"><div class="t">空白区</div><p>"成分透明 + 温和表活 + 无硅油选项 + 年轻化沟通"带（霸王营销与备案矛盾 / 含 SLES + MIT / 成分不透明）是差异化机会。<span class="flag c">C·推断</span></p></div>
+  </div>
+  <div class="src"><b>数据来源：</b>京东 / 天猫 / 官网（C 级，价格 / 定位 / 质地）｜国家药监局备案（A 级，特证 / 成分）。坐标为基于公开价格的示意性卡位。</div>
+</section>
+
+<!-- ============ P4 ============ -->
+<section class="page" id="p4">
+  <div class="pageno">04 / 10</div>
+  <span class="tag">配方拆解</span>
+  <h2>表活 / 去屑剂 / 防脱植萃 / 硅油（专业词）</h2>
+  <p class="sub">霸王防脱洗发液的"配方"= 硫酸盐表活体系 + 去屑剂 + 防脱植萃 + 硅油顺滑 + 阳离子调理。以 SLES + 月桂醇硫酸酯铵为骨架，吡罗克酮乙醇胺盐（丰盈款）/ 水杨酸（控油去屑款）做去屑，侧柏叶 / 生姜（丰盈款已验证）做中药育发。<span class="flag c">C</span></p>
+  <div class="tw"><table>
+    <tr><th style="width:22%">模块</th><th style="width:20%">成分 / 工艺</th><th style="width:32%">作用</th><th>备注</th></tr>
+    <tr><td>表活体系</td><td>月桂醇聚醚硫酸酯钠（SLES）+ 月桂醇硫酸酯铵</td><td>硫酸盐系清洁，非氨基酸 / 非 APG</td><td>清洁力强、成本低的经典体系</td></tr>
+    <tr><td>去屑剂</td><td>吡罗克酮乙醇胺盐（丰盈款）/ 水杨酸（控油去屑款）</td><td>去屑 / 控油抑菌</td><td>按变体区分</td></tr>
+    <tr><td>防脱植萃</td><td>侧柏叶 / 生姜（丰盈款已验证）；首乌 / 当归 / 人参 / 黑芝麻</td><td>中药育发逻辑、促微循环滋养</td><td>后四类多为品牌宣传 + 其他变体</td></tr>
+    <tr><td>硅油</td><td>聚二甲基硅氧烷</td><td>顺滑、防打结</td><td>含硅油，推翻"无硅油"宣称</td></tr>
+    <tr><td>阳离子调理剂</td><td>瓜儿胶羟丙基三甲基氯化铵 / 聚季铵盐-10</td><td>抗静电、顺滑、修护</td><td>常用阳离子调理</td></tr>
+    <tr><td>备案</td><td>国妆特字 20258240 / 粤妆 20160039</td><td>特妆育发类 + 生产许可</td><td>原产中国广东，2025-07-28 NMPA 送达</td></tr>
+  </table></div>
+  <div class="newzone" style="border-color:var(--bad);background:rgba(199,123,90,.06);">
+    <div class="zh" style="color:var(--bad);">⚠ 冲突标注：营销"氨基酸表活 / 无硅油 / 无硫酸盐" vs 备案（SLES + 硅油）</div>
+    <p style="font-size:13px;color:var(--text);">电商与品牌传播中常见"氨基酸无硅油无硫酸盐"话术，但备案成分显示表活为<b>月桂醇聚醚硫酸酯钠（SLES）+ 月桂醇硫酸酯铵（硫酸盐系，非氨基酸）</b>，且<b>含聚二甲基硅氧烷（硅油）</b>。两者直接矛盾，本报告以备案为准；此外基础款 20258240 完整成分表未检索到（成分来自同线变体），淘宝"上市 1928"为误标（实为 1989），均标注待核。</p>
+  </div>
+  <div class="grid g3" style="margin-top:14px;">
+    <div class="card"><div class="t">特证壁垒</div><p>持国妆特字 20258240 育发类特证，使其"防脱 / 育发"宣称合规，区别于普通化妆品违规宣称，是核心竞争壁垒。</p></div>
+    <div class="card"><div class="t">植萃可信度</div><p>侧柏叶 / 生姜在丰盈款已验证，中药育发逻辑成立；首乌 / 当归 / 人参 / 黑芝麻更多为品牌宣传与其他变体，需按变体区分。</p></div>
+    <div class="card"><div class="t">备案</div><p>国妆特字 20258240（2025-07-28 NMPA 送达，特妆育发类）/ 生产许可证粤妆 20160039 / 原产中国广东。<span class="flag a">A</span></p></div>
+  </div>
+  <div class="src"><b>数据来源：</b>国家药监局备案（A 级，国妆特字 20258240 / 粤妆 20160039）｜方舟健客成分库（B 级，表活 / 去屑剂 / 植萃 / 硅油）｜京东 / 淘宝（C 级，营销话术）。基础款 20258240 完整成分表未检索到，成分来自同线变体，标注待核。</div>
+</section>
+
+<!-- ============ P5 ============ -->
+<section class="page" id="p5">
+  <div class="pageno">05 / 10</div>
+  <span class="tag">价格策略</span>
+  <h2>价格带与销量</h2>
+  <p class="sub">霸王防脱呈"小样尝鲜→正装常卖→套装饰选"梯度：80ml 小样京东 ¥13.9、防脱丰盈 380ml 常卖 ¥49（历史低 ¥42.33）、套装 / 礼赠冲 ¥79。整体卡位大众开架，靠特证防脱 + 平价老牌支撑，与中端新锐（滋源 / Spes）及国际高端（卡诗）形成价格梯度。<span class="flag c">C</span></p>
+  <div style="background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px;">
+    <div class="bar-row"><div class="bar-name">小样80ml</div><div class="bar-track"><div class="bar-fill gold" style="width:18%">¥13.9</div></div></div>
+    <div class="bar-row"><div class="bar-name">380ml历史低</div><div class="bar-track"><div class="bar-fill gold" style="width:53%">¥42.33</div></div></div>
+    <div class="bar-row"><div class="bar-name">380ml常卖</div><div class="bar-track"><div class="bar-fill gold" style="width:62%">¥49</div></div></div>
+    <div class="bar-row"><div class="bar-name">套装饰选</div><div class="bar-track"><div class="bar-fill gold" style="width:100%">约¥79</div></div></div>
+  </div>
+  <div class="grid g3" style="margin-top:16px;">
+    <div class="card red"><div class="t">大众卡位</div><p>¥35 起跳、套装冲 ¥79，占"平价特证防脱"心智，与中端新锐及国际高端形成代差。</p></div>
+    <div class="card"><div class="t">梯度矩阵</div><p>小样（尝鲜引流）+ 正装（复购）+ 套装（礼赠），覆盖新客到老客，80ml 低门槛拉新。</p></div>
+    <div class="card"><div class="t">风险</div><p>营销"氨基酸无硅油无硫酸盐"与备案矛盾、基础款成分不透明、含 SLES + MIT 敏感头皮刺激。<span class="flag c">C</span></p></div>
+  </div>
+  <div class="src"><b>数据来源：</b>京东商品页（B/C 级，价格 / 评论 / 好评率快照）。以官方实时价为准；常卖价与历史低价口径不同。</div>
+</section>
+
+<!-- ============ P6 ============ -->
+<section class="page" id="p6">
+  <div class="pageno">06 / 10</div>
+  <span class="tag">消费者评价</span>
+  <h2>口碑横向</h2>
+  <p class="sub">正向集中在"特证防脱有背书、大众平价、药香接受度高、老牌信任"；负向在"营销成分与备案矛盾、含 SLES + MIT 敏感刺激、硅油偏厚重、基础款成分不透明"。<span class="flag c">C</span></p>
+  <div class="tw"><table>
+    <tr><th style="width:15%">维度</th><th style="width:30%">正向高频词</th><th style="width:30%">负向 / 痛点</th><th>信号</th></tr>
+    <tr><td>功效</td><td>特证防脱有背书 / 老牌可信</td><td>营销成分与备案矛盾，信任打折</td><td>特证强</td></tr>
+    <tr><td>质地</td><td>乳白顺滑 / 硅油好梳</td><td>硅油偏厚重、油头易塌</td><td>顺滑但偏重</td></tr>
+    <tr><td>价格</td><td>大众平价 / 老牌性价比</td><td>成分不透明、性价比存疑</td><td>平价心智</td></tr>
+    <tr><td>气味</td><td>药香 / 清香接受度高</td><td>药感偏重、部分不喜</td><td>接受度尚可</td></tr>
+    <tr><td>温和</td><td>普通头皮可用</td><td>含 SLES + MIT，敏感头皮刺激</td><td>敏感需谨慎</td></tr>
+  </table></div>
+  <div class="grid g2" style="margin-top:14px;">
+    <div class="card red"><div class="t">强特证 + 平价 + 老牌信任</div><p>国妆特字育发类 + 大众价格 + 中药世家资产，让霸王成为"平价合规防脱"代名词，承接对防脱合规有要求的用户。</p></div>
+    <div class="card gold"><div class="t">可攻击口子</div><p>"成分透明 + 温和表活（氨基酸 / APG）+ 无硅油选项 + 年轻化沟通"是清晰短板，后来者用"同特证 + 换透明 / 换温和"切。</p></div>
+  </div>
+  <div class="src"><b>数据来源：</b>京东 / 淘宝达人 / 微博（C 级，正向 / 负向高频词归纳）。差评以平台个案为主，不代表整体率；"含 SLES + MIT 敏感刺激"为备案成分与用户共性反馈。</div>
+</section>
+
+<!-- ============ P7 ============ -->
+<section class="page" id="p7">
+  <div class="pageno">07 / 10</div>
+  <span class="tag">卖点拆解</span>
+  <h2>洗护卖点五轴</h2>
+  <p class="sub">功效轴（特证防脱固发）× 质地轴（乳白含硅油顺滑）× 配方轴（侧柏叶 + 生姜中药育发）× 价格轴（大众开架）× 护城河轴（国妆特字育发类特证 + 中药世家品牌资产）。<span class="flag c">C</span></p>
+  <div class="tw"><table>
+    <tr><th style="width:16%">轴</th><th style="width:28%">内容</th><th>说明</th></tr>
+    <tr><td><span class="y">功效轴</span></td><td>特证防脱 / 固发</td><td>持国妆特字 20258240 育发类，合规宣称防脱，区别于普通化妆品</td></tr>
+    <tr><td><span class="y">质地轴</span></td><td>乳白含硅油顺滑</td><td>聚二甲基硅氧烷，顺滑好梳但偏厚重，油头需控量</td></tr>
+    <tr><td><span class="y">配方轴</span></td><td>侧柏叶 + 生姜中药育发</td><td>丰盈款已验证；首乌 / 当归 / 人参 / 黑芝麻多为品牌宣传 + 其他变体</td></tr>
+    <tr><td><span class="y">价格轴</span></td><td>大众开架 ¥35-79</td><td>小样 + 正装梯度，平价国民带，复购友好</td></tr>
+    <tr><td><span class="n">护城河轴</span></td><td>国妆特字 + 中药世家</td><td>育发类特证合规壁垒 + 1989 老牌中药资产，新锐难短期复制</td></tr>
+  </table></div>
+  <div class="quote" style="margin-top:16px;"><span class="q">洞察：</span>霸王的护城河来自"国妆特字育发类特证 + 中药世家品牌资产 + 大众平价"，而非单纯价格或渠道；它把"合规专业防脱与平价心智"守住了，把"成分透明、温和表活、无硅油选项、年轻化沟通"留给了后来者——用同特证度 + 换透明 / 换温和即可切。<span class="flag c">C·策略推断</span></div>
+  <div class="src"><b>数据来源：</b>京东 / 天猫 / 官网（C 级，功效 / 质地 / 价格 / 配方）｜国家药监局备案（A 级，特证）。五轴为我按"洗护卖点轴"格式提炼。</div>
+</section>
+
+<!-- ============ P8 ============ -->
+<section class="page" id="p8">
+  <div class="pageno">08 / 10</div>
+  <span class="tag">痛点与机会</span>
+  <h2>空白 = 你的机会</h2>
+  <p class="sub">把霸王短板轴与洗发水赛道空白叠加，得到可切入的切口。</p>
+  <div class="tw"><table>
+    <tr><th style="width:26%">赛道级空白</th><th>对应短板</th><th>你的切口</th></tr>
+    <tr><td><span class="n">成分透明化</span></td><td>基础款完整成分未公开</td><td><span class="y">基础款成分全公开</span></td></tr>
+    <tr><td><span class="n">温和表活版</span></td><td>含 SLES + MIT 敏感刺激</td><td><span class="y">氨基酸 / APG 温和表活</span></td></tr>
+    <tr><td><span class="n">无硅油版</span></td><td>含硅油推翻无硅油宣称</td><td><span class="y">推出无硅油变体</span></td></tr>
+    <tr><td><span class="n">敏感头皮友好</span></td><td>SLES / MIT 刺激</td><td><span class="y">敏感头皮专用线</span></td></tr>
+    <tr><td><span class="n">年轻化沟通</span></td><td>老化营销 / "Duang"梗陈旧</td><td><span class="y">年轻化社媒沟通</span></td></tr>
+  </table></div>
+  <div class="newzone">
+    <div class="zh">▍对标转化路径（换表活 / 换配方 / 换沟通 / 切空白）</div>
+    <div class="tw"><table>
+      <tr><th style="width:20%">对标对象</th><th style="width:16%">换表活</th><th style="width:16%">换配方</th><th style="width:16%">换沟通</th><th>切入空白</th></tr>
+      <tr><td>滋源</td><td>无硅油</td><td>透明成分</td><td>中端新锐</td><td>无硅油 + 透明</td></tr>
+      <tr><td>Off&amp;Relax</td><td>氨基酸温和</td><td>去特证补强</td><td>日系质感</td><td>温和 + 特证</td></tr>
+      <tr><td>Spes</td><td>蓬松体系</td><td>香氛植萃</td><td>年轻化</td><td>香氛 + 年轻</td></tr>
+      <tr><td>卡诗</td><td>高端温和</td><td>成分升级修护</td><td>高端专业</td><td>高端 + 修护</td></tr>
+    </table></div>
+  </div>
+  <div class="src"><b>数据来源：</b>京东 / 天猫 / 方舟健客（C 级，短板）｜国家药监局备案（A 级，特证）。空白与对标转化为基于公开事实的策略推断。</div>
+</section>
+
+<!-- ============ P9 ============ -->
+<section class="page" id="p9">
+  <div class="pageno">09 / 10</div>
+  <span class="tag">产品启示</span>
+  <h2>如果做新锐国货防脱品牌，怎么打？</h2>
+  <p class="sub">不打霸王的"中药世家 + 特证老牌"正面战场，而是用"同特证合规 + 空白透明 / 温和 / 无硅油 / 年轻化"切入。五条可执行策略：</p>
+  <ol class="listnum">
+    <li><b>特证合规是壁垒。</b>承接"国妆特字育发类"合规防脱心智，以持特证建立宣称合法性，正面切霸王的专业带而非绕开。</li>
+    <li><b>成分透明化。</b>补霸王"基础款完整成分未公开"短板，把全成分与浓度明示，借"备案为准"建立可信沟通。</li>
+    <li><b>温和表活 + 无硅油选项。</b>补"含 SLES + MIT / 含硅油"短板，做氨基酸 / APG 温和表活与无硅油变体，切敏感头皮与无硅油需求。</li>
+    <li><b>年轻化沟通。</b>补"老化营销 / Duang 梗陈旧"短板，用社媒与科学传播做年轻化，承接新锐用户。</li>
+    <li><b>切信任洼地。</b>直击霸王"营销氨基酸无硅油无硫酸盐 vs 备案 SLES + 硅油"矛盾，用"说备案、做备案"建立信任差。</li>
+  </ol>
+  <div class="src"><b>说明：</b>以上为基于霸王公开竞争态势的"我方（假设为新锐国货防脱品牌）"策略推断，非任何品牌官方信息。我方定位 / 价格 / 渠道需结合实际业务定义。</div>
+</section>
+
+<!-- ============ P10 ============ -->
+<section class="page" id="p10">
+  <div class="pageno">10 / 10</div>
+  <span class="tag">总结 + 来源</span>
+  <h2>一句话总结</h2>
+  <div class="quote"><span class="q">霸王给后来者的启示：</span>它证明"中药世家 + 国妆特字育发类特证 + 侧柏叶 / 生姜中药防脱 + 大众平价"能占死大众专业防脱心智，但它把"特证合规与平价心智"守住了，把"成分透明、温和表活、无硅油选项、年轻化沟通"留给了后来者——切口从不在特证腹地，而在"同特证合规、换透明 / 换温和 / 换无硅油"的信任洼地里。</div>
+
+  <h3 style="margin-top:18px;">数据来源与置信度清单</h3>
+  <div class="tw"><table>
+    <tr><th style="width:42%">来源</th><th style="width:12%">级别</th><th>用于本报告的结论</th></tr>
+    <tr><td>国家药监局 2025 送达信息（国妆特字 20258240 / 粤妆 20160039）</td><td><span class="y">A</span></td><td>特妆育发类特证、生产许可、原产广东、2025-07-28 送达、成分（SLES + 硅油）为准</td></tr>
+    <tr><td>霸王国际 2025 年报</td><td><span class="y">A</span></td><td>品牌沿革（1989 创立）、01338.HK 上市、中药世家定位</td></tr>
+    <tr><td>明光市监局处罚信息</td><td><span class="y">A</span></td><td>2010 历史个案（两款"男士固发"无特证宣称育发被处罚），不影响现持证</td></tr>
+    <tr><td>中国新闻网</td><td>B</td><td>品牌背景、成龙代言"Duang"梗、国民记忆点</td></tr>
+    <tr><td>京东商品页</td><td>B/C</td><td>价格（380ml ¥49 / 历史低 ¥42.33 / 80ml ¥13.9）、评论（约 2 万 / 99% 好评）快照</td></tr>
+    <tr><td>方舟健客成分库</td><td>B</td><td>表活（SLES + 月桂醇硫酸酯铵）、去屑剂、防脱植萃、硅油、阳离子调理剂</td></tr>
+  </table></div>
+  <div class="src"><b>置信度说明：</b>A=官方/备案/监管；B=京东商品页(销量/好评)、权威媒体、成分库；C=平台快照/达人内容（波动大、存个案偏差）。价格/销量为电商快照，随促销波动；营销"氨基酸无硅油无硫酸盐"与备案（SLES + 硅油）冲突，以 A 级备案为准；特证合规但基础款 20258240 完整成分表未检索到（成分来自同线变体），待核；淘宝"上市 1928"误标（实为 1989）；2010 历史处罚为个案，不影响现持证。本报告不构成投资或购买建议。</div>
+</section>
+
+<div class="foot">竞品分析情报网 · 洗护·EP01 霸王 BAWANG 防脱洗发液 ｜ 洗护赛道 · 大众中药特证防脱 ｜ 数据截至 2026-08 公开资料整理 ｜ 内容仅供产品研究与求职作品集使用</div>
+
+</body>
+</html>

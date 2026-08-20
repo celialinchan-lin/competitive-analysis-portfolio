@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>竞品分析情报网 · 洗护·EP04｜Spes 诗裴丝 蓬松控油洗发水</title>
+<style>
+  :root{
+    --red:#4A9E5C; --red-deep:#1E442A; --gold:#C8A04E; --gold-light:#E0D49A;
+    --bg:#0E0C08; --bg2:#1A160E; --card:#1F1A11; --card2:#2C2517;
+    --text:#F2EAD9; --muted:#A99E86; --line:#2C2517; --good:#D8B35E; --bad:#C77B5A;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{background:var(--bg);color:var(--text);font-family:"PingFang SC","Microsoft YaHei",-apple-system,sans-serif;line-height:1.6;font-size:15px;}
+  .page{width:100%;max-width:920px;margin:0 auto;min-height:100vh;padding:54px 40px 40px;display:flex;flex-direction:column;justify-content:flex-start;border-bottom:1px solid var(--line);position:relative;}
+  .pageno{position:absolute;top:22px;right:40px;font-size:12px;color:var(--gold);letter-spacing:2px;font-weight:700;}
+  .tag{display:inline-block;background:var(--red);color:#fff;font-size:12px;padding:3px 12px;border-radius:20px;letter-spacing:1px;margin-bottom:14px;font-weight:700;}
+  h1{font-size:38px;line-height:1.25;font-weight:800;letter-spacing:1px;margin-bottom:8px;}
+  h2{font-size:26px;font-weight:800;margin-bottom:6px;color:var(--gold-light);}
+  h3{font-size:18px;font-weight:800;color:var(--text);margin:18px 0 8px;}
+  .sub{color:var(--muted);font-size:14px;margin-bottom:20px;}
+  .src{margin-top:auto;padding-top:18px;font-size:11px;color:var(--muted);border-top:1px dashed var(--line);}
+  .src b{color:var(--gold-light);}
+  .grid{display:grid;gap:14px;}
+  .g3{grid-template-columns:repeat(3,1fr);}
+  .g2{grid-template-columns:repeat(2,1fr);}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 16px;}
+  .card.red{border-left:4px solid var(--red);}
+  .card.gold{border-left:4px solid var(--gold);}
+  .kpi{font-size:32px;font-weight:800;color:var(--gold);line-height:1.1;}
+  .kpi.red{color:var(--red);}
+  .kpi small{font-size:13px;color:var(--muted);font-weight:400;}
+  .card .t{font-size:13px;color:var(--muted);margin-bottom:6px;}
+  .pill{display:inline-block;background:var(--card2);border:1px solid var(--line);border-radius:8px;padding:4px 10px;font-size:12px;margin:3px 4px 3px 0;color:var(--text);}
+  .pill.good{background:rgba(216,179,94,.15);border-color:var(--good);color:var(--good);}
+  .pill.bad{background:rgba(199,123,90,.15);border-color:var(--bad);color:var(--bad);}
+  .pill.gold{background:rgba(216,179,94,.14);border-color:var(--gold);color:var(--gold-light);}
+  .pill.new{background:rgba(216,179,94,.22);border-color:var(--gold);color:#F5EEDD;font-weight:700;}
+  .bar-row{display:flex;align-items:center;margin:7px 0;font-size:13px;}
+  .bar-name{width:108px;flex-shrink:0;color:var(--text);text-align:right;padding-right:10px;}
+  .bar-track{flex:1;background:var(--bg2);border-radius:6px;height:22px;overflow:hidden;position:relative;}
+  .bar-fill{height:100%;border-radius:6px;background:linear-gradient(90deg,var(--red-deep),var(--red));display:flex;align-items:center;justify-content:flex-end;padding-right:8px;font-size:11px;color:#fff;font-weight:700;}
+  .bar-fill.gold{background:linear-gradient(90deg,#3a2e15,var(--gold));color:#0E0C08;}
+  .bar-fill.dim{background:linear-gradient(90deg,#2C2517,#5a4a2a);}
+  .matrix{position:relative;width:100%;height:380px;background:var(--bg2);border:1px solid var(--line);border-radius:14px;margin-top:8px;}
+  .axis-x{position:absolute;bottom:8px;width:100%;text-align:center;font-size:12px;color:var(--muted);}
+  .axis-y{position:absolute;left:8px;top:0;height:100%;writing-mode:vertical-rl;font-size:12px;color:var(--muted);}
+  .dot{position:absolute;transform:translate(-50%,-50%);padding:5px 10px;border-radius:20px;font-size:12px;font-weight:700;white-space:nowrap;}
+  .dot.me{background:var(--red);color:#fff;border:2px solid var(--gold);}
+  .dot.other{background:var(--card2);color:var(--text);border:1px solid var(--line);}
+  .cloud{display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px;padding:14px;background:var(--bg2);border-radius:14px;}
+  .cloud span{padding:3px 10px;border-radius:8px;line-height:1.5;}
+  .s1{font-size:13px;} .s2{font-size:16px;} .s3{font-size:20px;} .s4{font-size:25px;}
+  .cgood{background:rgba(216,179,94,.13);color:var(--good);}
+  .cbad{background:rgba(199,123,90,.13);color:var(--bad);}
+  .ctheme{font-size:15px;color:var(--gold-light);background:rgba(216,179,94,.1);padding:6px 14px;border-radius:10px;font-weight:700;}
+  .quote{border-left:3px solid var(--gold);padding:10px 16px;background:var(--card);border-radius:0 10px 10px 0;font-size:15px;color:var(--text);margin:10px 0;}
+  .quote .q{color:var(--gold-light);font-weight:800;}
+  table{width:100%;border-collapse:collapse;font-size:13px;margin-top:8px;}
+  th,td{border:1px solid var(--line);padding:9px 10px;text-align:left;vertical-align:top;}
+  th{background:var(--card2);color:var(--gold-light);font-weight:700;}
+  td .y{color:var(--good);} td .n{color:var(--bad);}
+  .listnum{counter-reset:l;list-style:none;}
+  .listnum li{counter-increment:l;position:relative;padding:12px 14px 12px 52px;background:var(--card);border:1px solid var(--line);border-radius:12px;margin-bottom:10px;}
+  .listnum li::before{content:counter(l);position:absolute;left:14px;top:12px;width:26px;height:26px;background:var(--red);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;}
+  .listnum li b{color:var(--gold-light);}
+  .foot{text-align:center;font-size:12px;color:var(--muted);padding:26px;}
+  .foot b{color:var(--gold-light);}
+  .flag{font-size:11px;padding:1px 6px;border-radius:5px;background:var(--card2);color:var(--muted);margin-left:4px;}
+  .flag.a{color:var(--good);} .flag.b{color:var(--gold-light);} .flag.c{color:var(--bad);}
+  .newzone{border:1px dashed var(--gold);border-radius:14px;padding:14px 16px;margin-top:14px;background:rgba(216,179,94,.06);}
+  .newzone .zh{font-size:13px;color:var(--gold-light);font-weight:800;margin-bottom:8px;}
+
+  @media (max-width:820px){
+    .page{min-height:100dvh;padding:24px 18px 40px;}
+    .pageno{top:14px;right:16px;}
+    h1{font-size:25px;}
+    h2{font-size:21px;}
+    h3{font-size:16px;}
+    .sub{font-size:13px;margin-bottom:14px;}
+    .g3,.g2{grid-template-columns:1fr;}
+    .card{padding:15px 13px;}
+    .kpi{font-size:24px;}
+    .bar-name{width:74px;font-size:11px;padding-right:6px;}
+    .bar-track{height:20px;}
+    .bar-fill{font-size:10px;padding-right:5px;}
+    .matrix{height:320px;}
+    .dot{font-size:11px;padding:4px 8px;}
+    .cloud{padding:12px 10px;gap:5px 6px;}
+    .s1{font-size:12px;} .s2{font-size:14px;} .s3{font-size:17px;} .s4{font-size:21px;}
+    table{font-size:12px;}
+    th,td{padding:7px 8px;}
+    .quote{font-size:14px;padding:9px 13px;}
+    .listnum li{padding:11px 12px 11px 46px;}
+    .listnum li::before{left:12px;width:24px;height:24px;font-size:13px;}
+    .src{font-size:10px;}
+    .flag{font-size:10px;}
+  }
+  .page{overflow-x:hidden;}
+  .tw{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:10px 0;}
+  .tw table{min-width:640px;}
+  @media (max-width:820px){
+    .bar-row,.bar{flex-direction:column;align-items:stretch;margin:11px 0;}
+    .bar-name{width:auto !important;flex-shrink:1;text-align:left !important;padding-right:0;font-size:12.5px;line-height:1.4;}
+    .bar-track{width:100%;}
+    .bar-fill{min-width:60px;}
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ P1 ============ -->
+<section class="page" id="p1">
+  <div class="pageno">01 / 10</div>
+  <span class="tag">洗护·EP04 · Spes 诗裴丝 蓬松丰盈洗发水</span>
+  <h1>Spes 蓬松丰盈洗发水「绿胖子」<br>从干发喷雾到蓬松控油的新锐</h1>
+  <p class="sub">Spes 诗裴丝由浙江浩迈科技于 2020 年 4 月在杭州创立，创始人郑如晶（媒体称前网易严选 CEO）；定位功效型头部护理、控油蓬松专业；以免洗空气感干发喷雾（破圈）起家，2021 年 12 月完成近 2 亿元 A 轮融资（华兴新经济基金领投、SIG 跟投）。其「绿胖子」蓬松丰盈洗发水以无硅油氨基酸 + 亚美尼斯分子强韧发根为核心卖点。<span class="flag a">A/B</span></p>
+  <div class="quote"><span class="q">一句话结论：</span>Spes 用「无硅油氨基酸 + 亚美尼斯分子强韧发根 + 小苍兰定制香氛 + 绿胖子视觉符号」切「蓬松控油」新锐赛道，卡位中端 ¥50-70；亮点在<b>无硅油氨基酸温和 + 亚美尼斯分子强韧发根 / 小苍兰定制香氛（Maurice Roucel 调香，FIFI 奖）/ 中端价格 / 绿胖子视觉符号</b>，短板在<b>绿胖子单品销量与评论数未公开（待核）/ 创始人"玫琳凯高管"系误传（实为网易严选 CEO）/ "3 天不油"缺独立实证 / 代工广东嘉丹婷属研产销分离</b>。<span class="flag c">C·电商快照</span></div>
+  <div class="grid g3" style="margin-top:22px;">
+    <div class="card red">
+      <div class="kpi">¥50<small> –70</small></div>
+      <div class="t">单瓶价格带（500ml）<span class="flag c">C</span></div>
+      <p style="font-size:13px;color:var(--muted);margin-top:6px;">京东常卖 ¥60、唯品会历史低 ¥41、淘宝折扣 ¥53.48；中端卡位，介于滋源与 Off&amp;Relax 之间。</p>
+    </div>
+    <div class="card gold">
+      <div class="kpi red">2020</div>
+      <div class="t">品牌创立年份 <span class="flag a">A</span></div>
+      <p style="font-size:13px;color:var(--muted);margin-top:6px;">浙江浩迈科技（杭州）创立，功效型头部护理新锐；2021.12 近 2 亿 A 轮（华兴领投 / SIG 跟投）。</p>
+    </div>
+    <div class="card">
+      <div class="kpi red">氨基酸</div>
+      <div class="t">配方核心 <span class="flag c">C</span></div>
+      <p style="font-size:13px;color:var(--muted);margin-top:6px;">无硅油氨基酸表活 + 亚美尼斯分子（二氨基嘧啶氧化物）宣称强韧发根、减少断发。</p>
+    </div>
+  </div>
+  <div class="src"><b>数据来源：</b>美妆头条 / TopDigital 专访（B 级，品牌沿革 / 创始人 / 定位）｜创业邦融资报道（B 级，A 轮融资）｜京东 / 唯品会 / 淘宝商品页（C 级，价格快照）｜国家药监局备案（A 级，备案号）。价格随促销与渠道波动。</div>
+</section>
+
+<!-- ============ P2 ============ -->
+<section class="page" id="p2">
+  <div class="pageno">02 / 10</div>
+  <span class="tag">市场全景</span>
+  <h2>洗护 / 洗发水赛道格局：国货突围 vs 国际高端的光谱</h2>
+  <p class="sub">洗发水赛道呈"国货突围 vs 国际高端"光谱：霸王以"防脱特证"立中端国货，滋源以"无硫酸盐无硅油"占中端，Off&amp;Relax 以"氨基酸 + 日系"上探中高端，卡诗以"高端修护"守国际顶奢。Spes 以"蓬松控油新锐 + 小苍兰香氛差异 + 中端价格"卡位，与滋源（无硅油）、Off&amp;Relax（氨基酸）形成"蓬松香氛"细分。<span class="flag b">B/C</span></p>
+  <div class="tw"><table>
+    <tr><th style="width:16%">品牌</th><th style="width:20%">核心卖点</th><th style="width:16%">价格带</th><th style="width:22%">核心定位</th><th>主渠道</th></tr>
+    <tr><td>霸王</td><td>防脱特证 / 草本</td><td>¥35-79</td><td>国货防脱中端</td><td>全渠道</td></tr>
+    <tr><td>滋源</td><td>无硫酸盐 / 无硅油</td><td>¥30-60</td><td>国货无硅油中端</td><td>全渠道</td></tr>
+    <tr><td>Off&amp;Relax</td><td>氨基酸 / 日系</td><td>¥99-149</td><td>中日合资中高端</td><td>线上为主</td></tr>
+    <tr><td><span class="y">Spes 诗裴丝</span></td><td>蓬松控油 / 香氛</td><td>¥50-70</td><td>新锐蓬松中端</td><td>线上为主</td></tr>
+    <tr><td>卡诗</td><td>高端修护 / 成分</td><td>¥159-300</td><td>国际高端顶奢</td><td>专柜+线上</td></tr>
+  </table></div>
+  <div class="grid g3" style="margin-top:16px;">
+    <div class="card"><div class="t">Spes 卡位</div><p>独占 ¥50-70 的"蓬松控油香氛"新锐，靠"干发喷雾破圈品牌 + 小苍兰香氛 + 亚美尼斯强韧发根"与滋源中端、Off&amp;Relax 中高端形成差异，承接追求蓬松与香氛体验的油头用户。</p></div>
+    <div class="card"><div class="t">分化</div><p>滋源赢无硅油认知、Off&amp;Relax 赢氨基酸与日系背书、卡诗赢高端修护；Spes 赢"蓬松 + 香氛 + 绿胖子视觉"，但单品销量与"3 天不油"实证是软肋。</p></div>
+    <div class="card"><div class="t">机会</div><p>"销量数据透明化 + 3 天不油第三方实证 + 北方干冷滋润版 + 创始人背景澄清"带是后来者切 Spes 信任洼地的空白。<span class="flag c">C·推断</span></p></div>
+  </div>
+  <div class="src"><b>数据来源：</b>京东 / 天猫 / 商品页（B/C 级，价格 / 定位）｜美妆头条 / TopDigital（B 级，品牌矩阵与赛道分化）。价格为快照，随促销波动。</div>
+</section>
+
+<!-- ============ P3 ============ -->
+<section class="page" id="p3">
+  <div class="pageno">03 / 10</div>
+  <span class="tag">产品定位</span>
+  <h2>洗护六维坐标（功效机理 × 发质人群 × 香型 × 质地 × 价格定位 × 地域）</h2>
+  <p class="sub">Spes 的「绿胖子」以"蓬松控油 + 香氛差异"为内核，六维坐标用消费者语言表述如下。<span class="flag c">C</span></p>
+  <div class="tw"><table>
+    <tr><th style="width:15%">维度</th><th style="width:30%">坐标（消费者语言）</th><th>含义</th></tr>
+    <tr><td><span class="y">功效机理</span></td><td>蓬松核心 &gt; 控油 &gt; 防断强韧 &gt; 轻度修护（需配护发素）</td><td>以亚美尼斯分子强韧发根、BD-Si 植物油柔顺替代硅油，视觉丰盈；轻度修护依赖配套护发素</td></tr>
+    <tr><td><span class="y">发质人群</span></td><td>油头 / 细软塌 / 扁塌为主</td><td>干枯 / 染烫受损需搭护发素；无硅油氨基酸对敏感头皮较友好</td></tr>
+    <tr><td><span class="y">香型</span></td><td>清香 / 沙龙香——小苍兰定制调香</td><td>调香师 Maurice Roucel 操刀、获 FIFI 奖，掩盖出油异味</td></tr>
+    <tr><td><span class="y">质地</span></td><td>淡绿色啫喱含可见 VE 小绿珠</td><td>流动性较强，小绿珠带来仪式感</td></tr>
+    <tr><td><span class="y">价格定位</span></td><td>中端</td><td>单瓶 ¥50-70，介于滋源与 Off&amp;Relax 之间</td></tr>
+    <tr><td><span class="y">地域</span></td><td>南方湿热更适配</td><td>控油清爽；北方干冷单用可能偏干涩，建议配护发素</td></tr>
+  </table></div>
+  <h3 style="margin-top:18px;">定位矩阵（价格带 × 功效专业度）</h3>
+  <div class="matrix">
+    <div class="axis-y">功效专业度（入门 → 专业）</div>
+    <div class="axis-x">价格带（平价 → 高端）</div>
+    <div class="dot other" style="left:22%;top:52%;">霸王 35-79</div>
+    <div class="dot other" style="left:18%;top:58%;">滋源 30-60</div>
+    <div class="dot other" style="left:62%;top:38%;">Off&amp;Relax 99-149</div>
+    <div class="dot me" style="left:40%;top:40%;">Spes 50-70</div>
+    <div class="dot other" style="left:92%;top:16%;">卡诗 159-300</div>
+  </div>
+  <div class="grid g2" style="margin-top:16px;">
+    <div class="card red"><div class="t">Spes 占位</div><p>中端价格 + 蓬松控油香氛新锐，把"蓬松宣称"做成差异化心智，正面承接油头用户的清爽蓬松需求。</p></div>
+    <div class="card gold"><div class="t">空白区</div><p>"销量透明 + 3 天不油实证 + 北方滋润版"带（Spes 单品销量未公开 / 3 天不油缺实证 / 北方偏干涩）是差异化机会。<span class="flag c">C·推断</span></p></div>
+  </div>
+  <div class="src"><b>数据来源：</b>京东 / 天猫 / 商品页（C 级，价格 / 定位 / 质地）｜美妆头条（B 级，品牌矩阵）。坐标为基于公开价格的示意性卡位。</div>
+</section>
+
+<!-- ============ P4 ============ -->
+<section class="page" id="p4">
+  <div class="pageno">04 / 10</div>
+  <span class="tag">配方拆解</span>
+  <h2>表活 / 无硅油 / 控油蓬松体系（专业词）</h2>
+  <p class="sub">Spes 绿胖子的"配方"= 氨基酸表活 + 无硅油替代 + 亚美尼斯分子 + 生物肽 / 植萃 / VE / 薄荷醇。以氨基酸表活温和清洁，无硅油体系以"BD-Si 柔顺技术 / 可溶性植物油"替代硅油（植物油调理为推断），亚美尼斯分子（二氨基嘧啶氧化物，米诺地尔衍生物）宣称强韧发根减少断发。<span class="flag c">C</span></p>
+  <div class="tw"><table>
+    <tr><th style="width:22%">模块</th><th style="width:20%">成分 / 工艺</th><th style="width:32%">作用</th><th>备注</th></tr>
+    <tr><td>表活体系</td><td>氨基酸表活</td><td>温和清洁，降低发丝负重塌陷</td><td>无 SLS/SLES 取向</td></tr>
+    <tr><td>无硅油</td><td>是（BD-Si 柔顺技术 / 可溶性植物油替代硅油）</td><td>保持轻盈不扁塌；植物油调理为推断</td><td>以植物油替代硅油</td></tr>
+    <tr><td>控油 / 蓬松</td><td>亚美尼斯分子（二氨基嘧啶氧化物，米诺地尔衍生物）</td><td>宣称强韧发根、减少断发 → 视觉丰盈</td><td>品牌宣称，缺独立实证</td></tr>
+    <tr><td>生物肽</td><td>三肽-1 铜</td><td>强韧发根、修护</td><td>配方添加</td></tr>
+    <tr><td>植萃 / VE</td><td>植萃原液 / VE 小绿珠</td><td>滋润、抗氧化、仪式感</td><td>可见小绿珠</td></tr>
+    <tr><td>肤感</td><td>薄荷醇</td><td>清凉感、提升清爽体感</td><td>控油清爽感知</td></tr>
+    <tr><td>备案</td><td>浙G妆网备字2021500406（蓬松丰盈洗护套装）</td><td>非特；备案人浙江浩迈科技（杭州萧山）</td><td>代工广东嘉丹婷（粤妆20210094）</td></tr>
+  </table></div>
+  <div class="newzone" style="border-color:var(--bad);background:rgba(199,123,90,.06);">
+    <div class="zh" style="color:var(--bad);">⚠ 冲突标注：创始人"玫琳凯高管"误传 / "3 天不油"缺实证 / 代工与"自研"话术</div>
+    <p style="font-size:13px;color:var(--text);">媒体称创始人郑如晶为前网易严选 CEO / 创始人，而非"玫琳凯高管"——玫琳凯背景<b>待核</b>；"红石榴蓬松洗发水"未检索到对应产品→<b>待核</b>；"3 天不油 / 持久蓬松"品牌 + 体验测评正面但缺独立实验室长期实证，百度百科式盲测（86% 蓬松提升）来源等级低（D）不进结论；代工厂广东嘉丹婷属实（生产外包），属"研产销分离"需注明；干发喷雾"破 1 亿瓶"vs 创业邦 2021"超 600 万瓶"口径 / 时点不同<b>待核</b>。</p>
+  </div>
+  <div class="grid g3" style="margin-top:14px;">
+    <div class="card"><div class="t">配方完整度</div><p>氨基酸表活 + 无硅油 + 亚美尼斯 + 生物肽 + VE 小绿珠 + 薄荷醇，是一套偏"蓬松强韧 + 香氛清爽"的新锐方案。</p></div>
+    <div class="card"><div class="t">RTB 壁垒</div><p>无硅油 + 氨基酸避免发丝负重塌陷；亚美尼斯 / 生物肽强韧发根减少断发→视觉丰盈；BD-Si 植物油柔顺替代硅油保持轻盈；小苍兰调香掩盖出油异味。</p></div>
+    <div class="card"><div class="t">备案</div><p>浙 G 妆网备字 2021500406（蓬松丰盈洗护套装）；非特殊化妆品；备案人浙江浩迈科技，代工厂广东嘉丹婷日用品（肇庆）粤妆 20210094。<span class="flag a">A</span></p></div>
+  </div>
+  <div class="src"><b>数据来源：</b>国家药监局备案（A 级，备案号 / 非特 / 代工厂监管事实）｜商品页 / 果壳测评（B/C 级，成分 / 作用 / 主观测评）｜创业邦（B 级，干发喷雾口径）。植物油调理为基于成分表的推断，以官方为准。</div>
+</section>
+
+<!-- ============ P5 ============ -->
+<section class="page" id="p5">
+  <div class="pageno">05 / 10</div>
+  <span class="tag">价格策略</span>
+  <h2>价格带与渠道价差</h2>
+  <p class="sub">Spes 绿胖子单瓶 500ml 京东标价 ¥69（常卖 ¥60）、唯品会 ¥47.36（历史低 ¥41）、淘宝折扣店 ¥53.48；天猫官方旗舰店洗护套装页面价 ¥139，实付约 ¥104。整体卡位国际高端线（卡诗）与中端滋源之间，靠香氛与蓬松撑中端溢价。<span class="flag c">C</span></p>
+  <div style="background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px;">
+    <div class="bar-row"><div class="bar-name">京东标价</div><div class="bar-track"><div class="bar-fill gold" style="width:50%">¥69（标价）</div></div></div>
+    <div class="bar-row"><div class="bar-name">京东常卖</div><div class="bar-track"><div class="bar-fill gold" style="width:43%">¥60（常卖）</div></div></div>
+    <div class="bar-row"><div class="bar-name">淘宝折扣</div><div class="bar-track"><div class="bar-fill gold" style="width:39%">¥53.48</div></div></div>
+    <div class="bar-row"><div class="bar-name">唯品会低</div><div class="bar-track"><div class="bar-fill gold" style="width:30%">¥41（历史低）</div></div></div>
+    <div class="bar-row"><div class="bar-name">天猫套装</div><div class="bar-track"><div class="bar-fill gold" style="width:75%">¥104（套餐实付）</div></div></div>
+  </div>
+  <div class="grid g3" style="margin-top:16px;">
+    <div class="card red"><div class="t">中端卡位</div><p>单瓶 ¥50-70，卡在滋源（¥30-60）之上、Off&amp;Relax（¥99-149）之下，靠香氛 + 蓬松差异撑溢价。</p></div>
+    <div class="card"><div class="t">渠道价差</div><p>同款跨平台价差达 ¥28（唯品会 ¥41 vs 京东标价 ¥69），促销节点影响大；套装实付约 ¥104 拉高客单。</p></div>
+    <div class="card"><div class="t">风险</div><p>绿胖子单品销量未公开；"3 天不油"缺独立实证；北方干冷单用偏干涩需护发素；代工"自研"话术需厘清。<span class="flag c">C</span></p></div>
+  </div>
+  <div class="src"><b>数据来源：</b>京东 / 唯品会 / 淘宝 / 天猫商品页（C 级，价格快照）。以官方实时价为准；常卖价与标价位口径不同。</div>
+</section>
+
+<!-- ============ P6 ============ -->
+<section class="page" id="p6">
+  <div class="pageno">06 / 10</div>
+  <span class="tag">消费者评价</span>
+  <h2>口碑横向</h2>
+  <p class="sub">正向集中在"蓬松丰盈油头友好、小苍兰香氛高级、无硅油氨基酸温和、VE 小绿珠仪式感、中端价"；负向在"绿胖子单品销量未公开、3 天不油缺实证、北方干冷偏干涩需护发素、代工自研话术需厘清、创始人背景误传"。<span class="flag c">C</span></p>
+  <div class="tw"><table>
+    <tr><th style="width:15%">维度</th><th style="width:30%">正向高频词</th><th style="width:30%">负向 / 痛点</th><th>信号</th></tr>
+    <tr><td>蓬松</td><td>蓬松丰盈 / 油头友好</td><td>绿胖子单品销量未公开</td><td>蓬松强项</td></tr>
+    <tr><td>香氛</td><td>小苍兰香氛高级</td><td>"3 天不油"缺实证</td><td>香氛差异</td></tr>
+    <tr><td>配方</td><td>无硅油氨基酸温和</td><td>北方干冷偏干涩需护发素</td><td>温和但偏清爽</td></tr>
+    <tr><td>质地</td><td>VE 小绿珠仪式感</td><td>代工"自研"话术需厘清</td><td>视觉符号强</td></tr>
+    <tr><td>价值</td><td>中端价 / 性价比</td><td>创始人背景误传</td><td>中端心智</td></tr>
+  </table></div>
+  <div class="grid g2" style="margin-top:14px;">
+    <div class="card red"><div class="t">强项：蓬松 + 香氛 + 温和</div><p>蓬松丰盈 + 小苍兰香氛 + 无硅油氨基酸温和 + VE 小绿珠仪式感 + 中端价，让 Spes 成为油头用户的"蓬松香氛"选择。</p></div>
+    <div class="card gold"><div class="t">可攻击口子</div><p>"销量透明 + 3 天不油实证 + 北方滋润版 + 创始人背景澄清 + 代工自研话术厘清"是清晰短板，后来者用"同蓬松 + 换信任"切。</p></div>
+  </div>
+  <div class="src"><b>数据来源：</b>京东 / 淘宝达人 / 微博（C 级，正向 / 负向高频词归纳）｜果壳 / 什么值得买（B/C 级，主观测评）。差评以平台个案为主，不代表整体率。</div>
+</section>
+
+<!-- ============ P7 ============ -->
+<section class="page" id="p7">
+  <div class="pageno">07 / 10</div>
+  <span class="tag">卖点拆解</span>
+  <h2>洗护卖点五轴</h2>
+  <p class="sub">功效轴（蓬松丰盈 + 控油）× 质地轴（淡绿啫喱 + VE 小绿珠）× 配方轴（无硅油氨基酸 + 亚美尼斯强韧）× 价格轴（中端 ¥50-70）× 护城河轴（干发喷雾破圈品牌 + 小苍兰香氛 + 近 2 亿融资研产销）。<span class="flag c">C</span></p>
+  <div class="tw"><table>
+    <tr><th style="width:16%">轴</th><th style="width:28%">内容</th><th>说明</th></tr>
+    <tr><td><span class="y">功效轴</span></td><td>蓬松丰盈 + 控油</td><td>亚美尼斯分子强韧发根，针对油头 / 细软塌 / 扁塌</td></tr>
+    <tr><td><span class="y">质地轴</span></td><td>淡绿啫喱 + VE 小绿珠</td><td>流动性强、小绿珠仪式感、视觉辨识度高</td></tr>
+    <tr><td><span class="y">配方轴</span></td><td>无硅油氨基酸 + 亚美尼斯分子</td><td>温和清洁不塌陷 + 强韧发根减少断发</td></tr>
+    <tr><td><span class="y">价格轴</span></td><td>中端 ¥50-70</td><td>卡在滋源之上、Off&amp;Relax 之下，香氛撑溢价</td></tr>
+    <tr><td><span class="n">护城河轴</span></td><td>干发喷雾破圈品牌 + 小苍兰香氛 + 近 2 亿融资</td><td>研产销分离（广东嘉丹婷代工），靠品牌 + 香氛立壁垒</td></tr>
+  </table></div>
+  <div class="quote" style="margin-top:16px;"><span class="q">洞察：</span>Spes 的护城河来自"干发喷雾破圈品牌 + 小苍兰香氛差异化 + 近 2 亿融资研产销"，而非单纯价格或渠道；它把"蓬松香氛"心智守住了，把"销量透明、3 天不油实证、北方滋润版、创始人背景澄清"留给了后来者——用同蓬松 + 换信任即可切。<span class="flag c">C·策略推断</span></div>
+  <div class="src"><b>数据来源：</b>京东 / 天猫 / 商品页（C 级，功效 / 质地 / 价格）｜美妆头条 / 创业邦（B 级，品牌与融资）。五轴为我按"洗护卖点轴"格式提炼。</div>
+</section>
+
+<!-- ============ P8 ============ -->
+<section class="page" id="p8">
+  <div class="pageno">08 / 10</div>
+  <span class="tag">痛点与机会</span>
+  <h2>空白 = 你的机会</h2>
+  <p class="sub">把 Spes 短板轴与洗护赛道空白叠加，得到可切入的切口。</p>
+  <div class="tw"><table>
+    <tr><th style="width:26%">赛道级空白</th><th>对应短板</th><th>你的切口</th></tr>
+    <tr><td><span class="n">销量数据透明化</span></td><td>绿胖子单品销量 / 评论未公开</td><td><span class="y">公开销量与实证数据</span></td></tr>
+    <tr><td><span class="n">3 天不油第三方实证</span></td><td>"3 天不油"缺独立实验室实证</td><td><span class="y">第三方长期盲测背书</span></td></tr>
+    <tr><td><span class="n">北方干冷滋润版</span></td><td>北方单用偏干涩需护发素</td><td><span class="y">干冷适配滋润线</span></td></tr>
+    <tr><td><span class="n">创始人背景澄清</span></td><td>"玫琳凯高管"误传</td><td><span class="y">官方履历透明化</span></td></tr>
+    <tr><td><span class="n">代工自研话术厘清</span></td><td>代工广东嘉丹婷属研产销分离</td><td><span class="y">研发 / 生产口径厘清</span></td></tr>
+  </table></div>
+  <div class="newzone">
+    <div class="zh">▍对标转化路径（换表活 / 换成分 / 换特证 / 换修护 / 换定位）</div>
+    <div class="tw"><table>
+      <tr><th style="width:20%">对标对象</th><th style="width:16%">换表活</th><th style="width:16%">换成分</th><th style="width:16%">换修护</th><th>切入空白</th></tr>
+      <tr><td>滋源</td><td>真无硫酸盐</td><td>透明配方</td><td>配套护发素</td><td>透明 + 无硫酸盐</td></tr>
+      <tr><td>Off&amp;Relax</td><td>真氨基酸</td><td>研发背书</td><td>中度修护</td><td>研发背书 + 氨基酸</td></tr>
+      <tr><td>霸王</td><td>温和表活</td><td>特证防脱</td><td>强韧防断</td><td>特证防脱补强</td></tr>
+      <tr><td>卡诗</td><td>氨基酸</td><td>高端成分</td><td>高端修护</td><td>高端修护 + 成分升级</td></tr>
+    </table></div>
+  </div>
+  <div class="src"><b>数据来源：</b>京东 / 天猫 / 商品页（C 级，短板）｜美妆头条 / 创业邦（B 级，对标背景）。空白与对标转化为基于公开事实的策略推断。</div>
+</section>
+
+<!-- ============ P9 ============ -->
+<section class="page" id="p9">
+  <div class="pageno">09 / 10</div>
+  <span class="tag">产品启示</span>
+  <h2>如果做新锐蓬松洗发水，怎么打？</h2>
+  <p class="sub">不打 Spes 的"干发喷雾破圈 + 香氛 + 融资"正面战场，而是用"同蓬松 + 空白信任"切入。五条可执行策略：</p>
+  <ol class="listnum">
+    <li><b>无硅油氨基酸 + 亚美尼斯强韧。</b>承接"蓬松丰盈"心智，用无硅油氨基酸表活 + 亚美尼斯分子（二氨基嘧啶氧化物）强韧发根，切油头 / 细软塌 / 扁塌人群。</li>
+    <li><b>香氛差异化。</b>借 Spes 已验证的"小苍兰沙龙香"趋势，做定制调香 + 调香师 / 奖项背书，建立香氛记忆点。</li>
+    <li><b>销量实证透明。</b>补 Spes"绿胖子单品销量未公开 / 3 天不油缺实证"短板，用第三方长期盲测 + 公开销量建立信任。</li>
+    <li><b>地域适配扩展。</b>补"北方干冷偏干涩"短板，做干冷滋润版 + 配套护发素，覆盖全地域。</li>
+    <li><b>信任洼地切入。</b>整体切"蓬松宣称缺实证"的信任洼地——同蓬松 + 换实证 / 换透明，是后来者最清晰的切口。</li>
+  </ol>
+  <div class="src"><b>说明：</b>以上为基于 Spes 公开竞争态势的"我方（假设为新锐蓬松洗发水品牌）"策略推断，非任何品牌官方信息。我方定位 / 价格 / 渠道需结合实际业务定义。</div>
+</section>
+
+<!-- ============ P10 ============ -->
+<section class="page" id="p10">
+  <div class="pageno">10 / 10</div>
+  <span class="tag">总结 + 来源</span>
+  <h2>一句话总结</h2>
+  <div class="quote"><span class="q">Spes 给后来者的启示：</span>它证明"无硅油氨基酸 + 亚美尼斯强韧发根 + 小苍兰香氛 + 绿胖子视觉"能占死"蓬松控油香氛"新锐心智，但它把"蓬松香氛"心智守住了，把"销量透明、3 天不油实证、北方滋润版、创始人背景澄清"留给了后来者——切口从不在正面战场，而在"同蓬松、换信任 / 换透明 / 换实证"的空白里。</div>
+
+  <h3 style="margin-top:18px;">数据来源与置信度清单</h3>
+  <div class="tw"><table>
+    <tr><th style="width:42%">来源</th><th style="width:12%">级别</th><th>用于本报告的结论</th></tr>
+    <tr><td>美妆头条</td><td><span class="y">B</span></td><td>品牌沿革（2020 创立）、干发喷雾破圈、产品矩阵</td></tr>
+    <tr><td>TopDigital 专访</td><td><span class="y">B</span></td><td>创始人郑如晶（前网易严选 CEO）、品牌定位与背景</td></tr>
+    <tr><td>创业邦融资报道</td><td><span class="y">B</span></td><td>2021.12 近 2 亿 A 轮（华兴领投 / SIG 跟投）、干发喷雾"超 600 万瓶"</td></tr>
+    <tr><td>果壳测评</td><td>B/C</td><td>油头用户"3 天不油 / 发根蓬松"主观测评（正面，缺独立实证）</td></tr>
+    <tr><td>什么值得买</td><td>C</td><td>价格 / 渠道价差（京东 / 唯品会 / 淘宝 / 天猫套装）快照</td></tr>
+    <tr><td>ebuy7 商品页</td><td>D</td><td>备案（浙G妆网备字2021500406）/ 代工厂（广东嘉丹婷 粤妆20210094）为监管事实</td></tr>
+    <tr><td>京东 / 唯品会 / 淘宝商品页</td><td>C</td><td>价格（¥41-69）、套装实付约 ¥104 快照</td></tr>
+  </table></div>
+  <div class="src"><b>置信度说明：</b>A=官方/备案；B=美妆头条/TopDigital/创业邦；C=平台快照/成分库/达人内容（波动大、存个案偏差）；D=商品页监管事实。"绿胖子单品销量与评论数未公开"待核；"3 天不油"缺独立实证（百度百科式盲测 86% 蓬松提升来源等级低 D 不进结论）；代工属实属研产销分离；价格为电商快照随促销波动；"玫琳凯高管""红石榴蓬松洗发水""破 1 亿瓶"等为待核项。本报告不构成投资或购买建议。</div>
+</section>
+
+<div class="foot">竞品分析情报网 · 洗护·EP04 Spes 诗裴丝 蓬松丰盈洗发水 ｜ 蓬松控油新锐 · 香氛差异化 ｜ 数据截至 2026-08 公开资料整理 ｜ 内容仅供产品研究与求职作品集使用</div>
+
+</body>
+</html>

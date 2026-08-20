@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>竞品分析情报网 · 洗护·EP05｜卡诗 Kérastase 黑钻钥源洗发水</title>
+<style>
+  :root{
+    --red:#2B2B2B; --red-deep:#0E0E0E; --gold:#C9A24B; --gold-light:#DDBE7E;
+    --bg:#0E0C08; --bg2:#1A160E; --card:#1F1A11; --card2:#2C2517;
+    --text:#F2EAD9; --muted:#A99E86; --line:#2C2517; --good:#D8B35E; --bad:#C77B5A;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{background:var(--bg);color:var(--text);font-family:"PingFang SC","Microsoft YaHei",-apple-system,sans-serif;line-height:1.6;font-size:15px;}
+  .page{width:100%;max-width:920px;margin:0 auto;min-height:100vh;padding:54px 40px 40px;display:flex;flex-direction:column;justify-content:flex-start;border-bottom:1px solid var(--line);position:relative;}
+  .pageno{position:absolute;top:22px;right:40px;font-size:12px;color:var(--gold);letter-spacing:2px;font-weight:700;}
+  .tag{display:inline-block;background:var(--red);color:#fff;font-size:12px;padding:3px 12px;border-radius:20px;letter-spacing:1px;margin-bottom:14px;font-weight:700;}
+  h1{font-size:38px;line-height:1.25;font-weight:800;letter-spacing:1px;margin-bottom:8px;}
+  h2{font-size:26px;font-weight:800;margin-bottom:6px;color:var(--gold-light);}
+  h3{font-size:18px;font-weight:800;color:var(--text);margin:18px 0 8px;}
+  .sub{color:var(--muted);font-size:14px;margin-bottom:20px;}
+  .src{margin-top:auto;padding-top:18px;font-size:11px;color:var(--muted);border-top:1px dashed var(--line);}
+  .src b{color:var(--gold-light);}
+  .grid{display:grid;gap:14px;}
+  .g3{grid-template-columns:repeat(3,1fr);}
+  .g2{grid-template-columns:repeat(2,1fr);}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 16px;}
+  .card.red{border-left:4px solid var(--red);}
+  .card.gold{border-left:4px solid var(--gold);}
+  .kpi{font-size:32px;font-weight:800;color:var(--gold);line-height:1.1;}
+  .kpi.red{color:var(--red);}
+  .kpi small{font-size:13px;color:var(--muted);font-weight:400;}
+  .card .t{font-size:13px;color:var(--muted);margin-bottom:6px;}
+  .pill{display:inline-block;background:var(--card2);border:1px solid var(--line);border-radius:8px;padding:4px 10px;font-size:12px;margin:3px 4px 3px 0;color:var(--text);}
+  .pill.good{background:rgba(216,179,94,.15);border-color:var(--good);color:var(--good);}
+  .pill.bad{background:rgba(199,123,90,.15);border-color:var(--bad);color:var(--bad);}
+  .pill.gold{background:rgba(216,179,94,.14);border-color:var(--gold);color:var(--gold-light);}
+  .pill.new{background:rgba(216,179,94,.22);border-color:var(--gold);color:#F5EEDD;font-weight:700;}
+  .bar-row{display:flex;align-items:center;margin:7px 0;font-size:13px;}
+  .bar-name{width:108px;flex-shrink:0;color:var(--text);text-align:right;padding-right:10px;}
+  .bar-track{flex:1;background:var(--bg2);border-radius:6px;height:22px;overflow:hidden;position:relative;}
+  .bar-fill{height:100%;border-radius:6px;background:linear-gradient(90deg,var(--red-deep),var(--red));display:flex;align-items:center;justify-content:flex-end;padding-right:8px;font-size:11px;color:#fff;font-weight:700;}
+  .bar-fill.gold{background:linear-gradient(90deg,#3a2e15,var(--gold));color:#0E0C08;}
+  .bar-fill.dim{background:linear-gradient(90deg,#2C2517,#5a4a2a);}
+  .matrix{position:relative;width:100%;height:380px;background:var(--bg2);border:1px solid var(--line);border-radius:14px;margin-top:8px;}
+  .axis-x{position:absolute;bottom:8px;width:100%;text-align:center;font-size:12px;color:var(--muted);}
+  .axis-y{position:absolute;left:8px;top:0;height:100%;writing-mode:vertical-rl;font-size:12px;color:var(--muted);}
+  .dot{position:absolute;transform:translate(-50%,-50%);padding:5px 10px;border-radius:20px;font-size:12px;font-weight:700;white-space:nowrap;}
+  .dot.me{background:var(--red);color:#fff;border:2px solid var(--gold);}
+  .dot.other{background:var(--card2);color:var(--text);border:1px solid var(--line);}
+  .cloud{display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px;padding:14px;background:var(--bg2);border-radius:14px;}
+  .cloud span{padding:3px 10px;border-radius:8px;line-height:1.5;}
+  .s1{font-size:13px;} .s2{font-size:16px;} .s3{font-size:20px;} .s4{font-size:25px;}
+  .cgood{background:rgba(216,179,94,.13);color:var(--good);}
+  .cbad{background:rgba(199,123,90,.13);color:var(--bad);}
+  .ctheme{font-size:15px;color:var(--gold-light);background:rgba(216,179,94,.1);padding:6px 14px;border-radius:10px;font-weight:700;}
+  .quote{border-left:3px solid var(--gold);padding:10px 16px;background:var(--card);border-radius:0 10px 10px 0;font-size:15px;color:var(--text);margin:10px 0;}
+  .quote .q{color:var(--gold-light);font-weight:800;}
+  table{width:100%;border-collapse:collapse;font-size:13px;margin-top:8px;}
+  th,td{border:1px solid var(--line);padding:9px 10px;text-align:left;vertical-align:top;}
+  th{background:var(--card2);color:var(--gold-light);font-weight:700;}
+  td .y{color:var(--good);} td .n{color:var(--bad);}
+  .listnum{counter-reset:l;list-style:none;}
+  .listnum li{counter-increment:l;position:relative;padding:12px 14px 12px 52px;background:var(--card);border:1px solid var(--line);border-radius:12px;margin-bottom:10px;}
+  .listnum li::before{content:counter(l);position:absolute;left:14px;top:12px;width:26px;height:26px;background:var(--red);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;}
+  .listnum li b{color:var(--gold-light);}
+  .foot{text-align:center;font-size:12px;color:var(--muted);padding:26px;}
+  .foot b{color:var(--gold-light);}
+  .flag{font-size:11px;padding:1px 6px;border-radius:5px;background:var(--card2);color:var(--muted);margin-left:4px;}
+  .flag.a{color:var(--good);} .flag.b{color:var(--gold-light);} .flag.c{color:var(--bad);}
+  .newzone{border:1px dashed var(--gold);border-radius:14px;padding:14px 16px;margin-top:14px;background:rgba(216,179,94,.06);}
+  .newzone .zh{font-size:13px;color:var(--gold-light);font-weight:800;margin-bottom:8px;}
+
+  @media (max-width:820px){
+    .page{min-height:100dvh;padding:24px 18px 40px;}
+    .pageno{top:14px;right:16px;}
+    h1{font-size:25px;}
+    h2{font-size:21px;}
+    h3{font-size:16px;}
+    .sub{font-size:13px;margin-bottom:14px;}
+    .g3,.g2{grid-template-columns:1fr;}
+    .card{padding:15px 13px;}
+    .kpi{font-size:24px;}
+    .bar-name{width:74px;font-size:11px;padding-right:6px;}
+    .bar-track{height:20px;}
+    .bar-fill{font-size:10px;padding-right:5px;}
+    .matrix{height:320px;}
+    .dot{font-size:11px;padding:4px 8px;}
+    .cloud{padding:12px 10px;gap:5px 6px;}
+    .s1{font-size:12px;} .s2{font-size:14px;} .s3{font-size:17px;} .s4{font-size:21px;}
+    table{font-size:12px;}
+    th,td{padding:7px 8px;}
+    .quote{font-size:14px;padding:9px 13px;}
+    .listnum li{padding:11px 12px 11px 46px;}
+    .listnum li::before{left:12px;width:24px;height:24px;font-size:13px;}
+    .src{font-size:10px;}
+    .flag{font-size:10px;}
+  }
+  .page{overflow-x:hidden;}
+  .tw{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:10px 0;}
+  .tw table{min-width:640px;}
+  @media (max-width:820px){
+    .bar-row,.bar{flex-direction:column;align-items:stretch;margin:11px 0;}
+    .bar-name{width:auto !important;flex-shrink:1;text-align:left !important;padding-right:0;font-size:12.5px;line-height:1.4;}
+    .bar-track{width:100%;}
+    .bar-fill{min-width:60px;}
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ P1 ============ -->
+<section class="page" id="p1">
+  <div class="pageno">01 / 10</div>
+  <span class="tag">洗护·EP05 · 卡诗 黑钻钥源洗发水</span>
+  <h1>卡诗 黑钻钥源洗发水<br>欧莱雅集团的国际高端护发标杆</h1>
+  <p class="sub">品牌背景：1964 创于法国巴黎，欧莱雅集团旗下最高端专业美发品牌；1968 进发廊、成为首个在沙龙零售的护发品牌；1999 随欧莱雅专业部入华、2012 上海开首间概念专柜；卡诗中欧护发 TOP1，21 年天猫高端美护发客单价 ¥291。<span class="flag a">A/B</span></p>
+  <div class="quote"><span class="q">一句话结论：</span>卡诗以"Abyssine 深海微生物精粹 + 玻尿酸逆时修护、沙龙级高端香氛、国际高端品牌资产、备案确证含硅油（amodimethicone）"站上欧莱雅最高端护发心智，卡位 ¥159-300；亮点在<b>逆时修护口碑 / 沙龙高级香氛 / 高端品牌资产 / 成分含玻尿酸 + 硅油修护</b>，短板在<b>营销"无硅油 / 氨基酸表活"与备案（SLES 主表活 + amodimethicone 硅油）直接矛盾 / 原产国法国 vs 备案西班牙 / 跨境版与国内版一致性待核 / 高溢价清洁力一般</b>。<span class="flag c">C·电商快照</span></div>
+  <div class="grid g3" style="margin-top:22px;">
+    <div class="card red">
+      <div class="kpi">¥159<small> –300</small></div>
+      <div class="t">价格带（250ml） <span class="flag c">C</span></div>
+      <p style="font-size:13px;color:var(--muted);margin-top:6px;">官方旗舰天猫约 ¥300、京东海外版常卖 ¥159（历史低 ¥144）；跨境与官方价差 1-2 倍。</p>
+    </div>
+    <div class="card gold">
+      <div class="kpi red">1964</div>
+      <div class="t">品牌创立年份 <span class="flag a">A</span></div>
+      <p style="font-size:13px;color:var(--muted);margin-top:6px;">创于法国巴黎，欧莱雅集团最高端专业美发品牌；中欧护发 TOP1，沙龙起源高端资产。</p>
+    </div>
+    <div class="card">
+      <div class="kpi red">Abyssine+玻尿酸</div>
+      <div class="t">核心修护体系 <span class="flag a">A</span></div>
+      <p style="font-size:13px;color:var(--muted);margin-top:6px;">交替单胞菌发酵产物提取物（Abyssine）+ 透明质酸钠逆时修护；标签"黑钻钥源"仅为商标、未添加钻石成分。</p>
+    </div>
+  </div>
+  <div class="src"><b>数据来源：</b>产品标签图 / 国家药监局备案（A 级，品牌沿革 / 成分 / 备案号）｜京东 / 天猫商品页（B/C 级，价格 / 评论 / 好评率）｜腾讯新闻 / NGA 实测 / sohu 成分解析（C 级）。价格随促销与渠道波动。</div>
+</section>
+
+<!-- ============ P2 ============ -->
+<section class="page" id="p2">
+  <div class="pageno">02 / 10</div>
+  <span class="tag">市场全景</span>
+  <h2>洗护 / 洗发水赛道格局：国际高端由卡诗领跑</h2>
+  <p class="sub">洗发水的"表活体系 + 修护成分 + 品牌溢价 + 香氛"门槛分化明显。霸王凭防脱特证守功效、滋源凭无硅油守健康、Off&Relax 凭氨基酸守温和、Spes 凭蓬松守颜值，而卡诗凭集团高端 + 沙龙起源独占国际高端——形成"国货突围 vs 国际高端"的价格 / 定位光谱。<span class="flag b">B/C</span></p>
+  <div class="tw"><table>
+    <tr><th style="width:16%">品牌</th><th style="width:20%">代表产品</th><th style="width:16%">价格带</th><th style="width:22%">核心定位</th><th>主渠道</th></tr>
+    <tr><td>霸王</td><td>防脱洗发水</td><td>¥35-79</td><td>防脱特证 / 国货功效</td><td>全渠道</td></tr>
+    <tr><td>滋源</td><td>无硅油洗发水</td><td>¥30-60</td><td>无硅油 / 健康头皮</td><td>全渠道</td></tr>
+    <tr><td>Spes</td><td>蓬松洗发水</td><td>¥50-70</td><td>蓬松颜值 / 年轻国货</td><td>天猫抖音</td></tr>
+    <tr><td>Off&Relax</td><td>氨基酸洗发水</td><td>¥99-149</td><td>氨基酸温和 / 日系高端</td><td>天猫京东</td></tr>
+    <tr><td><span class="y">卡诗 Kérastase</span></td><td>黑钻钥源洗发水</td><td>¥159-300</td><td>国际高端 / 修护奢护</td><td>专柜+跨境</td></tr>
+  </table></div>
+  <div class="grid g3" style="margin-top:16px;">
+    <div class="card"><div class="t">卡诗卡位</div><p>国际高端标杆、修护奢护定位，靠"欧莱雅最高端专业线 + 沙龙起源 + 高端香氛"与国货四强形成价格 / 定位代差，承接对高端护发有强支付意愿的用户。</p></div>
+    <div class="card"><div class="t">分化</div><p>霸王赢防脱、滋源赢无硅油、Spes 赢蓬松颜值、Off&Relax 赢氨基酸温和；卡诗赢"品牌资产 + 沙龙香氛 + 修护奢护"，但价格与"营销 vs 备案"矛盾把价格敏感 / 成分党挡在门外。</p></div>
+    <div class="card"><div class="t">机会</div><p>"营销话术与备案一致化 + 真无硅油 / 真氨基酸 + 成分透明 + ¥200 内切高端与中端之间"带是后来者切卡诗信任洼地的空白。<span class="flag c">C·推断</span></p></div>
+  </div>
+  <div class="src"><b>数据来源：</b>京东 / 天猫商品页（B/C 级，价格 / 定位 / 渠道）｜美妆研库数说 / 腾讯新闻（B/C 级，竞品参数）。价格为快照，随促销波动。</div>
+</section>
+
+<!-- ============ P3 ============ -->
+<section class="page" id="p3">
+  <div class="pageno">03 / 10</div>
+  <span class="tag">产品定位</span>
+  <h2>洗护六维坐标（功效机理 × 发质人群 × 香型 × 质地 × 价格定位 × 地域）</h2>
+  <p class="sub">卡诗黑钻钥源以"逆时奢护"为内核，六维坐标用消费者语言表述如下。<span class="flag c">C</span></p>
+  <div class="tw"><table>
+    <tr><th style="width:15%">维度</th><th style="width:30%">坐标（消费者语言）</th><th>含义</th></tr>
+    <tr><td><span class="y">功效机理</span></td><td>修护 / 滋润 / 舒缓为主</td><td>非防脱、非控油、非去屑；以 Abyssine + 玻尿酸逆时修护、填补受损空隙为主</td></tr>
+    <tr><td><span class="y">发质人群</span></td><td>标签"正常发质"</td><td>适配干枯 / 染烫受损 / 矛盾发质（细软塌但发尾干）；油头清洁力不足，敏感头皮慎入（含水杨酸）</td></tr>
+    <tr><td><span class="y">香型</span></td><td>沙龙高级浓香（黑钻钥源香氛）</td><td>沙龙级高端香氛，留香浓、身份感强，是溢价支撑点之一</td></tr>
+    <tr><td><span class="y">质地</span></td><td>透明啫喱 / 透明状有流动性拉丝感</td><td>啫喱质地易推开、有拉丝，肤感显高端</td></tr>
+    <tr><td><span class="y">价格定位</span></td><td>高端 ¥300 / 250ml、¥1.2/ml</td><td>客单价约为国货四强 3-6 倍，高端定位明显</td></tr>
+    <tr><td><span class="y">地域</span></td><td>偏滋润，更适合北方干冷 / 受损</td><td>南方湿热 / 油头可能清洁力不够（NGA 广东春测清洁力一般）</td></tr>
+  </table></div>
+  <h3 style="margin-top:18px;">定位矩阵（价格带 × 功效专业度）</h3>
+  <div class="matrix">
+    <div class="axis-y">功效专业度（入门 → 专业）</div>
+    <div class="axis-x">价格带（平价 → 高端）</div>
+    <div class="dot other" style="left:11%;top:82%;">霸王 35-79</div>
+    <div class="dot other" style="left:9%;top:88%;">滋源 30-60</div>
+    <div class="dot other" style="left:18%;top:78%;">Spes 50-70</div>
+    <div class="dot other" style="left:44%;top:52%;">Off&Relax 99-149</div>
+    <div class="dot me" style="left:90%;top:14%;">卡诗 159-300</div>
+  </div>
+  <div class="grid g2" style="margin-top:16px;">
+    <div class="card red"><div class="t">卡诗占位</div><p>高端价格 + 高功效专业度（Abyssine + 玻尿酸修护 + 沙龙香氛 + 集团背书），把"国际高端护发"做成奢侈品心智，正面承接国货之上的升级需求。</p></div>
+    <div class="card gold"><div class="t">空白区</div><p>"真无硅油 / 真氨基酸 + 成分透明 + ¥200 内切高端与中端"带（卡诗营销与备案矛盾 / 高溢价 / 油头清洁力一般）是差异化机会。<span class="flag c">C·推断</span></p></div>
+  </div>
+  <div class="src"><b>数据来源：</b>京东 / 天猫 / 标签图（C 级，价格 / 定位 / 质地 / 香型）｜NGA 实测（C 级，清洁力 / 地域适配，标注待核）。坐标为基于公开价格的示意性卡位。</div>
+</section>
+
+<!-- ============ P4 ============ -->
+<section class="page" id="p4">
+  <div class="pageno">04 / 10</div>
+  <span class="tag">配方拆解</span>
+  <h2>表活 / 硅油 / 调理（专业词）</h2>
+  <p class="sub">卡诗黑钻钥源洗发水的"配方"= 硫酸盐表活体系 + 阳离子硅油修护 + 透明质酸 / Abyssine 滋养 + 水杨酸发用调理。以 SLES 为主清洁、amodimethicone 为修护硅油，配方与多平台"无硅油 / 氨基酸表活"宣称存在冲突。<span class="flag c">C</span></p>
+  <div class="tw"><table>
+    <tr><th style="width:22%">模块</th><th style="width:20%">成分 / 工艺</th><th style="width:32%">作用</th><th>备注</th></tr>
+    <tr><td>表活体系</td><td>SLES（月桂醇聚醚硫酸酯钠）主清洁 + 椰油酰胺丙基甜菜碱 + 月桂醇聚醚-5 羧酸 + 椰油酰胺 MIPA + 少量 SLS</td><td>去污清洁、起泡</td><td>非氨基酸体系，反驳"氨基酸温和表活"宣称</td></tr>
+    <tr><td>硅油</td><td>氨端聚二甲基硅氧烷（amodimethicone，改性阳离子硅油）</td><td>修护、顺滑、填充受损毛鳞片</td><td>并非"无硅油"，反驳多平台标题</td></tr>
+    <tr><td>滋养 / 调理</td><td>透明质酸钠 / 交替单胞菌发酵产物提取物（Abyssine）/ 生育酚（VE）/ 红没药醇 / 聚季铵盐-10</td><td>补水、舒缓、抗氧、柔顺</td><td>逆时修护核心组合</td></tr>
+    <tr><td>水杨酸</td><td>水杨酸（作发用调理剂）</td><td>控油 / 头皮调理</td><td>标签警示敏感头皮 / 三岁以下慎用</td></tr>
+    <tr><td>备案</td><td>国妆网备进字（沪）2023005383（250ml，2023）；同系 older 2020001474（2020-03-16）；非特；原产国西班牙</td><td>合规凭证</td><td>生产 PRODUCTOS CAPILARES L'ORÉAL S.A.（Burgos 西班牙）</td></tr>
+  </table></div>
+  <div class="newzone" style="border-color:var(--bad);background:rgba(199,123,90,.06);">
+    <div class="zh" style="color:var(--bad);">⚠ 冲突标注：营销宣称 vs 备案 / INCI 实测</div>
+    <p style="font-size:13px;color:var(--text);">① "无硅油"宣称 vs 含 <b>amodimethicone</b>（标签 / INCI 实测）——营销与备案冲突，待核；<br>② "氨基酸表活"宣称 vs 实际 <b>SLES 硫酸盐主表活</b>——冲突，待核；<br>③ 原产国<b>法国</b> vs 备案<b>西班牙</b>（品牌源自法、产于西，需澄清）；<br>④ "鱼子酱 / 山茶花"= 黑钻护发精油成分，<b>非本洗发水</b> INCI（营销混淆）；<br>⑤ 跨境版（¥149 起）与国内版成分 / 香型一致性<b>待核</b>；<br>⑥ 销量"5 万评论"疑合并链接口径<b>待核</b>。</p>
+  </div>
+  <div class="grid g3" style="margin-top:14px;">
+    <div class="card"><div class="t">表活完整度</div><p>SLES + 两性 + 羧酸 + MIPA 复配 + 少量 SLS，清洁力与起泡稳健，但属硫酸盐体系，与"氨基酸温和"宣称不符。</p></div>
+    <div class="card"><div class="t">修护壁垒</div><p>amodimethicone 阳离子硅油 + 透明质酸钠 + Abyssine 组成高端修护方案；"逆时修护"口碑强，是核心差异。</p></div>
+    <div class="card"><div class="t">备案</div><p>国妆网备进字（沪）2023005383（250ml，2023）/ 同系 older 2020001474（2020）；非特殊化妆品；原产国西班牙。<span class="flag a">A</span></p></div>
+  </div>
+  <div class="src"><b>数据来源：</b>国家药监局备案（A 级，备案号 / 非特 / 原产国）｜产品标签图（A 级，INCI / 警示）｜sohu 成分解析 / NGA 实测（C 级，成分组成，标注待核）。浓度为标签披露，以官方为准。</div>
+</section>
+
+<!-- ============ P5 ============ -->
+<section class="page" id="p5">
+  <div class="pageno">05 / 10</div>
+  <span class="tag">价格策略</span>
+  <h2>价格带与销量</h2>
+  <p class="sub">卡诗黑钻呈"官方旗舰 → 官方促销 → 跨境自营 → 海外版"梯度：官方旗舰天猫约 ¥300/250ml、促销"买 250ml 享 410ml + 赠 80ml×2"实付低至 ¥227.5、天猫国际自营 ¥269（原价 ¥300）、京东全球购海外版 250ml 常卖 ¥159（历史低 ¥144）。官方 vs 跨境价差 1-2 倍，整体卡位国际高端、与国货四强代差显著。<span class="flag c">C</span></p>
+  <div style="background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px;">
+    <div class="bar-row"><div class="bar-name">京东海外版常卖</div><div class="bar-track"><div class="bar-fill gold" style="width:53%">¥159（250ml）</div></div></div>
+    <div class="bar-row"><div class="bar-name">京东历史低</div><div class="bar-track"><div class="bar-fill gold" style="width:48%">¥144（250ml）</div></div></div>
+    <div class="bar-row"><div class="bar-name">官方促销实付</div><div class="bar-track"><div class="bar-fill gold" style="width:76%">¥227.5（买250享410+赠80×2）</div></div></div>
+    <div class="bar-row"><div class="bar-name">天猫国际自营</div><div class="bar-track"><div class="bar-fill gold" style="width:90%">¥269（原价 ¥300）</div></div></div>
+    <div class="bar-row"><div class="bar-name">官方旗舰天猫</div><div class="bar-track"><div class="bar-fill gold" style="width:100%">¥300（250ml）</div></div></div>
+  </div>
+  <div class="grid g3" style="margin-top:16px;">
+    <div class="card red"><div class="t">高端卡位</div><p>¥159 起跳、官方冲 ¥300，占"国际高端护发奢侈品"心智，与国货四强（¥30-149）形成价格代差。</p></div>
+    <div class="card"><div class="t">官方 vs 跨境</div><p>官方（¥227.5-300）与跨境 / 海外版（¥144-159）价差 1-2 倍；海外版成分 / 香型一致性待核，存在信任风险。</p></div>
+    <div class="card"><div class="t">风险</div><p>高溢价、清洁力一般、油头不够；营销"无硅油 / 氨基酸"与备案冲突；销量"5 万评论"疑合并口径。<span class="flag c">C</span></p></div>
+  </div>
+  <div class="src"><b>数据来源：</b>京东 / 天猫 / 天猫国际自营（C 级，价格 / 评论 / 好评率快照）。以官方实时价为准；跨境与官方口径不同。</div>
+</section>
+
+<!-- ============ P6 ============ -->
+<section class="page" id="p6">
+  <div class="pageno">06 / 10</div>
+  <span class="tag">消费者评价</span>
+  <h2>口碑横向</h2>
+  <p class="sub">正向集中在"逆时修护洗感顺滑、沙龙高级香氛、品牌溢价身份感、Abyssine + 玻尿酸修护口碑、弱酸 pH6-7"；负向在"高溢价性价比低、清洁力一般油头不够、含水杨酸敏感头皮慎入、营销无硅油 / 氨基酸与备案矛盾、跨境版成分一致性待核"。<span class="flag c">C</span></p>
+  <div class="tw"><table>
+    <tr><th style="width:15%">维度</th><th style="width:30%">正向高频词</th><th style="width:30%">负向 / 痛点</th><th>信号</th></tr>
+    <tr><td>功效</td><td>逆时修护 / 洗感顺滑 / 柔顺</td><td>清洁力一般、油头不够</td><td>修护强、清洁弱</td></tr>
+    <tr><td>成分</td><td>Abyssine + 玻尿酸修护口碑</td><td>含水杨酸敏感头皮慎入</td><td>修护优、刺激性存疑</td></tr>
+    <tr><td>香氛</td><td>沙龙高级浓香 / 留香久</td><td>香太浓（个别偏好差异）</td><td>高端香氛心智</td></tr>
+    <tr><td>酸碱</td><td>弱酸 pH6-7 友好</td><td>—</td><td>温和度加分</td></tr>
+    <tr><td>价值</td><td>品牌溢价 / 身份感</td><td>高溢价、性价比低；营销与备案矛盾</td><td>奢侈品心智 / 信任洼地</td></tr>
+  </table></div>
+  <div class="grid g2" style="margin-top:14px;">
+    <div class="card red"><div class="t">强修护 + 香氛 + 品牌</div><p>Abyssine + 玻尿酸修护、沙龙香氛、高端品牌资产，让卡诗成为"国际高端护发"代名词，承接对护发品质要求高的进阶用户。</p></div>
+    <div class="card gold"><div class="t">可攻击口子</div><p>"真无硅油 / 真氨基酸 + 成分透明 + ¥200 内切高端中端 + 油头控油版"是清晰短板，后来者用"同修护 + 换信任 / 换价格 / 换清洁力"切。</p></div>
+  </div>
+  <div class="src"><b>数据来源：</b>京东 / 淘宝达人 / NGA 实测（C 级，正向 / 负向高频词归纳）。差评以平台个案为主，不代表整体率；"清洁力一般 / 含水杨酸"为测评与用户共性反馈。</div>
+</section>
+
+<!-- ============ P7 ============ -->
+<section class="page" id="p7">
+  <div class="pageno">07 / 10</div>
+  <span class="tag">卖点拆解</span>
+  <h2>洗护卖点五轴</h2>
+  <p class="sub">功效轴（Abyssine + 玻尿酸逆时修护）× 质地轴（透明啫喱 + 拉丝高端肤感）× 配方轴（SLES 清洁 + amodimethicone 修护）× 价格轴（高端 ¥1.2/ml）× 护城河轴（欧莱雅最高端专业线 + 沙龙起源 + 品牌资产 + 高端香氛）。<span class="flag c">C</span></p>
+  <div class="tw"><table>
+    <tr><th style="width:16%">轴</th><th style="width:28%">内容</th><th>说明</th></tr>
+    <tr><td><span class="y">功效轴</span></td><td>Abyssine + 玻尿酸逆时修护</td><td>深海微生物精粹舒缓头皮 + 玻尿酸补水填补受损空隙，实现"逆时修护"</td></tr>
+    <tr><td><span class="y">质地轴</span></td><td>透明啫喱 + 拉丝高端肤感</td><td>透明状有流动性、拉丝感，显高端奢护</td></tr>
+    <tr><td><span class="y">配方轴</span></td><td>SLES 清洁 + amodimethicone 硅油修护 + 透明质酸钠</td><td>硫酸盐去污 + 阳离子硅油顺滑 + 玻尿酸补水（非"无硅油 / 氨基酸"体系）</td></tr>
+    <tr><td><span class="y">价格轴</span></td><td>高端 ¥1.2/ml（¥300/250ml）</td><td>客单价约为国货四强 3-6 倍，高端定位明显</td></tr>
+    <tr><td><span class="n">护城河轴</span></td><td>欧莱雅最高端专业线 + 沙龙起源 + 品牌资产 + 高端香氛</td><td>1964 巴黎、沙龙零售起源、集团背书与高端香氛资产</td></tr>
+  </table></div>
+  <div class="quote" style="margin-top:16px;"><span class="q">洞察：</span>卡诗的护城河来自"欧莱雅最高端专业线 + 沙龙起源 + 高端香氛 + 品牌资产"，而非单纯表活或成分；它把"国际高端护发奢侈品心智"守住了，却把"营销与备案一致化、真无硅油 / 真氨基酸、成分透明、油头控油版"留给了后来者——用同修护度 + 换信任 / 换价格 / 换清洁力即可切。<span class="flag c">C·策略推断</span></div>
+  <div class="src"><b>数据来源：</b>京东 / 天猫 / 标签图（C 级，功效 / 质地 / 配方）｜国家药监局备案（A 级，INCI 事实）。五轴为我按"洗护卖点轴"格式提炼。</div>
+</section>
+
+<!-- ============ P8 ============ -->
+<section class="page" id="p8">
+  <div class="pageno">08 / 10</div>
+  <span class="tag">痛点与机会</span>
+  <h2>空白 = 你的机会</h2>
+  <p class="sub">把卡诗短板轴与洗发水赛道空白叠加，得到可切入的切口。</p>
+  <div class="tw"><table>
+    <tr><th style="width:26%">赛道级空白</th><th>对应短板</th><th>你的切口</th></tr>
+    <tr><td><span class="n">营销一致化</span></td><td>"无硅油 / 氨基酸"与备案冲突</td><td><span class="y">真无硅油 / 真氨基酸 + 成分透明</span></td></tr>
+    <tr><td><span class="n">敏感头皮版</span></td><td>含水杨酸、敏感头皮慎入</td><td><span class="y">无酸温和版</span></td></tr>
+    <tr><td><span class="n">南方控油版</span></td><td>油头清洁力一般</td><td><span class="y">湿热控油版</span></td></tr>
+    <tr><td><span class="n">跨境透明</span></td><td>跨境版成分一致性待核</td><td><span class="y">跨境 / 国内成分一致明示</span></td></tr>
+    <tr><td><span class="n">价格下探</span></td><td>高溢价（¥1.2/ml）</td><td><span class="y">¥200 内切高端与中端之间</span></td></tr>
+  </table></div>
+  <div class="newzone">
+    <div class="zh">▍对标转化路径（换表活 / 换修护 / 换香氛 / 换定位）</div>
+    <div class="tw"><table>
+      <tr><th style="width:20%">对标对象</th><th style="width:16%">换表活</th><th style="width:16%">换修护</th><th style="width:16%">换香氛</th><th>切入空白</th></tr>
+      <tr><td>滋源</td><td>真无硅油</td><td>修护</td><td>—</td><td>真无硅油 + 修护</td></tr>
+      <tr><td>Off&Relax</td><td>氨基酸</td><td>高端修护</td><td>—</td><td>氨基酸 + 高端修护</td></tr>
+      <tr><td>Spes</td><td>—</td><td>蓬松</td><td>香氛高端化</td><td>蓬松 + 香氛高端</td></tr>
+      <tr><td>霸王</td><td>特证</td><td>高端养发</td><td>—</td><td>特证 + 高端养发</td></tr>
+      <tr><td>卡诗（标杆）</td><td>SLES + amodimethicone</td><td>玻尿酸 + Abyssine</td><td>沙龙浓香</td><td>国际高端标杆</td></tr>
+    </table></div>
+  </div>
+  <div class="src"><b>数据来源：</b>京东 / 天猫 / 标签图（C 级，短板）｜国家药监局备案（A 级，INCI 事实）。空白与对标转化为基于公开事实的策略推断。</div>
+</section>
+
+<!-- ============ P9 ============ -->
+<section class="page" id="p9">
+  <div class="pageno">09 / 10</div>
+  <span class="tag">产品启示</span>
+  <h2>如果做新锐高端洗发水，怎么打？</h2>
+  <p class="sub">不打卡诗的"国际高端品牌资产 + 沙龙香氛"正面战场，而是用"同修护度 + 空白信任 / 价格 / 清洁力"切入。五条可执行策略：</p>
+  <ol class="listnum">
+    <li><b>真无硅油 / 真氨基酸。</b>正面切卡诗"无硅油 / 氨基酸"宣称与备案（含 SLES + amodimethicone）矛盾的信任洼地，把表活体系如实标注。</li>
+    <li><b>高端修护成分。</b>承接 Abyssine + 玻尿酸已验证的"逆时修护"心智，用同等修护成分建立高端功效认知。</li>
+    <li><b>成分透明化。</b>把硅油 / 表活 / 香型 / 水杨酸等如实标清，补卡诗"营销与备案冲突"短板，建立成分党信任。</li>
+    <li><b>香氛差异化。</b>补沙龙高级香氛的心智空白，用差异化香型做高端感，而不必堆砌品牌溢价。</li>
+    <li><b>¥200-300 价格带。</b>卡在高端与中端之间，正面承接卡诗之下的升级需求，同时规避跨境价差 1-2 倍的信任风险。</li>
+  </ol>
+  <div class="src"><b>说明：</b>以上为基于卡诗公开竞争态势的"我方（假设为新锐高端洗发水品牌）"策略推断，非任何品牌官方信息。我方定位 / 价格 / 渠道需结合实际业务定义。</div>
+</section>
+
+<!-- ============ P10 ============ -->
+<section class="page" id="p10">
+  <div class="pageno">10 / 10</div>
+  <span class="tag">总结 + 来源</span>
+  <h2>一句话总结</h2>
+  <div class="quote"><span class="q">卡诗给后来者的启示：</span>它证明"Abyssine + 玻尿酸逆时修护 + 沙龙高级香氛 + 欧莱雅最高端专业线 + 品牌资产"能占死国际高端护发心智，但它把"国际高端与奢侈品心智"守住了，把"营销与备案一致化、真无硅油 / 真氨基酸、成分透明、油头控油版、¥200 内切高端中端"留给了后来者——切口从不在品牌腹地，而在"同修护度、换信任 / 换价格 / 换清洁力"的空白里。</div>
+
+  <h3 style="margin-top:18px;">数据来源与置信度清单</h3>
+  <div class="tw"><table>
+    <tr><th style="width:42%">来源</th><th style="width:12%">级别</th><th>用于本报告的结论</th></tr>
+    <tr><td>产品标签图</td><td><span class="y">A</span></td><td>INCI 成分、警示（含水杨酸 / 三岁以下慎用）、"黑钻钥源"仅为商标</td></tr>
+    <tr><td>315jiage 引 NMPA 备案</td><td><span class="y">A</span></td><td>国妆网备进字（沪）2023005383 / 2020001474、非特、原产国西班牙</td></tr>
+    <tr><td>京东全球购</td><td>B/C</td><td>海外版价格（¥159 常卖 / ¥144 历史低）、评论（5 万，疑合并口径）、好评率</td></tr>
+    <tr><td>腾讯新闻</td><td>B/C</td><td>品牌沿革（1964 巴黎 / 沙龙起源 / 入华 / 中欧 TOP1）、客单价</td></tr>
+    <tr><td>美妆研库数说</td><td>B/C</td><td>赛道格局、价格带、五强定位参数</td></tr>
+    <tr><td>NGA 实测</td><td>C</td><td>洗感顺滑 / 留香浓 / 弱酸 pH6-7 / 清洁力一般 / 敏感头皮不建议</td></tr>
+    <tr><td>sohu 成分解析</td><td>C</td><td>表活（SLES 主）/ 硅油（amodimethicone）/ Abyssine / 玻尿酸组成</td></tr>
+    <tr><td>strawberrynet 海外版</td><td>C</td><td>海外版成分 / 香型（含神经酰胺 / 维 A/E / 山茶花油市场版本差异，推断不进结论）</td></tr>
+  </table></div>
+  <div class="src"><b>置信度说明：</b>A=官方 / 备案 / 标签；B=京东商品页（销量 / 好评）/ 腾讯新闻；C=平台快照 / 成分解析 / 第三方实测（波动大、存个案偏差）。价格与销量为电商快照，随促销波动；"无硅油 / 氨基酸"宣称与备案冲突以 A 级备案 INCI 为准；原产国法国 vs 西班牙以备案为准；跨境版成分 / 香型一致性待核；销量"5 万评论"疑合并链接口径待核。本报告不构成投资或购买建议。</div>
+</section>
+
+<div class="foot">竞品分析情报网 · 洗护·EP05 卡诗 Kérastase 黑钻钥源洗发水 ｜ 洗护赛道 · 国际高端修护奢护标杆 ｜ 数据截至 2026-08 公开资料整理 ｜ 内容仅供产品研究与求职作品集使用</div>
+
+</body>
+</html>
