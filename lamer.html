@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0" />
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet" />
+<title>竞品分析情报网 · 限阅</title>
+<style>#gate{position:fixed;inset:0;z-index:9999;background:#0d0608;display:flex;align-items:center;justify-content:center;padding:24px;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif}
+.card{width:100%;max-width:340px;background:#17100f;border:1px solid #2c2020;border-radius:14px;padding:28px 24px;text-align:center}
+.logo{font-size:19px;font-weight:700;color:#f0e6e4}
+.sub{font-size:12.5px;color:#9a8482;margin-top:7px}
+.tip{font-size:12.5px;color:#a8928f;margin:20px 0 9px}
+input{width:100%;box-sizing:border-box;padding:11px 13px;border-radius:9px;border:1px solid #3a2b29;background:#0d0608;color:#f0e6e4;font-size:14px;outline:none;text-align:center}
+input:focus{border-color:#a8635a}
+button{margin-top:11px;width:100%;padding:11px;border:0;border-radius:9px;background:#a8635a;color:#fff;font-size:14px;font-weight:600;cursor:pointer}
+button:hover{background:#955347}
+.err{color:#d98b7a;font-size:12.5px;margin-top:11px;min-height:17px;line-height:1.5}</style>
+</head><body>
+<div id="gate"><div class="card">
+  <div class="logo">竞品分析情报网</div>
+  <div class="sub">竞品拆解 · 护肤 / 彩妆 / 个护 / 家清</div>
+  <div class="tip">请输入访问验证码</div>
+  <input id="gi" type="password" autocomplete="off" placeholder="验证码" />
+  <button id="gb" type="button">进入</button>
+  <div class="err" id="ge"></div>
+</div></div>
+<script src="v/lamer.js"></script>
+<script>
+(function(){
+  var gate=document.getElementById('gate'),
+      input=document.getElementById('gi'),
+      btn=document.getElementById('gb'),
+      err=document.getElementById('ge');
+  if(!window.crypto||!window.crypto.subtle){
+    input.disabled=true; btn.disabled=true;
+    err.textContent='当前不是安全上下文，无法解密。请用 https:// 或 http://127.0.0.1 访问。';
+    return;
+  }
+  function b64(s){var b=atob(s),u=new Uint8Array(b.length);for(var i=0;i<b.length;i++)u[i]=b.charCodeAt(i);return u;}
+  function derive(code,salt,iter){
+    return crypto.subtle.importKey('raw',new TextEncoder().encode(code),'PBKDF2',false,['deriveKey'])
+      .then(function(km){return crypto.subtle.deriveKey({name:'PBKDF2',salt:salt,iterations:iter,hash:'SHA-256'},km,{name:'AES-GCM',length:256},false,['decrypt']);});
+  }
+  function open(code,v){
+    return derive(code,b64(v.salt),v.iter)
+      .then(function(k){return crypto.subtle.decrypt({name:'AES-GCM',iv:b64(v.iv)},k,b64(v.ct));})
+      .then(function(pt){
+        var html=new TextDecoder().decode(pt);
+        try{sessionStorage.setItem('pf_code',code);}catch(e){}
+        // 让原 index.html 自带的验证码门自动放行（它读的就是这个键）
+        try{sessionStorage.setItem('gate_ok','1');}catch(e){}
+        document.open(); document.write(html); document.close();
+      });
+  }
+  function go(){
+    var code=input.value.trim(); if(!code) return;
+    btn.disabled=true; btn.textContent='验证中…'; err.textContent='';
+    open(code,window.PF_VAULT).catch(function(){
+      err.textContent='验证码不正确'; btn.disabled=false; btn.textContent='进入';
+      try{sessionStorage.removeItem('pf_code');sessionStorage.removeItem('gate_ok');}catch(e){}
+      input.select();
+    });
+  }
+  btn.addEventListener('click',go);
+  input.addEventListener('keydown',function(e){if(e.key==='Enter')go();});
+  var saved=null; try{saved=sessionStorage.getItem('pf_code');}catch(e){}
+  if(saved){ input.value=saved; go(); }
+})();
+</script>
+</body></html>
